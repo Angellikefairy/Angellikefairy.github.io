@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hexo</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-07-06T01:54:13.125Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Angel</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>second_blog</title>
+    <link href="http://yoursite.com/2019/07/06/second-blog/"/>
+    <id>http://yoursite.com/2019/07/06/second-blog/</id>
+    <published>2019-07-06T01:37:53.000Z</published>
+    <updated>2019-07-06T01:54:13.125Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="hello"><a href="#hello" class="headerlink" title="hello"></a>hello</h1><img src="/2019/07/06/second-blog/1.jpg" title="hello">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;hello&quot;&gt;&lt;a href=&quot;#hello&quot; class=&quot;headerlink&quot; title=&quot;hello&quot;&gt;&lt;/a&gt;hello&lt;/h1&gt;&lt;img src=&quot;/2019/07/06/second-blog/1.jpg&quot; title=&quot;hello&quot;&gt;
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>first_blog</title>
+    <link href="http://yoursite.com/2019/07/05/first-blog/"/>
+    <id>http://yoursite.com/2019/07/05/first-blog/</id>
+    <published>2019-07-05T12:39:57.000Z</published>
+    <updated>2019-07-06T01:57:44.870Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="hello"><a href="#hello" class="headerlink" title="hello"></a>hello</h1><p><img src="/images/1.jpg" alt="you konw that" title="hh"><br><a href="https://www.baidu.com" target="_blank" rel="noopener">avgle</a></p><p><code>const a=4;</code></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a=<span class="number">4</span>;</span><br><span class="line"><span class="keyword">const</span> b=<span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(a+b);</span><br></pre></td></tr></table></figure><table><thead><tr><th align="right">Markdown</th><th align="right">Less</th><th align="right">Pretty</th></tr></thead><tbody><tr><td align="right"><em>Still</em></td><td align="right"><code>renders</code></td><td align="right"><strong>nicely</strong></td></tr><tr><td align="right">1</td><td align="right">2</td><td align="right">3</td></tr><tr><td align="right"><em>Still</em></td><td align="right"><code>renders</code></td><td align="right"><strong>nicely</strong></td></tr></tbody></table><blockquote><p>Blockquotes are very handy in email to emulate reply text.<br>This line is part of the same quote.</p></blockquote><p>Quote break.</p><blockquote><p>This is a very long line that will still be quoted properly when it wraps. Oh boy let’s keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can <em>put</em> <strong>Markdown</strong> into a blockquote. </p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;hello&quot;&gt;&lt;a href=&quot;#hello&quot; class=&quot;headerlink&quot; title=&quot;hello&quot;&gt;&lt;/a&gt;hello&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;/images/1.jpg&quot; alt=&quot;you konw that&quot; title=&quot;hh&quot;&gt;&lt;b
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2019/07/05/hello-world/"/>
+    <id>http://yoursite.com/2019/07/05/hello-world/</id>
+    <published>2019-07-05T11:33:40.430Z</published>
+    <updated>2019-07-05T11:33:40.430Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
