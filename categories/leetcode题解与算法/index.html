@@ -91,7 +91,7 @@
 <meta name="description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/categories/leetcode题解与算法/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
 <meta property="og:locale" content="zh-Hans">
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/categories/leetcode题解与算法/">
 
 
 
 
 
-  <title>Hexo</title>
+  <title>分类: leetcode题解与算法 | Hexo</title>
   
 
 
@@ -154,8 +154,7 @@
   
  
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left ">
     <div class="headband">
          <a href="https://github.com/Angellikefairy"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149" alt="Fork me on GitHub"></a>
     </div>
@@ -260,201 +259,54 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
-    
-      
-
-  
 
   
   
   
+  <div class="post-block category">
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/leetcode-双指针/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/08/leetcode-双指针/" itemprop="url">leetcode--双指针</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-08T18:18:03+08:00">
-                2019-07-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode题解与算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  360
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="leetcode题解之双指针"><a href="#leetcode题解之双指针" class="headerlink" title="leetcode题解之双指针"></a>leetcode题解之双指针</h1><h2 id="1、两数之和-输入有序数组"><a href="#1、两数之和-输入有序数组" class="headerlink" title="1、两数之和|| - 输入有序数组"></a>1、两数之和|| - 输入有序数组</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><blockquote>
-<p>给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。</p>
-<p>函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。</p>
-<p>说明:</p>
-<p>返回的下标值（index1 和 index2）不是从零开始的。<br>你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。<br>示例:</p>
-<p>输入: numbers = [2, 7, 11, 15], target = 9<br>输出: [1,2]<br>解释: 2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted" target="_blank" rel="noopener">https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-</blockquote>
-<h3 id="coding实现"><a href="#coding实现" class="headerlink" title="coding实现"></a>coding实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">numbers, target</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">let</span> min=<span class="number">0</span>;</span><br><span class="line">   <span class="keyword">let</span> max=numbers.length<span class="number">-1</span>;</span><br><span class="line">   <span class="keyword">let</span> sum;</span><br><span class="line">   <span class="keyword">while</span>((sum=numbers[min]+numbers[max])!==target)&#123;</span><br><span class="line">      <span class="keyword">if</span>(sum&lt;target)&#123;</span><br><span class="line">        min++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span>&#123;</span><br><span class="line">        max--;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> [min+<span class="number">1</span>,max+<span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h3><blockquote>
-<p>   题目给定的是有序数组，所以使用双指针方法较为方便。设定min指向第一个数组元素（也就是当前最小数），max指向最后一个数组元素。令sum=numbers[min]+numbers[max]</p>
-<p>   循环比较sum与target是否相等，若想等则输出。小于target则代表min指向的元素值比输出值要小，则min++;反之，则max–;</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>leetcode题解与算法<small>分类</small>
+        </h1>
       </div>
 
       
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2019/07/08/leetcode-双指针/" itemprop="url">
+              
+                <span itemprop="name">leetcode--双指针</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-07-08T18:18:03+08:00" content="2019-07-08">
+          07-08
+        </time>
+      </div>
+
+    </header>
+  </article>
+
 
       
+    </div>
 
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
   
   
   
-  </article>
-
-
-    
-  </section>
 
   
+
 
 
           </div>
