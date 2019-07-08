@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-06T01:54:13.125Z</updated>
+  <updated>2019-07-08T13:44:31.481Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,65 +17,25 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>second_blog</title>
-    <link href="http://yoursite.com/2019/07/06/second-blog/"/>
-    <id>http://yoursite.com/2019/07/06/second-blog/</id>
-    <published>2019-07-06T01:37:53.000Z</published>
-    <updated>2019-07-06T01:54:13.125Z</updated>
+    <title>leetcode--双指针</title>
+    <link href="http://yoursite.com/2019/07/08/leetcode-%E5%8F%8C%E6%8C%87%E9%92%88/"/>
+    <id>http://yoursite.com/2019/07/08/leetcode-双指针/</id>
+    <published>2019-07-08T10:18:03.000Z</published>
+    <updated>2019-07-08T13:44:31.481Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="hello"><a href="#hello" class="headerlink" title="hello"></a>hello</h1><img src="/2019/07/06/second-blog/1.jpg" title="hello">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;hello&quot;&gt;&lt;a href=&quot;#hello&quot; class=&quot;headerlink&quot; title=&quot;hello&quot;&gt;&lt;/a&gt;hello&lt;/h1&gt;&lt;img src=&quot;/2019/07/06/second-blog/1.jpg&quot; title=&quot;hello&quot;&gt;
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>first_blog</title>
-    <link href="http://yoursite.com/2019/07/05/first-blog/"/>
-    <id>http://yoursite.com/2019/07/05/first-blog/</id>
-    <published>2019-07-05T12:39:57.000Z</published>
-    <updated>2019-07-06T01:57:44.870Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="hello"><a href="#hello" class="headerlink" title="hello"></a>hello</h1><p><img src="/images/1.jpg" alt="you konw that" title="hh"><br><a href="https://www.baidu.com" target="_blank" rel="noopener">avgle</a></p><p><code>const a=4;</code></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a=<span class="number">4</span>;</span><br><span class="line"><span class="keyword">const</span> b=<span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(a+b);</span><br></pre></td></tr></table></figure><table><thead><tr><th align="right">Markdown</th><th align="right">Less</th><th align="right">Pretty</th></tr></thead><tbody><tr><td align="right"><em>Still</em></td><td align="right"><code>renders</code></td><td align="right"><strong>nicely</strong></td></tr><tr><td align="right">1</td><td align="right">2</td><td align="right">3</td></tr><tr><td align="right"><em>Still</em></td><td align="right"><code>renders</code></td><td align="right"><strong>nicely</strong></td></tr></tbody></table><blockquote><p>Blockquotes are very handy in email to emulate reply text.<br>This line is part of the same quote.</p></blockquote><p>Quote break.</p><blockquote><p>This is a very long line that will still be quoted properly when it wraps. Oh boy let’s keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can <em>put</em> <strong>Markdown</strong> into a blockquote. </p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h1 id="leetcode题解之双指针"><a href="#leetcode题解之双指针" class="headerlink" title="leetcode题解之双指针"></a>leetcode题解之双指针</h1><h2 id="1、两数之和-输入有序数组"><a href="#1、两数之和-输入有序数组" class="headerlink" title="1、两数之和|| - 输入有序数组"></a>1、两数之和|| - 输入有序数组</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><blockquote><p>给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。</p><p>函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。</p><p>说明:</p><p>返回的下标值（index1 和 index2）不是从零开始的。<br>你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。<br>示例:</p><p>输入: numbers = [2, 7, 11, 15], target = 9<br>输出: [1,2]<br>解释: 2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted" target="_blank" rel="noopener">https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h3 id="coding实现"><a href="#coding实现" class="headerlink" title="coding实现"></a>coding实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">numbers, target</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">let</span> min=<span class="number">0</span>;</span><br><span class="line">   <span class="keyword">let</span> max=numbers.length<span class="number">-1</span>;</span><br><span class="line">   <span class="keyword">let</span> sum;</span><br><span class="line">   <span class="keyword">while</span>((sum=numbers[min]+numbers[max])!==target)&#123;</span><br><span class="line">      <span class="keyword">if</span>(sum&lt;target)&#123;</span><br><span class="line">        min++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span>&#123;</span><br><span class="line">        max--;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> [min+<span class="number">1</span>,max+<span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h3><blockquote><p>   题目给定的是有序数组，所以使用双指针方法较为方便。设定min指向第一个数组元素（也就是当前最小数），max指向最后一个数组元素。令sum=numbers[min]+numbers[max]</p><p>   循环比较sum与target是否相等，若想等则输出。小于target则代表min指向的元素值比输出值要小，则min++;反之，则max–;</p></blockquote>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;hello&quot;&gt;&lt;a href=&quot;#hello&quot; class=&quot;headerlink&quot; title=&quot;hello&quot;&gt;&lt;/a&gt;hello&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;/images/1.jpg&quot; alt=&quot;you konw that&quot; title=&quot;hh&quot;&gt;&lt;b
+        &lt;h1 id=&quot;leetcode题解之双指针&quot;&gt;&lt;a href=&quot;#leetcode题解之双指针&quot; class=&quot;headerlink&quot; title=&quot;leetcode题解之双指针&quot;&gt;&lt;/a&gt;leetcode题解之双指针&lt;/h1&gt;&lt;h2 id=&quot;1、两数之和-输入有序数组&quot;&gt;&lt;a
       
     
     </summary>
     
     
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2019/07/05/hello-world/"/>
-    <id>http://yoursite.com/2019/07/05/hello-world/</id>
-    <published>2019-07-05T11:33:40.430Z</published>
-    <updated>2019-07-05T11:33:40.430Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
-    
-    </summary>
-    
+      <category term="leetcode题解" scheme="http://yoursite.com/tags/leetcode%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
