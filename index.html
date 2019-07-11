@@ -360,7 +360,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  109
+                  275
                 </span>
               
 
@@ -399,13 +399,37 @@
       
         
           
-            <h1 id="Vue项目代码与命名规范"><a href="#Vue项目代码与命名规范" class="headerlink" title="Vue项目代码与命名规范"></a>Vue项目代码与命名规范</h1><h2 id="1-项目结构"><a href="#1-项目结构" class="headerlink" title="1. 项目结构"></a>1. 项目结构</h2><hr>
-<h2 id="2-文件命名"><a href="#2-文件命名" class="headerlink" title="2. 文件命名"></a>2. 文件命名</h2><hr>
-<pre><code>1. 单文件组件
-    1. 组件名为多个单词
-    组件名应该始终是多个单词的，根组件 App 以及 &lt;transition&gt;、&lt;component&gt; 之类的 Vue 内置组件除外。
-    这样做可以避免跟现有的以及未来的 HTML 元素相冲突，因为所有的 HTML 元素名称都是单个单词的。
-    2. </code></pre>
+            <h1 id="Vue项目代码与命名规范"><a href="#Vue项目代码与命名规范" class="headerlink" title="Vue项目代码与命名规范"></a>Vue项目代码与命名规范</h1><h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><h2 id="文件命名"><a href="#文件命名" class="headerlink" title="文件命名"></a>文件命名</h2><ol>
+<li><p>单文件组件命名规范</p>
+<ol>
+<li><p>组件名为多个单词</p>
+<p> <strong>组件名应该始终是多个单词的，根组件 App 以及 <transition>、<component> 之类的 Vue 内置组件除外。</component></transition></strong></p>
+<blockquote>
+<p>这样做可以避免跟现有的以及未来的 HTML 元素相冲突，因为所有的 HTML 元素名称都是单个单词的。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    MyComponent.vue</span><br><span class="line">    ``` </span><br><span class="line">2. 语义化及单词顺序</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p> SearchButtonRun.vue</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3. 文件名以单词大写开头</span><br></pre></td></tr></table></figure>
+
+<p>MyComponent.vue</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4. 组件名应该倾向于完整单词而不是缩写</span><br></pre></td></tr></table></figure>
+
+<p>UserProfileOptions.vue<br>```</p>
+</li>
+</ol>
+</li>
+<li><p>文件夹命名规范</p>
+<ol>
+<li>属于components文件夹下的子文件夹，使用大写字母开头的PascalBase风格</li>
+<li>所有组件放在components文件夹下，对于各个页面应当新建立业务页面组件文件夹。</li>
+<li>一些通用组件可以建立common文件夹放在components文件夹下</li>
+<li>应当建立api文件夹，统一定义管理接口请求</li>
+<li>建立router文件夹，进行路由管理</li>
+<li>建立store文件夹，进行vuex状态管理</li>
+</ol>
+</li>
+</ol>
+
           
         
       
@@ -1121,7 +1145,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">845</span>
+    <span title="Site words total count">1k</span>
   
 </div>
 
@@ -1151,7 +1175,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共845字</span>
+  <span class="post-count">博客全站共1k字</span>
 </div>
         
 
