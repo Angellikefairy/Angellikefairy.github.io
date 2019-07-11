@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-09T12:34:08.347Z</updated>
+  <updated>2019-07-11T09:52:42.532Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue项目代码与命名规范</title>
+    <link href="http://yoursite.com/2019/07/11/Vue%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E4%B8%8E%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/"/>
+    <id>http://yoursite.com/2019/07/11/Vue项目代码与命名规范/</id>
+    <published>2019-07-11T09:23:51.000Z</published>
+    <updated>2019-07-11T09:52:42.532Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Vue项目代码与命名规范"><a href="#Vue项目代码与命名规范" class="headerlink" title="Vue项目代码与命名规范"></a>Vue项目代码与命名规范</h1><h2 id="1-项目结构"><a href="#1-项目结构" class="headerlink" title="1. 项目结构"></a>1. 项目结构</h2><hr><h2 id="2-文件命名"><a href="#2-文件命名" class="headerlink" title="2. 文件命名"></a>2. 文件命名</h2><hr><pre><code>1. 单文件组件    1. 组件名为多个单词    组件名应该始终是多个单词的，根组件 App 以及 &lt;transition&gt;、&lt;component&gt; 之类的 Vue 内置组件除外。    这样做可以避免跟现有的以及未来的 HTML 元素相冲突，因为所有的 HTML 元素名称都是单个单词的。    2. </code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Vue项目代码与命名规范&quot;&gt;&lt;a href=&quot;#Vue项目代码与命名规范&quot; class=&quot;headerlink&quot; title=&quot;Vue项目代码与命名规范&quot;&gt;&lt;/a&gt;Vue项目代码与命名规范&lt;/h1&gt;&lt;h2 id=&quot;1-项目结构&quot;&gt;&lt;a href=&quot;#1-项目结构&quot;
+      
+    
+    </summary>
+    
+      <category term="Vue" scheme="http://yoursite.com/categories/Vue/"/>
+    
+    
+      <category term="命名规范" scheme="http://yoursite.com/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue项目的快速搭建</title>
+    <link href="http://yoursite.com/2019/07/11/Vue%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/"/>
+    <id>http://yoursite.com/2019/07/11/Vue项目的快速搭建/</id>
+    <published>2019-07-11T09:01:47.000Z</published>
+    <updated>2019-07-11T09:23:39.849Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Vue项目的快速搭建"><a href="#Vue项目的快速搭建" class="headerlink" title="Vue项目的快速搭建"></a>Vue项目的快速搭建</h1><h2 id="1-Vue项目中的文件-文件夹的命名规范"><a href="#1-Vue项目中的文件-文件夹的命名规范" class="headerlink" title="1. Vue项目中的文件/文件夹的命名规范"></a>1. Vue项目中的文件/文件夹的命名规范</h2><pre><code>1. </code></pre><hr><h2 id="2-vue-cli创建项目"><a href="#2-vue-cli创建项目" class="headerlink" title="2. vue-cli创建项目"></a>2. vue-cli创建项目</h2><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Vue项目的快速搭建&quot;&gt;&lt;a href=&quot;#Vue项目的快速搭建&quot; class=&quot;headerlink&quot; title=&quot;Vue项目的快速搭建&quot;&gt;&lt;/a&gt;Vue项目的快速搭建&lt;/h1&gt;&lt;h2 id=&quot;1-Vue项目中的文件-文件夹的命名规范&quot;&gt;&lt;a href=&quot;#1
+      
+    
+    </summary>
+    
+      <category term="Vue" scheme="http://yoursite.com/categories/Vue/"/>
+    
+    
+      <category term="Vue Cli" scheme="http://yoursite.com/tags/Vue-Cli/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode-169 求众数</title>
