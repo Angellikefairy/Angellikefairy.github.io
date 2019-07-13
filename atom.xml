@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-12T05:22:46.383Z</updated>
+  <updated>2019-07-13T08:23:12.520Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-171</title>
+    <link href="http://yoursite.com/2019/07/13/leetcode-171/"/>
+    <id>http://yoursite.com/2019/07/13/leetcode-171/</id>
+    <published>2019-07-13T03:59:25.000Z</published>
+    <updated>2019-07-13T08:23:12.520Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Excel表列序号"><a href="#Excel表列序号" class="headerlink" title="Excel表列序号"></a>Excel表列序号</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个Excel表格中的列名称，返回其相应的列序号。</p><p>例如，</p><pre><code>A -&gt; 1B -&gt; 2C -&gt; 3...Z -&gt; 26AA -&gt; 27AB -&gt; 28 ...</code></pre><p>示例 1:</p><blockquote><p>输入: “A”<br>  输出: 1</p></blockquote><p>示例 2:</p><blockquote><p>输入: “AB”<br>  输出: 28</p></blockquote><p>示例 3:</p><blockquote><p>输入: “ZY”<br>输出: 701</p></blockquote><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/excel-sheet-column-number" target="_blank" rel="noopener">https://leetcode-cn.com/problems/excel-sheet-column-number</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>通过观察，不难发现其实这类似于二进制之类的表示形式。只不过对于该题可以把其称之为26进制。再按照二进制转化为十进制方法将其转化为对应的表示数</p><p>A的Unicode编码为65，在该题目中对应的是1.因此可以通过letter.charCodeAt()函数得到的Unicode编码值减去64即可得到对应的单个字母对应值。</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>将字符串转化为数组从而可以进行遍历</li><li>将转化得到的数组反转(reverse()) 【类似于二进制转化为十进制的方法，因此，反转后的数组的下标index就是他们在累加时的26幂的次方】</li><li>利用reduce()函数进行累加</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><h3 id="我一开始的coding"><a href="#我一开始的coding" class="headerlink" title="我一开始的coding"></a>我一开始的coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> titleToNumber = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> sArray=s.split(<span class="string">''</span>);</span><br><span class="line">  <span class="keyword">let</span> length=sArray.length<span class="number">-1</span>;  </span><br><span class="line">  <span class="keyword">let</span> sum=<span class="number">0</span>;</span><br><span class="line">  sArray.forEach(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">    sum+=(value.charCodeAt()%<span class="string">'A'</span>.charCodeAt()+<span class="number">1</span>)*<span class="built_in">Math</span>.pow(<span class="number">26</span>,length);</span><br><span class="line">    length--;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="优化过的coding"><a href="#优化过的coding" class="headerlink" title="优化过的coding"></a>优化过的coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> titleToNumber = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> sArray=s.split(<span class="string">''</span>).reverse();</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">sArray.reduce((pre,cur,index</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> pre+(cur.charCodeAt()<span class="number">-64</span>)*<span class="built_in">Math</span>.pow(<span class="number">26</span>,index);</span><br><span class="line">  &#125;,<span class="number">0</span>))</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Excel表列序号&quot;&gt;&lt;a href=&quot;#Excel表列序号&quot; class=&quot;headerlink&quot; title=&quot;Excel表列序号&quot;&gt;&lt;/a&gt;Excel表列序号&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定一个Excel表格中的列名称，返回其相应的列序号。&lt;/p&gt;
+&lt;p&gt;例如，&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;A -&amp;gt; 1
+B -&amp;gt; 2
+C -&amp;gt; 3
+...
+Z -&amp;gt; 26
+AA -&amp;gt; 27
+AB -&amp;gt; 28 
+...&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;示例 1:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: “A”&lt;br&gt;  输出: 1&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 2:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: “AB”&lt;br&gt;  输出: 28&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 3:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: “ZY”&lt;br&gt;输出: 701&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
   
   <entry>
     <title>Vue项目代码与命名规范</title>
@@ -40,10 +82,10 @@
   
   <entry>
     <title>Vue项目的快速搭建</title>
-    <link href="http://yoursite.com/2019/07/11/vue/"/>
-    <id>http://yoursite.com/2019/07/11/vue/</id>
+    <link href="http://yoursite.com/2019/07/11/Vue%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/"/>
+    <id>http://yoursite.com/2019/07/11/Vue项目的快速搭建/</id>
     <published>2019-07-11T09:01:47.000Z</published>
-    <updated>2019-07-12T09:06:55.767Z</updated>
+    <updated>2019-07-13T08:23:12.541Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Vue项目的快速搭建"><a href="#Vue项目的快速搭建" class="headerlink" title="Vue项目的快速搭建"></a>Vue项目的快速搭建</h1><h2 id="vue-cli创建项目"><a href="#vue-cli创建项目" class="headerlink" title="vue-cli创建项目"></a>vue-cli创建项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vue create &lt;项目名&gt;</span><br><span class="line">//选择手动设置特性（Manually select features）</span><br></pre></td></tr></table></figure><h2 id="安装必要依赖包括但不限于vue-router-vuex-vue-axios-axios"><a href="#安装必要依赖包括但不限于vue-router-vuex-vue-axios-axios" class="headerlink" title="安装必要依赖包括但不限于vue-router,vuex,vue-axios,axios"></a>安装必要依赖包括但不限于vue-router,vuex,vue-axios,axios</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install vue-router --save</span><br></pre></td></tr></table></figure><h2 id="建立基本路由管理"><a href="#建立基本路由管理" class="headerlink" title="建立基本路由管理"></a>建立基本路由管理</h2><h3 id="在router-js中配置路由"><a href="#在router-js中配置路由" class="headerlink" title="在router.js中配置路由"></a>在router.js中配置路由</h3>   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br><span class="line"><span class="keyword">import</span> RouterView1 <span class="keyword">from</span> <span class="string">'@/component/RouterView1'</span></span><br><span class="line"><span class="comment">//@默认表示src文件夹</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter) </span><br><span class="line"><span class="comment">/*安装 Vue.js 插件。如果插件是一个对象，必须提供 install 方法。如果插件是一个函数，它会被作为 install 方法。install 方法调用时，会将 Vue 作为参数传入。*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">    routes:[</span><br><span class="line">        &#123;</span><br><span class="line">             path:<span class="string">'/RouterView1'</span>,</span><br><span class="line">             name:<span class="string">'view1'</span>,</span><br><span class="line">             component:RouterView1</span><br><span class="line">        &#125;,</span><br><span class="line">         &#123;</span><br><span class="line">             path:<span class="string">'/RouterView2'</span>,</span><br><span class="line">             name:<span class="string">'view2'</span>,</span><br><span class="line">             component:<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">                 <span class="keyword">import</span>(<span class="string">'@/component/RouterView2'</span>)</span><br><span class="line">             &#125;</span><br><span class="line">             <span class="comment">/*import() es6函数，动态异步加载模块，返回一个promise*/</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h3 id="在main-js中注册"><a href="#在main-js中注册" class="headerlink" title="在main.js中注册"></a>在main.js中注册</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;).$mount(<span class="string">"#app"</span>);</span><br></pre></td></tr></table></figure><h2 id="使用axios（或vue-axios）"><a href="#使用axios（或vue-axios）" class="headerlink" title="使用axios（或vue-axios）"></a>使用axios（或vue-axios）</h2><h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><ol><li><p>第一种方式（main.js直接引入)</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"><span class="keyword">import</span> VueAxios <span class="keyword">from</span> <span class="string">'vue-axios'</span></span><br><span class="line"></span><br><span class="line">Vue.use(axios,vue-axios)</span><br></pre></td></tr></table></figure></li><li><p>第二种方式（在api文件夹中引入）</p><ol><li>建立api.js文件用来编写接口函数<br><img src="/.com//api.png" alt="api.js"></li><li>建立index.js导出api.js的所有函数<br><img src="/.com//index.png" alt="index.js"></li></ol></li></ol><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3>   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Vue.axios.get(api).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line"><span class="built_in">console</span>.log(response.data)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span>.axios.get(api).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line"><span class="built_in">console</span>.log(response.data)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span>.$http.get(api).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line"><span class="built_in">console</span>.log(response.data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
     
