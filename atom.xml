@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-14T06:38:57.192Z</updated>
+  <updated>2019-07-14T07:00:46.616Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,11 +21,26 @@
     <link href="http://yoursite.com/2019/07/14/leetcode-172/"/>
     <id>http://yoursite.com/2019/07/14/leetcode-172/</id>
     <published>2019-07-14T06:38:57.000Z</published>
-    <updated>2019-07-14T06:38:57.192Z</updated>
+    <updated>2019-07-14T07:00:46.616Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Excel表列序号"><a href="#Excel表列序号" class="headerlink" title="Excel表列序号"></a>Excel表列序号</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个整数 n，返回 n! 结果尾数中零的数量。</p><p>示例 1:</p><blockquote><p>输入: 3<br>输出: 0<br>解释: 3! = 6, 尾数中没有零。</p></blockquote><p>示例 2:</p><blockquote><p>输入: 5<br>输出: 1<br>解释: 5! = 120, 尾数中有 1 个零.</p></blockquote><p>说明: 你算法的时间复杂度应为 O(log n) 。</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/factorial-trailing-zeroes" target="_blank" rel="noopener">https://leetcode-cn.com/problems/factorial-trailing-zeroes</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>一开始看到题目时的第一反应就是求解出n!的值，再遍历得到0的个数。然后提交之后，报错提示：超出最大堆栈大小（RangeError: Maximum call stack size exceeded）。因此，看题解之后得到提示，开始寻找规律。</p><p>若要某个数中有某位为0,那么他必定是10的倍数。而10=2 * 5；因此，该阶乘中有几对2 * 5，则该数就有几个0；又因为该阶乘为递减，则5的个数必定小于2的个数，则题目即可转化为求出5的个数即可。</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li><p>归纳得：</p><table><thead><tr><th>n</th><th>式子</th><th>5的个数</th><th>5的总个数</th></tr></thead><tbody><tr><td>5</td><td>1*5</td><td>1</td><td>1</td></tr><tr><td>10</td><td>2*5</td><td>1</td><td>2</td></tr><tr><td>15</td><td>3*5</td><td>1</td><td>3</td></tr><tr><td>20</td><td>4*5</td><td>1</td><td>4</td></tr><tr><td>25</td><td>5*5</td><td>2</td><td>6</td></tr></tbody></table></li><li><p>因此，可以通过</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while (n &gt;= 5) &#123;</span><br><span class="line">    n = Math.floor(n / 5);</span><br><span class="line">    total += n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p> 得到5的个数</p></li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><h3 id="一开始使用递归报错的coding"><a href="#一开始使用递归报错的coding" class="headerlink" title="一开始使用递归报错的coding"></a>一开始使用递归报错的coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> trailingZeroes = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> sum=(<span class="function"><span class="keyword">function</span> <span class="title">circle</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n!=<span class="number">1</span>)&#123;</span><br><span class="line">     <span class="keyword">return</span> circle(n<span class="number">-1</span>)*n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;)(n)</span><br><span class="line">  <span class="built_in">console</span>.log(sum);</span><br><span class="line">    sum=sum.toString().split(<span class="string">''</span>);</span><br><span class="line">    <span class="keyword">let</span> count=<span class="number">0</span>;</span><br><span class="line">    sum.forEach(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(value==<span class="number">0</span>)&#123;</span><br><span class="line">        count++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="优化过的coding"><a href="#优化过的coding" class="headerlink" title="优化过的coding"></a>优化过的coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> trailingZeroes = <span class="function"><span class="params">n</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> total = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (n &gt;= <span class="number">5</span>) &#123;</span><br><span class="line">    n = <span class="built_in">Math</span>.floor(n / <span class="number">5</span>);</span><br><span class="line">    total += n;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> total;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
+      &lt;h1 id=&quot;Excel表列序号&quot;&gt;&lt;a href=&quot;#Excel表列序号&quot; class=&quot;headerlink&quot; title=&quot;Excel表列序号&quot;&gt;&lt;/a&gt;Excel表列序号&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定一个整数 n，返回 n! 结果尾数中零的数量。&lt;/p&gt;
+&lt;p&gt;示例 1:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: 3&lt;br&gt;输出: 0&lt;br&gt;解释: 3! = 6, 尾数中没有零。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 2:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: 5&lt;br&gt;输出: 1&lt;br&gt;解释: 5! = 120, 尾数中有 1 个零.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;说明: 你算法的时间复杂度应为 O(log n) 。&lt;/p&gt;
+    
     </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
   </entry>
