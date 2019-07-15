@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="数组,">
+  <meta name="keywords" content="递归,">
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。 例如， A -&amp;gt; 1 B -&amp;gt; 2 C -&amp;gt; 3 ... Z -&amp;gt; 26 AA -&amp;gt; 27 AB -&amp;gt; 28  ...示例 1:  输入: “A”  输出: 1  示例 2:  输入: “AB”  输出: 28  示例 3:  输入: “ZY”输出: 701">
-<meta name="keywords" content="数组">
+<meta name="description" content="快乐数题目描述编写一个算法来判断一个数是不是“快乐数”。 一个“快乐数”定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是无限循环但始终变不到 1。如果可以变为 1，那么这个数就是快乐数。 示例:   输入: 19输出: true解释: 12 + 92 = 8282 + 22 = 6862 + 82 = 10012 + 02 + 02">
+<meta name="keywords" content="递归">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-171 Excel表列序号">
-<meta property="og:url" content="http://yoursite.com/2019/07/13/leetcode-171/index.html">
+<meta property="og:title" content="leetcode-202 快乐数">
+<meta property="og:url" content="http://yoursite.com/2019/07/15/leetcode-202/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。 例如， A -&amp;gt; 1 B -&amp;gt; 2 C -&amp;gt; 3 ... Z -&amp;gt; 26 AA -&amp;gt; 27 AB -&amp;gt; 28  ...示例 1:  输入: “A”  输出: 1  示例 2:  输入: “AB”  输出: 28  示例 3:  输入: “ZY”输出: 701">
+<meta property="og:description" content="快乐数题目描述编写一个算法来判断一个数是不是“快乐数”。 一个“快乐数”定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是无限循环但始终变不到 1。如果可以变为 1，那么这个数就是快乐数。 示例:   输入: 19输出: true解释: 12 + 92 = 8282 + 22 = 6862 + 82 = 10012 + 02 + 02">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-13T08:27:15.712Z">
+<meta property="og:updated_time" content="2019-07-15T08:56:08.469Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-171 Excel表列序号">
-<meta name="twitter:description" content="Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。 例如， A -&amp;gt; 1 B -&amp;gt; 2 C -&amp;gt; 3 ... Z -&amp;gt; 26 AA -&amp;gt; 27 AB -&amp;gt; 28  ...示例 1:  输入: “A”  输出: 1  示例 2:  输入: “AB”  输出: 28  示例 3:  输入: “ZY”输出: 701">
+<meta name="twitter:title" content="leetcode-202 快乐数">
+<meta name="twitter:description" content="快乐数题目描述编写一个算法来判断一个数是不是“快乐数”。 一个“快乐数”定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是无限循环但始终变不到 1。如果可以变为 1，那么这个数就是快乐数。 示例:   输入: 19输出: true解释: 12 + 92 = 8282 + 22 = 6862 + 82 = 10012 + 02 + 02">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/13/leetcode-171/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/15/leetcode-202/">
 
 
 
 
 
-  <title>leetcode-171 Excel表列序号 | Hexo</title>
+  <title>leetcode-202 快乐数 | Hexo</title>
   
 
 
@@ -276,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/13/leetcode-171/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/15/leetcode-202/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -293,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode-171 Excel表列序号</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode-202 快乐数</h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-13T11:59:25+08:00">
-                2019-07-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-15T16:44:13+08:00">
+                2019-07-15
               </time>
             
 
@@ -359,7 +359,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  402
+                  437
                 </span>
               
 
@@ -396,39 +396,28 @@
       
 
       
-        <h1 id="Excel表列序号"><a href="#Excel表列序号" class="headerlink" title="Excel表列序号"></a>Excel表列序号</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个Excel表格中的列名称，返回其相应的列序号。</p>
-<p>例如，</p>
-<pre><code>A -&gt; 1
-B -&gt; 2
-C -&gt; 3
-...
-Z -&gt; 26
-AA -&gt; 27
-AB -&gt; 28 
-...</code></pre><p>示例 1:</p>
+        <h1 id="快乐数"><a href="#快乐数" class="headerlink" title="快乐数"></a>快乐数</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>编写一个算法来判断一个数是不是“快乐数”。</p>
+<p>一个“快乐数”定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是无限循环但始终变不到 1。如果可以变为 1，那么这个数就是快乐数。</p>
+<p>示例: </p>
 <blockquote>
-<p>输入: “A”<br>  输出: 1</p>
-</blockquote>
-<p>示例 2:</p>
-<blockquote>
-<p>输入: “AB”<br>  输出: 28</p>
-</blockquote>
-<p>示例 3:</p>
-<blockquote>
-<p>输入: “ZY”<br>输出: 701</p>
+<p>输入: 19<br>输出: true<br>解释: <br>12 + 92 = 82<br>82 + 22 = 68<br>62 + 82 = 100<br>12 + 02 + 02 = 1</p>
 </blockquote>
 <a id="more"></a>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/excel-sheet-column-number" target="_blank" rel="noopener">https://leetcode-cn.com/problems/excel-sheet-column-number</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>通过观察，不难发现其实这类似于二进制之类的表示形式。只不过对于该题可以把其称之为26进制。再按照二进制转化为十进制方法将其转化为对应的表示数</p>
-<p>A的Unicode编码为65，在该题目中对应的是1.因此可以通过letter.charCodeAt()函数得到的Unicode编码值减去64即可得到对应的单个字母对应值。</p>
-<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
-<li>将字符串转化为数组从而可以进行遍历</li>
-<li>将转化得到的数组反转(reverse()) 【类似于二进制转化为十进制的方法，因此，反转后的数组的下标index就是他们在累加时的26幂的次方】</li>
-<li>利用reduce()函数进行累加</li>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/happy-number" target="_blank" rel="noopener">https://leetcode-cn.com/problems/happy-number</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ol>
+<li><p>正面解题，寻找快乐数。当重复过程变为1则为快乐数，若当循环过程中得到的数与之前出现过的数相重复，则表示之后会在这两数之间无限循环，此时即可返回false.</p>
+</li>
+<li><p>递归解法</p>
+</li>
 </ol>
-<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><h3 id="我一开始的coding"><a href="#我一开始的coding" class="headerlink" title="我一开始的coding"></a>我一开始的coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> titleToNumber = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> sArray=s.split(<span class="string">''</span>);</span><br><span class="line">  <span class="keyword">let</span> length=sArray.length<span class="number">-1</span>;  </span><br><span class="line">  <span class="keyword">let</span> sum=<span class="number">0</span>;</span><br><span class="line">  sArray.forEach(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">    sum+=(value.charCodeAt()%<span class="string">'A'</span>.charCodeAt()+<span class="number">1</span>)*<span class="built_in">Math</span>.pow(<span class="number">26</span>,length);</span><br><span class="line">    length--;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><h4 id="正面解题法"><a href="#正面解题法" class="headerlink" title="正面解题法"></a>正面解题法</h4><ol>
+<li>若输入为1，则直接返回true</li>
+<li>设置set集合用来存储循环过程中得到的数</li>
+<li>进入do-while循环，将参数转化为数组，利用reduce函数进行平方和累加，判断该得到的数是否存在于set集合中，若存在则返回false，否则则将该数放入set集合中。同时,若该数为1则返回true退出函数</li>
+</ol>
+<h4 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h4><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><h3 id="正面解题的Coding"><a href="#正面解题的Coding" class="headerlink" title="正面解题的Coding"></a>正面解题的Coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isHappy = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n===<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">let</span> arr;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">set</span>=new Set([n]);</span><br><span class="line">    do&#123;</span><br><span class="line">        arr=n.toString().split(<span class="string">''</span>);</span><br><span class="line">        n=arr.reduce(<span class="function">(<span class="params">pre,value</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> pre+<span class="built_in">Math</span>.pow(<span class="built_in">parseInt</span>(value),<span class="number">2</span>)</span><br><span class="line">        &#125;,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">set</span>.has(n))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">set</span>.add(n);</span><br><span class="line">    &#125;while(n!=1)</span><br><span class="line">    return true;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="优化过的coding"><a href="#优化过的coding" class="headerlink" title="优化过的coding"></a>优化过的coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> titleToNumber = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> sArray=s.split(<span class="string">''</span>).reverse();</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">sArray.reduce((pre,cur,index</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> pre+(cur.charCodeAt()<span class="number">-64</span>)*<span class="built_in">Math</span>.pow(<span class="number">26</span>,index);</span><br><span class="line">  &#125;,<span class="number">0</span>))</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="递归法的Coding"><a href="#递归法的Coding" class="headerlink" title="递归法的Coding"></a>递归法的Coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
       
@@ -447,7 +436,7 @@ AB -&gt; 28
       
         <div class="post-tags">
           
-            <a href="/tags/数组/" rel="tag"># 数组</a>
+            <a href="/tags/递归/" rel="tag"># 递归</a>
           
         </div>
       
@@ -466,8 +455,8 @@ AB -&gt; 28
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/11/Vue项目代码与命名规范/" rel="next" title="Vue项目代码与命名规范">
-                <i class="fa fa-chevron-left"></i> Vue项目代码与命名规范
+              <a href="/2019/07/15/var、let与const/" rel="next" title="var、let与const的比较以及作用域">
+                <i class="fa fa-chevron-left"></i> var、let与const的比较以及作用域
               </a>
             
           </div>
@@ -475,10 +464,6 @@ AB -&gt; 28
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/14/leetcode-172/" rel="prev" title="leetcode-172 阶乘后的零">
-                leetcode-172 阶乘后的零 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -619,7 +604,7 @@ AB -&gt; 28
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Excel表列序号"><span class="nav-number">1.</span> <span class="nav-text">Excel表列序号</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#我一开始的coding"><span class="nav-number">1.3.1.</span> <span class="nav-text">我一开始的coding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化过的coding"><span class="nav-number">1.3.2.</span> <span class="nav-text">优化过的coding</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#快乐数"><span class="nav-number">1.</span> <span class="nav-text">快乐数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#正面解题法"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">正面解题法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#递归法"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">递归法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正面解题的Coding"><span class="nav-number">1.3.1.</span> <span class="nav-text">正面解题的Coding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归法的Coding"><span class="nav-number">1.3.2.</span> <span class="nav-text">递归法的Coding</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

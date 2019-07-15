@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="数组,">
+  <meta name="keywords" content="基础语法,">
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。 例如， A -&amp;gt; 1 B -&amp;gt; 2 C -&amp;gt; 3 ... Z -&amp;gt; 26 AA -&amp;gt; 27 AB -&amp;gt; 28  ...示例 1:  输入: “A”  输出: 1  示例 2:  输入: “AB”  输出: 28  示例 3:  输入: “ZY”输出: 701">
-<meta name="keywords" content="数组">
+<meta name="description" content="var、let与const的比较以及作用域">
+<meta name="keywords" content="基础语法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-171 Excel表列序号">
-<meta property="og:url" content="http://yoursite.com/2019/07/13/leetcode-171/index.html">
+<meta property="og:title" content="var、let与const的比较以及作用域">
+<meta property="og:url" content="http://yoursite.com/2019/07/15/var、let与const/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。 例如， A -&amp;gt; 1 B -&amp;gt; 2 C -&amp;gt; 3 ... Z -&amp;gt; 26 AA -&amp;gt; 27 AB -&amp;gt; 28  ...示例 1:  输入: “A”  输出: 1  示例 2:  输入: “AB”  输出: 28  示例 3:  输入: “ZY”输出: 701">
+<meta property="og:description" content="var、let与const的比较以及作用域">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-13T08:27:15.712Z">
+<meta property="og:updated_time" content="2019-07-15T08:56:08.469Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-171 Excel表列序号">
-<meta name="twitter:description" content="Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。 例如， A -&amp;gt; 1 B -&amp;gt; 2 C -&amp;gt; 3 ... Z -&amp;gt; 26 AA -&amp;gt; 27 AB -&amp;gt; 28  ...示例 1:  输入: “A”  输出: 1  示例 2:  输入: “AB”  输出: 28  示例 3:  输入: “ZY”输出: 701">
+<meta name="twitter:title" content="var、let与const的比较以及作用域">
+<meta name="twitter:description" content="var、let与const的比较以及作用域">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/13/leetcode-171/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/15/var、let与const/">
 
 
 
 
 
-  <title>leetcode-171 Excel表列序号 | Hexo</title>
+  <title>var、let与const的比较以及作用域 | Hexo</title>
   
 
 
@@ -276,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/13/leetcode-171/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/15/var、let与const/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -293,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode-171 Excel表列序号</h1>
+          <h1 class="post-title" itemprop="name headline">var、let与const的比较以及作用域</h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-13T11:59:25+08:00">
-                2019-07-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-15T09:58:31+08:00">
+                2019-07-15
               </time>
             
 
@@ -328,8 +328,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode题解与算法</span>
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
                   </a>
                 </span>
 
@@ -359,7 +359,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  402
+                  668
                 </span>
               
 
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -396,40 +396,95 @@
       
 
       
-        <h1 id="Excel表列序号"><a href="#Excel表列序号" class="headerlink" title="Excel表列序号"></a>Excel表列序号</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个Excel表格中的列名称，返回其相应的列序号。</p>
-<p>例如，</p>
-<pre><code>A -&gt; 1
-B -&gt; 2
-C -&gt; 3
-...
-Z -&gt; 26
-AA -&gt; 27
-AB -&gt; 28 
-...</code></pre><p>示例 1:</p>
-<blockquote>
-<p>输入: “A”<br>  输出: 1</p>
+        <h1 id="var、let与const的比较以及作用域"><a href="#var、let与const的比较以及作用域" class="headerlink" title="var、let与const的比较以及作用域"></a>var、let与const的比较以及作用域</h1><a id="more"></a>
+<h2 id="提升机制"><a href="#提升机制" class="headerlink" title="提升机制"></a>提升机制</h2><h3 id="对于用var定义的变量会被提升到当前作用域的顶端并赋值为undefined"><a href="#对于用var定义的变量会被提升到当前作用域的顶端并赋值为undefined" class="headerlink" title="对于用var定义的变量会被提升到当前作用域的顶端并赋值为undefined"></a>对于用var定义的变量会被提升到当前作用域的顶端并赋值为undefined</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);   <span class="comment">//undefined</span></span><br><span class="line"><span class="keyword">var</span> a=<span class="string">'hello'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);   <span class="comment">//hello</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="函数声明整体提升"><a href="#函数声明整体提升" class="headerlink" title="函数声明整体提升"></a>函数声明整体提升</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a();   <span class="comment">//hello</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);  <span class="comment">//undefined</span></span><br><span class="line">a();  <span class="comment">//报错：a is not a function</span></span><br><span class="line"><span class="keyword">var</span> a=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;   </span><br><span class="line">    <span class="comment">/*遇见var a=  会直接将a当作一个变量提升并赋值为undefined;*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);  <span class="comment">/*报错：Cannot access 'a' before initialization*/</span></span><br><span class="line">a();  </span><br><span class="line"><span class="keyword">let</span> a=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;   </span><br><span class="line">    <span class="comment">/*这里为let a= ,不会有变量提升机制*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="预编译与词法分析"><a href="#预编译与词法分析" class="headerlink" title="预编译与词法分析"></a>预编译与词法分析</h2><h3 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h3><blockquote>
+<p>JS引擎会在正式执行代码之前进行一次”预编译“，预编译简单理解就是在内存中开辟一些空间，存放一些变量和函数。</p>
 </blockquote>
-<p>示例 2:</p>
+<h4 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h4><ol>
+<li><p>页面创建全局对象（Global Object）对象（window对象）。</p>
+</li>
+<li><p>加载第一个脚本文件</p>
+</li>
+<li><p>脚本加载完毕后，进行语法分析。</p>
+</li>
+<li><p>开始预编译</p>
+<ol>
+<li><p>查找函数声明，作为GO属性，值赋予函数体（函数声明优先）</p>
+</li>
+<li><p>查找变量声明（除了函数内部的），作为GO属性，值赋予undefined</p>
 <blockquote>
-<p>输入: “AB”<br>  输出: 28</p>
+<p>若函数声明与变量声明同名，则函数声明会优先于变量声明。具体来说即是1. 函数声明替换变量声明 2. 后面的函数声明替换前面的函数声明 3. 后面的变量声明无效</p>
 </blockquote>
-<p>示例 3:</p>
-<blockquote>
-<p>输入: “ZY”<br>输出: 701</p>
-</blockquote>
-<a id="more"></a>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/excel-sheet-column-number" target="_blank" rel="noopener">https://leetcode-cn.com/problems/excel-sheet-column-number</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>通过观察，不难发现其实这类似于二进制之类的表示形式。只不过对于该题可以把其称之为26进制。再按照二进制转化为十进制方法将其转化为对应的表示数</p>
-<p>A的Unicode编码为65，在该题目中对应的是1.因此可以通过letter.charCodeAt()函数得到的Unicode编码值减去64即可得到对应的单个字母对应值。</p>
-<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
-<li>将字符串转化为数组从而可以进行遍历</li>
-<li>将转化得到的数组反转(reverse()) 【类似于二进制转化为十进制的方法，因此，反转后的数组的下标index就是他们在累加时的26幂的次方】</li>
-<li>利用reduce()函数进行累加</li>
+<p>例如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);   <span class="comment">//[function: a]</span></span><br><span class="line">a();   <span class="comment">//hello</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a=<span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);   <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+
+</li>
 </ol>
-<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><h3 id="我一开始的coding"><a href="#我一开始的coding" class="headerlink" title="我一开始的coding"></a>我一开始的coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> titleToNumber = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> sArray=s.split(<span class="string">''</span>);</span><br><span class="line">  <span class="keyword">let</span> length=sArray.length<span class="number">-1</span>;  </span><br><span class="line">  <span class="keyword">let</span> sum=<span class="number">0</span>;</span><br><span class="line">  sArray.forEach(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">    sum+=(value.charCodeAt()%<span class="string">'A'</span>.charCodeAt()+<span class="number">1</span>)*<span class="built_in">Math</span>.pow(<span class="number">26</span>,length);</span><br><span class="line">    length--;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h3><ol>
+<li>创建AO活动对象（Active Object）</li>
+<li>查找形参和变量声明，值赋予undefined</li>
+<li>实参值赋给形参</li>
+<li>查找函数声明，值赋给函数体</li>
+<li>解释执行函数中的代码</li>
+</ol>
+<h2 id="块级声明与块级作用域"><a href="#块级声明与块级作用域" class="headerlink" title="块级声明与块级作用域"></a>块级声明与块级作用域</h2><p>块级作用域存在于：</p>
+<blockquote>
+<p>1.函数内部<br>2.块中（{ }之间的区域）</p>
+</blockquote>
+<p>例如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);  <span class="comment">//报错：a is not defined</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="keyword">let</span> a=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
 
-<h3 id="优化过的coding"><a href="#优化过的coding" class="headerlink" title="优化过的coding"></a>优化过的coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> titleToNumber = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> sArray=s.split(<span class="string">''</span>).reverse();</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">sArray.reduce((pre,cur,index</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> pre+(cur.charCodeAt()<span class="number">-64</span>)*<span class="built_in">Math</span>.pow(<span class="number">26</span>,index);</span><br><span class="line">  &#125;,<span class="number">0</span>))</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>用let声明变量，会将变量的作用域限制在当前代码块中（即块级作用域）;因此块级作用域外部无法访问</p>
+<h2 id="临时死区"><a href="#临时死区" class="headerlink" title="临时死区"></a>临时死区</h2><blockquote>
+<p>javascript引擎在预编译阶段时，要么将变量提升至作用域顶部（var）,要么就将其放到TDZ（临时死区中）。访问临时死区的变量会触发运行错误。</p>
+</blockquote>
+<p>例如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> a);  <span class="comment">//报错</span></span><br><span class="line">    <span class="keyword">let</span> a=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="var、let与const的比较"><a href="#var、let与const的比较" class="headerlink" title="var、let与const的比较"></a>var、let与const的比较</h2><table>
+<thead>
+<tr>
+<th>\</th>
+<th>var</th>
+<th>let</th>
+<th>const</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>变量提升机制</td>
+<td>有</td>
+<td>无</td>
+<td>无</td>
+</tr>
+<tr>
+<td>重声明</td>
+<td>允许</td>
+<td>在同个作用域下禁止,不同作用域下允许</td>
+<td>同let</td>
+</tr>
+<tr>
+<td>能否更改</td>
+<td>允许</td>
+<td>允许</td>
+<td>不允许</td>
+</tr>
+<tr>
+<td>初始化</td>
+<td>可以不用</td>
+<td>可以不用</td>
+<td>必须</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -447,7 +502,7 @@ AB -&gt; 28
       
         <div class="post-tags">
           
-            <a href="/tags/数组/" rel="tag"># 数组</a>
+            <a href="/tags/基础语法/" rel="tag"># 基础语法</a>
           
         </div>
       
@@ -466,8 +521,8 @@ AB -&gt; 28
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/11/Vue项目代码与命名规范/" rel="next" title="Vue项目代码与命名规范">
-                <i class="fa fa-chevron-left"></i> Vue项目代码与命名规范
+              <a href="/2019/07/14/leetcode-172/" rel="next" title="leetcode-172 阶乘后的零">
+                <i class="fa fa-chevron-left"></i> leetcode-172 阶乘后的零
               </a>
             
           </div>
@@ -476,8 +531,8 @@ AB -&gt; 28
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/14/leetcode-172/" rel="prev" title="leetcode-172 阶乘后的零">
-                leetcode-172 阶乘后的零 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/15/leetcode-202/" rel="prev" title="leetcode-202 快乐数">
+                leetcode-202 快乐数 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -619,7 +674,7 @@ AB -&gt; 28
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Excel表列序号"><span class="nav-number">1.</span> <span class="nav-text">Excel表列序号</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#我一开始的coding"><span class="nav-number">1.3.1.</span> <span class="nav-text">我一开始的coding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化过的coding"><span class="nav-number">1.3.2.</span> <span class="nav-text">优化过的coding</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#var、let与const的比较以及作用域"><span class="nav-number">1.</span> <span class="nav-text">var、let与const的比较以及作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提升机制"><span class="nav-number">1.1.</span> <span class="nav-text">提升机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对于用var定义的变量会被提升到当前作用域的顶端并赋值为undefined"><span class="nav-number">1.1.1.</span> <span class="nav-text">对于用var定义的变量会被提升到当前作用域的顶端并赋值为undefined</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数声明整体提升"><span class="nav-number">1.1.2.</span> <span class="nav-text">函数声明整体提升</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预编译与词法分析"><span class="nav-number">1.2.</span> <span class="nav-text">预编译与词法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#预编译"><span class="nav-number">1.2.1.</span> <span class="nav-text">预编译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体步骤"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">具体步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#词法分析"><span class="nav-number">1.2.2.</span> <span class="nav-text">词法分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#块级声明与块级作用域"><span class="nav-number">1.3.</span> <span class="nav-text">块级声明与块级作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#临时死区"><span class="nav-number">1.4.</span> <span class="nav-text">临时死区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var、let与const的比较"><span class="nav-number">1.5.</span> <span class="nav-text">var、let与const的比较</span></a></li></ol></li></ol></div>
             
 
           </div>
