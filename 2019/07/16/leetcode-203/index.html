@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="命名规范,">
+  <meta name="keywords" content="链表,">
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="Vue项目代码与命名规范">
-<meta name="keywords" content="命名规范">
+<meta name="description" content="移除链表元素题目描述删除链表中等于给定值 val 的所有节点。 示例:  输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5  核心思路概述此题为单链表删除指定元素 解题步骤单独考虑头节点（因为头节点之前没有节点） 考虑头节点即为指定需删除元素，那么应当将头指针指向下一个元素。循环检验，当头">
+<meta name="keywords" content="链表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue项目代码与命名规范">
-<meta property="og:url" content="http://yoursite.com/2019/07/11/Vue项目代码与命名规范/index.html">
+<meta property="og:title" content="leetcode-203 移除链表元素">
+<meta property="og:url" content="http://yoursite.com/2019/07/16/leetcode-203/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Vue项目代码与命名规范">
+<meta property="og:description" content="移除链表元素题目描述删除链表中等于给定值 val 的所有节点。 示例:  输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5  核心思路概述此题为单链表删除指定元素 解题步骤单独考虑头节点（因为头节点之前没有节点） 考虑头节点即为指定需删除元素，那么应当将头指针指向下一个元素。循环检验，当头">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-12T05:22:46.383Z">
+<meta property="og:updated_time" content="2019-07-16T06:21:59.257Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vue项目代码与命名规范">
-<meta name="twitter:description" content="Vue项目代码与命名规范">
+<meta name="twitter:title" content="leetcode-203 移除链表元素">
+<meta name="twitter:description" content="移除链表元素题目描述删除链表中等于给定值 val 的所有节点。 示例:  输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5  核心思路概述此题为单链表删除指定元素 解题步骤单独考虑头节点（因为头节点之前没有节点） 考虑头节点即为指定需删除元素，那么应当将头指针指向下一个元素。循环检验，当头">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/11/Vue项目代码与命名规范/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/16/leetcode-203/">
 
 
 
 
 
-  <title>Vue项目代码与命名规范 | Hexo</title>
+  <title>leetcode-203 移除链表元素 | Hexo</title>
   
 
 
@@ -276,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/Vue项目代码与命名规范/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/leetcode-203/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -293,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Vue项目代码与命名规范</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode-203 移除链表元素</h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-11T17:23:51+08:00">
-                2019-07-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-16T13:43:19+08:00">
+                2019-07-16
               </time>
             
 
@@ -328,8 +328,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
+                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode题解与算法</span>
                   </a>
                 </span>
 
@@ -359,7 +359,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  277
+                  480
                 </span>
               
 
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -396,46 +396,26 @@
       
 
       
-        <h1 id="Vue项目代码与命名规范"><a href="#Vue项目代码与命名规范" class="headerlink" title="Vue项目代码与命名规范"></a>Vue项目代码与命名规范</h1><a id="more"></a>
-<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><h2 id="文件命名"><a href="#文件命名" class="headerlink" title="文件命名"></a>文件命名</h2><ol>
-<li><p>单文件组件命名规范</p>
-<ol>
-<li><p>组件名为多个单词</p>
-<p> <strong>组件名应该始终是多个单词的，根组件 App 以及 &lt; transition &gt;、&lt; component &gt; 之类的 Vue 内置组件除外。</strong></p>
-<p> 这样做可以避免跟现有的以及未来的 HTML 元素相冲突，因为所有的 HTML 元素名称都是单个单词的。</p>
+        <h1 id="移除链表元素"><a href="#移除链表元素" class="headerlink" title="移除链表元素"></a>移除链表元素</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>删除链表中等于给定值 val 的所有节点。</p>
+<p>示例:</p>
 <blockquote>
-<p>MyComponent.vue</p>
+<p>输入: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6<br>输出: 1-&gt;2-&gt;3-&gt;4-&gt;5</p>
 </blockquote>
-</li>
-<li><p>语义化及单词顺序</p>
-<blockquote>
-<p>SearchButtonRun.vue</p>
-</blockquote>
-</li>
-<li><p>文件名以单词大写开头</p>
-<blockquote>
-<p>MyComponent.vue</p>
-</blockquote>
-</li>
-<li><p>组件名应该倾向于完整单词而不是缩写</p>
-<blockquote>
-<p>UserProfileOptions.vue</p>
-</blockquote>
-</li>
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>此题为单链表删除指定元素</p>
+<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><h4 id="单独考虑头节点（因为头节点之前没有节点）"><a href="#单独考虑头节点（因为头节点之前没有节点）" class="headerlink" title="单独考虑头节点（因为头节点之前没有节点）"></a>单独考虑头节点（因为头节点之前没有节点）</h4><ol>
+<li>考虑头节点即为指定需删除元素，那么应当将头指针指向下一个元素。循环检验，当头节点不是指定需删除元素时则退出循环</li>
+<li>若步骤1之后，该链表为空链表则直接返回该空链表</li>
+<li>1、2步骤之后，当前链表则为头节点不为指定需删除元素的非空链表。遍历当前链表，设置pre和cur指针方便删除链表节点。</li>
 </ol>
-</li>
+<h4 id="设置虚拟头节点（指向头节点的节点）"><a href="#设置虚拟头节点（指向头节点的节点）" class="headerlink" title="设置虚拟头节点（指向头节点的节点）"></a>设置虚拟头节点（指向头节点的节点）</h4><ol>
+<li>创建新节点指向当前头节点</li>
+<li>遍历该链表，删除指定元素</li>
+<li>返回以创建的新节点的下一个节点为头节点所在的链表</li>
 </ol>
-<ol start="2">
-<li>文件夹命名规范<ol>
-<li>属于components文件夹下的子文件夹，使用大写字母开头的PascalBase风格</li>
-<li>所有组件放在components文件夹下，对于各个页面应当新建立业务页面组件文件夹。</li>
-<li>一些通用组件可以建立common文件夹放在components文件夹下</li>
-<li>应当建立api文件夹，统一定义管理接口请求</li>
-<li>建立router文件夹，进行路由管理</li>
-<li>建立store文件夹，进行vuex状态管理</li>
-</ol>
-</li>
-</ol>
+<h4 id="头节点之前设置一个指向头节点的节点"><a href="#头节点之前设置一个指向头节点的节点" class="headerlink" title="头节点之前设置一个指向头节点的节点"></a>头节点之前设置一个指向头节点的节点</h4><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><h3 id="单独处理头节点的Coding"><a href="#单独处理头节点的Coding" class="headerlink" title="单独处理头节点的Coding"></a>单独处理头节点的Coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * function ListNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.next = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;ListNode&#125; head</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; val</span></span><br><span class="line"><span class="comment"> * @return &#123;ListNode&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> removeElements = <span class="function"><span class="keyword">function</span>(<span class="params">head, val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(head&amp;&amp;head.val===val)&#123;</span><br><span class="line">        head=head.next</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(head===<span class="literal">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">    <span class="keyword">let</span> cur=head;</span><br><span class="line">    <span class="keyword">let</span> pre=head;</span><br><span class="line">    <span class="keyword">while</span>(cur.next)&#123;</span><br><span class="line">        pre=cur;</span><br><span class="line">        cur=cur.next;     </span><br><span class="line">        <span class="keyword">if</span>(cur.val===val)&#123;</span><br><span class="line">            pre.next=cur.next;</span><br><span class="line">            cur=pre;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置指向头节点的指针节点的Coding"><a href="#设置指向头节点的指针节点的Coding" class="headerlink" title="设置指向头节点的指针节点的Coding"></a>设置指向头节点的指针节点的Coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * function ListNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.next = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;ListNode&#125; head</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; val</span></span><br><span class="line"><span class="comment"> * @return &#123;ListNode&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> removeElements = <span class="function"><span class="keyword">function</span>(<span class="params">head, val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> listNode=<span class="keyword">new</span> ListNode(val<span class="number">-1</span>);</span><br><span class="line">    listNode.next=head;</span><br><span class="line">    <span class="keyword">let</span> list=listNode;</span><br><span class="line">    <span class="keyword">while</span>(list.next)&#123;</span><br><span class="line">        <span class="keyword">if</span>(list.next.val===val)&#123;</span><br><span class="line">            list.next=list.next.next;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        list=list.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> listNode.next;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -453,7 +433,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/命名规范/" rel="tag"># 命名规范</a>
+            <a href="/tags/链表/" rel="tag"># 链表</a>
           
         </div>
       
@@ -472,8 +452,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/11/Vue项目的快速搭建/" rel="next" title="Vue项目的快速搭建">
-                <i class="fa fa-chevron-left"></i> Vue项目的快速搭建
+              <a href="/2019/07/15/leetcode-202/" rel="next" title="leetcode-202 快乐数">
+                <i class="fa fa-chevron-left"></i> leetcode-202 快乐数
               </a>
             
           </div>
@@ -481,10 +461,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/13/leetcode-171/" rel="prev" title="leetcode-171 Excel表列序号">
-                leetcode-171 Excel表列序号 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -625,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue项目代码与命名规范"><span class="nav-number">1.</span> <span class="nav-text">Vue项目代码与命名规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#项目结构"><span class="nav-number">1.1.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件命名"><span class="nav-number">1.2.</span> <span class="nav-text">文件命名</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#移除链表元素"><span class="nav-number">1.</span> <span class="nav-text">移除链表元素</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单独考虑头节点（因为头节点之前没有节点）"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">单独考虑头节点（因为头节点之前没有节点）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置虚拟头节点（指向头节点的节点）"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">设置虚拟头节点（指向头节点的节点）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头节点之前设置一个指向头节点的节点"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">头节点之前设置一个指向头节点的节点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单独处理头节点的Coding"><span class="nav-number">1.3.1.</span> <span class="nav-text">单独处理头节点的Coding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置指向头节点的指针节点的Coding"><span class="nav-number">1.3.2.</span> <span class="nav-text">设置指向头节点的指针节点的Coding</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
