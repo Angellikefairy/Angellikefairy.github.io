@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[leetcode-204 计数质数]]></title>
+    <url>%2F2019%2F07%2F17%2Fleetcode-204%2F</url>
+    <content type="text"><![CDATA[计数质数题目描述统计所有小于非负整数 n 的质数的数量。 示例: 输入: 10输出: 4解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。 核心思路概述质数的定义 质数又称素数。一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数；否则称为合数。 此题的基本解法即为遍历给定数之前的数，若为质数则计数加一 解题步骤 建立一个函数用来判断当前数是否为质数 对于1中的函数质数判断条件，若在1~开根号n的左开右闭的区间内无法被整除，那么该数即为质数。 遍历给定数之前的数，若为质数则计数加一 Coding实现1234567891011121314151617181920212223/** * @param &#123;number&#125; n * @return &#123;number&#125; */const checkPrimes=function(n)&#123; if(n===2) return true; if(n===1) return false; if(n%2===1)&#123; for(let i=1;i&lt;=Math.sqrt(n);i=i+2)&#123; if(n%i===0&amp;&amp;i!==1) return false; &#125; return true; &#125;&#125;var countPrimes = function(n) &#123; let count=0; for(let i=2;i&lt;n;i++)&#123; if(checkPrimes(i))&#123; count++; &#125; &#125; return count;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-203 移除链表元素]]></title>
+    <url>%2F2019%2F07%2F16%2Fleetcode-203%2F</url>
+    <content type="text"><![CDATA[移除链表元素题目描述删除链表中等于给定值 val 的所有节点。 示例: 输入: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6输出: 1-&gt;2-&gt;3-&gt;4-&gt;5 核心思路概述此题为单链表删除指定元素 解题步骤单独考虑头节点（因为头节点之前没有节点） 考虑头节点即为指定需删除元素，那么应当将头指针指向下一个元素。循环检验，当头节点不是指定需删除元素时则退出循环 若步骤1之后，该链表为空链表则直接返回该空链表 1、2步骤之后，当前链表则为头节点不为指定需删除元素的非空链表。遍历当前链表，设置pre和cur指针方便删除链表节点。 设置虚拟头节点（指向头节点的节点） 创建新节点指向当前头节点 遍历该链表，删除指定元素 返回以创建的新节点的下一个节点为头节点所在的链表 Coding实现单独处理头节点的Coding1234567891011121314151617181920212223242526272829/** * Definition for singly-linked list. * function ListNode(val) &#123; * this.val = val; * this.next = null; * &#125; *//** * @param &#123;ListNode&#125; head * @param &#123;number&#125; val * @return &#123;ListNode&#125; */var removeElements = function(head, val) &#123; while(head&amp;&amp;head.val===val)&#123; head=head.next &#125; if(head===null) return head; let cur=head; let pre=head; while(cur.next)&#123; pre=cur; cur=cur.next; if(cur.val===val)&#123; pre.next=cur.next; cur=pre; &#125; &#125; return head;&#125;; 设置指向头节点的指针节点的Coding12345678910111213141516171819202122232425/** * Definition for singly-linked list. * function ListNode(val) &#123; * this.val = val; * this.next = null; * &#125; *//** * @param &#123;ListNode&#125; head * @param &#123;number&#125; val * @return &#123;ListNode&#125; */var removeElements = function(head, val) &#123; let listNode=new ListNode(val-1); listNode.next=head; let list=listNode; while(list.next)&#123; if(list.next.val===val)&#123; list.next=list.next.next; continue; &#125; list=list.next; &#125; return listNode.next;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-202 快乐数]]></title>
+    <url>%2F2019%2F07%2F15%2Fleetcode-202%2F</url>
+    <content type="text"><![CDATA[快乐数题目描述编写一个算法来判断一个数是不是“快乐数”。 一个“快乐数”定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是无限循环但始终变不到 1。如果可以变为 1，那么这个数就是快乐数。 示例: 输入: 19输出: true解释: 12 + 92 = 8282 + 22 = 6862 + 82 = 10012 + 02 + 02 = 1 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/happy-number著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述 正面解题，寻找快乐数。当重复过程变为1则为快乐数，若当循环过程中得到的数与之前出现过的数相重复，则表示之后会在这两数之间无限循环，此时即可返回false. 快慢指针解法：使用快慢指针来判断该循环是否为无限死循环。 解题步骤正面解题法(遇到重复数字则退出) 若输入为1，则直接返回true 设置set集合用来存储循环过程中得到的数 进入do-while循环，将参数转化为数组，利用reduce函数进行平方和累加，判断该得到的数是否存在于set集合中，若存在则返回false，否则则将该数放入set集合中。同时,若该数为1则返回true退出函数快慢指针法 设置两个指针，一个指针移动较快，一个指针移动较慢，若两指针相遇，则代表该循环中存在死循环，则应退出该函数。Coding实现正面解题的Coding12345678910111213141516var isHappy = function(n) &#123; if(n===1) return true; let arr; let set=new Set([n]); do&#123; arr=n.toString().split(''); n=arr.reduce((pre,value)=&gt;&#123; return pre+Math.pow(parseInt(value),2) &#125;,0); if(set.has(n))&#123; return false; &#125; set.add(n); &#125;while(n!=1) return true;&#125;; 递归法的Coding12]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>快慢指针</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[var、let与const的比较以及作用域]]></title>
+    <url>%2F2019%2F07%2F15%2Fvar%E3%80%81let%E4%B8%8Econst%2F</url>
+    <content type="text"><![CDATA[var、let与const的比较以及作用域 提升机制对于用var定义的变量会被提升到当前作用域的顶端并赋值为undefined123console.log(a); //undefinedvar a='hello';console.log(a); //hello 函数声明整体提升1234a(); //hellofunction a()&#123; console.log('hello');&#125; 123456console.log(a); //undefineda(); //报错：a is not a functionvar a=function()&#123; /*遇见var a= 会直接将a当作一个变量提升并赋值为undefined;*/console.log('hello');&#125; 123456console.log(a); /*报错：Cannot access 'a' before initialization*/a(); let a=function()&#123; /*这里为let a= ,不会有变量提升机制*/console.log('hello');&#125; 预编译与词法分析预编译 JS引擎会在正式执行代码之前进行一次”预编译“，预编译简单理解就是在内存中开辟一些空间，存放一些变量和函数。 具体步骤 页面创建全局对象（Global Object）对象（window对象）。 加载第一个脚本文件 脚本加载完毕后，进行语法分析。 开始预编译 查找函数声明，作为GO属性，值赋予函数体（函数声明优先） 查找变量声明（除了函数内部的），作为GO属性，值赋予undefined 若函数声明与变量声明同名，则函数声明会优先于变量声明。具体来说即是1. 函数声明替换变量声明 2. 后面的函数声明替换前面的函数声明 3. 后面的变量声明无效 例如 1234567console.log(a); //[function: a]a(); //hellofunction a()&#123; console.log('hello');&#125;var a=1;console.log(a); //1 词法分析 创建AO活动对象（Active Object） 查找形参和变量声明，值赋予undefined 实参值赋给形参 查找函数声明，值赋给函数体 解释执行函数中的代码 块级声明与块级作用域块级作用域存在于： 1.函数内部2.块中（{ }之间的区域） 例如 123456(function test()&#123; console.log(a); //报错：a is not defined if(true)&#123; let a=1; &#125;&#125;)() 用let声明变量，会将变量的作用域限制在当前代码块中（即块级作用域）;因此块级作用域外部无法访问 临时死区 javascript引擎在预编译阶段时，要么将变量提升至作用域顶部（var）,要么就将其放到TDZ（临时死区中）。访问临时死区的变量会触发运行错误。 例如 1234if(true)&#123; console.log(typeof a); //报错 let a=1;&#125; var、let与const的比较 \ var let const 变量提升机制 有 无 无 重声明 允许 在同个作用域下禁止,不同作用域下允许 同let 能否更改 允许 允许 不允许 初始化 可以不用 可以不用 必须]]></content>
+      <categories>
+        <category>javaScript基础</category>
+      </categories>
+      <tags>
+        <tag>基础语法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-172 阶乘后的零]]></title>
+    <url>%2F2019%2F07%2F14%2Fleetcode-172%2F</url>
+    <content type="text"><![CDATA[阶乘后的零题目描述给定一个整数 n，返回 n! 结果尾数中零的数量。 示例 1: 输入: 3输出: 0解释: 3! = 6, 尾数中没有零。 示例 2: 输入: 5输出: 1解释: 5! = 120, 尾数中有 1 个零. 说明: 你算法的时间复杂度应为 O(log n) 。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/factorial-trailing-zeroes著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述一开始看到题目时的第一反应就是求解出n!的值，再遍历得到0的个数。然后提交之后，报错提示：超出最大堆栈大小（RangeError: Maximum call stack size exceeded）。因此，看题解之后得到提示，开始寻找规律。 若要某个数中有某位为0,那么他必定是10的倍数。而10=2 * 5；因此，该阶乘中有几对2 * 5，则该数就有几个0；又因为该阶乘为递减，则5的个数必定小于2的个数，则题目即可转化为求出5的个数即可。 解题步骤 归纳得： n 式子 5的个数 5的总个数 5 1*5 1 1 10 2*5 1 2 15 3*5 1 3 20 4*5 1 4 25 5*5 2 6 因此，可以通过 1234while (n &gt;= 5) &#123; n = Math.floor(n / 5); total += n;&#125; 得到5的个数 Coding实现一开始使用递归报错的coding1234567891011121314151617var trailingZeroes = function(n) &#123; let sum=(function circle(n)&#123; if(n!=1)&#123; return circle(n-1)*n; &#125; return 1; &#125;)(n) console.log(sum); sum=sum.toString().split(''); let count=0; sum.forEach(value=&gt;&#123; if(value==0)&#123; count++; &#125; &#125;); return count;&#125;; 优化过的coding12345678const trailingZeroes = n =&gt; &#123; let total = 0; while (n &gt;= 5) &#123; n = Math.floor(n / 5); total += n; &#125; return total;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-171 Excel表列序号]]></title>
+    <url>%2F2019%2F07%2F13%2Fleetcode-171%2F</url>
+    <content type="text"><![CDATA[Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。 例如， A -&gt; 1 B -&gt; 2 C -&gt; 3 ... Z -&gt; 26 AA -&gt; 27 AB -&gt; 28 ...示例 1: 输入: “A” 输出: 1 示例 2: 输入: “AB” 输出: 28 示例 3: 输入: “ZY”输出: 701 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/excel-sheet-column-number著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述通过观察，不难发现其实这类似于二进制之类的表示形式。只不过对于该题可以把其称之为26进制。再按照二进制转化为十进制方法将其转化为对应的表示数 A的Unicode编码为65，在该题目中对应的是1.因此可以通过letter.charCodeAt()函数得到的Unicode编码值减去64即可得到对应的单个字母对应值。 解题步骤 将字符串转化为数组从而可以进行遍历 将转化得到的数组反转(reverse()) 【类似于二进制转化为十进制的方法，因此，反转后的数组的下标index就是他们在累加时的26幂的次方】 利用reduce()函数进行累加 Coding实现我一开始的coding12345678910var titleToNumber = function(s) &#123; const sArray=s.split(''); let length=sArray.length-1; let sum=0; sArray.forEach(value=&gt;&#123; sum+=(value.charCodeAt()%'A'.charCodeAt()+1)*Math.pow(26,length); length--; &#125;); return sum;&#125;; 优化过的coding123456var titleToNumber = function(s) &#123; const sArray=s.split('').reverse(); return (sArray.reduce((pre,cur,index)=&gt;&#123; return pre+(cur.charCodeAt()-64)*Math.pow(26,index); &#125;,0))&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Vue项目代码与命名规范]]></title>
+    <url>%2F2019%2F07%2F11%2FVue%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E4%B8%8E%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%2F</url>
+    <content type="text"><![CDATA[Vue项目代码与命名规范 项目结构文件命名 单文件组件命名规范 组件名为多个单词 组件名应该始终是多个单词的，根组件 App 以及 &lt; transition &gt;、&lt; component &gt; 之类的 Vue 内置组件除外。 这样做可以避免跟现有的以及未来的 HTML 元素相冲突，因为所有的 HTML 元素名称都是单个单词的。 MyComponent.vue 语义化及单词顺序 SearchButtonRun.vue 文件名以单词大写开头 MyComponent.vue 组件名应该倾向于完整单词而不是缩写 UserProfileOptions.vue 文件夹命名规范 属于components文件夹下的子文件夹，使用大写字母开头的PascalBase风格 所有组件放在components文件夹下，对于各个页面应当新建立业务页面组件文件夹。 一些通用组件可以建立common文件夹放在components文件夹下 应当建立api文件夹，统一定义管理接口请求 建立router文件夹，进行路由管理 建立store文件夹，进行vuex状态管理]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>命名规范</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Vue项目的快速搭建]]></title>
+    <url>%2F2019%2F07%2F11%2FVue%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[Vue项目的快速搭建vue-cli创建项目12vue create &lt;项目名&gt;//选择手动设置特性（Manually select features） 安装必要依赖包括但不限于vue-router,vuex,vue-axios,axios1cnpm install vue-router --save 建立基本路由管理在router.js中配置路由 1234567891011121314151617181920212223242526import Vue from 'vue'import VueRouter from 'vue-router'import RouterView1 from '@/component/RouterView1'//@默认表示src文件夹Vue.use(VueRouter) /*安装 Vue.js 插件。如果插件是一个对象，必须提供 install 方法。如果插件是一个函数，它会被作为 install 方法。install 方法调用时，会将 Vue 作为参数传入。*/export default new VueRouter(&#123; routes:[ &#123; path:'/RouterView1', name:'view1', component:RouterView1 &#125;, &#123; path:'/RouterView2', name:'view2', component:()=&gt;&#123; import('@/component/RouterView2') &#125; /*import() es6函数，动态异步加载模块，返回一个promise*/ &#125; ]&#125;) 在main.js中注册12345new Vue(&#123; router, store, render: h =&gt; h(App)&#125;).$mount("#app"); 使用axios（或vue-axios）引入 第一种方式（main.js直接引入) 1234import axios from 'axios'import VueAxios from 'vue-axios'Vue.use(axios,vue-axios) 第二种方式（在api文件夹中引入） 建立api.js文件用来编写接口函数 建立index.js导出api.js的所有函数 使用 1234567891011Vue.axios.get(api).then((response) =&gt; &#123;console.log(response.data)&#125;)this.axios.get(api).then((response) =&gt; &#123;console.log(response.data)&#125;)this.$http.get(api).then((response) =&gt; &#123;console.log(response.data)&#125;)]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue Cli</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-169 求众数]]></title>
+    <url>%2F2019%2F07%2F09%2Fleetcode-169%2F</url>
+    <content type="text"><![CDATA[求众数核心方法：哈希表题目描述 给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。 你可以假设数组是非空的，并且给定的数组总是存在众数。 示例 1: 输入: [3,2,3]输出: 3 示例 2: 输入: [2,2,1,1,1,2,2]输出: 2 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/majority-element著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路 利用哈希表这一数据结构来存储每个数的出现次数。元素作为键名，他们所出现的次数作为键值，进行存储。 遍历给定数组，若当前数组元素未在哈希表map中（map.has(key)===false），则以该元素为键名添加该元素，并置键值为1（map.set(value,1)）；若已存在，则更新该键值（键值加1:map.set(value,map.get(value)+1)） 遍历哈希表map，找到键值最大的那个键名并返回 coding实现1234567891011121314151617181920var majorityElement = function(nums) &#123; let maxCount=0; let num=0; let numsMap=new Map() nums.forEach(value=&gt;&#123; if(!numsMap.has(value))&#123; numsMap.set(value,1); &#125; else&#123; numsMap.set(value,numsMap.get(value)+1); &#125; &#125;) numsMap.forEach((value,key)=&gt;&#123; if(value&gt;maxCount)&#123; maxCount=value; num=key; &#125; &#125;) return num;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>哈希表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-167 两数之和|| - 输入有序数组]]></title>
+    <url>%2F2019%2F07%2F08%2Fleetcode-167%2F</url>
+    <content type="text"><![CDATA[两数之和|| - 输入有序数组核心方法：双指针题目描述 给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。 说明: 返回的下标值（index1 和 index2）不是从零开始的。你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。 示例: 输入: numbers = [2, 7, 11, 15], target = 9输出: [1,2]解释: 2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路 题目给定的是有序数组，所以使用双指针方法较为方便。设定min指向第一个数组元素（也就是当前最小数），max指向最后一个数组元素。令sum=numbers[min]+numbers[max] 循环比较sum与target是否相等，若想等则输出。小于target则代表min指向的元素值比输出值要小，则min++;反之，则max–; coding实现1234567891011121314var twoSum = function(numbers, target) &#123; let min=0; let max=numbers.length-1; let sum; while((sum=numbers[min]+numbers[max])!==target)&#123; if(sum&lt;target)&#123; min++; &#125; else&#123; max--; &#125; &#125; return [min+1,max+1];&#125;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>双指针</tag>
+      </tags>
+  </entry>
+</search>
