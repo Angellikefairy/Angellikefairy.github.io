@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="移除链表元素题目描述删除链表中等于给定值 val 的所有节点。 示例:  输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5  核心思路概述此题为单链表删除指定元素 解题步骤单独考虑头节点（因为头节点之前没有节点） 考虑头节点即为指定需删除元素，那么应当将头指针指向下一个元素。循环检验，当头">
+<meta name="description" content="移除链表元素题目描述删除链表中等于给定值 val 的所有节点。 示例:  输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5">
 <meta name="keywords" content="链表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="leetcode-203 移除链表元素">
 <meta property="og:url" content="http://yoursite.com/2019/07/16/leetcode-203/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="移除链表元素题目描述删除链表中等于给定值 val 的所有节点。 示例:  输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5  核心思路概述此题为单链表删除指定元素 解题步骤单独考虑头节点（因为头节点之前没有节点） 考虑头节点即为指定需删除元素，那么应当将头指针指向下一个元素。循环检验，当头">
+<meta property="og:description" content="移除链表元素题目描述删除链表中等于给定值 val 的所有节点。 示例:  输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-17T03:09:32.799Z">
+<meta property="og:updated_time" content="2019-07-17T03:27:57.330Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode-203 移除链表元素">
-<meta name="twitter:description" content="移除链表元素题目描述删除链表中等于给定值 val 的所有节点。 示例:  输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5  核心思路概述此题为单链表删除指定元素 解题步骤单独考虑头节点（因为头节点之前没有节点） 考虑头节点即为指定需删除元素，那么应当将头指针指向下一个元素。循环检验，当头">
+<meta name="twitter:description" content="移除链表元素题目描述删除链表中等于给定值 val 的所有节点。 示例:  输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5">
 
 
 
@@ -433,6 +433,8 @@
 <blockquote>
 <p>输入: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6<br>输出: 1-&gt;2-&gt;3-&gt;4-&gt;5</p>
 </blockquote>
+<a id="more"></a>
+
 <h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>此题为单链表删除指定元素</p>
 <h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><h4 id="单独考虑头节点（因为头节点之前没有节点）"><a href="#单独考虑头节点（因为头节点之前没有节点）" class="headerlink" title="单独考虑头节点（因为头节点之前没有节点）"></a>单独考虑头节点（因为头节点之前没有节点）</h4><ol>
 <li>考虑头节点即为指定需删除元素，那么应当将头指针指向下一个元素。循环检验，当头节点不是指定需删除元素时则退出循环</li>
