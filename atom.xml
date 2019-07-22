@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-21T08:54:46.131Z</updated>
+  <updated>2019-07-22T08:50:43.498Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-771 宝石与石头</title>
+    <link href="http://yoursite.com/2019/07/22/leetcode-771/"/>
+    <id>http://yoursite.com/2019/07/22/leetcode-771/</id>
+    <published>2019-07-22T08:44:27.000Z</published>
+    <updated>2019-07-22T08:50:43.498Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="宝石与石头"><a href="#宝石与石头" class="headerlink" title="宝石与石头"></a>宝石与石头</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p> 给定字符串J 代表石头中宝石的类型，和字符串 S代表你拥有的石头。 S 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。</p><p>J 中的字母不重复，J 和 S中的所有字符都是字母。字母区分大小写，因此”a”和”A”是不同类型的石头。</p><p>示例 1:</p><blockquote><p>输入: J = “aA”, S = “aAAbbbb”<br>输出: 3</p></blockquote><p>示例 2:</p><blockquote><p>输入: J = “z”, S = “ZZ”<br>输出: 0</p></blockquote><p>注意:</p><p>S 和 J 最多含有50个字母。<br> J 中的字符不重复。</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/jewels-and-stones" target="_blank" rel="noopener">https://leetcode-cn.com/problems/jewels-and-stones</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>利用哈希表，遍历宝石类型字符串，建立以宝石类型为键名，宝石数量为值的哈希表。哈希表中的所有键值之和就是所拥有的宝石的数量。</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>建立哈希表，声明所拥有的宝石数量为ans=0</li><li>遍历J字符串，以字符为键名，0为键值建立哈希表</li><li>遍历S字符串，若哈希表中存在该键名，则ans++</li><li>返回ans</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; J</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; S</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> numJewelsInStones = <span class="function"><span class="keyword">function</span>(<span class="params">J, S</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> map=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">let</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;J.length;i++)&#123;</span><br><span class="line">        map.set(J[i],<span class="number">0</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;S.length;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(map.has(S[i]))&#123;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;宝石与石头&quot;&gt;&lt;a href=&quot;#宝石与石头&quot; class=&quot;headerlink&quot; title=&quot;宝石与石头&quot;&gt;&lt;/a&gt;宝石与石头&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt; 给定字符串J 代表石头中宝石的类型，和字符串 S代表你拥有的石头。 S 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。&lt;/p&gt;
+&lt;p&gt;J 中的字母不重复，J 和 S中的所有字符都是字母。字母区分大小写，因此”a”和”A”是不同类型的石头。&lt;/p&gt;
+&lt;p&gt;示例 1:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: J = “aA”, S = “aAAbbbb”&lt;br&gt;输出: 3&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 2:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: J = “z”, S = “ZZ”&lt;br&gt;输出: 0&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;注意:&lt;/p&gt;
+&lt;p&gt;S 和 J 最多含有50个字母。&lt;br&gt; J 中的字符不重复。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="哈希表" scheme="http://yoursite.com/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode-219 存在重复元素 II</title>

@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="求众数核心方法：哈希表题目描述 给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。  你可以假设数组是非空的，并且给定的数组总是存在众数。">
+<meta name="description" content="宝石与石头题目描述 给定字符串J 代表石头中宝石的类型，和字符串 S代表你拥有的石头。 S 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。 J 中的字母不重复，J 和 S中的所有字符都是字母。字母区分大小写，因此”a”和”A”是不同类型的石头。 示例 1:  输入: J = “aA”, S = “aAAbbbb”输出: 3  示例 2:  输入: J = “z”, S">
 <meta name="keywords" content="哈希表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-169 求众数">
-<meta property="og:url" content="http://yoursite.com/2019/07/09/leetcode-169/index.html">
+<meta property="og:title" content="leetcode-771 宝石与石头">
+<meta property="og:url" content="http://yoursite.com/2019/07/22/leetcode-771/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="求众数核心方法：哈希表题目描述 给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。  你可以假设数组是非空的，并且给定的数组总是存在众数。">
+<meta property="og:description" content="宝石与石头题目描述 给定字符串J 代表石头中宝石的类型，和字符串 S代表你拥有的石头。 S 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。 J 中的字母不重复，J 和 S中的所有字符都是字母。字母区分大小写，因此”a”和”A”是不同类型的石头。 示例 1:  输入: J = “aA”, S = “aAAbbbb”输出: 3  示例 2:  输入: J = “z”, S">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-09T12:34:08.347Z">
+<meta property="og:updated_time" content="2019-07-22T08:50:43.498Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-169 求众数">
-<meta name="twitter:description" content="求众数核心方法：哈希表题目描述 给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。  你可以假设数组是非空的，并且给定的数组总是存在众数。">
+<meta name="twitter:title" content="leetcode-771 宝石与石头">
+<meta name="twitter:description" content="宝石与石头题目描述 给定字符串J 代表石头中宝石的类型，和字符串 S代表你拥有的石头。 S 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。 J 中的字母不重复，J 和 S中的所有字符都是字母。字母区分大小写，因此”a”和”A”是不同类型的石头。 示例 1:  输入: J = “aA”, S = “aAAbbbb”输出: 3  示例 2:  输入: J = “z”, S">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/09/leetcode-169/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/22/leetcode-771/">
 
 
 
 
 
-  <title>leetcode-169 求众数 | Hexo</title>
+  <title>leetcode-771 宝石与石头 | Hexo</title>
   
 
 
@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/leetcode-169/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/22/leetcode-771/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -325,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode-169 求众数</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode-771 宝石与石头</h1>
         
 
         <div class="post-meta">
@@ -337,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-09T13:18:25+08:00">
-                2019-07-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T16:44:27+08:00">
+                2019-07-22
               </time>
             
 
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  345
+                  401
                 </span>
               
 
@@ -428,30 +428,30 @@
       
 
       
-        <h1 id="求众数"><a href="#求众数" class="headerlink" title="求众数"></a>求众数</h1><h2 id="核心方法：哈希表"><a href="#核心方法：哈希表" class="headerlink" title="核心方法：哈希表"></a>核心方法：哈希表</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><blockquote>
-<p>给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。</p>
-</blockquote>
-<p>你可以假设数组是非空的，并且给定的数组总是存在众数。</p>
-<a id="more"></a>
-<blockquote>
+        <h1 id="宝石与石头"><a href="#宝石与石头" class="headerlink" title="宝石与石头"></a>宝石与石头</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p> 给定字符串J 代表石头中宝石的类型，和字符串 S代表你拥有的石头。 S 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。</p>
+<p>J 中的字母不重复，J 和 S中的所有字符都是字母。字母区分大小写，因此”a”和”A”是不同类型的石头。</p>
 <p>示例 1:</p>
-</blockquote>
-<p>输入: [3,2,3]<br>输出: 3</p>
 <blockquote>
+<p>输入: J = “aA”, S = “aAAbbbb”<br>输出: 3</p>
+</blockquote>
 <p>示例 2:</p>
+<blockquote>
+<p>输入: J = “z”, S = “ZZ”<br>输出: 0</p>
 </blockquote>
-<p>输入: [2,2,1,1,1,2,2]<br>输出: 2</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/majority-element" target="_blank" rel="noopener">https://leetcode-cn.com/problems/majority-element</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h3 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h3><blockquote>
-<p>利用哈希表这一数据结构来存储每个数的出现次数。元素作为键名，他们所出现的次数作为键值，进行存储。</p>
-</blockquote>
-<ol>
-<li><p>遍历给定数组，若当前数组元素未在哈希表map中（map.has(key)===false），则以该元素为键名添加该元素，并置键值为1（map.set(value,1)）；若已存在，则更新该键值（键值加1:map.set(value,map.get(value)+1)）</p>
-</li>
-<li><p>遍历哈希表map，找到键值最大的那个键名并返回</p>
-</li>
+<p>注意:</p>
+<p>S 和 J 最多含有50个字母。<br> J 中的字符不重复。</p>
+<a id="more"></a>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/jewels-and-stones" target="_blank" rel="noopener">https://leetcode-cn.com/problems/jewels-and-stones</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>利用哈希表，遍历宝石类型字符串，建立以宝石类型为键名，宝石数量为值的哈希表。哈希表中的所有键值之和就是所拥有的宝石的数量。</p>
+<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
+<li>建立哈希表，声明所拥有的宝石数量为ans=0</li>
+<li>遍历J字符串，以字符为键名，0为键值建立哈希表</li>
+<li>遍历S字符串，若哈希表中存在该键名，则ans++</li>
+<li>返回ans</li>
 </ol>
-<h3 id="coding实现"><a href="#coding实现" class="headerlink" title="coding实现"></a>coding实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> majorityElement = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> maxCount=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> num=<span class="number">0</span>;</span><br><span class="line">   <span class="keyword">let</span> numsMap=<span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">   nums.forEach(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(!numsMap.has(value))&#123;</span><br><span class="line">        numsMap.set(value,<span class="number">1</span>);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">else</span>&#123;</span><br><span class="line">       numsMap.set(value,numsMap.get(value)+<span class="number">1</span>);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;)</span><br><span class="line">   numsMap.forEach(<span class="function">(<span class="params">value,key</span>)=&gt;</span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(value&gt;maxCount)&#123;</span><br><span class="line">       maxCount=value;</span><br><span class="line">       num=key;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;)</span><br><span class="line">   <span class="keyword">return</span> num;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; J</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; S</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> numJewelsInStones = <span class="function"><span class="keyword">function</span>(<span class="params">J, S</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> map=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">let</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;J.length;i++)&#123;</span><br><span class="line">        map.set(J[i],<span class="number">0</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;S.length;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(map.has(S[i]))&#123;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     
@@ -487,8 +487,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/08/leetcode-167/" rel="next" title="leetcode-167 两数之和|| - 输入有序数组">
-                <i class="fa fa-chevron-left"></i> leetcode-167 两数之和|| - 输入有序数组
+              <a href="/2019/07/21/leetcode-219/" rel="next" title="leetcode-219 存在重复元素 II">
+                <i class="fa fa-chevron-left"></i> leetcode-219 存在重复元素 II
               </a>
             
           </div>
@@ -496,10 +496,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/11/Vue项目的快速搭建/" rel="prev" title="Vue项目的快速搭建">
-                Vue项目的快速搭建 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -640,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#求众数"><span class="nav-number">1.</span> <span class="nav-text">求众数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心方法：哈希表"><span class="nav-number">1.1.</span> <span class="nav-text">核心方法：哈希表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心思路"><span class="nav-number">1.1.2.</span> <span class="nav-text">核心思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#coding实现"><span class="nav-number">1.1.3.</span> <span class="nav-text">coding实现</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#宝石与石头"><span class="nav-number">1.</span> <span class="nav-text">宝石与石头</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
             
 
           </div>
