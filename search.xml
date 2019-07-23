@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-349 两个数组的交集]]></title>
+    <url>%2F2019%2F07%2F23%2Fleetcode-349%2F</url>
+    <content type="text"><![CDATA[两个数组的交集题目描述给定两个数组，编写一个函数来计算它们的交集。 示例 1: 输入: nums1 = [1,2,2,1], nums2 = [2,2]输出: [2] 示例 2: 输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]输出: [9,4] 说明: 输出结果中的每个元素一定是唯一的。我们可以不考虑输出结果的顺序。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/intersection-of-two-arrays著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述将两个数组都去重后，比较另一个数组是否包含这个数组的某些元素，返回即可 解题步骤 使用set将两个数组去重 比较去重后的两个数组的大小，遍历较小的那个数组，查看另一个数组是否includes这个数组中的某些元素，有则添加到ans数组返回 Coding实现12345678910111213141516171819/** * @param &#123;number[]&#125; nums1 * @param &#123;number[]&#125; nums2 * @return &#123;number[]&#125; */var intersection = function(nums1, nums2) &#123; let ans=[]; nums1=[...new Set(nums1)]; nums2=[...new Set(nums2)]; function inter(nums1,nums2)&#123; nums1.forEach(value=&gt;&#123; if(nums2.includes(value))&#123; ans.push(value); &#125; &#125;) &#125; nums1.length&gt;nums2.length?inter(nums2,nums1):inter(nums1,nums2); return ans;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-961 重复 N 次的元素]]></title>
     <url>%2F2019%2F07%2F23%2Fleetcode-961%2F</url>
     <content type="text"><![CDATA[重复 N 次的元素题目描述在大小为 2N 的数组 A 中有 N+1 个不同的元素，其中有一个元素重复了 N 次。 返回重复了 N 次的那个元素。 示例 1： 输入：[1,2,3,3]输出：3 示例 2： 输入：[2,1,2,5,3,2]输出：2 示例 3： 输入：[5,1,5,2,5,3,5,4]输出：5 提示： 4 &lt;= A.length &lt;= 100000 &lt;= A[i] &lt; 10000A.length 为偶数 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/n-repeated-element-in-size-2n-array著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述因为该数组大小为2N，其中由N+1个不同的元素，并且有一个元素重复了N次，那么剩余的N个数都是不同的 所以题目可转化为返回有重复的那个数 解题步骤 建立哈希表 遍历给定数组，若哈希表中没有该键名，则加入哈希表；若有，则直接返回该数组元素 Coding实现123456789101112131415/** * @param &#123;number[]&#125; A * @return &#123;number&#125; */var repeatedNTimes = function(A) &#123; let map=new Map(); for(let i=0;i&lt;A.length;i++)&#123; if(!map.has(A[i]))&#123; map.set(A[i],0); &#125; else&#123; return A[i]; &#125; &#125;&#125;;]]></content>
