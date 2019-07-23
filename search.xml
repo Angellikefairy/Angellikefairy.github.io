@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-500 键盘行]]></title>
+    <url>%2F2019%2F07%2F23%2Fleetcode-500%2F</url>
+    <content type="text"><![CDATA[键盘行题目描述 给定一个单词列表，只返回可以使用在键盘同一行的字母打印出来的单词。键盘如下图所示。 示例： 输入: [“Hello”, “Alaska”, “Dad”, “Peace”]输出: [“Alaska”, “Dad”] 注意： 你可以重复使用键盘上同一字符。你可以假设输入的字符串将只包含字母。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/keyboard-row著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述利用哈希表,分别即字母为键名，字母所在行号为键值建立哈希表。遍历给定字符串，若字符串的所有字符的所在哈希表的键值都一样，则说明该字符串的字符都在同一行上 解题步骤 建立哈希表以及键盘字符数组 将每个字符以字符为键名，字符所在行号为键值建立哈希表。 遍历题目给定字符串数组，若每个字符串中的字符在哈希表中的键值都一样，则将该字符串加入到要返回的数组中 遍历字符串方法：先得到字符串的第一个字符的所在行号，接着循环得到后面的字符的行号，若不一样则直接退出该循环 注意 将所有字符都转换为小写形式再去得到字符的键值 Coding实现123456789101112131415161718192021222324252627282930313233/** * @param &#123;string&#125; J * @param &#123;string&#125; S * @return &#123;number&#125; *//** * @param &#123;string[]&#125; words * @return &#123;string[]&#125; */var findWords = function(words) &#123; const str=['qwertyuiop','asdfghjkl','zxcvbnm']; let ans=[]; let map=new Map(); str.forEach((value,index)=&gt;&#123; for(let i=0;i&lt;value.length;i++)&#123; map.set(value[i],index+1); &#125; &#125;); words.forEach(value=&gt;&#123; let flag=0; let first=map.get(value[0].toLowerCase()); for(let i=1;i&lt;value.length;i++)&#123; if(map.get(value[i].toLowerCase())!=first)&#123; flag=1; break; &#125; &#125; if(flag===0)&#123; ans.push(value); &#125; &#125;) return ans;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>哈希表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[散列]]></title>
     <url>%2F2019%2F07%2F22%2F%E6%95%A3%E5%88%97%2F</url>
     <content type="text"><![CDATA[散列的定义 简单来说：就是将某个元素通过一个函数转换为整数，使得该整数可以尽量唯一地代表这个元素 常用的散列函数 直接定址法 直接把key值作为哈希表的下标 平方取中法 取key的平方的中间若干位作为哈希表的下标 除留余数法（常用） 指把key除以一个数得到的余数作为hash值的方法 冲突处理 线性探查法 如果该hash值已经被占用，那么就不断检查下一个位置，直到找到没被占用的。如果检查过程中超过了表长，则返回到哈希表的首位继续循环查找，或是发现所有的位置都被占用 该方法容易造成扎堆现象，即表中的若干个连续位置都被使用 平方探查法 按照下列的顺序进行探查： H(key)+1^2,H(key)-1^2, H(key)+2^2,H(key)-2^2, H(key)+3^2,H(key)-3^2, … … 如果，检查过程中H(key)+k^2超过了表长Tsize，那么就把(H(key)+k^2) % Tsize 作为hash值 链地址法 链地址法不计算新的hash值，而是把所有H(key)相同的key连接成一条单链表 字符串hash字符串hash是指将字符串S映射为一个整数，使得该整数尽可能唯一地代表该字符串 假设字符串只由AZ构成，那么可以将AZ映射为0~25；比如，ABC则就可以看作是012。显然，与二进制类似，我们可以把其看作为26进制，再将其转化为10进制，即可得到该字符串唯一地hash映射。 代码 1234567const hashFunc(str,length)&#123; let hash=0; for(let i=0;i&lt;length;i++)&#123; hash=hash*26+str[i].charCodeAt()-'A'.charCodeAt(); &#125; return hash;&#125; 如果外加有小写字母，则就是52进制转换若还有数字，则就是62进制转换 一些散列表算法题散列表相关算法题]]></content>
