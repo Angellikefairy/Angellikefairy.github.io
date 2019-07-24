@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="哈希表,">
 
 
 
@@ -88,17 +88,18 @@
 
 
 
-<meta name="description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta name="description" content="查找常用字符题目描述给定仅有小写字母组成的字符串数组 A，返回列表中的每个字符串中都显示的全部字符（包括重复字符）组成的列表。例如，如果一个字符在每个字符串中出现 3 次，但不是 4 次，则需要在最终答案中包含该字符 3 次。 你可以按任意顺序返回答案。 示例 1：  输入：[“bella”,”label”,”roller”]输出：[“e”,”l”,”l”]  示例 2：  输入：[“cool”,">
+<meta name="keywords" content="哈希表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-1002">
+<meta property="og:title" content="leetcode-1002 查找常用字符">
 <meta property="og:url" content="http://yoursite.com/2019/07/24/leetcode-1002/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta property="og:description" content="查找常用字符题目描述给定仅有小写字母组成的字符串数组 A，返回列表中的每个字符串中都显示的全部字符（包括重复字符）组成的列表。例如，如果一个字符在每个字符串中出现 3 次，但不是 4 次，则需要在最终答案中包含该字符 3 次。 你可以按任意顺序返回答案。 示例 1：  输入：[“bella”,”label”,”roller”]输出：[“e”,”l”,”l”]  示例 2：  输入：[“cool”,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-24T06:51:44.344Z">
+<meta property="og:updated_time" content="2019-07-24T07:05:22.438Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-1002">
-<meta name="twitter:description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta name="twitter:title" content="leetcode-1002 查找常用字符">
+<meta name="twitter:description" content="查找常用字符题目描述给定仅有小写字母组成的字符串数组 A，返回列表中的每个字符串中都显示的全部字符（包括重复字符）组成的列表。例如，如果一个字符在每个字符串中出现 3 次，但不是 4 次，则需要在最终答案中包含该字符 3 次。 你可以按任意顺序返回答案。 示例 1：  输入：[“bella”,”label”,”roller”]输出：[“e”,”l”,”l”]  示例 2：  输入：[“cool”,">
 
 
 
@@ -134,7 +135,7 @@
 
 
 
-  <title>leetcode-1002 | Hexo</title>
+  <title>leetcode-1002 查找常用字符 | Hexo</title>
   
 
 
@@ -324,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode-1002</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode-1002 查找常用字符</h1>
         
 
         <div class="post-meta">
@@ -347,6 +348,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode题解与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -368,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  525
                 </span>
               
 
@@ -384,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -405,7 +428,32 @@
       
 
       
-        
+        <h1 id="查找常用字符"><a href="#查找常用字符" class="headerlink" title="查找常用字符"></a>查找常用字符</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定仅有小写字母组成的字符串数组 A，返回列表中的每个字符串中都显示的全部字符（包括重复字符）组成的列表。例如，如果一个字符在每个字符串中出现 3 次，但不是 4 次，则需要在最终答案中包含该字符 3 次。</p>
+<p>你可以按任意顺序返回答案。</p>
+<p>示例 1：</p>
+<blockquote>
+<p>输入：[“bella”,”label”,”roller”]<br>输出：[“e”,”l”,”l”]</p>
+</blockquote>
+<p>示例 2：</p>
+<blockquote>
+<p>输入：[“cool”,”lock”,”cook”]<br>输出：[“c”,”o”]</p>
+</blockquote>
+<p>提示：</p>
+<ol>
+<li>1&lt;= A.length &lt;= 100</li>
+<li>1&lt;= A[i].length &lt;= 100</li>
+<li>A[i][j] 是小写字母<a id="more"></a>
+来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/find-common-characters" target="_blank" rel="noopener">https://leetcode-cn.com/problems/find-common-characters</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li>
+</ol>
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>统计每个字符串中字符的出现个数，返回出现相同字符的最少个数字符</p>
+<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
+<li>建立哈希表A，存储第一个字符串个字符的出现次数</li>
+<li>遍历后面的字符串，在每个循环中建立新的哈希表，存储该字符串中第一个字符串所有字符的个数；比较新哈希表与步骤1建立的哈希表A，更新A哈希表中的键值为两者较小值</li>
+<li>遍历A哈希表，存储value次key到ans数组并返回</li>
+</ol>
+<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string[]&#125; A</span></span><br><span class="line"><span class="comment"> * @return &#123;string[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> commonChars = <span class="function"><span class="keyword">function</span>(<span class="params">A</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> map=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">let</span> ans=[];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;A[<span class="number">0</span>].length;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!map.has(A[<span class="number">0</span>][i]))&#123;</span><br><span class="line">            map.set(A[<span class="number">0</span>][i],<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            map.set(A[<span class="number">0</span>][i],map.get(A[<span class="number">0</span>][i])+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;A.length;i++)&#123;</span><br><span class="line">        <span class="keyword">let</span> mapEve=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">        map.forEach(<span class="function">(<span class="params">value,key</span>)=&gt;</span>&#123;</span><br><span class="line">            mapEve.set(key,<span class="number">0</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;A[i].length;k++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(map.has(A[i][k]))&#123;</span><br><span class="line">                 mapEve.set(A[i][k],mapEve.get(A[i][k])+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        map.forEach(<span class="function">(<span class="params">value,key</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(value&gt;mapEve.get(key))&#123;</span><br><span class="line">                map.set(key,mapEve.get(key));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    map.forEach(<span class="function">(<span class="params">value,key</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(value&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;value;i++)&#123;</span><br><span class="line">                ans.push(key);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     
@@ -419,6 +467,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/哈希表/" rel="tag"># 哈希表</a>
+          
+        </div>
       
 
       <div>
@@ -495,8 +549,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -566,6 +629,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#查找常用字符"><span class="nav-number">1.</span> <span class="nav-text">查找常用字符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -594,7 +673,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">8k</span>
+    <span title="Site words total count">8.5k</span>
   
 </div>
 
@@ -624,7 +703,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共8k字</span>
+  <span class="post-count">博客全站共8.5k字</span>
 </div>
         
 

@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[leetcode-1002]]></title>
+    <title><![CDATA[leetcode-1002 查找常用字符]]></title>
     <url>%2F2019%2F07%2F24%2Fleetcode-1002%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[查找常用字符题目描述给定仅有小写字母组成的字符串数组 A，返回列表中的每个字符串中都显示的全部字符（包括重复字符）组成的列表。例如，如果一个字符在每个字符串中出现 3 次，但不是 4 次，则需要在最终答案中包含该字符 3 次。 你可以按任意顺序返回答案。 示例 1： 输入：[“bella”,”label”,”roller”]输出：[“e”,”l”,”l”] 示例 2： 输入：[“cool”,”lock”,”cook”]输出：[“c”,”o”] 提示： 1&lt;= A.length &lt;= 100 1&lt;= A[i].length &lt;= 100 A[i][j] 是小写字母 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/find-common-characters著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述统计每个字符串中字符的出现个数，返回出现相同字符的最少个数字符 解题步骤 建立哈希表A，存储第一个字符串个字符的出现次数 遍历后面的字符串，在每个循环中建立新的哈希表，存储该字符串中第一个字符串所有字符的个数；比较新哈希表与步骤1建立的哈希表A，更新A哈希表中的键值为两者较小值 遍历A哈希表，存储value次key到ans数组并返回 Coding实现12345678910111213141516171819202122232425262728293031323334353637383940/** * @param &#123;string[]&#125; A * @return &#123;string[]&#125; */var commonChars = function(A) &#123; let map=new Map(); let ans=[]; for(let i=0;i&lt;A[0].length;i++)&#123; if(!map.has(A[0][i]))&#123; map.set(A[0][i],1); &#125; else &#123; map.set(A[0][i],map.get(A[0][i])+1); &#125; &#125; for(let i=1;i&lt;A.length;i++)&#123; let mapEve=new Map(); map.forEach((value,key)=&gt;&#123; mapEve.set(key,0); &#125;) for(let k=0;k&lt;A[i].length;k++)&#123; if(map.has(A[i][k]))&#123; mapEve.set(A[i][k],mapEve.get(A[i][k])+1); &#125; &#125; map.forEach((value,key)=&gt;&#123; if(value&gt;mapEve.get(key))&#123; map.set(key,mapEve.get(key)); &#125; &#125;) &#125; map.forEach((value,key)=&gt;&#123; if(value&gt;0)&#123; for(let i=0;i&lt;value;i++)&#123; ans.push(key); &#125; &#125; &#125;); return ans;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>哈希表</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[递归与分治]]></title>
