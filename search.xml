@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[递归与分治]]></title>
+    <url>%2F2019%2F07%2F24%2F%E9%80%92%E5%BD%92%E4%B8%8E%E5%88%86%E6%B2%BB%2F</url>
+    <content type="text"><![CDATA[分治分治的全称为“分而治之”。分治法将原问题划分为若干个规模较小而结构与原问题相同或类似的子问题，然后分别解决这些子问题，最后合并子问题的解，即可得到原问题的解 减治、分治 一般把子问题个数为1的情况称为减治（例如对n!的求解） 123456function F(n)&#123; if(n===1) return 1; else &#123; return F(n-1)*n; &#125;&#125; 子问题个数大于1的情况称为分治（例如对Fibonacci数列的求解） 1234function F(n)&#123; if(n===1||n===0) return 1; else return F(n-1)+F(n-2);&#125; 递归 递归适合用来实现分治思想 递归的两个核心概念 递归边界 递归式（递归调用） 对于n!的求解，可以很容易的到F(n)=F(n-1)*n ;这就是递归式而F(1)=1; 这是递归的边界 分治思想的应用全排列n皇后问题]]></content>
+      <categories>
+        <category>算法笔记</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-349 两个数组的交集]]></title>
     <url>%2F2019%2F07%2F23%2Fleetcode-349%2F</url>
     <content type="text"><![CDATA[两个数组的交集题目描述给定两个数组，编写一个函数来计算它们的交集。 示例 1: 输入: nums1 = [1,2,2,1], nums2 = [2,2]输出: [2] 示例 2: 输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]输出: [9,4] 说明: 输出结果中的每个元素一定是唯一的。我们可以不考虑输出结果的顺序。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/intersection-of-two-arrays著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述将两个数组都去重后，比较另一个数组是否包含这个数组的某些元素，返回即可 解题步骤 使用set将两个数组去重 比较去重后的两个数组的大小，遍历较小的那个数组，查看另一个数组是否includes这个数组中的某些元素，有则添加到ans数组返回 Coding实现12345678910111213141516171819/** * @param &#123;number[]&#125; nums1 * @param &#123;number[]&#125; nums2 * @return &#123;number[]&#125; */var intersection = function(nums1, nums2) &#123; let ans=[]; nums1=[...new Set(nums1)]; nums2=[...new Set(nums2)]; function inter(nums1,nums2)&#123; nums1.forEach(value=&gt;&#123; if(nums2.includes(value))&#123; ans.push(value); &#125; &#125;) &#125; nums1.length&gt;nums2.length?inter(nums2,nums1):inter(nums1,nums2); return ans;&#125;;]]></content>
