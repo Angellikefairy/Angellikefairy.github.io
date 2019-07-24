@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-1002]]></title>
+    <url>%2F2019%2F07%2F24%2Fleetcode-1002%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[递归与分治]]></title>
     <url>%2F2019%2F07%2F24%2F%E9%80%92%E5%BD%92%E4%B8%8E%E5%88%86%E6%B2%BB%2F</url>
     <content type="text"><![CDATA[分治分治的全称为“分而治之”。分治法将原问题划分为若干个规模较小而结构与原问题相同或类似的子问题，然后分别解决这些子问题，最后合并子问题的解，即可得到原问题的解 减治、分治 一般把子问题个数为1的情况称为减治（例如对n!的求解） 123456function F(n)&#123; if(n===1) return 1; else &#123; return F(n-1)*n; &#125;&#125; 子问题个数大于1的情况称为分治（例如对Fibonacci数列的求解） 1234function F(n)&#123; if(n===1||n===0) return 1; else return F(n-1)+F(n-2);&#125; 递归 递归适合用来实现分治思想 递归的两个核心概念 递归边界 递归式（递归调用） 对于n!的求解，可以很容易的到F(n)=F(n-1)*n ;这就是递归式而F(1)=1; 这是递归的边界 分治思想的应用全排列n皇后问题]]></content>
