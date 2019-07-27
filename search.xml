@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-852 山脉数组的峰顶索引]]></title>
+    <url>%2F2019%2F07%2F27%2Fleetcode-852%2F</url>
+    <content type="text"><![CDATA[山脉数组的峰顶索引题目描述我们把符合下列属性的数组 A 称作山脉： A.length &gt;= 3 存在 0 &lt; i &lt; A.length - 1 使得A[0] &lt; A[1] &lt; … A[i-1] &lt; A[i] &gt; A[i+1] &gt; … &gt; A[A.length - 1] 给定一个确定为山脉的数组，返回任何满足 A[0] &lt; A[1] &lt; … A[i-1] &lt; A[i] &gt; A[i+1] &gt; … &gt; A[A.length - 1] 的 i 的值。 示例 1： 输入：[0,1,0]输出：1 示例 2： 输入：[0,2,1,0]输出：1 提示： 3&lt;= A.length &lt;= 10000 0&lt;= A[i] &lt;= 10^6 A是如上定义的山脉 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/peak-index-in-a-mountain-array著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述要找某个特定的值，都可以使用二分查找来提高效率 解题步骤 二分法查找山脉的下标 一开始设定left为0，right为A.length-1,mid为Math.floor((left+right)/2) 如果A[mid]&gt;A[mid+1]&amp;&amp;A[mid]&gt;A[mid-1],那么此时mid就是山脉的下标 如果A[mid]&lt;A[mid+1]，那么就说明山脉应该在mid的右边区间，故left=mid+1 如果A[mid]&gt;A[mid+1]，那么就说明山脉应该在mid的右边区间，故right=mid-1 Coding实现1234567891011121314151617181920/** * @param &#123;number[]&#125; A * @return &#123;number&#125; */var peakIndexInMountainArray = function(A) &#123; let left=0; let right=A.length-1; while(left&lt;=right)&#123; let mid=Math.floor((left+right)/2); if(A[mid]&gt;A[mid+1]&amp;&amp;A[mid]&gt;A[mid-1])&#123; return mid; &#125; else if(A[mid]&lt;A[mid+1])&#123; left=mid+1; &#125; else&#123; right=mid-1; &#125; &#125;&#125;; 时间复杂度时间复杂度为O(log2N);]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>二分查找</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-944 删列造序]]></title>
     <url>%2F2019%2F07%2F26%2Fleetcode-944%2F</url>
     <content type="text"><![CDATA[删列造序题目描述给定由 N 个小写字母字符串组成的数组 A，其中每个字符串长度相等。 删除 操作的定义是：选出一组要删掉的列，删去 A 中对应列中的所有字符，形式上，第 n 列为 [A[0][n], A[1][n], …, A[A.length-1][n]]）。 比如，有 A = [“abcdef”, “uvwxyz”]， 要删掉的列为 {0, 2, 3}，删除后 A 为[“bef”, “vyz”]， A 的列分别为[“b”,”v”], [“e”,”y”], [“f”,”z”]。 你需要选出一组要删掉的列 D，对 A 执行删除操作，使 A 中剩余的每一列都是 非降序 排列的，然后请你返回 D.length 的最小可能值。 示例 1： 输入：[“cba”, “daf”, “ghi”]输出：1解释：当选择 D = {1}，删除后 A 的列为：[“c”,”d”,”g”] 和 [“a”,”f”,”i”]，均为非降序排列。若选择 D = {}，那么 A 的列 [“b”,”a”,”h”] 就不是非降序排列了。 示例 2： 输入：[“a”, “b”]输出：0解释：D = {} 示例 3： 输入：[“zyx”, “wvu”, “tsr”]输出：3解释：D = {0, 1, 2} 提示： 1&lt;= A.length &lt;= 100 1&lt;= A[i].length &lt;= 1000 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/delete-columns-to-make-sorted著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述题目要求得到删去列数的最小值来使剩余的每一列都是非降序的，那么对于贪心思想，只要找到某些列存在降序的删除即可，而无需删除那些已经是非降序的列 解题步骤 根据数组第一个字符串元素长度来确认列数 根据列数，遍历每一个字符串中的那一列 如果某一列存在降序则将ans加1 返回ans Coding实现12345678910111213141516/** * @param &#123;string[]&#125; A * @return &#123;number&#125; */var minDeletionSize = function(A) &#123; let ans=0; for(let i=0;i&lt;A[0].length;i++)&#123; for(let k=0;k&lt;A.length-1;k++)&#123; if(A[k+1][i].charCodeAt()-A[k][i].charCodeAt()&lt;0)&#123; ans++; break; &#125; &#125; &#125; return ans; &#125;;]]></content>
