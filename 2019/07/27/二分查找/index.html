@@ -88,16 +88,17 @@
 
 
 
-<meta name="description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2019/07/index.html">
+<meta name="description" content="二分查找的高效之处在于，每一步都可以去除当前区间中的一半元素，因此时间复杂度为O(logn)  严格递增序列的二分查找 输入：[1,2,3,7,9,11] , 3返回: 2   输入：[1,2,3,7,9,11] , 8返回：false  1234567891011121314151617function F(n,m)&amp;#123;  let left=0;  let right=n.length">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二分查找">
+<meta property="og:url" content="http://yoursite.com/2019/07/27/二分查找/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta property="og:description" content="二分查找的高效之处在于，每一步都可以去除当前区间中的一半元素，因此时间复杂度为O(logn)  严格递增序列的二分查找 输入：[1,2,3,7,9,11] , 3返回: 2   输入：[1,2,3,7,9,11] , 8返回：false  1234567891011121314151617function F(n,m)&amp;#123;  let left=0;  let right=n.length">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-28T02:47:29.860Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta name="twitter:title" content="二分查找">
+<meta name="twitter:description" content="二分查找的高效之处在于，每一步都可以去除当前区间中的一半元素，因此时间复杂度为O(logn)  严格递增序列的二分查找 输入：[1,2,3,7,9,11] , 3返回: 2   输入：[1,2,3,7,9,11] , 8返回：false  1234567891011121314151617function F(n,m)&amp;#123;  let left=0;  let right=n.length">
 
 
 
@@ -127,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2019/07/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/27/二分查找/">
 
 
 
 
 
-  <title>归档 | Hexo</title>
+  <title>二分查找 | Hexo</title>
   
 
 
@@ -154,7 +155,7 @@
   
  
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband">
          <a href="https://github.com/Angellikefairy"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149" alt="Fork me on GitHub"></a>
     </div>
@@ -292,391 +293,246 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/二分查找/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">二分查找</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-27T17:49:17+08:00">
+                2019-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 27 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">算法笔记</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/27/二分查找/" itemprop="url">
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">二分查找</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  589
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-27T17:49:17+08:00" content="2019-07-27">
-          07-27
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
 
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>二分查找的高效之处在于，每一步都可以去除当前区间中的一半元素，因此时间复杂度为O(logn)</p>
+</blockquote>
+<h2 id="严格递增序列的二分查找"><a href="#严格递增序列的二分查找" class="headerlink" title="严格递增序列的二分查找"></a>严格递增序列的二分查找</h2><blockquote>
+<p>输入：[1,2,3,7,9,11] , 3<br>返回: 2</p>
+</blockquote>
+<blockquote>
+<p>输入：[1,2,3,7,9,11] , 8<br>返回：false</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">n,m</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> left=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> right=n.length<span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">    <span class="keyword">let</span> mid=<span class="built_in">Math</span>.floor((left+right)/<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">if</span>(m===n[mid])&#123;</span><br><span class="line">      <span class="keyword">return</span> mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(m&lt;n[mid])&#123;</span><br><span class="line">      right=mid<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      left=mid+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在整体递增，局部重复的序列中二分查找第一个符合要求的元素位置"><a href="#在整体递增，局部重复的序列中二分查找第一个符合要求的元素位置" class="headerlink" title="在整体递增，局部重复的序列中二分查找第一个符合要求的元素位置"></a>在整体递增，局部重复的序列中二分查找第一个符合要求的元素位置</h2><blockquote>
+<p>输入：[1,2,3,3,3,7,9,11],3<br>返回: 2</p>
+</blockquote>
+<blockquote>
+<p>输入：[1,2,3,3,3,7,9,11],8<br>返回：false</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">n,m</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> left=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> right=n.length;</span><br><span class="line">  <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">    <span class="keyword">let</span> mid=<span class="built_in">Math</span>.floor((left+right)/<span class="number">2</span>);  <span class="comment">//floor()函数，不大于当前数的最大数</span></span><br><span class="line">    <span class="keyword">if</span>(m&lt;=n[mid])&#123;</span><br><span class="line">      right=mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      left=mid+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(n[left]===m) <span class="keyword">return</span> left;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在整体递增，局部重复的序列中二分查找第一个大于给定元素的元素位置"><a href="#在整体递增，局部重复的序列中二分查找第一个大于给定元素的元素位置" class="headerlink" title="在整体递增，局部重复的序列中二分查找第一个大于给定元素的元素位置"></a>在整体递增，局部重复的序列中二分查找第一个大于给定元素的元素位置</h2><blockquote>
+<p>输入：[1,2,3,3,3,7,9,11],3<br>返回：5</p>
+</blockquote>
+<blockquote>
+<p>输入：[1,2,3,3,3,7,9,11],4<br>返回: ‘给定元素不存在’</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">n,m</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> left=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> right=n.length<span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">    <span class="keyword">let</span> mid=<span class="built_in">Math</span>.ceil((left+right)/<span class="number">2</span>);  <span class="comment">//ceil()函数，不小于当前数的最小整数</span></span><br><span class="line">    <span class="keyword">if</span>(m&gt;=n[mid])&#123;</span><br><span class="line">      left=mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      right=mid<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(n[right]===m) <span class="keyword">return</span> right+<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="string">'给定元素不存在'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="求根号2的近似值"><a href="#求根号2的近似值" class="headerlink" title="求根号2的近似值"></a>求根号2的近似值</h2><blockquote>
+<p>输入：0.00001  //精确度<br>返回：(1.4142074584960938,1.414215087890625)</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> left=<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">let</span> right=<span class="number">2</span>;</span><br><span class="line">  <span class="keyword">let</span> num=<span class="built_in">Math</span>.sqrt(<span class="number">2</span>);</span><br><span class="line">  <span class="keyword">while</span>(right-left&gt;x)&#123;</span><br><span class="line">    <span class="keyword">let</span> mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(num&lt;mid)&#123;</span><br><span class="line">      right=mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(num&gt;mid)&#123;</span><br><span class="line">      left=mid;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`(<span class="subst">$&#123;left&#125;</span>,<span class="subst">$&#123;right&#125;</span>)`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><p>用于求解高次幂的快速求法<br>比如2^10</p>
+<blockquote>
+<p>基于二分的思想，又被称之为二分幂</p>
+</blockquote>
+<p>快速幂基于以下原理：</p>
+<ol>
+<li>如果b是奇数，那么有a^b=a*a^(b-1)</li>
+<li>如果b是偶数，那么有a^b=(a^(b/2))*(a^(b/2))</li>
+</ol>
+<p>因此可以利用递归来求解快速幂</p>
+<blockquote>
+<p>输入 2,10<br>返回: 1024</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">a,n</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(n===<span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span>(n%<span class="number">2</span>===<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> F(a,n<span class="number">-1</span>)*a;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> F(a,n/<span class="number">2</span>)*F(a,n/<span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/27/leetcode-852/" itemprop="url">
-              
-                <span itemprop="name">leetcode-852 山脉数组的峰顶索引</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-27T15:42:56+08:00" content="2019-07-27">
-          07-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/26/leetcode-944/" itemprop="url">
-              
-                <span itemprop="name">leetcode-944 删列造序</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-26T10:55:29+08:00" content="2019-07-26">
-          07-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/26/贪心/" itemprop="url">
-              
-                <span itemprop="name">贪心</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-26T09:34:08+08:00" content="2019-07-26">
-          07-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/25/排序/" itemprop="url">
-              
-                <span itemprop="name">排序</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-25T09:27:08+08:00" content="2019-07-25">
-          07-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/24/leetcode-1002/" itemprop="url">
-              
-                <span itemprop="name">leetcode-1002 查找常用字符</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-24T14:51:44+08:00" content="2019-07-24">
-          07-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/24/递归与分治/" itemprop="url">
-              
-                <span itemprop="name">递归与分治</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-24T09:04:47+08:00" content="2019-07-24">
-          07-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/23/leetcode-349/" itemprop="url">
-              
-                <span itemprop="name">leetcode-349 两个数组的交集</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-23T11:14:11+08:00" content="2019-07-23">
-          07-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/23/leetcode-961/" itemprop="url">
-              
-                <span itemprop="name">leetcode-961 重复 N 次的元素</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-23T10:48:57+08:00" content="2019-07-23">
-          07-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/23/leetcode-500/" itemprop="url">
-              
-                <span itemprop="name">leetcode-500 键盘行</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-23T10:11:14+08:00" content="2019-07-23">
-          07-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+        
+      
+      </div>
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/27/leetcode-852/" rel="next" title="leetcode-852 山脉数组的峰顶索引">
+                <i class="fa fa-chevron-left"></i> leetcode-852 山脉数组的峰顶索引
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2019/07/page/2/">2</a><a class="page-number" href="/archives/2019/07/page/3/">3</a><a class="extend next" rel="next" href="/archives/2019/07/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -684,6 +540,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -704,8 +564,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -774,6 +643,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#严格递增序列的二分查找"><span class="nav-number">1.</span> <span class="nav-text">严格递增序列的二分查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在整体递增，局部重复的序列中二分查找第一个符合要求的元素位置"><span class="nav-number">2.</span> <span class="nav-text">在整体递增，局部重复的序列中二分查找第一个符合要求的元素位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在整体递增，局部重复的序列中二分查找第一个大于给定元素的元素位置"><span class="nav-number">3.</span> <span class="nav-text">在整体递增，局部重复的序列中二分查找第一个大于给定元素的元素位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求根号2的近似值"><span class="nav-number">4.</span> <span class="nav-text">求根号2的近似值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速幂"><span class="nav-number">5.</span> <span class="nav-text">快速幂</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -945,6 +830,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
