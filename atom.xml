@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-28T02:49:38.604Z</updated>
+  <updated>2019-07-29T14:09:26.726Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-977 有序数组的平方</title>
+    <link href="http://yoursite.com/2019/07/29/leetcode-977/"/>
+    <id>http://yoursite.com/2019/07/29/leetcode-977/</id>
+    <published>2019-07-29T14:06:32.000Z</published>
+    <updated>2019-07-29T14:09:26.726Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="有序数组的平方"><a href="#有序数组的平方" class="headerlink" title="有序数组的平方"></a>有序数组的平方</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个按非递减顺序排序的整数数组 A，返回每个数字的平方组成的新数组，要求也按非递减顺序排序。</p><p>示例 1：</p><blockquote><p>输入：[-4,-1,0,3,10]<br>输出：[0,1,9,16,100]</p></blockquote><p>示例 2：</p><blockquote><p>输入：[-7,-3,2,3,11]<br>输出：[4,9,9,49,121]</p></blockquote><p>提示：</p><ol><li>1&lt;= A.length &lt;= 10000</li><li>-10000 &lt;= A[i] &lt;= 10000</li><li>A 已按非递减顺序排序。<a id="more"></a>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/squares-of-a-sorted-array" target="_blank" rel="noopener">https://leetcode-cn.com/problems/squares-of-a-sorted-array</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li></ol><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>将该数组的每一个元素平方后在将该数组排序并返回</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>将该数组的每一个元素平方</li><li>排序该数组并返回</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; A</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> sortedSquares = <span class="function"><span class="keyword">function</span>(<span class="params">A</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> A.map(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value*value;</span><br><span class="line">    &#125;).sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;<span class="keyword">return</span> a-b;&#125;)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;有序数组的平方&quot;&gt;&lt;a href=&quot;#有序数组的平方&quot; class=&quot;headerlink&quot; title=&quot;有序数组的平方&quot;&gt;&lt;/a&gt;有序数组的平方&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定一个按非递减顺序排序的整数数组 A，返回每个数字的平方组成的新数组，要求也按非递减顺序排序。&lt;/p&gt;
+&lt;p&gt;示例 1：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：[-4,-1,0,3,10]&lt;br&gt;输出：[0,1,9,16,100]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 2：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：[-7,-3,2,3,11]&lt;br&gt;输出：[4,9,9,49,121]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;提示：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;1&amp;lt;= A.length &amp;lt;= 10000&lt;/li&gt;
+&lt;li&gt;-10000 &amp;lt;= A[i] &amp;lt;= 10000&lt;/li&gt;
+&lt;li&gt;A 已按非递减顺序排序。
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
   
   <entry>
     <title>二分查找</title>
@@ -585,33 +620,6 @@
     
     
       <category term="链表" scheme="http://yoursite.com/tags/%E9%93%BE%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-202 快乐数</title>
-    <link href="http://yoursite.com/2019/07/15/leetcode-202/"/>
-    <id>http://yoursite.com/2019/07/15/leetcode-202/</id>
-    <published>2019-07-15T08:44:13.000Z</published>
-    <updated>2019-07-16T05:42:00.535Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="快乐数"><a href="#快乐数" class="headerlink" title="快乐数"></a>快乐数</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>编写一个算法来判断一个数是不是“快乐数”。</p><p>一个“快乐数”定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是无限循环但始终变不到 1。如果可以变为 1，那么这个数就是快乐数。</p><p>示例: </p><blockquote><p>输入: 19<br>输出: true<br>解释: <br>12 + 92 = 82<br>82 + 22 = 68<br>62 + 82 = 100<br>12 + 02 + 02 = 1</p></blockquote><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/happy-number" target="_blank" rel="noopener">https://leetcode-cn.com/problems/happy-number</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ol><li><p>正面解题，寻找快乐数。当重复过程变为1则为快乐数，若当循环过程中得到的数与之前出现过的数相重复，则表示之后会在这两数之间无限循环，此时即可返回false.</p></li><li><p>快慢指针解法：使用快慢指针来判断该循环是否为无限死循环。</p></li></ol><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><h4 id="正面解题法-遇到重复数字则退出"><a href="#正面解题法-遇到重复数字则退出" class="headerlink" title="正面解题法(遇到重复数字则退出)"></a>正面解题法(遇到重复数字则退出)</h4><ol><li>若输入为1，则直接返回true</li><li>设置set集合用来存储循环过程中得到的数</li><li>进入do-while循环，将参数转化为数组，利用reduce函数进行平方和累加，判断该得到的数是否存在于set集合中，若存在则返回false，否则则将该数放入set集合中。同时,若该数为1则返回true退出函数<h4 id="快慢指针法"><a href="#快慢指针法" class="headerlink" title="快慢指针法"></a>快慢指针法</h4></li><li>设置两个指针，一个指针移动较快，一个指针移动较慢，若两指针相遇，则代表该循环中存在死循环，则应退出该函数。<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><h3 id="正面解题的Coding"><a href="#正面解题的Coding" class="headerlink" title="正面解题的Coding"></a>正面解题的Coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isHappy = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n===<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">let</span> arr;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">set</span>=new Set([n]);</span><br><span class="line">    do&#123;</span><br><span class="line">        arr=n.toString().split(<span class="string">''</span>);</span><br><span class="line">        n=arr.reduce(<span class="function">(<span class="params">pre,value</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> pre+<span class="built_in">Math</span>.pow(<span class="built_in">parseInt</span>(value),<span class="number">2</span>)</span><br><span class="line">        &#125;,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">set</span>.has(n))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">set</span>.add(n);</span><br><span class="line">    &#125;while(n!=1)</span><br><span class="line">    return true;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li></ol><h3 id="递归法的Coding"><a href="#递归法的Coding" class="headerlink" title="递归法的Coding"></a>递归法的Coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;快乐数&quot;&gt;&lt;a href=&quot;#快乐数&quot; class=&quot;headerlink&quot; title=&quot;快乐数&quot;&gt;&lt;/a&gt;快乐数&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;编写一个算法来判断一个数是不是“快乐数”。&lt;/p&gt;
-&lt;p&gt;一个“快乐数”定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是无限循环但始终变不到 1。如果可以变为 1，那么这个数就是快乐数。&lt;/p&gt;
-&lt;p&gt;示例: &lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: 19&lt;br&gt;输出: true&lt;br&gt;解释: &lt;br&gt;12 + 92 = 82&lt;br&gt;82 + 22 = 68&lt;br&gt;62 + 82 = 100&lt;br&gt;12 + 02 + 02 = 1&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="快慢指针" scheme="http://yoursite.com/tags/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/"/>
     
   </entry>
   

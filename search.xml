@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-977 有序数组的平方]]></title>
+    <url>%2F2019%2F07%2F29%2Fleetcode-977%2F</url>
+    <content type="text"><![CDATA[有序数组的平方题目描述给定一个按非递减顺序排序的整数数组 A，返回每个数字的平方组成的新数组，要求也按非递减顺序排序。 示例 1： 输入：[-4,-1,0,3,10]输出：[0,1,9,16,100] 示例 2： 输入：[-7,-3,2,3,11]输出：[4,9,9,49,121] 提示： 1&lt;= A.length &lt;= 10000 -10000 &lt;= A[i] &lt;= 10000 A 已按非递减顺序排序。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/squares-of-a-sorted-array著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述将该数组的每一个元素平方后在将该数组排序并返回 解题步骤 将该数组的每一个元素平方 排序该数组并返回 Coding实现123456789/** * @param &#123;number[]&#125; A * @return &#123;number[]&#125; */var sortedSquares = function(A) &#123; return A.map(value=&gt;&#123; return value*value; &#125;).sort((a,b)=&gt;&#123;return a-b;&#125;)&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[二分查找]]></title>
     <url>%2F2019%2F07%2F27%2F%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%2F</url>
     <content type="text"><![CDATA[二分查找概述 二分查找的高效之处在于，每一步都可以去除当前区间中的一半元素，因此时间复杂度为O(logn) 严格递增序列的二分查找 输入：[1,2,3,7,9,11] , 3返回: 2 输入：[1,2,3,7,9,11] , 8返回：false 1234567891011121314151617function F(n,m)&#123; let left=0; let right=n.length-1; while(left&lt;=right)&#123; let mid=Math.floor((left+right)/2); if(m===n[mid])&#123; return mid; &#125; if(m&lt;n[mid])&#123; right=mid-1; &#125; else&#123; left=mid+1; &#125; &#125; return false;&#125; 在整体递增，局部重复的序列中二分查找第一个符合要求的元素位置 输入：[1,2,3,3,3,7,9,11],3返回: 2 输入：[1,2,3,3,3,7,9,11],8返回：false 123456789101112131415function F(n,m)&#123; let left=0; let right=n.length; while(left&lt;right)&#123; let mid=Math.floor((left+right)/2); //floor()函数，不大于当前数的最大数 if(m&lt;=n[mid])&#123; right=mid; &#125; else&#123; left=mid+1; &#125; &#125; if(n[left]===m) return left; else return false;&#125; 在整体递增，局部重复的序列中二分查找第一个大于给定元素的元素位置 输入：[1,2,3,3,3,7,9,11],3返回：5 输入：[1,2,3,3,3,7,9,11],4返回: ‘给定元素不存在’ 1234567891011121314151617function F(n,m)&#123; let left=0; let right=n.length-1; while(left&lt;right)&#123; let mid=Math.ceil((left+right)/2); //ceil()函数，不小于当前数的最小整数 if(m&gt;=n[mid])&#123; left=mid; &#125; else&#123; right=mid-1; &#125; &#125; if(n[right]===m) return right+1; else &#123; return ('给定元素不存在'); &#125;&#125; 求根号2的近似值 输入：0.00001 //精确度返回：(1.4142074584960938,1.414215087890625) 123456789101112131415function F(x)&#123; let left=1; let right=2; let num=Math.sqrt(2); while(right-left&gt;x)&#123; let mid=(left+right)/2; if(num&lt;mid)&#123; right=mid; &#125; if(num&gt;mid)&#123; left=mid; &#125; &#125; return `($&#123;left&#125;,$&#123;right&#125;)`&#125; 快速幂用于求解高次幂的快速求法比如2^10 基于二分的思想，又被称之为二分幂 快速幂基于以下原理： 如果b是奇数，那么有a^b=a*a^(b-1) 如果b是偶数，那么有a^b=(a^(b/2))*(a^(b/2)) 因此可以利用递归来求解快速幂 输入 2,10返回: 1024 123456789function F(a,n)&#123; if(n===0) return 1; if(n%2===1)&#123; return F(a,n-1)*a; &#125; else &#123; return F(a,n/2)*F(a,n/2); &#125;&#125;]]></content>
