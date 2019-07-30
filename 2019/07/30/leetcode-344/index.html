@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="哈希表,">
+  <meta name="keywords" content="双指针,">
 
 
 
@@ -88,20 +88,18 @@
 
 
 
-<meta name="description" content="键盘行题目描述 给定一个单词列表，只返回可以使用在键盘同一行的字母打印出来的单词。键盘如下图所示。  示例：  输入: [“Hello”, “Alaska”, “Dad”, “Peace”]输出: [“Alaska”, “Dad”]  注意： 你可以重复使用键盘上同一字符。你可以假设输入的字符串将只包含字母。">
-<meta name="keywords" content="哈希表">
+<meta name="description" content="反转字符串题目描述编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。 不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。 你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。 示例 1：  输入：[“h”,”e”,”l”,”l”,”o”]输出：[“o”,”l”,”l”,”e”,”h”]  示例 2">
+<meta name="keywords" content="双指针">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-500 键盘行">
-<meta property="og:url" content="http://yoursite.com/2019/07/23/leetcode-500/index.html">
+<meta property="og:title" content="leetcode-344 反转字符串">
+<meta property="og:url" content="http://yoursite.com/2019/07/30/leetcode-344/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="键盘行题目描述 给定一个单词列表，只返回可以使用在键盘同一行的字母打印出来的单词。键盘如下图所示。  示例：  输入: [“Hello”, “Alaska”, “Dad”, “Peace”]输出: [“Alaska”, “Dad”]  注意： 你可以重复使用键盘上同一字符。你可以假设输入的字符串将只包含字母。">
+<meta property="og:description" content="反转字符串题目描述编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。 不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。 你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。 示例 1：  输入：[“h”,”e”,”l”,”l”,”o”]输出：[“o”,”l”,”l”,”e”,”h”]  示例 2">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/keyboard.png">
-<meta property="og:updated_time" content="2019-07-23T02:26:49.127Z">
+<meta property="og:updated_time" content="2019-07-30T06:14:13.403Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-500 键盘行">
-<meta name="twitter:description" content="键盘行题目描述 给定一个单词列表，只返回可以使用在键盘同一行的字母打印出来的单词。键盘如下图所示。  示例：  输入: [“Hello”, “Alaska”, “Dad”, “Peace”]输出: [“Alaska”, “Dad”]  注意： 你可以重复使用键盘上同一字符。你可以假设输入的字符串将只包含字母。">
-<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/keyboard.png">
+<meta name="twitter:title" content="leetcode-344 反转字符串">
+<meta name="twitter:description" content="反转字符串题目描述编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。 不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。 你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。 示例 1：  输入：[“h”,”e”,”l”,”l”,”o”]输出：[“o”,”l”,”l”,”e”,”h”]  示例 2">
 
 
 
@@ -131,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/23/leetcode-500/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/30/leetcode-344/">
 
 
 
 
 
-  <title>leetcode-500 键盘行 | Hexo</title>
+  <title>leetcode-344 反转字符串 | Hexo</title>
   
 
 
@@ -310,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/leetcode-500/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/leetcode-344/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -327,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode-500 键盘行</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode-344 反转字符串</h1>
         
 
         <div class="post-meta">
@@ -339,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-23T10:11:14+08:00">
-                2019-07-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-30T13:42:24+08:00">
+                2019-07-30
               </time>
             
 
@@ -393,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  492
+                  351
                 </span>
               
 
@@ -409,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  1
                 </span>
               
             </div>
@@ -430,26 +428,25 @@
       
 
       
-        <h1 id="键盘行"><a href="#键盘行" class="headerlink" title="键盘行"></a>键盘行</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p> 给定一个单词列表，只返回可以使用在键盘同一行的字母打印出来的单词。键盘如下图所示。</p>
-<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/keyboard.png" alt></p>
-<p>示例：</p>
+        <h1 id="反转字符串"><a href="#反转字符串" class="headerlink" title="反转字符串"></a>反转字符串</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。</p>
+<p>不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。</p>
+<p>你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</p>
+<p>示例 1：</p>
 <blockquote>
-<p>输入: [“Hello”, “Alaska”, “Dad”, “Peace”]<br>输出: [“Alaska”, “Dad”]</p>
+<p>输入：[“h”,”e”,”l”,”l”,”o”]<br>输出：[“o”,”l”,”l”,”e”,”h”]</p>
 </blockquote>
-<p>注意：</p>
-<p>你可以重复使用键盘上同一字符。<br>你可以假设输入的字符串将只包含字母。</p>
+<p>示例 2：</p>
+<blockquote>
+<p>输入：[“H”,”a”,”n”,”n”,”a”,”h”]<br>输出：[“h”,”a”,”n”,”n”,”a”,”H”]</p>
+</blockquote>
 <a id="more"></a>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/keyboard-row" target="_blank" rel="noopener">https://leetcode-cn.com/problems/keyboard-row</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>利用哈希表,分别即字母为键名，字母所在行号为键值建立哈希表。遍历给定字符串，若字符串的所有字符的所在哈希表的键值都一样，则说明该字符串的字符都在同一行上</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-string" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-string</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>题目要求是原地修改数组，并且只能使用O(1)的额外空间。因此，不能创建新的数组来存放数组元素，此时可以考虑使用双指针，一个置首，一个置尾。首向后，尾向前，交换两个指针的值即可。</p>
 <h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
-<li>建立哈希表以及键盘字符数组</li>
-<li>将每个字符以字符为键名，字符所在行号为键值建立哈希表。</li>
-<li>遍历题目给定字符串数组，若每个字符串中的字符在哈希表中的键值都一样，则将该字符串加入到要返回的数组中</li>
-<li>遍历字符串方法：先得到字符串的第一个字符的所在行号，接着循环得到后面的字符的行号，若不一样则直接退出该循环</li>
+<li>建立left,right双指针</li>
+<li>当left&lt;=right时，交换两指针元素</li>
 </ol>
-<p>注意</p>
-<p>将所有字符都转换为小写形式再去得到字符的键值</p>
-<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; J</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; S</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string[]&#125; words</span></span><br><span class="line"><span class="comment"> * @return &#123;string[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> findWords = <span class="function"><span class="keyword">function</span>(<span class="params">words</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> str=[<span class="string">'qwertyuiop'</span>,<span class="string">'asdfghjkl'</span>,<span class="string">'zxcvbnm'</span>];</span><br><span class="line">    <span class="keyword">let</span> ans=[];</span><br><span class="line">    <span class="keyword">let</span> map=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    str.forEach(<span class="function">(<span class="params">value,index</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;value.length;i++)&#123;</span><br><span class="line">            map.set(value[i],index+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    words.forEach(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> flag=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">let</span> first=map.get(value[<span class="number">0</span>].toLowerCase());</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;value.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(map.get(value[i].toLowerCase())!=first)&#123;</span><br><span class="line">                flag=<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(flag===<span class="number">0</span>)&#123;</span><br><span class="line">            ans.push(value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;character[]&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;void&#125; Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> reverseString = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> left=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> right=s.length<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">        [s[left],s[right]]=[s[right],s[left]];</span><br><span class="line">        left++;</span><br><span class="line">        right--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -468,7 +465,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/哈希表/" rel="tag"># 哈希表</a>
+            <a href="/tags/双指针/" rel="tag"># 双指针</a>
           
         </div>
       
@@ -487,8 +484,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/22/散列/" rel="next" title="散列">
-                <i class="fa fa-chevron-left"></i> 散列
+              <a href="/2019/07/29/leetcode-977/" rel="next" title="leetcode-977 有序数组的平方">
+                <i class="fa fa-chevron-left"></i> leetcode-977 有序数组的平方
               </a>
             
           </div>
@@ -497,8 +494,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/23/leetcode-961/" rel="prev" title="leetcode-961 重复 N 次的元素">
-                leetcode-961 重复 N 次的元素 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/30/leetcode-1122/" rel="prev" title="leetcode-1122 数组的相对排序">
+                leetcode-1122 数组的相对排序 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -640,7 +637,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#键盘行"><span class="nav-number">1.</span> <span class="nav-text">键盘行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#反转字符串"><span class="nav-number">1.</span> <span class="nav-text">反转字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
             
 
           </div>

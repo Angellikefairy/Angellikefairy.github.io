@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-1122 数组的相对排序]]></title>
+    <url>%2F2019%2F07%2F30%2Fleetcode-1122%2F</url>
+    <content type="text"><![CDATA[数组的相对排序题目描述给你两个数组，arr1 和 arr2， arr2 中的元素各不相同 arr2 中的每个元素都出现在 arr1 中 对 arr1 中的元素进行排序，使 arr1 中项的相对顺序和 arr2 中的相对顺序相同。未在 arr2 中出现过的元素需要按照升序放在 arr1 的末尾。 示例： 输入：arr1 = [2,3,1,3,2,4,6,7,9,2,19], arr2 = [2,1,4,3,9,6]输出：[2,2,2,1,4,3,3,9,6,7,19] 提示： arr1.length, arr2.length &lt;= 1000 0 &lt;= arr1[i], arr2[i] &lt;= 1000 arr2 中的元素 arr2[i] 各不相同 arr2 中的每个元素 arr2[i] 都出现在 arr1 中 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/relative-sort-array著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述目前觉得暴力解法最简单 解题步骤双循环，时间复杂度为O(n*m) Coding实现1234567891011121314151617181920212223/** * @param &#123;number[]&#125; arr1 * @param &#123;number[]&#125; arr2 * @return &#123;number[]&#125; */var relativeSortArray = function(arr1, arr2) &#123; let ans=[]; let el=[]; arr1.forEach(value=&gt;&#123; if(!arr2.includes(value))&#123; el.push(value); &#125; &#125;) arr2.forEach(value2=&gt;&#123; arr1.forEach(value1=&gt;&#123; if(value1===value2)&#123; ans.push(value2); &#125; &#125;) &#125;) el.sort((a,b)=&gt;&#123;return a-b;&#125;) return ans.concat(el);&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-344 反转字符串]]></title>
+    <url>%2F2019%2F07%2F30%2Fleetcode-344%2F</url>
+    <content type="text"><![CDATA[反转字符串题目描述编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。 不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。 你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。 示例 1： 输入：[“h”,”e”,”l”,”l”,”o”]输出：[“o”,”l”,”l”,”e”,”h”] 示例 2： 输入：[“H”,”a”,”n”,”n”,”a”,”h”]输出：[“h”,”a”,”n”,”n”,”a”,”H”] 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/reverse-string著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述题目要求是原地修改数组，并且只能使用O(1)的额外空间。因此，不能创建新的数组来存放数组元素，此时可以考虑使用双指针，一个置首，一个置尾。首向后，尾向前，交换两个指针的值即可。 解题步骤 建立left,right双指针 当left&lt;=right时，交换两指针元素 Coding实现1234567891011121314/** * @param &#123;character[]&#125; s * @return &#123;void&#125; Do not return anything, modify s in-place instead. */var reverseString = function(s) &#123; let left=0; let right=s.length-1; while(left&lt;=right)&#123; [s[left],s[right]]=[s[right],s[left]]; left++; right--; &#125; return s;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>双指针</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-977 有序数组的平方]]></title>
     <url>%2F2019%2F07%2F29%2Fleetcode-977%2F</url>
     <content type="text"><![CDATA[有序数组的平方题目描述给定一个按非递减顺序排序的整数数组 A，返回每个数字的平方组成的新数组，要求也按非递减顺序排序。 示例 1： 输入：[-4,-1,0,3,10]输出：[0,1,9,16,100] 示例 2： 输入：[-7,-3,2,3,11]输出：[4,9,9,49,121] 提示： 1&lt;= A.length &lt;= 10000 -10000 &lt;= A[i] &lt;= 10000 A 已按非递减顺序排序。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/squares-of-a-sorted-array著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述将该数组的每一个元素平方后在将该数组排序并返回 解题步骤 将该数组的每一个元素平方 排序该数组并返回 Coding实现123456789/** * @param &#123;number[]&#125; A * @return &#123;number[]&#125; */var sortedSquares = function(A) &#123; return A.map(value=&gt;&#123; return value*value; &#125;).sort((a,b)=&gt;&#123;return a-b;&#125;)&#125;;]]></content>
@@ -19,8 +38,8 @@
         <category>leetcode题解与算法</category>
       </categories>
       <tags>
-        <tag>双指针</tag>
         <tag>哈希表</tag>
+        <tag>双指针</tag>
       </tags>
   </entry>
   <entry>
