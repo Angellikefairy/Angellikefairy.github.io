@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-30T06:17:41.290Z</updated>
+  <updated>2019-07-31T08:19:06.012Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-1021 删除最外层的括号</title>
+    <link href="http://yoursite.com/2019/07/31/leetcode-1021/"/>
+    <id>http://yoursite.com/2019/07/31/leetcode-1021/</id>
+    <published>2019-07-31T08:11:10.000Z</published>
+    <updated>2019-07-31T08:19:06.012Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="删除最外层的括号"><a href="#删除最外层的括号" class="headerlink" title="删除最外层的括号"></a>删除最外层的括号</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>有效括号字符串为空 (“”)、”(“ + A + “)” 或 A + B，其中 A 和 B 都是有效的括号字符串，+ 代表字符串的连接。例如，””，”()”，”(())()” 和 “(()(()))” 都是有效的括号字符串。</p><p>如果有效字符串 S 非空，且不存在将其拆分为 S = A+B 的方法，我们称其为原语（primitive），其中 A 和 B 都是非空有效括号字符串。</p><p>给出一个非空有效字符串 S，考虑将其进行原语化分解，使得：S = P_1 + P_2 + … + P_k，其中 P_i 是有效括号字符串原语。</p><p>对 S 进行原语化分解，删除分解中每个原语字符串的最外层括号，返回 S 。</p><p>示例 1：</p><blockquote><p>输入：”(()())(())”<br>输出：”()()()”<br>解释：<br>输入字符串为 “(()())(())”，原语化分解得到 “(()())” + “(())”，<br>删除每个部分中的最外层括号后得到 “()()” + “()” = “()()()”。</p></blockquote><p>示例 2：</p><blockquote><p>输入：”(()())(())(()(()))”<br>输出：”()()()()(())”<br>解释：<br>输入字符串为 “(()())(())(()(()))”，原语化分解得到 “(()())” + “(())” + “(()(()))”，<br>删除每隔部分中的最外层括号后得到 “()()” + “()” + “()(())” = “()()()()(())”。</p></blockquote><p>示例 3：</p><blockquote><p>输入：”()()”<br>输出：””<br>解释：<br>输入字符串为 “()()”，原语化分解得到 “()” + “()”，<br>删除每个部分中的最外层括号后得到 “” + “” = “”。</p></blockquote><p>提示：</p><ol><li>S.length &lt;= 10000</li><li>S[i] 为 “(“ 或 “)”</li><li>S 是一个有效括号字符串<a id="more"></a>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/remove-outermost-parentheses" target="_blank" rel="noopener">https://leetcode-cn.com/problems/remove-outermost-parentheses</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li></ol><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>关于括号匹配问题，很容易想到用栈来解决。</p><p>遇到 ‘ ( ‘ 入栈，遇到 ‘ ) ‘ 则出栈。则当该栈为空时，则代表之前的括号都已匹配。那么就可以将先前的括号去掉最外层的括号</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>设定一个数组stack用来表示栈操作，并预先压入第一个元素’(‘</li><li>设定一个数组temp用来存放已经匹配完成的括号，并预先设定第一个元素’(‘</li><li>从第二个元素开始遍历，遇到 ‘ ( ‘ 入栈，遇到 ‘ ) ‘ 则出栈。则当该栈为空时，则代表之前的括号都已匹配。那么就可以将先前的括号去掉最外层的括号,并压入结果数组ans</li><li>返回ans</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; S</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> removeOuterParentheses = <span class="function"><span class="keyword">function</span>(<span class="params">S</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> stack=[<span class="string">'('</span>];</span><br><span class="line">    <span class="keyword">let</span> temp=[<span class="string">'('</span>];</span><br><span class="line">    <span class="keyword">let</span> ans=[];</span><br><span class="line">    S=S.split(<span class="string">''</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;S.length;i++)&#123;</span><br><span class="line">        temp.push(S[i]);</span><br><span class="line">        <span class="keyword">if</span>(S[i]===<span class="string">')'</span>)&#123;</span><br><span class="line">            stack.pop();</span><br><span class="line">            <span class="keyword">if</span>(stack.length===<span class="number">0</span>)&#123;</span><br><span class="line">                temp.pop();</span><br><span class="line">                temp.shift();</span><br><span class="line">                ans.push(...temp);</span><br><span class="line">                temp=[];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> stack.push(S[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans.join(<span class="string">''</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;删除最外层的括号&quot;&gt;&lt;a href=&quot;#删除最外层的括号&quot; class=&quot;headerlink&quot; title=&quot;删除最外层的括号&quot;&gt;&lt;/a&gt;删除最外层的括号&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;有效括号字符串为空 (“”)、”(“ + A + “)” 或 A + B，其中 A 和 B 都是有效的括号字符串，+ 代表字符串的连接。例如，””，”()”，”(())()” 和 “(()(()))” 都是有效的括号字符串。&lt;/p&gt;
+&lt;p&gt;如果有效字符串 S 非空，且不存在将其拆分为 S = A+B 的方法，我们称其为原语（primitive），其中 A 和 B 都是非空有效括号字符串。&lt;/p&gt;
+&lt;p&gt;给出一个非空有效字符串 S，考虑将其进行原语化分解，使得：S = P_1 + P_2 + … + P_k，其中 P_i 是有效括号字符串原语。&lt;/p&gt;
+&lt;p&gt;对 S 进行原语化分解，删除分解中每个原语字符串的最外层括号，返回 S 。&lt;/p&gt;
+&lt;p&gt;示例 1：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：”(()())(())”&lt;br&gt;输出：”()()()”&lt;br&gt;解释：&lt;br&gt;输入字符串为 “(()())(())”，原语化分解得到 “(()())” + “(())”，&lt;br&gt;删除每个部分中的最外层括号后得到 “()()” + “()” = “()()()”。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 2：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：”(()())(())(()(()))”&lt;br&gt;输出：”()()()()(())”&lt;br&gt;解释：&lt;br&gt;输入字符串为 “(()())(())(()(()))”，原语化分解得到 “(()())” + “(())” + “(()(()))”，&lt;br&gt;删除每隔部分中的最外层括号后得到 “()()” + “()” + “()(())” = “()()()()(())”。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 3：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：”()()”&lt;br&gt;输出：””&lt;br&gt;解释：&lt;br&gt;输入字符串为 “()()”，原语化分解得到 “()” + “()”，&lt;br&gt;删除每个部分中的最外层括号后得到 “” + “” = “”。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;提示：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;S.length &amp;lt;= 10000&lt;/li&gt;
+&lt;li&gt;S[i] 为 “(“ 或 “)”&lt;/li&gt;
+&lt;li&gt;S 是一个有效括号字符串
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="栈" scheme="http://yoursite.com/tags/%E6%A0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode-1122 数组的相对排序</title>
@@ -151,9 +193,9 @@
       <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="哈希表" scheme="http://yoursite.com/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
-    
       <category term="双指针" scheme="http://yoursite.com/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
+    
+      <category term="哈希表" scheme="http://yoursite.com/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
     
   </entry>
   
@@ -614,33 +656,6 @@
     
       <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-206 反转链表</title>
-    <link href="http://yoursite.com/2019/07/19/leetcode-206/"/>
-    <id>http://yoursite.com/2019/07/19/leetcode-206/</id>
-    <published>2019-07-19T11:08:47.000Z</published>
-    <updated>2019-07-20T07:45:18.444Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>反转一个单链表。</p><p>示例:</p><blockquote><p>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p></blockquote><p>进阶:<br>你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-linked-list" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-linked-list</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>将链表所有的元素取出并倒序放到数组，按照数组元素创建新链表并返回</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>遍历链表，并将数组元素unshift入数组</li><li>按照数组元素添加节点到新创建的链表上</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * function ListNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.next = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;ListNode&#125; head</span></span><br><span class="line"><span class="comment"> * @return &#123;ListNode&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> reverseList = <span class="function"><span class="keyword">function</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> newList=<span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">let</span> newHead=newList;</span><br><span class="line">    <span class="keyword">let</span> numArray=[];</span><br><span class="line">    <span class="keyword">while</span>(head)&#123;</span><br><span class="line">        numArray.unshift(head.val);</span><br><span class="line">        head=head.next;</span><br><span class="line">    &#125;</span><br><span class="line">    numArray.forEach(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">        newHead.next=<span class="keyword">new</span> ListNode(value);</span><br><span class="line">        newHead=newHead.next;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> newList.next;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;反转链表&quot;&gt;&lt;a href=&quot;#反转链表&quot; class=&quot;headerlink&quot; title=&quot;反转链表&quot;&gt;&lt;/a&gt;反转链表&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;反转一个单链表。&lt;/p&gt;
-&lt;p&gt;示例:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL&lt;br&gt;输出: 5-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;1-&amp;gt;NULL&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;进阶:&lt;br&gt;你可以迭代或递归地反转链表。你能否用两种方法解决这道题？&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="链表" scheme="http://yoursite.com/tags/%E9%93%BE%E8%A1%A8/"/>
     
   </entry>
   
