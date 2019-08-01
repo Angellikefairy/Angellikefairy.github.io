@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[数据类型]]></title>
+    <url>%2F2019%2F08%2F01%2F%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%2F</url>
+    <content type="text"><![CDATA[数据类型简单数据类型 Null (null值本质上是一个空对象指针) Undefined String Number Bollean Symbol 复杂数据类型 Object(包括Array、Function、Date、RegExp、Error、Arguments等更为具体的引用类型) 数据类型的检测判断1.typeof typeof 常用于判断基本数据类型 一些注意点 typeof返回的是一个字符串,因此 typeof typeof 1 //(任意数据类型)都会返回string null是一个空对象指针，因此typeof null会返回object 对于函数function的判断，tpeof function会返回function而不是对象object 从技术角度讲，函数在es中是对象，而不是一种数据类型。然而，函数也确实有一些特殊的属性，因此通过typeof操作符来区分函数和其他对象是有必要的 对于除function外的复杂数据类型，例如数组，set,map都会返回对象object 1234567891011121314151617181920212223typeof 123 // "number"typeof "abc" // "string" typeof (new String()) //objecttypeof true // "boolean" typeof &#123;a: 1&#125; // "object" typeof null //objecttypeof function foo() &#123;&#125; // "function" typeof undefined // "undefined" typeof Symbol('foo') // "symbol"typeof (new Set()) //"object"typeof (new Map()) //"object"typeof typeof 1 //"string" typeof的不足使用 typeof 方法来检测数据类型，基本类型大部分都能被准确检测并返回正确的字符串（除了 Null 类型，其返回 object 字符串），而引用类型大部分都不能够被准确检测（除了 Function 类型能够准确返回 function 字符串外，其它的都返回了 object 字符串）。 instanceofinstanceof用于判断引用类型 instanceof 运算符用于测试构造函数的prototype属性是否出现在对象的原型链中的任何位置 12let str=new String();console.log(str instanceof String); //true 123456function Person()&#123;&#125;;function Student()&#123;&#125;;let person=new Person();Student.prototype=person;let student=new Student();console.log(student instanceof Person) //true 语法 object instanceof constructor 因此当使用instanceof判断基本数据类型时就会返回false,与此同时,instanceof 右端也必须是某个构造函数 12'a' instanceof String //false123 instanceof Number //false null instance object那么基本数据类型中的null呢，既然typeof null===object;那么null instance object呢？很不幸,返回的会是false 简单来说，null并不是以Object为原型创建出来的 1null instanceof object //false 函数模拟instanceof知道instaceof的原理是判断构造函数的prototype属性是否出现在对象的原型链中的任何位置时，那么就不难模拟一个函数来实现instanceof 12345678910function instance(a,b)&#123; let bPro=b.prototype; //取b的显示原型 let aPro=a.__proto__; //取a的隐式原型 //或者使用Object.getPrototypeOf(a)取得a的隐式原型 while(true)&#123; if(aPro===bPro) return true; if(aPro===Object.prototype) return false; aPro=aPro.__proto__; &#125;&#125; 数组判断isArray()]]></content>
+      <categories>
+        <category>javaScript基础</category>
+      </categories>
+      <tags>
+        <tag>基础语法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-1021 删除最外层的括号]]></title>
     <url>%2F2019%2F07%2F31%2Fleetcode-1021%2F</url>
     <content type="text"><![CDATA[删除最外层的括号题目描述有效括号字符串为空 (“”)、”(“ + A + “)” 或 A + B，其中 A 和 B 都是有效的括号字符串，+ 代表字符串的连接。例如，””，”()”，”(())()” 和 “(()(()))” 都是有效的括号字符串。 如果有效字符串 S 非空，且不存在将其拆分为 S = A+B 的方法，我们称其为原语（primitive），其中 A 和 B 都是非空有效括号字符串。 给出一个非空有效字符串 S，考虑将其进行原语化分解，使得：S = P_1 + P_2 + … + P_k，其中 P_i 是有效括号字符串原语。 对 S 进行原语化分解，删除分解中每个原语字符串的最外层括号，返回 S 。 示例 1： 输入：”(()())(())”输出：”()()()”解释：输入字符串为 “(()())(())”，原语化分解得到 “(()())” + “(())”，删除每个部分中的最外层括号后得到 “()()” + “()” = “()()()”。 示例 2： 输入：”(()())(())(()(()))”输出：”()()()()(())”解释：输入字符串为 “(()())(())(()(()))”，原语化分解得到 “(()())” + “(())” + “(()(()))”，删除每隔部分中的最外层括号后得到 “()()” + “()” + “()(())” = “()()()()(())”。 示例 3： 输入：”()()”输出：””解释：输入字符串为 “()()”，原语化分解得到 “()” + “()”，删除每个部分中的最外层括号后得到 “” + “” = “”。 提示： S.length &lt;= 10000 S[i] 为 “(“ 或 “)” S 是一个有效括号字符串 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/remove-outermost-parentheses著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述关于括号匹配问题，很容易想到用栈来解决。 遇到 ‘ ( ‘ 入栈，遇到 ‘ ) ‘ 则出栈。则当该栈为空时，则代表之前的括号都已匹配。那么就可以将先前的括号去掉最外层的括号 解题步骤 设定一个数组stack用来表示栈操作，并预先压入第一个元素’(‘ 设定一个数组temp用来存放已经匹配完成的括号，并预先设定第一个元素’(‘ 从第二个元素开始遍历，遇到 ‘ ( ‘ 入栈，遇到 ‘ ) ‘ 则出栈。则当该栈为空时，则代表之前的括号都已匹配。那么就可以将先前的括号去掉最外层的括号,并压入结果数组ans 返回ans Coding实现123456789101112131415161718192021222324/** * @param &#123;string&#125; S * @return &#123;string&#125; */var removeOuterParentheses = function(S) &#123; let stack=['(']; let temp=['(']; let ans=[]; S=S.split(''); for(let i=1;i&lt;S.length;i++)&#123; temp.push(S[i]); if(S[i]===')')&#123; stack.pop(); if(stack.length===0)&#123; temp.pop(); temp.shift(); ans.push(...temp); temp=[]; &#125; &#125; else stack.push(S[i]); &#125; return ans.join('');&#125;;]]></content>
@@ -49,8 +60,8 @@
         <category>leetcode题解与算法</category>
       </categories>
       <tags>
-        <tag>双指针</tag>
         <tag>哈希表</tag>
+        <tag>双指针</tag>
       </tags>
   </entry>
   <entry>
