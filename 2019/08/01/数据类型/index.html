@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="数据类型简单数据类型 Null (null值本质上是一个空对象指针) Undefined String Number Bollean Symbol  复杂数据类型 Object(包括Array、Function、Date、RegExp、Error、Arguments等更为具体的引用类型)  数据类型的检测判断1.typeof typeof 常用于判断基本数据类型  一些注意点 typeof返回的是">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-01T09:10:57.811Z">
+<meta property="og:updated_time" content="2019-08-02T02:40:47.062Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据类型">
 <meta name="twitter:description" content="数据类型简单数据类型 Null (null值本质上是一个空对象指针) Undefined String Number Bollean Symbol  复杂数据类型 Object(包括Array、Function、Date、RegExp、Error、Arguments等更为具体的引用类型)  数据类型的检测判断1.typeof typeof 常用于判断基本数据类型  一些注意点 typeof返回的是">
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  667
+                  1k
                 </span>
               
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  4
                 </span>
               
             </div>
@@ -468,14 +468,28 @@
 <p>因此当使用instanceof判断基本数据类型时就会返回false,与此同时,instanceof 右端也必须是某个构造函数</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'a'</span> <span class="keyword">instanceof</span> <span class="built_in">String</span> <span class="comment">//false</span></span><br><span class="line"><span class="number">123</span> <span class="keyword">instanceof</span> <span class="built_in">Number</span> <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="null-instance-object"><a href="#null-instance-object" class="headerlink" title="null instance object"></a>null instance object</h4><p>那么基本数据类型中的null呢，既然typeof null===object;那么null instance object呢？<br>很不幸,返回的会是false</p>
+<h4 id="null-instanceof-object"><a href="#null-instanceof-object" class="headerlink" title="null instanceof object"></a>null instanceof object</h4><p>那么基本数据类型中的null呢，既然typeof null===object;那么null instanceof object呢？<br>很不幸,返回的会是false</p>
 <p>简单来说，null并不是以Object为原型创建出来的</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> <span class="keyword">instanceof</span> object <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="函数模拟instanceof"><a href="#函数模拟instanceof" class="headerlink" title="函数模拟instanceof"></a>函数模拟instanceof</h4><p>知道instaceof的原理是判断构造函数的prototype属性是否出现在对象的原型链中的任何位置时，那么就不难模拟一个函数来实现instanceof</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">instance</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> bPro=b.prototype; <span class="comment">//取b的显示原型</span></span><br><span class="line">    <span class="keyword">let</span> aPro=a.__proto__; <span class="comment">//取a的隐式原型</span></span><br><span class="line">    <span class="comment">//或者使用Object.getPrototypeOf(a)取得a的隐式原型</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(aPro===bPro) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(aPro===<span class="built_in">Object</span>.prototype) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        aPro=aPro.__proto__;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="数组判断isArray"><a href="#数组判断isArray" class="headerlink" title="数组判断isArray()"></a>数组判断isArray()</h3>
+<h3 id="Object-prototype-toString-一个完善的类型检测方案"><a href="#Object-prototype-toString-一个完善的类型检测方案" class="headerlink" title="Object.prototype.toString()一个完善的类型检测方案"></a>Object.prototype.toString()一个完善的类型检测方案</h3><blockquote>
+<p>每个对象都有一个toString()方法，当该对象被表示为一个文本值时，或者一个对象以预期的字符串方式引用时自动调用。默认情况下，toString()方法被每个Object对象继承。如果此方法在自定义对象中未被覆盖，toString() 返回 “[object type]”，其中type是对象的类型</p>
+</blockquote>
+<blockquote>
+<p>可以通过toString() 来获取每个对象的类型。为了每个对象都能通过 Object.prototype.toString() 来检测，需要以 Function.prototype.call() 或者 Function.prototype.apply() 的形式来调用，传递要检查的对象作为第一个参数，称为thisArg。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> toString=<span class="built_in">Object</span>.prototype.toString;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(toString.call(<span class="literal">undefined</span>));  <span class="comment">// [object Undefined]</span></span><br><span class="line"><span class="built_in">console</span>.log(toString.call(<span class="literal">null</span>));  <span class="comment">// [object Null]</span></span><br><span class="line"><span class="built_in">console</span>.log(toString.call(<span class="literal">true</span>));  <span class="comment">// [object Boolean]</span></span><br><span class="line"><span class="built_in">console</span>.log(toString.call(<span class="number">123</span>));  <span class="comment">// [object Number]</span></span><br><span class="line"><span class="built_in">console</span>.log(toString.call(<span class="string">'a'</span>));  <span class="comment">// [object String]</span></span><br><span class="line"><span class="built_in">console</span>.log(toString.call(<span class="keyword">new</span> <span class="built_in">Object</span>());  <span class="comment">// [object Object]</span></span><br><span class="line"><span class="built_in">console</span>.log(toString.call([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]));  <span class="comment">// [object Array]</span></span><br><span class="line"><span class="built_in">console</span>.log(toString.call(<span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;));  <span class="comment">// [object Function]</span></span><br><span class="line"><span class="built_in">console</span>.log(toString.call(<span class="keyword">new</span> <span class="built_in">Date</span>()));  <span class="comment">// [object Date]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="数组判断isArray"><a href="#数组判断isArray" class="headerlink" title="数组判断isArray()"></a>数组判断isArray()</h3><blockquote>
+<p>Array.isArray() 用于确定传递的值是否是一个 Array。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.isArray([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);  </span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="built_in">Array</span>.isArray(&#123;<span class="attr">foo</span>: <span class="number">123</span>&#125;); </span><br><span class="line"><span class="comment">// false</span></span><br><span class="line"><span class="built_in">Array</span>.isArray(<span class="string">"foobar"</span>);   </span><br><span class="line"><span class="comment">// false</span></span><br><span class="line"><span class="built_in">Array</span>.isArray(<span class="literal">undefined</span>);  </span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="综上得到的一个较好的解决方案"><a href="#综上得到的一个较好的解决方案" class="headerlink" title="综上得到的一个较好的解决方案"></a>综上得到的一个较好的解决方案</h3><p>一个较好的解决方案应该是检测基本数据类型时使用typeof，当然null除外；检测复杂数据类型时使用Object.prototype.toString()</p>
+
       
     </div>
     
@@ -660,7 +674,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">简单数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂数据类型"><span class="nav-number">1.2.</span> <span class="nav-text">复杂数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型的检测判断"><span class="nav-number">2.</span> <span class="nav-text">数据类型的检测判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-typeof"><span class="nav-number">2.1.</span> <span class="nav-text">1.typeof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一些注意点"><span class="nav-number">2.1.1.</span> <span class="nav-text">一些注意点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#typeof的不足"><span class="nav-number">2.1.2.</span> <span class="nav-text">typeof的不足</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof"><span class="nav-number">2.2.</span> <span class="nav-text">instanceof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法"><span class="nav-number">2.2.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null-instance-object"><span class="nav-number">2.2.2.</span> <span class="nav-text">null instance object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数模拟instanceof"><span class="nav-number">2.2.3.</span> <span class="nav-text">函数模拟instanceof</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组判断isArray"><span class="nav-number">2.3.</span> <span class="nav-text">数组判断isArray()</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">简单数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂数据类型"><span class="nav-number">1.2.</span> <span class="nav-text">复杂数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型的检测判断"><span class="nav-number">2.</span> <span class="nav-text">数据类型的检测判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-typeof"><span class="nav-number">2.1.</span> <span class="nav-text">1.typeof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一些注意点"><span class="nav-number">2.1.1.</span> <span class="nav-text">一些注意点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#typeof的不足"><span class="nav-number">2.1.2.</span> <span class="nav-text">typeof的不足</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof"><span class="nav-number">2.2.</span> <span class="nav-text">instanceof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法"><span class="nav-number">2.2.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null-instanceof-object"><span class="nav-number">2.2.2.</span> <span class="nav-text">null instanceof object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数模拟instanceof"><span class="nav-number">2.2.3.</span> <span class="nav-text">函数模拟instanceof</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-prototype-toString-一个完善的类型检测方案"><span class="nav-number">2.3.</span> <span class="nav-text">Object.prototype.toString()一个完善的类型检测方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组判断isArray"><span class="nav-number">2.4.</span> <span class="nav-text">数组判断isArray()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#综上得到的一个较好的解决方案"><span class="nav-number">2.5.</span> <span class="nav-text">综上得到的一个较好的解决方案</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -695,7 +709,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">14.8k</span>
+    <span title="Site words total count">15.1k</span>
   
 </div>
 
@@ -725,7 +739,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共14.8k字</span>
+  <span class="post-count">博客全站共15.1k字</span>
 </div>
         
 
