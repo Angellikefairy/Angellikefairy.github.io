@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  994
                 </span>
               
 
@@ -491,7 +491,7 @@
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.isArray([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);  </span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="built_in">Array</span>.isArray(&#123;<span class="attr">foo</span>: <span class="number">123</span>&#125;); </span><br><span class="line"><span class="comment">// false</span></span><br><span class="line"><span class="built_in">Array</span>.isArray(<span class="string">"foobar"</span>);   </span><br><span class="line"><span class="comment">// false</span></span><br><span class="line"><span class="built_in">Array</span>.isArray(<span class="literal">undefined</span>);  </span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="综上得到的一个较好的解决方案"><a href="#综上得到的一个较好的解决方案" class="headerlink" title="综上得到的一个较好的解决方案"></a>综上得到的一个较好的解决方案</h3><p>一个较好的解决方案应该是检测基本数据类型时使用typeof，当然null除外；检测复杂数据类型时使用Object.prototype.toString()</p>
+<h3 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h3><p>一个较好的解决方案应该是检测基本数据类型时使用typeof，当然null除外；检测复杂数据类型时使用Object.prototype.toString()</p>
 
           
         
