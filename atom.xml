@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-02T02:52:57.752Z</updated>
+  <updated>2019-08-02T07:27:14.546Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-283 移动零</title>
+    <link href="http://yoursite.com/2019/08/02/leetcode-283/"/>
+    <id>http://yoursite.com/2019/08/02/leetcode-283/</id>
+    <published>2019-08-02T07:19:27.000Z</published>
+    <updated>2019-08-02T07:27:14.546Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="移动零"><a href="#移动零" class="headerlink" title="移动零"></a>移动零</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。</p><p>示例:</p><blockquote><p>输入: [0,1,0,3,12]<br>输出: [1,3,12,0,0]</p></blockquote><p>说明:</p><ol><li>必须在原数组上操作，不能拷贝额外的数组。</li><li>尽量减少操作次数。<a id="more"></a>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/move-zeroes" target="_blank" rel="noopener">https://leetcode-cn.com/problems/move-zeroes</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li></ol><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>利用双指针，一个left指针用来寻找为0的元素，当找到后，该元素后面的所有元素前移，并将第二个指向数组末尾的指针right的元素值赋为0；如此循环直到left&gt;right</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>设置left指针指向数组第一个元素，设置right指针指向数组的最后一个元素</li><li>移动Left寻找数组中为0元素，当找到后，该元素后面的所有元素前移，并将第二个指向数组末尾的指针right的元素值赋为0；如此循环直到left&gt;right</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;void&#125; Do not return anything, modify nums in-place instead.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> moveZeroes = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> left=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> right=nums.length<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums[left]===<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=left;i&lt;right;i++)&#123;</span><br><span class="line">                nums[i]=nums[i+<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            nums[right]=<span class="number">0</span>;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            left++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;移动零&quot;&gt;&lt;a href=&quot;#移动零&quot; class=&quot;headerlink&quot; title=&quot;移动零&quot;&gt;&lt;/a&gt;移动零&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。&lt;/p&gt;
+&lt;p&gt;示例:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: [0,1,0,3,12]&lt;br&gt;输出: [1,3,12,0,0]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;说明:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;必须在原数组上操作，不能拷贝额外的数组。&lt;/li&gt;
+&lt;li&gt;尽量减少操作次数。
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="双指针" scheme="http://yoursite.com/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
+    
+  </entry>
   
   <entry>
     <title>数据类型</title>
@@ -625,39 +655,6 @@
     
     
       <category term="哈希表" scheme="http://yoursite.com/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-217 存在重复元素</title>
-    <link href="http://yoursite.com/2019/07/20/leetcode-217/"/>
-    <id>http://yoursite.com/2019/07/20/leetcode-217/</id>
-    <published>2019-07-20T07:39:40.000Z</published>
-    <updated>2019-07-20T07:45:18.358Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="存在重复元素"><a href="#存在重复元素" class="headerlink" title="存在重复元素"></a>存在重复元素</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个整数数组，判断是否存在重复元素。</p><p>如果任何值在数组中出现至少两次，函数返回 true。如果数组中每个元素都不相同，则返回 false。</p><p>示例 1:</p><blockquote><p>输入: [1,2,3,1]<br>输出: true</p></blockquote><p>示例 2:</p><blockquote><p>输入: [1,2,3,4]<br>输出: false</p></blockquote><p>示例 3:</p><blockquote><p>输入: [1,1,1,3,3,4,3,2,4,2]<br>输出: true</p></blockquote><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/contains-duplicate" target="_blank" rel="noopener">https://leetcode-cn.com/problems/contains-duplicate</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>将该数组去重之后的元素个数与原数组长度进行比较，不一样则有重复；</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>建立set集合，用于数组去重</li><li>将set集合的size与数组长度进行比较</li><li>不相同则有重复,返回true;反之,false</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> containsDuplicate = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">let</span> <span class="keyword">set</span>=new Set(nums);</span><br><span class="line">    if(<span class="keyword">set</span>.size===nums.length) return false;</span><br><span class="line">    else return true;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;存在重复元素&quot;&gt;&lt;a href=&quot;#存在重复元素&quot; class=&quot;headerlink&quot; title=&quot;存在重复元素&quot;&gt;&lt;/a&gt;存在重复元素&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定一个整数数组，判断是否存在重复元素。&lt;/p&gt;
-&lt;p&gt;如果任何值在数组中出现至少两次，函数返回 true。如果数组中每个元素都不相同，则返回 false。&lt;/p&gt;
-&lt;p&gt;示例 1:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: [1,2,3,1]&lt;br&gt;输出: true&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;示例 2:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: [1,2,3,4]&lt;br&gt;输出: false&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;示例 3:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: [1,1,1,3,3,4,3,2,4,2]&lt;br&gt;输出: true&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
     
   </entry>
   
