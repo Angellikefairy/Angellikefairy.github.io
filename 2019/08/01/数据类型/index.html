@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="数据类型简单数据类型 Null (null值本质上是一个空对象指针) Undefined String Number Bollean Symbol  复杂数据类型 Object(包括Array、Function、Date、RegExp、Error、Arguments等更为具体的引用类型)  数据类型的检测判断1.typeof typeof 常用于判断基本数据类型  一些注意点 typeof返回的是">
+<meta name="description" content="数据类型简单数据类型 Null (null值本质上是一个空对象指针) Undefined String Number Boolean Symbol  复杂数据类型 Object(包括Array、Function、Date、RegExp、Error、Arguments等更为具体的引用类型)  数据类型的检测判断1.typeof typeof 常用于判断基本数据类型  一些注意点 typeof返回的是">
 <meta name="keywords" content="基础语法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据类型">
 <meta property="og:url" content="http://yoursite.com/2019/08/01/数据类型/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="数据类型简单数据类型 Null (null值本质上是一个空对象指针) Undefined String Number Bollean Symbol  复杂数据类型 Object(包括Array、Function、Date、RegExp、Error、Arguments等更为具体的引用类型)  数据类型的检测判断1.typeof typeof 常用于判断基本数据类型  一些注意点 typeof返回的是">
+<meta property="og:description" content="数据类型简单数据类型 Null (null值本质上是一个空对象指针) Undefined String Number Boolean Symbol  复杂数据类型 Object(包括Array、Function、Date、RegExp、Error、Arguments等更为具体的引用类型)  数据类型的检测判断1.typeof typeof 常用于判断基本数据类型  一些注意点 typeof返回的是">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-02T02:52:57.752Z">
+<meta property="og:updated_time" content="2019-08-02T08:24:13.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据类型">
-<meta name="twitter:description" content="数据类型简单数据类型 Null (null值本质上是一个空对象指针) Undefined String Number Bollean Symbol  复杂数据类型 Object(包括Array、Function、Date、RegExp、Error、Arguments等更为具体的引用类型)  数据类型的检测判断1.typeof typeof 常用于判断基本数据类型  一些注意点 typeof返回的是">
+<meta name="twitter:description" content="数据类型简单数据类型 Null (null值本质上是一个空对象指针) Undefined String Number Boolean Symbol  复杂数据类型 Object(包括Array、Function、Date、RegExp、Error、Arguments等更为具体的引用类型)  数据类型的检测判断1.typeof typeof 常用于判断基本数据类型  一些注意点 typeof返回的是">
 
 
 
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  994
+                  1.8k
                 </span>
               
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  7
                 </span>
               
             </div>
@@ -433,7 +433,7 @@
 <li>Undefined</li>
 <li>String</li>
 <li>Number</li>
-<li>Bollean</li>
+<li>Boolean</li>
 <li>Symbol</li>
 </ol>
 <h3 id="复杂数据类型"><a href="#复杂数据类型" class="headerlink" title="复杂数据类型"></a>复杂数据类型</h3><ol>
@@ -489,6 +489,89 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.isArray([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);  </span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="built_in">Array</span>.isArray(&#123;<span class="attr">foo</span>: <span class="number">123</span>&#125;); </span><br><span class="line"><span class="comment">// false</span></span><br><span class="line"><span class="built_in">Array</span>.isArray(<span class="string">"foobar"</span>);   </span><br><span class="line"><span class="comment">// false</span></span><br><span class="line"><span class="built_in">Array</span>.isArray(<span class="literal">undefined</span>);  </span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h3><p>一个较好的解决方案应该是检测基本数据类型时使用typeof，当然null除外；检测复杂数据类型时使用Object.prototype.toString()</p>
+<h2 id="Undefined类型"><a href="#Undefined类型" class="headerlink" title="Undefined类型"></a>Undefined类型</h2><p>undefined指那些被声明但未被初始化的值</p>
+<h2 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a>Null类型</h2><p>null值表示一个空对象指针，因此typeof null === object</p>
+<h2 id="Boolean类型及相应转换规则"><a href="#Boolean类型及相应转换规则" class="headerlink" title="Boolean类型及相应转换规则"></a>Boolean类型及相应转换规则</h2><h3 id="转型函数Boolean"><a href="#转型函数Boolean" class="headerlink" title="转型函数Boolean()"></a>转型函数Boolean()</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str=<span class="string">'hello'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(str)); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Boolean自动转换规则"><a href="#Boolean自动转换规则" class="headerlink" title="Boolean自动转换规则"></a>Boolean自动转换规则</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>转换为true值</th>
+<th>转换为false值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Number</td>
+<td>任何非0数值</td>
+<td>0和NaN</td>
+</tr>
+<tr>
+<td>String</td>
+<td>非空字符串</td>
+<td>空字符串（””）</td>
+</tr>
+<tr>
+<td>Bollean</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>任何object</td>
+<td>null</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>无</td>
+<td>undefined</td>
+</tr>
+</tbody></table>
+<h2 id="Number类型"><a href="#Number类型" class="headerlink" title="Number类型"></a>Number类型</h2><p><a href>为什么0.1+0.2!==0.3</a></p>
+<h3 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h3><p>NaN,指的是非数值，用来表示一个本来要返回数值的操作数未返回数值的情况，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'a'</span><span class="number">-1</span>); <span class="comment">//NaN</span></span><br></pre></td></tr></table></figure>
+
+<p>任何设置NaN的操作都会返回NaN,甚至NaN与任何值都不相等包括其本身，包括但不限于：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="literal">NaN</span><span class="number">-1</span>); <span class="comment">//NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">NaN</span>===<span class="literal">NaN</span>); <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="isNaN函数"><a href="#isNaN函数" class="headerlink" title="isNaN函数"></a>isNaN函数</h4><blockquote>
+<p>isNaN() 函数用来确定一个值是否为NaN 。注：isNaN函数内包含一些非常有趣的规则；你也可以使用 ECMAScript 2015 中定义的 Number.isNaN() 来判断。</p>
+</blockquote>
+<blockquote>
+<p>下一个版本的ECMAScript (ES2015)包含Number.isNaN()函数。通过Number.isNaN(x)来检测变量x是否是一个NaN将会是一种可靠的做法。然而，在缺少Number.isNaN函数的情况下, 通过表达式(x != x) 来检测变量x是否是NaN会更加可靠。</p>
+</blockquote>
+<p>一个isNaN的 polyfill 可以理解为（这个polyfill利用了NaN自身永不相等于自身这一特征 ）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">isNaN</span> = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n = <span class="built_in">Number</span>(value); <span class="comment">//利用Number()函数进行数值转换</span></span><br><span class="line">    <span class="keyword">return</span> n !== n;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">isNaN</span>(<span class="literal">NaN</span>);       <span class="comment">// true</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="literal">undefined</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">isNaN</span>(&#123;&#125;);        <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="literal">true</span>);      <span class="comment">// false</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="literal">null</span>);      <span class="comment">// false</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="number">37</span>);        <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// strings</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="string">"37"</span>);      <span class="comment">// false: 可以被转换成数值37</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="string">"37.37"</span>);   <span class="comment">// false: 可以被转换成数值37.37</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="string">"37,5"</span>);    <span class="comment">// true</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="string">'123ABC'</span>);  <span class="comment">// true:  parseInt("123ABC")的结果是 123, 但是Number("123ABC")结果是 NaN</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="string">""</span>);        <span class="comment">// false: 空字符串被转换成0</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="string">" "</span>);       <span class="comment">// false: 包含空格的字符串被转换成0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// dates</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="keyword">new</span> <span class="built_in">Date</span>());                <span class="comment">// false</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="keyword">new</span> <span class="built_in">Date</span>().toString());     <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="string">"blabla"</span>)   <span class="comment">// true: "blabla"不能转换成数值</span></span><br><span class="line">                  <span class="comment">// 转换成数值失败， 返回NaN</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="数值转换"><a href="#数值转换" class="headerlink" title="数值转换"></a>数值转换</h3><ol>
+<li>Number()</li>
+<li>parseInt()</li>
+<li>parseFloat()</li>
+</ol>
+<h2 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h2><h3 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h3><p>作用：返回值的字符串表现<br>数值，布尔值，对象和字符串都有该方法<br>但是undefined和null没有该方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">123.</span>toString()); <span class="comment">//'123'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">true</span>.toString()); <span class="comment">//'true'</span></span><br><span class="line"><span class="keyword">let</span> a=&#123;<span class="attr">item</span>:<span class="number">1</span>&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(a.toString()); <span class="comment">//'[object Object]'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="String-转型函数"><a href="#String-转型函数" class="headerlink" title="String()转型函数"></a>String()转型函数</h3><p>该函数不同于toString不能转换null和undefined;该方法可以转换任何类型的值</p>
+<p>转换规则如下：</p>
+<ol>
+<li>如果该类型有toString()方法，那么就调用该方法</li>
+<li>如果为null，则返回”null”</li>
+<li>如果为undefined，则返回”undefined”</li>
+</ol>
+<h2 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a>Object类型</h2><p>Object类型是所有对象的基础，也就是所有对象都是继承与Object的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="keyword">let</span> str=<span class="keyword">new</span> <span class="built_in">String</span>();</span><br><span class="line"><span class="keyword">let</span> date=<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="built_in">console</span>.log(a <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(str <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(date <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<p>对象可以通过执行new操作符后跟要创建的对象类型的名称来创建，例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="keyword">let</span> str=<span class="keyword">new</span> <span class="built_in">String</span>();</span><br><span class="line"><span class="keyword">let</span> date=<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="Object实例的一些属性与方法"><a href="#Object实例的一些属性与方法" class="headerlink" title="Object实例的一些属性与方法"></a>Object实例的一些属性与方法</h3><ol>
+<li>constructor: 指向构造函数</li>
+<li>isPrototypeOf(object)：用于检查传入的对象是否是当前对象的原型</li>
+<li>toString()：返回对象的字符串表示</li>
+<li>valueOf(): 返回对象的字符串、数值或布尔值表示。通常与toString()方法返回值相同</li>
+</ol>
 
       
     </div>
@@ -678,7 +761,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">简单数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂数据类型"><span class="nav-number">1.2.</span> <span class="nav-text">复杂数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型的检测判断"><span class="nav-number">2.</span> <span class="nav-text">数据类型的检测判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-typeof"><span class="nav-number">2.1.</span> <span class="nav-text">1.typeof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一些注意点"><span class="nav-number">2.1.1.</span> <span class="nav-text">一些注意点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#typeof的不足"><span class="nav-number">2.1.2.</span> <span class="nav-text">typeof的不足</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof"><span class="nav-number">2.2.</span> <span class="nav-text">instanceof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法"><span class="nav-number">2.2.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null-instanceof-object"><span class="nav-number">2.2.2.</span> <span class="nav-text">null instanceof object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数模拟instanceof"><span class="nav-number">2.2.3.</span> <span class="nav-text">函数模拟instanceof</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-prototype-toString-一个完善的类型检测方案"><span class="nav-number">2.3.</span> <span class="nav-text">Object.prototype.toString()一个完善的类型检测方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组判断isArray"><span class="nav-number">2.4.</span> <span class="nav-text">数组判断isArray()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#综述"><span class="nav-number">2.5.</span> <span class="nav-text">综述</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">简单数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂数据类型"><span class="nav-number">1.2.</span> <span class="nav-text">复杂数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型的检测判断"><span class="nav-number">2.</span> <span class="nav-text">数据类型的检测判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-typeof"><span class="nav-number">2.1.</span> <span class="nav-text">1.typeof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一些注意点"><span class="nav-number">2.1.1.</span> <span class="nav-text">一些注意点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#typeof的不足"><span class="nav-number">2.1.2.</span> <span class="nav-text">typeof的不足</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof"><span class="nav-number">2.2.</span> <span class="nav-text">instanceof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法"><span class="nav-number">2.2.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null-instanceof-object"><span class="nav-number">2.2.2.</span> <span class="nav-text">null instanceof object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数模拟instanceof"><span class="nav-number">2.2.3.</span> <span class="nav-text">函数模拟instanceof</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-prototype-toString-一个完善的类型检测方案"><span class="nav-number">2.3.</span> <span class="nav-text">Object.prototype.toString()一个完善的类型检测方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组判断isArray"><span class="nav-number">2.4.</span> <span class="nav-text">数组判断isArray()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#综述"><span class="nav-number">2.5.</span> <span class="nav-text">综述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Undefined类型"><span class="nav-number">3.</span> <span class="nav-text">Undefined类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Null类型"><span class="nav-number">4.</span> <span class="nav-text">Null类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boolean类型及相应转换规则"><span class="nav-number">5.</span> <span class="nav-text">Boolean类型及相应转换规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#转型函数Boolean"><span class="nav-number">5.1.</span> <span class="nav-text">转型函数Boolean()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boolean自动转换规则"><span class="nav-number">5.2.</span> <span class="nav-text">Boolean自动转换规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Number类型"><span class="nav-number">6.</span> <span class="nav-text">Number类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NaN"><span class="nav-number">6.1.</span> <span class="nav-text">NaN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#isNaN函数"><span class="nav-number">6.1.1.</span> <span class="nav-text">isNaN函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#例子"><span class="nav-number">6.1.1.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值转换"><span class="nav-number">6.2.</span> <span class="nav-text">数值转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String类型"><span class="nav-number">7.</span> <span class="nav-text">String类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#toString-方法"><span class="nav-number">7.1.</span> <span class="nav-text">toString()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String-转型函数"><span class="nav-number">7.2.</span> <span class="nav-text">String()转型函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object类型"><span class="nav-number">8.</span> <span class="nav-text">Object类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object实例的一些属性与方法"><span class="nav-number">8.1.</span> <span class="nav-text">Object实例的一些属性与方法</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -713,7 +796,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">15.4k</span>
+    <span title="Site words total count">16.3k</span>
   
 </div>
 
@@ -743,7 +826,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共15.4k字</span>
+  <span class="post-count">博客全站共16.3k字</span>
 </div>
         
 
