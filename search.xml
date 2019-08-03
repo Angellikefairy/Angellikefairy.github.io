@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-237 删除链表中的节点]]></title>
+    <url>%2F2019%2F08%2F03%2Fleetcode-237%2F</url>
+    <content type="text"><![CDATA[删除链表中的节点题目描述请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。 现有一个链表 – head = [4,5,1,9]，它可以表示为: 示例 1: 输入: head = [4,5,1,9], node = 5输出: [4,1,9]解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9. 示例 2: 输入: head = [4,5,1,9], node = 1输出: [4,5,9]解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 5 -&gt; 9. 说明: 链表至少包含两个节点。 链表中所有节点的值都是唯一的。 给定的节点为非末尾节点并且一定是链表中的一个有效节点。 不要从你的函数中返回任何结果。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/delete-node-in-a-linked-list著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述一开始看到这个题目也是傻了一下，为什么只是传入一个要删除的节点，而不传入整个链表。后来一想，题目给定的初始链表中，每个节点的next存在的指向关系是一定的。那么我们就可以不需要考虑要删除节点之前的节点，只需要将要删除的节点的val值和next指向改变就可以了 解题步骤 改变要删除节点的val值为其下一个节点的val值 改变要删除节点的next指向为其下一个节点的下一个节点 Coding实现123456789101112131415/** * Definition for singly-linked list. * function ListNode(val) &#123; * this.val = val; * this.next = null; * &#125; *//** * @param &#123;ListNode&#125; node * @return &#123;void&#125; Do not return anything, modify node in-place instead. */var deleteNode = function(node) &#123; node.val=node.next.val; node.next=node.next.next;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[arguments与模拟函数重载]]></title>
     <url>%2F2019%2F08%2F03%2Farguments%E4%B8%8E%E6%A8%A1%E6%8B%9F%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%2F</url>
     <content type="text"><![CDATA[argumentsarguments对象是所有（非箭头）函数中都可用的局部变量。 通过该对象可以访问参数数组。因为此对象包含传递给函数的每个参数，第一个参数在索引0处。 12345function a()&#123; console.log(arguments); //Arguments &#123; 0: 1, 1: 2, 2: 3, … &#125; console.log(arguments[0]); //1&#125;a(1,2,3); 由此可以看到，arguments对象并不是Array的实例，它是类数组对象。因此，可以通过方括号语法访问它的每一个元素 arguments对象内的属性值永远与对应命名参数的值保持同步 123456function a(num)&#123; console.log(arguments[0]); //1 num=11; console.log(arguments[0]); //11&#125;a(1,2,3); 模拟函数重载重载的概念在Java语言中，函数或者方法有相同的名称，但是参数的类型或数量不同，这样的同名不同参数的函数或者方法之间，互相称之为重载函数。 为什么js没有重载然而，js中并没有重载的概念，因为： 1234567function a(num)&#123; console.log(1);&#125;function a(num1,num2)&#123; console.log(2);&#125;a(); // 2 如果定义了多个同名函数，那么该名字只属于后定义的函数，所以js中不能像Java一样有传统意义上的重载 js模拟函数重载其实，通过arguments,我们就可以通过检查传入函数中的参数类型和数量来做出不同的反应，从而模拟方法的重载 12345678910function a()&#123; if(arguments.length===0)&#123; console.log(0); &#125; else if(arguments.length===1)&#123; console.log(1); &#125;&#125;a(); // 0a(1); // 1]]></content>
