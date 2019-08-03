@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[空对象]]></title>
-    <url>%2F2019%2F08%2F03%2F%E7%A9%BA%E5%AF%B9%E8%B1%A1%2F</url>
-    <content type="text"></content>
+    <title><![CDATA[循环 (for...of与for...in)]]></title>
+    <url>%2F2019%2F08%2F03%2F%E5%BE%AA%E7%8E%AF%2F</url>
+    <content type="text"><![CDATA[循环语句类型 for 语句 do…while 语句 while 语句 labeled 语句 break 语句 continue 语句 for…in 语句 for…of 语句 for…infor…in 语句循环一个指定的变量来循环一个对象所有可枚举的属性。JavaScript 会为每一个不同的属性执行指定的语句。 123456789const items=&#123; item1:1, item2:2, item3:3&#125;for(let a in items)&#123; console.log(a); // item1,item2,item3 console.log(items[a]); //1,2,3&#125; for…offor…of语句在可迭代的对象(在es6中，所有的集合对象(数组、Set集合及Map集合)和字符串都是可迭代对象)上创建了一个循环 ，对值的每一个独特的属性调用一个将被执行的自定义的和语句挂钩的迭代。 for…of循环每执行一次都会调用可迭代对象的next()方法，并将迭代器返回的结果对象的value属性存储在一个变量中，循环将持续执行这一过程直到返回对象的done属性的值为true 与 for…in 循环遍历的结果是数组元素的下标不同的是， for…of 遍历的结果是元素的值： 1234567891011121314151617181920let arr=[4,5,6];let str='string';let set=new Set([1,'a',3]);let map=new Map([['a',1],['b',2]]);//遍历数组for(let a of arr)&#123; console.log(a); //4,5,6&#125;//遍历字符串for(let s of str)&#123; console.log(s); //s,t,r,i,n,g&#125;//遍历set集合for(let k of set)&#123; console.log(k); //1,'a',3&#125;//遍历map集合for(let m of map)&#123; console.log(m); //[ 'a', 1 ],[ 'b', 2 ]&#125; 总结 倘若是遍历普通对象(非迭代对象)，那么使用for…in最佳，遍历得到属性名 倘若是遍历可迭代对象，那么根据需求来，如果不需要一些下标信息（例如set集合，字符串）那么使用for…of最佳 如果是数组和map，那么使用forEach会更加方便]]></content>
+      <categories>
+        <category>javaScript基础</category>
+      </categories>
+      <tags>
+        <tag>基础语法</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[布尔操作符(1&&2和1||2)]]></title>
