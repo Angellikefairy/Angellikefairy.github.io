@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-03T05:55:10.271Z</updated>
+  <updated>2019-08-03T06:51:51.528Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>arguments与模拟函数重载</title>
+    <link href="http://yoursite.com/2019/08/03/arguments%E4%B8%8E%E6%A8%A1%E6%8B%9F%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/"/>
+    <id>http://yoursite.com/2019/08/03/arguments与模拟函数重载/</id>
+    <published>2019-08-03T05:57:50.000Z</published>
+    <updated>2019-08-03T06:51:51.528Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="arguments"><a href="#arguments" class="headerlink" title="arguments"></a>arguments</h2><p>arguments对象是所有（非箭头）函数中都可用的局部变量。</p><p>通过该对象可以访问参数数组。因为此对象包含传递给函数的每个参数，第一个参数在索引0处。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>); <span class="comment">//Arguments &#123; 0: 1, 1: 2, 2: 3, … &#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">//1</span></span><br><span class="line">&#125;</span><br><span class="line">a(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure><p>由此可以看到，arguments对象并不是Array的实例，它是类数组对象。因此，可以通过方括号语法访问它的每一个元素</p><blockquote><p>arguments对象内的属性值永远与对应命名参数的值保持同步</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">//1</span></span><br><span class="line">    num=<span class="number">11</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">//11</span></span><br><span class="line">&#125;</span><br><span class="line">a(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure><h2 id="模拟函数重载"><a href="#模拟函数重载" class="headerlink" title="模拟函数重载"></a>模拟函数重载</h2><h3 id="重载的概念"><a href="#重载的概念" class="headerlink" title="重载的概念"></a>重载的概念</h3><p>在Java语言中，函数或者方法有相同的名称，但是参数的类型或数量不同，这样的同名不同参数的函数或者方法之间，互相称之为重载函数。</p><h3 id="为什么js没有重载"><a href="#为什么js没有重载" class="headerlink" title="为什么js没有重载"></a>为什么js没有重载</h3><p>然而，js中并没有重载的概念，因为：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">num1,num2</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line">a(); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure><p>如果定义了多个同名函数，那么该名字只属于后定义的函数，所以js中不能像Java一样有传统意义上的重载</p><h3 id="js模拟函数重载"><a href="#js模拟函数重载" class="headerlink" title="js模拟函数重载"></a>js模拟函数重载</h3><p>其实，通过arguments,我们就可以通过检查传入函数中的参数类型和数量来做出不同的反应，从而模拟方法的重载</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">arguments</span>.length===<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">arguments</span>.length===<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">a(); <span class="comment">// 0</span></span><br><span class="line">a(<span class="number">1</span>); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;arguments&quot;&gt;&lt;a href=&quot;#arguments&quot; class=&quot;headerlink&quot; title=&quot;arguments&quot;&gt;&lt;/a&gt;arguments&lt;/h2&gt;&lt;p&gt;arguments对象是所有（非箭头）函数中都可用的局部变量。&lt;/p&gt;
+&lt;p&gt;通过该
+      
+    
+    </summary>
+    
+      <category term="javaScript基础" scheme="http://yoursite.com/categories/javaScript%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="基础语法" scheme="http://yoursite.com/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>循环 (for...of与for...in)</title>
@@ -623,30 +649,6 @@
     
     
       <category term="哈希表" scheme="http://yoursite.com/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>散列</title>
-    <link href="http://yoursite.com/2019/07/22/%E6%95%A3%E5%88%97/"/>
-    <id>http://yoursite.com/2019/07/22/散列/</id>
-    <published>2019-07-22T08:53:04.000Z</published>
-    <updated>2019-07-22T14:01:33.355Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="散列的定义"><a href="#散列的定义" class="headerlink" title="散列的定义"></a>散列的定义</h2><blockquote><p>简单来说：就是将某个元素通过一个函数转换为整数，使得该整数可以尽量唯一地代表这个元素</p></blockquote><h2 id="常用的散列函数"><a href="#常用的散列函数" class="headerlink" title="常用的散列函数"></a>常用的散列函数</h2><ol><li>直接定址法<blockquote><p>直接把key值作为哈希表的下标</p></blockquote></li><li>平方取中法<blockquote><p>取key的平方的中间若干位作为哈希表的下标</p></blockquote></li><li>除留余数法（常用）<blockquote><p>指把key除以一个数得到的余数作为hash值的方法</p></blockquote></li></ol><h2 id="冲突处理"><a href="#冲突处理" class="headerlink" title="冲突处理"></a>冲突处理</h2><ol><li><p>线性探查法</p><blockquote><p>如果该hash值已经被占用，那么就不断检查下一个位置，直到找到没被占用的。如果检查过程中超过了表长，则返回到哈希表的首位继续循环查找，或是发现所有的位置都被占用</p></blockquote><p> 该方法容易造成扎堆现象，即表中的若干个连续位置都被使用</p></li><li><p>平方探查法</p><blockquote><p>按照下列的顺序进行探查：<br> H(key)+1^2,H(key)-1^2,<br> H(key)+2^2,H(key)-2^2,<br> H(key)+3^2,H(key)-3^2,<br> …  …</p></blockquote><p> 如果，检查过程中H(key)+k^2超过了表长Tsize，那么就把(H(key)+k^2) % Tsize 作为hash值</p></li><li><p>链地址法</p><blockquote><p>链地址法不计算新的hash值，而是把所有H(key)相同的key连接成一条单链表</p></blockquote><p> <img src="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=249bc83ec45c10383073c690d378f876/c9fcc3cec3fdfc035f8e2b9cd63f8794a4c22624.jpg" alt></p></li></ol><h2 id="字符串hash"><a href="#字符串hash" class="headerlink" title="字符串hash"></a>字符串hash</h2><p>字符串hash是指将字符串S映射为一个整数，使得该整数尽可能唯一地代表该字符串</p><p>假设字符串只由A<del>Z构成，那么可以将A</del>Z映射为0~25；比如，ABC则就可以看作是012。显然，与二进制类似，我们可以把其看作为26进制，再将其转化为10进制，即可得到该字符串唯一地hash映射。</p><blockquote><p>代码</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> hashFunc(str,length)&#123;</span><br><span class="line">    <span class="keyword">let</span> hash=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;length;i++)&#123;</span><br><span class="line">        hash=hash*<span class="number">26</span>+str[i].charCodeAt()-<span class="string">'A'</span>.charCodeAt();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hash;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>如果外加有小写字母，则就是52进制转换<br>若还有数字，则就是62进制转换</p><h2 id="一些散列表算法题"><a href="#一些散列表算法题" class="headerlink" title="一些散列表算法题"></a>一些散列表算法题</h2><p><a href="http://angellikefairy.coding.me/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" target="_blank" rel="noopener">散列表相关算法题</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;散列的定义&quot;&gt;&lt;a href=&quot;#散列的定义&quot; class=&quot;headerlink&quot; title=&quot;散列的定义&quot;&gt;&lt;/a&gt;散列的定义&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;简单来说：就是将某个元素通过一个函数转换为整数，使得该整数可以尽量唯一地代表这个元素&lt;/p
-      
-    
-    </summary>
-    
-      <category term="算法笔记" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
-    
     
   </entry>
   
