@@ -56,6 +56,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[null与{}其实不相等]]></title>
+    <url>%2F2019%2F08%2F03%2F%E7%A9%BA%E5%AF%B9%E8%B1%A1%2F</url>
+    <content type="text"><![CDATA[引言{}与null相等吗？看一下下面的例子： 1console.log(&#123;&#125;===null); //false 显然，{}与null是不相等的 关于{}与null当我们在浏览器环境下，输入以下代码会发现： 1console.log(&#123;&#125;); // Object &#123; &#125; 作为比较，当需要输出null时会发现： 1console.log(null); // null 关于是否是空对象，我们可以采用instanceof的方法来检测 1console.log(&#123;&#125; instanceof Object); //true 那么，{}这个对象的原型链顶部会是Object，那么{}是一个不完全空的对象，只不过他没有任何属性罢了 1console.log(null instanceof Object); //false 而null的原型链上都找不到Object，那么null就是一个完完全全的空对象指针]]></content>
+      <categories>
+        <category>javaScript基础</category>
+      </categories>
+      <tags>
+        <tag>基础语法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[布尔操作符(1&&2和1||2)]]></title>
     <url>%2F2019%2F08%2F03%2F%E5%B8%83%E5%B0%94%E6%93%8D%E4%BD%9C%E7%AC%A6%2F</url>
     <content type="text"><![CDATA[mdn总结 运算符 语法 说明 逻辑与，AND（&amp;&amp;） expr1 &amp;&amp; expr2 若 expr1 可转换为 true，则返回 expr2；否则，返回 expr1。 逻辑或，OR（||） expr1 || expr2 若 expr1 可转换为 true，则返回 expr1；否则，返回 expr2。 逻辑非，NOT（!） !expr 若 expr 可转换为 true，则返回 false；否则，返回 true。 逻辑非 – !逻辑非操作符首先会将它的操作数转换为一个布尔值，然后再对其求反 123456console.log(!123); //falseconsole.log(!''); //trueconsole.log(!undefined); //trueconsole.log(!null); //trueconsole.log(!new String('1')); //falseconsole.log(!false); //true 逻辑与 – &amp;&amp;注意：逻辑与(&amp;&amp;)操作可以应用于任何类型的操纵数，而不仅仅是布尔值。 在有一个操作数不是布尔值的情况下，逻辑与操作就不一定返回布尔值；因此若要显示返回布尔值，则可以使用Boolean转型函数显示返回 逻辑与操作属于短路操作，即如果第一个操作数能够决定结果，那么就不会再对第二个操作数求值。 1234console.log(1&amp;&amp;2); //2console.log(0&amp;&amp;1); //0console.log(123&amp;&amp;'qwe'); //'qwe'console.log(&#123;&#125;&amp;&amp;null); //null 因为&#123;&#125;并不等于null，&#123;&#125;是一个不完全为空的对象，所以&#123;&#125;转换为逻辑值会是true 逻辑或 – ||与逻辑与操作类似，逻辑或操作也是短路操作。也就是说，如果第一个操作数的求值结果为true,就不会对第二个操作数求值了 1234console.log(1||2); //1console.log(0||1); //1console.log(123||'qwe'); //123console.log(&#123;&#125;||null); //&#123;&#125;]]></content>
