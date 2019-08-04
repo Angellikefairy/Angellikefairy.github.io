@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-04T08:38:02.692Z</updated>
+  <updated>2019-08-04T08:58:57.814Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-933 最近的请求次数</title>
+    <link href="http://yoursite.com/2019/08/04/leetcode-933/"/>
+    <id>http://yoursite.com/2019/08/04/leetcode-933/</id>
+    <published>2019-08-04T08:53:26.000Z</published>
+    <updated>2019-08-04T08:58:57.814Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="最近的请求次数"><a href="#最近的请求次数" class="headerlink" title="最近的请求次数"></a>最近的请求次数</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>写一个 RecentCounter 类来计算最近的请求。</p><p>它只有一个方法：ping(int t)，其中 t 代表以毫秒为单位的某个时间。</p><p>返回从 3000 毫秒前到现在的 ping 数。</p><p>任何处于 [t - 3000, t] 时间范围之内的 ping 都将会被计算在内，包括当前（指 t 时刻）的 ping。</p><p>保证每次对 ping 的调用都使用比之前更大的 t 值。</p><p>示例：</p><blockquote><p>输入：inputs = [“RecentCounter”,”ping”,”ping”,”ping”,”ping”], inputs = [[],[1],[100],[3001],[3002]]<br>输出：[null,1,2,3,3]</p></blockquote><p>提示：</p><ol><li>每个测试用例最多调用 10000 次 ping。</li><li>每个测试用例会使用严格递增的 t 值来调用 ping。</li><li>每次调用 ping 都有 1 &lt;= t &lt;= 10^9。<a id="more"></a>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/number-of-recent-calls" target="_blank" rel="noopener">https://leetcode-cn.com/problems/number-of-recent-calls</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li></ol><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>该题目的意思就是计算在当前时刻往前3000毫秒到此时（即[t - 3000, t]）的所有Ping的数量</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>在RecentCounter构造函数中设置一个队列queue用来保存按时间顺序到来的ping的时间</li><li>利用出队列来删去当前队列中小于当前时间-3000毫秒的队列项</li><li>返回队列长度</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> RecentCounter = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.queue=[];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; t</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">RecentCounter.prototype.ping = <span class="function"><span class="keyword">function</span>(<span class="params">t</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> queue=<span class="keyword">this</span>.queue;</span><br><span class="line">    <span class="keyword">if</span>(t===<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        queue.push(t);</span><br><span class="line">        <span class="keyword">while</span>(queue[<span class="number">0</span>]&lt;t<span class="number">-3000</span>)&#123;</span><br><span class="line">            queue.shift();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> queue.length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * Your RecentCounter object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * var obj = new RecentCounter()</span></span><br><span class="line"><span class="comment"> * var param_1 = obj.ping(t)</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;最近的请求次数&quot;&gt;&lt;a href=&quot;#最近的请求次数&quot; class=&quot;headerlink&quot; title=&quot;最近的请求次数&quot;&gt;&lt;/a&gt;最近的请求次数&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;写一个 RecentCounter 类来计算最近的请求。&lt;/p&gt;
+&lt;p&gt;它只有一个方法：ping(int t)，其中 t 代表以毫秒为单位的某个时间。&lt;/p&gt;
+&lt;p&gt;返回从 3000 毫秒前到现在的 ping 数。&lt;/p&gt;
+&lt;p&gt;任何处于 [t - 3000, t] 时间范围之内的 ping 都将会被计算在内，包括当前（指 t 时刻）的 ping。&lt;/p&gt;
+&lt;p&gt;保证每次对 ping 的调用都使用比之前更大的 t 值。&lt;/p&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：inputs = [“RecentCounter”,”ping”,”ping”,”ping”,”ping”], inputs = [[],[1],[100],[3001],[3002]]&lt;br&gt;输出：[null,1,2,3,3]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;提示：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;每个测试用例最多调用 10000 次 ping。&lt;/li&gt;
+&lt;li&gt;每个测试用例会使用严格递增的 t 值来调用 ping。&lt;/li&gt;
+&lt;li&gt;每次调用 ping 都有 1 &amp;lt;= t &amp;lt;= 10^9。
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="队列" scheme="http://yoursite.com/tags/%E9%98%9F%E5%88%97/"/>
+    
+  </entry>
   
   <entry>
     <title>变量、作用域和内存问题</title>
@@ -613,38 +648,6 @@
     
       <category term="算法笔记" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-349 两个数组的交集</title>
-    <link href="http://yoursite.com/2019/07/23/leetcode-349/"/>
-    <id>http://yoursite.com/2019/07/23/leetcode-349/</id>
-    <published>2019-07-23T03:14:11.000Z</published>
-    <updated>2019-07-23T03:19:44.629Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="两个数组的交集"><a href="#两个数组的交集" class="headerlink" title="两个数组的交集"></a>两个数组的交集</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定两个数组，编写一个函数来计算它们的交集。</p><p>示例 1:</p><blockquote><p>输入: nums1 = [1,2,2,1], nums2 = [2,2]<br>输出: [2]</p></blockquote><p>示例 2:</p><blockquote><p>输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]<br>输出: [9,4]</p></blockquote><p>说明:</p><p>输出结果中的每个元素一定是唯一的。<br>我们可以不考虑输出结果的顺序。</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/intersection-of-two-arrays" target="_blank" rel="noopener">https://leetcode-cn.com/problems/intersection-of-two-arrays</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>将两个数组都去重后，比较另一个数组是否包含这个数组的某些元素，返回即可</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>使用set将两个数组去重</li><li>比较去重后的两个数组的大小，遍历较小的那个数组，查看另一个数组是否includes这个数组中的某些元素，有则添加到ans数组返回</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums1</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums2</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> intersection = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, nums2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ans=[];</span><br><span class="line">    nums1=[...new <span class="built_in">Set</span>(nums1)];</span><br><span class="line">    nums2=[...new <span class="built_in">Set</span>(nums2)];</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">inter</span>(<span class="params">nums1,nums2</span>)</span>&#123;</span><br><span class="line">        nums1.forEach(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums2.includes(value))&#123;</span><br><span class="line">                ans.push(value);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    nums1.length&gt;nums2.length?inter(nums2,nums1):inter(nums1,nums2);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;两个数组的交集&quot;&gt;&lt;a href=&quot;#两个数组的交集&quot; class=&quot;headerlink&quot; title=&quot;两个数组的交集&quot;&gt;&lt;/a&gt;两个数组的交集&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定两个数组，编写一个函数来计算它们的交集。&lt;/p&gt;
-&lt;p&gt;示例 1:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: nums1 = [1,2,2,1], nums2 = [2,2]&lt;br&gt;输出: [2]&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;示例 2:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]&lt;br&gt;输出: [9,4]&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;说明:&lt;/p&gt;
-&lt;p&gt;输出结果中的每个元素一定是唯一的。&lt;br&gt;我们可以不考虑输出结果的顺序。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
     
   </entry>
   
