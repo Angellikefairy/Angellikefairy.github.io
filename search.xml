@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-345 反转字符串中的元音字母]]></title>
+    <url>%2F2019%2F08%2F05%2Fleetcode-345%2F</url>
+    <content type="text"><![CDATA[反转字符串中的元音字母题目描述编写一个函数，以字符串作为输入，反转该字符串中的元音字母。 示例 1: 输入: “hello”输出: “holle” 示例 2: 输入: “leetcode”输出: “leotcede” 说明:元音字母不包含字母”y”。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/reverse-vowels-of-a-string著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述元音字母一共有5个，分别为’a’,’e’,’i’,’o’,’u’; 当然该题要注意元音字母对应的大写形式也算 因此，使用双指针，一个在首，一个在尾，当两指针未相遇时，如果两个指针指的都是元音字母或其大写形式，那么就交换两个字母；如果不是，那么就左指针向后，右指针往前 解题步骤 建立left,right双指针；将字符串s转换为字符串数组 left与right双指针，一个在首，一个在尾，当两指针未相遇时，如果两个指针指的都是元音字母或其大写形式，那么就交换两个字母；如果不是，那么就左指针向后，右指针往前 Coding实现123456789101112131415161718192021222324/** * @param &#123;string&#125; s * @return &#123;string&#125; */var reverseVowels = function(s) &#123; s=s.split(''); let left=0; let yuan=['a','e','i','o','u']; let right=s.length-1; while(left&lt;right)&#123; if(yuan.includes(s[left].toLowerCase())&amp;&amp;yuan.includes(s[right].toLowerCase()))&#123; [s[left],s[right]]=[s[right],s[left]]; left++; right--; &#125; if(!yuan.includes(s[left].toLowerCase())) &#123; left++; &#125; if(!yuan.includes(s[right].toLowerCase())) &#123; right--; &#125; &#125; return s.join('');&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>双指针</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-933 最近的请求次数]]></title>
     <url>%2F2019%2F08%2F04%2Fleetcode-933%2F</url>
     <content type="text"><![CDATA[最近的请求次数题目描述写一个 RecentCounter 类来计算最近的请求。 它只有一个方法：ping(int t)，其中 t 代表以毫秒为单位的某个时间。 返回从 3000 毫秒前到现在的 ping 数。 任何处于 [t - 3000, t] 时间范围之内的 ping 都将会被计算在内，包括当前（指 t 时刻）的 ping。 保证每次对 ping 的调用都使用比之前更大的 t 值。 示例： 输入：inputs = [“RecentCounter”,”ping”,”ping”,”ping”,”ping”], inputs = [[],[1],[100],[3001],[3002]]输出：[null,1,2,3,3] 提示： 每个测试用例最多调用 10000 次 ping。 每个测试用例会使用严格递增的 t 值来调用 ping。 每次调用 ping 都有 1 &lt;= t &lt;= 10^9。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/number-of-recent-calls著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述该题目的意思就是计算在当前时刻往前3000毫秒到此时（即[t - 3000, t]）的所有Ping的数量 解题步骤 在RecentCounter构造函数中设置一个队列queue用来保存按时间顺序到来的ping的时间 利用出队列来删去当前队列中小于当前时间-3000毫秒的队列项 返回队列长度 Coding实现1234567891011121314151617181920212223242526var RecentCounter = function() &#123; this.queue=[];&#125;;/** * @param &#123;number&#125; t * @return &#123;number&#125; */RecentCounter.prototype.ping = function(t) &#123; let queue=this.queue; if(t===null) return null; else&#123; queue.push(t); while(queue[0]&lt;t-3000)&#123; queue.shift(); &#125; return queue.length; &#125;&#125;;/** * Your RecentCounter object will be instantiated and called as such: * var obj = new RecentCounter() * var param_1 = obj.ping(t) */]]></content>
