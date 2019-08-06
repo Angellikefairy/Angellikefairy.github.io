@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-832 翻转图像]]></title>
+    <url>%2F2019%2F08%2F06%2Fleetcode-832%2F</url>
+    <content type="text"><![CDATA[翻转图像题目描述 给定一个二进制矩阵 A，我们想先水平翻转图像，然后反转图像并返回结果。 水平翻转图片就是将图片的每一行都进行翻转，即逆序。例如，水平翻转 [1, 1, 0] 的结果是 [0, 1, 1]。 反转图片的意思是图片中的 0 全部被 1 替换， 1 全部被 0 替换。例如，反转 [0, 1, 1] 的结果是 [1, 0, 0]。 示例 1: 输入: [[1,1,0],[1,0,1],[0,0,0]]输出: [[1,0,0],[0,1,0],[1,1,1]]解释: 首先翻转每一行: [[0,1,1],[1,0,1],[0,0,0]]； 然后反转图片: [[1,0,0],[0,1,0],[1,1,1]] 示例 2: 输入: [[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]输出: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]解释: 首先翻转每一行: [[0,0,1,1],[1,0,0,1],[1,1,1,0],[0,1,0,1]]； 然后反转图片: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]] 说明: 1&lt;= A.length = A[0].length &lt;= 20 0&lt;= A[i][j] &lt;= 1 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/flipping-an-image著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述利用es6数组方法map()快速地修改数组元素 解题步骤 因为是二维数组，遍历该二维数组将一维数组倒序，并且1变成0,0变成1 Coding实现12345678910111213141516/** * @param &#123;number[][]&#125; A * @return &#123;number[][]&#125; */var flipAndInvertImage = function(A) &#123; return A.map(value=&gt;&#123; value.reverse(); return value.map(value1=&gt;&#123; if(value1===0)&#123; value1=1; &#125; else value1=0; return value1; &#125;); &#125;)&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-345 反转字符串中的元音字母]]></title>
     <url>%2F2019%2F08%2F05%2Fleetcode-345%2F</url>
     <content type="text"><![CDATA[反转字符串中的元音字母题目描述编写一个函数，以字符串作为输入，反转该字符串中的元音字母。 示例 1: 输入: “hello”输出: “holle” 示例 2: 输入: “leetcode”输出: “leotcede” 说明:元音字母不包含字母”y”。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/reverse-vowels-of-a-string著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述元音字母一共有5个，分别为’a’,’e’,’i’,’o’,’u’; 当然该题要注意元音字母对应的大写形式也算 因此，使用双指针，一个在首，一个在尾，当两指针未相遇时，如果两个指针指的都是元音字母或其大写形式，那么就交换两个字母；如果不是，那么就左指针向后，右指针往前 解题步骤 建立left,right双指针；将字符串s转换为字符串数组 left与right双指针，一个在首，一个在尾，当两指针未相遇时，如果两个指针指的都是元音字母或其大写形式，那么就交换两个字母；如果不是，那么就左指针向后，右指针往前 Coding实现123456789101112131415161718192021222324/** * @param &#123;string&#125; s * @return &#123;string&#125; */var reverseVowels = function(s) &#123; s=s.split(''); let left=0; let yuan=['a','e','i','o','u']; let right=s.length-1; while(left&lt;right)&#123; if(yuan.includes(s[left].toLowerCase())&amp;&amp;yuan.includes(s[right].toLowerCase()))&#123; [s[left],s[right]]=[s[right],s[left]]; left++; right--; &#125; if(!yuan.includes(s[left].toLowerCase())) &#123; left++; &#125; if(!yuan.includes(s[right].toLowerCase())) &#123; right--; &#125; &#125; return s.join('');&#125;;]]></content>
