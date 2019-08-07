@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="双指针,">
+  <meta name="keywords" content="数组,">
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="移动零题目描述给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。 示例:  输入: [0,1,0,3,12]输出: [1,3,12,0,0]  说明:  必须在原数组上操作，不能拷贝额外的数组。 尽量减少操作次数。">
-<meta name="keywords" content="双指针">
+<meta name="description" content="高度检查器题目描述学校在拍年度纪念照时，一般要求学生按照 非递减 的高度顺序排列。 请你返回至少有多少个学生没有站在正确位置数量。该人数指的是：能让所有学生以 非递减 高度排列的必要移动人数。 示例：  输入：[1,1,4,2,1,3]输出：3解释：高度为 4、3 和最后一个 1 的学生，没有站在正确的位置。  提示：  1&amp;lt;= heights.length &amp;lt;= 100 1&amp;lt;=">
+<meta name="keywords" content="数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-283 移动零">
-<meta property="og:url" content="http://yoursite.com/2019/08/02/leetcode-283/index.html">
+<meta property="og:title" content="leetcode-1051 高度检查器">
+<meta property="og:url" content="http://yoursite.com/2019/08/07/leetcode-1051/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="移动零题目描述给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。 示例:  输入: [0,1,0,3,12]输出: [1,3,12,0,0]  说明:  必须在原数组上操作，不能拷贝额外的数组。 尽量减少操作次数。">
+<meta property="og:description" content="高度检查器题目描述学校在拍年度纪念照时，一般要求学生按照 非递减 的高度顺序排列。 请你返回至少有多少个学生没有站在正确位置数量。该人数指的是：能让所有学生以 非递减 高度排列的必要移动人数。 示例：  输入：[1,1,4,2,1,3]输出：3解释：高度为 4、3 和最后一个 1 的学生，没有站在正确的位置。  提示：  1&amp;lt;= heights.length &amp;lt;= 100 1&amp;lt;=">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-02T07:27:14.546Z">
+<meta property="og:updated_time" content="2019-08-07T10:19:40.254Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-283 移动零">
-<meta name="twitter:description" content="移动零题目描述给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。 示例:  输入: [0,1,0,3,12]输出: [1,3,12,0,0]  说明:  必须在原数组上操作，不能拷贝额外的数组。 尽量减少操作次数。">
+<meta name="twitter:title" content="leetcode-1051 高度检查器">
+<meta name="twitter:description" content="高度检查器题目描述学校在拍年度纪念照时，一般要求学生按照 非递减 的高度顺序排列。 请你返回至少有多少个学生没有站在正确位置数量。该人数指的是：能让所有学生以 非递减 高度排列的必要移动人数。 示例：  输入：[1,1,4,2,1,3]输出：3解释：高度为 4、3 和最后一个 1 的学生，没有站在正确的位置。  提示：  1&amp;lt;= heights.length &amp;lt;= 100 1&amp;lt;=">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/02/leetcode-283/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/07/leetcode-1051/">
 
 
 
 
 
-  <title>leetcode-283 移动零 | Hexo</title>
+  <title>leetcode-1051 高度检查器 | Hexo</title>
   
 
 
@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/leetcode-283/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/leetcode-1051/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -325,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode-283 移动零</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode-1051 高度检查器</h1>
         
 
         <div class="post-meta">
@@ -337,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-02T15:19:27+08:00">
-                2019-08-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-07T18:15:11+08:00">
+                2019-08-07
               </time>
             
 
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  367
+                  313
                 </span>
               
 
@@ -428,23 +428,25 @@
       
 
       
-        <h1 id="移动零"><a href="#移动零" class="headerlink" title="移动零"></a>移动零</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
-<p>示例:</p>
+        <h1 id="高度检查器"><a href="#高度检查器" class="headerlink" title="高度检查器"></a>高度检查器</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>学校在拍年度纪念照时，一般要求学生按照 非递减 的高度顺序排列。</p>
+<p>请你返回至少有多少个学生没有站在正确位置数量。该人数指的是：能让所有学生以 非递减 高度排列的必要移动人数。</p>
+<p>示例：</p>
 <blockquote>
-<p>输入: [0,1,0,3,12]<br>输出: [1,3,12,0,0]</p>
+<p>输入：[1,1,4,2,1,3]<br>输出：3<br>解释：<br>高度为 4、3 和最后一个 1 的学生，没有站在正确的位置。</p>
 </blockquote>
-<p>说明:</p>
+<p>提示：</p>
 <ol>
-<li>必须在原数组上操作，不能拷贝额外的数组。</li>
-<li>尽量减少操作次数。<a id="more"></a>
-来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/move-zeroes" target="_blank" rel="noopener">https://leetcode-cn.com/problems/move-zeroes</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li>
+<li>1&lt;= heights.length &lt;= 100</li>
+<li>1&lt;= heights[i] &lt;= 100<a id="more"></a>
+来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/height-checker" target="_blank" rel="noopener">https://leetcode-cn.com/problems/height-checker</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li>
 </ol>
-<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>利用双指针，一个left指针用来寻找为0的元素，当找到后，该元素后面的所有元素前移，并将第二个指向数组末尾的指针right的元素值赋为0；如此循环直到left&gt;right</p>
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>只需比较原数组和排序后的数组的每个位置上的元素有几个不一样即可</p>
 <h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
-<li>设置left指针指向数组第一个元素，设置right指针指向数组的最后一个元素</li>
-<li>移动Left寻找数组中为0元素，当找到后，该元素后面的所有元素前移，并将第二个指向数组末尾的指针right的元素值赋为0；如此循环直到left&gt;right</li>
+<li>复制原数组，并排序</li>
+<li>比较原数组和排序后的数组的各个位置上的元素，若不同则ans++</li>
+<li>返回ans</li>
 </ol>
-<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;void&#125; Do not return anything, modify nums in-place instead.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> moveZeroes = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> left=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> right=nums.length<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums[left]===<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=left;i&lt;right;i++)&#123;</span><br><span class="line">                nums[i]=nums[i+<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            nums[right]=<span class="number">0</span>;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            left++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; heights</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> heightChecker = <span class="function"><span class="keyword">function</span>(<span class="params">heights</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> heightsSort=<span class="function">(<span class="params"><span class="keyword">new</span> <span class="built_in">Array</span>(...heights</span>)).<span class="params">sort</span>(<span class="params">(a,b</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a-b;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">let</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> heights)&#123;</span><br><span class="line">        <span class="keyword">if</span>(heights[i]!==heightsSort[i])&#123;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -463,7 +465,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/双指针/" rel="tag"># 双指针</a>
+            <a href="/tags/数组/" rel="tag"># 数组</a>
           
         </div>
       
@@ -482,8 +484,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/01/数据类型/" rel="next" title="数据类型">
-                <i class="fa fa-chevron-left"></i> 数据类型
+              <a href="/2019/08/06/leetcode-832/" rel="next" title="leetcode-832 翻转图像">
+                <i class="fa fa-chevron-left"></i> leetcode-832 翻转图像
               </a>
             
           </div>
@@ -491,10 +493,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/03/布尔操作符/" rel="prev" title="布尔操作符(1&&2和1||2)">
-                布尔操作符(1&&2和1||2) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -635,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#移动零"><span class="nav-number">1.</span> <span class="nav-text">移动零</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#高度检查器"><span class="nav-number">1.</span> <span class="nav-text">高度检查器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
             
 
           </div>

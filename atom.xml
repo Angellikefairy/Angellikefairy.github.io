@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-06T10:18:37.494Z</updated>
+  <updated>2019-08-07T10:19:40.254Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-1051 高度检查器</title>
+    <link href="http://yoursite.com/2019/08/07/leetcode-1051/"/>
+    <id>http://yoursite.com/2019/08/07/leetcode-1051/</id>
+    <published>2019-08-07T10:15:11.000Z</published>
+    <updated>2019-08-07T10:19:40.254Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="高度检查器"><a href="#高度检查器" class="headerlink" title="高度检查器"></a>高度检查器</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>学校在拍年度纪念照时，一般要求学生按照 非递减 的高度顺序排列。</p><p>请你返回至少有多少个学生没有站在正确位置数量。该人数指的是：能让所有学生以 非递减 高度排列的必要移动人数。</p><p>示例：</p><blockquote><p>输入：[1,1,4,2,1,3]<br>输出：3<br>解释：<br>高度为 4、3 和最后一个 1 的学生，没有站在正确的位置。</p></blockquote><p>提示：</p><ol><li>1&lt;= heights.length &lt;= 100</li><li>1&lt;= heights[i] &lt;= 100<a id="more"></a>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/height-checker" target="_blank" rel="noopener">https://leetcode-cn.com/problems/height-checker</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li></ol><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>只需比较原数组和排序后的数组的每个位置上的元素有几个不一样即可</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>复制原数组，并排序</li><li>比较原数组和排序后的数组的各个位置上的元素，若不同则ans++</li><li>返回ans</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; heights</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> heightChecker = <span class="function"><span class="keyword">function</span>(<span class="params">heights</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> heightsSort=<span class="function">(<span class="params"><span class="keyword">new</span> <span class="built_in">Array</span>(...heights</span>)).<span class="params">sort</span>(<span class="params">(a,b</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a-b;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">let</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> heights)&#123;</span><br><span class="line">        <span class="keyword">if</span>(heights[i]!==heightsSort[i])&#123;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;高度检查器&quot;&gt;&lt;a href=&quot;#高度检查器&quot; class=&quot;headerlink&quot; title=&quot;高度检查器&quot;&gt;&lt;/a&gt;高度检查器&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;学校在拍年度纪念照时，一般要求学生按照 非递减 的高度顺序排列。&lt;/p&gt;
+&lt;p&gt;请你返回至少有多少个学生没有站在正确位置数量。该人数指的是：能让所有学生以 非递减 高度排列的必要移动人数。&lt;/p&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：[1,1,4,2,1,3]&lt;br&gt;输出：3&lt;br&gt;解释：&lt;br&gt;高度为 4、3 和最后一个 1 的学生，没有站在正确的位置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;提示：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;1&amp;lt;= heights.length &amp;lt;= 100&lt;/li&gt;
+&lt;li&gt;1&amp;lt;= heights[i] &amp;lt;= 100
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode-832 翻转图像</title>
@@ -634,31 +665,6 @@
     
     
       <category term="贪心" scheme="http://yoursite.com/tags/%E8%B4%AA%E5%BF%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>贪心</title>
-    <link href="http://yoursite.com/2019/07/26/%E8%B4%AA%E5%BF%83/"/>
-    <id>http://yoursite.com/2019/07/26/贪心/</id>
-    <published>2019-07-26T01:34:08.000Z</published>
-    <updated>2019-07-26T02:54:43.732Z</updated>
-    
-    <content type="html"><![CDATA[<p>##简单贪心</p><blockquote><p>贪心法是求解一类最优化问题的方法，它总是考虑在当前状态下局部最优（或较优）的策略，来使全局的结果达到最优（或较优）</p></blockquote><p>简单来说，也就是，在对问题求解时，总是做出在当前看来是最好的选择。</p><h3 id="贪心算法的基本思路"><a href="#贪心算法的基本思路" class="headerlink" title="贪心算法的基本思路"></a>贪心算法的基本思路</h3><ol><li>将求解的问题分成若干子问题</li><li>对于每一个子问题，考虑得到该子问题的局部最优解</li><li>把所有子问题的局部最优解合成一个原问题的解</li></ol><h3 id="贪心算法的适用前提和问题"><a href="#贪心算法的适用前提和问题" class="headerlink" title="贪心算法的适用前提和问题"></a>贪心算法的适用前提和问题</h3><ol><li>局部最优解能够影响全局最优解</li><li>贪心算法得到的不一定就是问题的最优解</li></ol><h3 id="贪心算法题目"><a href="#贪心算法题目" class="headerlink" title="贪心算法题目"></a>贪心算法题目</h3><p>设有n个正整数，将它们连接成一排，组成一个最大的多位整数。</p><p>例如：n=3时，3个整数13，312，343，连成的最大整数为34331213。<br><br>又如：n=4时，4个整数7，13，4，246，连成的最大整数为7424613。</p><blockquote><p>输入：n<br><br>N个数<br><br>输出：连成的多位数</p></blockquote><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>因为要得到最大的正整数，那么高位数据越大则值越大。因此，使用贪心算法，每次选值的时候优先选择最高位最大的，如若相同，则比较次高位，直到选出较优值</p><p>因此，通过这个思路，比较高位可以利用字符串UniCode码来比较，比如’7’&gt;’432’</p><p>js的sort()函数可以完美解决，利用sort函数对输入值由高到低进行排序，最后转化为数值进行返回</p><h4 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">parseInt</span>(n.sort().reverse().join(<span class="string">''</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="区间贪心"><a href="#区间贪心" class="headerlink" title="区间贪心"></a>区间贪心</h2>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;##简单贪心&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;贪心法是求解一类最优化问题的方法，它总是考虑在当前状态下局部最优（或较优）的策略，来使全局的结果达到最优（或较优）&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;简单来说，也就是，在对问题求解时，总是做出在当前看来是最好的选
-      
-    
-    </summary>
-    
     
   </entry>
   
