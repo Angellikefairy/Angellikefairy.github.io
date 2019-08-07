@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="命名规范,">
+  <meta name="keywords" content="基础语法,">
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="Vue项目代码与命名规范">
-<meta name="keywords" content="命名规范">
+<meta name="description" content="引言 新对象的创建可以通过new操作符后跟一个构造函数来创建  例： 1let a=new Object()  Object类型创建Object实例的两个方法new操作符1let a=new Object()  对象字面量法1let a=&amp;#123;item:1&amp;#125;  在使用对象字面量语法时，属性名也可以使用字符串和可计算属性名 字符串属性名 1234let a=&amp;#123;    &apos;it">
+<meta name="keywords" content="基础语法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue项目代码与命名规范">
-<meta property="og:url" content="http://yoursite.com/2019/07/11/Vue项目代码与命名规范/index.html">
+<meta property="og:title" content="引用类型">
+<meta property="og:url" content="http://yoursite.com/2019/08/07/引用类型/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Vue项目代码与命名规范">
+<meta property="og:description" content="引言 新对象的创建可以通过new操作符后跟一个构造函数来创建  例： 1let a=new Object()  Object类型创建Object实例的两个方法new操作符1let a=new Object()  对象字面量法1let a=&amp;#123;item:1&amp;#125;  在使用对象字面量语法时，属性名也可以使用字符串和可计算属性名 字符串属性名 1234let a=&amp;#123;    &apos;it">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-12T05:22:46.383Z">
+<meta property="og:updated_time" content="2019-08-07T10:54:18.249Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vue项目代码与命名规范">
-<meta name="twitter:description" content="Vue项目代码与命名规范">
+<meta name="twitter:title" content="引用类型">
+<meta name="twitter:description" content="引言 新对象的创建可以通过new操作符后跟一个构造函数来创建  例： 1let a=new Object()  Object类型创建Object实例的两个方法new操作符1let a=new Object()  对象字面量法1let a=&amp;#123;item:1&amp;#125;  在使用对象字面量语法时，属性名也可以使用字符串和可计算属性名 字符串属性名 1234let a=&amp;#123;    &apos;it">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/11/Vue项目代码与命名规范/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/07/引用类型/">
 
 
 
 
 
-  <title>Vue项目代码与命名规范 | Hexo</title>
+  <title>引用类型 | Hexo</title>
   
 
 
@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/Vue项目代码与命名规范/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/引用类型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -325,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Vue项目代码与命名规范</h1>
+          <h1 class="post-title" itemprop="name headline">引用类型</h1>
         
 
         <div class="post-meta">
@@ -337,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-11T17:23:51+08:00">
-                2019-07-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-07T18:21:40+08:00">
+                2019-08-07
               </time>
             
 
@@ -360,8 +360,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
                   </a>
                 </span>
 
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  277
+                  355
                 </span>
               
 
@@ -428,47 +428,39 @@
       
 
       
-        <h1 id="Vue项目代码与命名规范"><a href="#Vue项目代码与命名规范" class="headerlink" title="Vue项目代码与命名规范"></a>Vue项目代码与命名规范</h1><a id="more"></a>
-<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><h2 id="文件命名"><a href="#文件命名" class="headerlink" title="文件命名"></a>文件命名</h2><ol>
-<li><p>单文件组件命名规范</p>
-<ol>
-<li><p>组件名为多个单词</p>
-<p> <strong>组件名应该始终是多个单词的，根组件 App 以及 &lt; transition &gt;、&lt; component &gt; 之类的 Vue 内置组件除外。</strong></p>
-<p> 这样做可以避免跟现有的以及未来的 HTML 元素相冲突，因为所有的 HTML 元素名称都是单个单词的。</p>
-<blockquote>
-<p>MyComponent.vue</p>
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
+<p>新对象的创建可以通过new操作符后跟一个构造函数来创建</p>
 </blockquote>
-</li>
-<li><p>语义化及单词顺序</p>
-<blockquote>
-<p>SearchButtonRun.vue</p>
-</blockquote>
-</li>
-<li><p>文件名以单词大写开头</p>
-<blockquote>
-<p>MyComponent.vue</p>
-</blockquote>
-</li>
-<li><p>组件名应该倾向于完整单词而不是缩写</p>
-<blockquote>
-<p>UserProfileOptions.vue</p>
-</blockquote>
-</li>
-</ol>
-</li>
-</ol>
-<ol start="2">
-<li>文件夹命名规范<ol>
-<li>属于components文件夹下的子文件夹，使用大写字母开头的PascalBase风格</li>
-<li>所有组件放在components文件夹下，对于各个页面应当新建立业务页面组件文件夹。</li>
-<li>一些通用组件可以建立common文件夹放在components文件夹下</li>
-<li>应当建立api文件夹，统一定义管理接口请求</li>
-<li>建立router文件夹，进行路由管理</li>
-<li>建立store文件夹，进行vuex状态管理</li>
-</ol>
-</li>
-</ol>
+<p>例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="keyword">new</span> <span class="built_in">Object</span>()</span><br></pre></td></tr></table></figure>
 
+<h2 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a>Object类型</h2><h3 id="创建Object实例的两个方法"><a href="#创建Object实例的两个方法" class="headerlink" title="创建Object实例的两个方法"></a>创建Object实例的两个方法</h3><h4 id="new操作符"><a href="#new操作符" class="headerlink" title="new操作符"></a>new操作符</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="keyword">new</span> <span class="built_in">Object</span>()</span><br></pre></td></tr></table></figure>
+
+<h4 id="对象字面量法"><a href="#对象字面量法" class="headerlink" title="对象字面量法"></a>对象字面量法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;<span class="attr">item</span>:<span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在使用对象字面量语法时，属性名也可以使用字符串和可计算属性名</p>
+<p>字符串属性名</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    <span class="string">'item'</span>:<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a.item); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>可计算属性名(方括号语法：使用变量来访问属性)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n=<span class="number">123</span>;</span><br><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    [n+<span class="string">'abc'</span>]:<span class="string">'hello'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a[<span class="string">'123abc'</span>]); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Array类型"><a href="#Array类型" class="headerlink" title="Array类型"></a>Array类型</h2><h3 id="创建数组的几种方式"><a href="#创建数组的几种方式" class="headerlink" title="创建数组的几种方式"></a>创建数组的几种方式</h3><ol>
+<li><p>Array构造函数</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// [1,2,3]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组字面量法</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//[1,2,3]</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="数组的length属性"><a href="#数组的length属性" class="headerlink" title="数组的length属性"></a>数组的length属性</h3><h4 id="设置值的索引下标超过数组长度"><a href="#设置值的索引下标超过数组长度" class="headerlink" title="设置值的索引下标超过数组长度"></a>设置值的索引下标超过数组长度</h4><p>当设置值的索引下标超过数组长度时，那么数组的长度会自动加到该索引值加一的长度，并且中间未设置的元素还是undefined</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">a[<span class="number">8</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//[ 1, 2, 3, &lt;5 empty items&gt;, 1 ]</span></span><br><span class="line"><span class="built_in">console</span>.log(a[<span class="number">5</span>]); <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="利用数组的length属性来移除数组项和添加项"><a href="#利用数组的length属性来移除数组项和添加项" class="headerlink" title="利用数组的length属性来移除数组项和添加项"></a>利用数组的length属性来移除数组项和添加项</h4><p>当将数组的length值设置为小于原数组的length时，则会将原数组后面的几项移除掉</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">a.length=<span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//[1]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="常用的数组方法"><a href="#常用的数组方法" class="headerlink" title="常用的数组方法"></a>常用的数组方法</h3><h4 id="栈方法"><a href="#栈方法" class="headerlink" title="栈方法"></a>栈方法</h4>
       
     </div>
     
@@ -485,7 +477,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/命名规范/" rel="tag"># 命名规范</a>
+            <a href="/tags/基础语法/" rel="tag"># 基础语法</a>
           
         </div>
       
@@ -504,8 +496,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/11/Vue项目的快速搭建/" rel="next" title="Vue项目的快速搭建">
-                <i class="fa fa-chevron-left"></i> Vue项目的快速搭建
+              <a href="/2019/08/07/leetcode-1051/" rel="next" title="leetcode-1051 高度检查器">
+                <i class="fa fa-chevron-left"></i> leetcode-1051 高度检查器
               </a>
             
           </div>
@@ -513,10 +505,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/13/leetcode-171/" rel="prev" title="leetcode-171 Excel表列序号">
-                leetcode-171 Excel表列序号 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -657,7 +645,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue项目代码与命名规范"><span class="nav-number">1.</span> <span class="nav-text">Vue项目代码与命名规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#项目结构"><span class="nav-number">1.1.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件命名"><span class="nav-number">1.2.</span> <span class="nav-text">文件命名</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object类型"><span class="nav-number">2.</span> <span class="nav-text">Object类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Object实例的两个方法"><span class="nav-number">2.1.</span> <span class="nav-text">创建Object实例的两个方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#new操作符"><span class="nav-number">2.1.1.</span> <span class="nav-text">new操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象字面量法"><span class="nav-number">2.1.2.</span> <span class="nav-text">对象字面量法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array类型"><span class="nav-number">3.</span> <span class="nav-text">Array类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数组的几种方式"><span class="nav-number">3.1.</span> <span class="nav-text">创建数组的几种方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的length属性"><span class="nav-number">3.2.</span> <span class="nav-text">数组的length属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置值的索引下标超过数组长度"><span class="nav-number">3.2.1.</span> <span class="nav-text">设置值的索引下标超过数组长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用数组的length属性来移除数组项和添加项"><span class="nav-number">3.2.2.</span> <span class="nav-text">利用数组的length属性来移除数组项和添加项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的数组方法"><span class="nav-number">3.3.</span> <span class="nav-text">常用的数组方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈方法"><span class="nav-number">3.3.1.</span> <span class="nav-text">栈方法</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

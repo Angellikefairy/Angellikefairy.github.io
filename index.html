@@ -307,6 +307,214 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/引用类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/07/引用类型/" itemprop="url">引用类型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-07T18:21:40+08:00">
+                2019-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  355
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
+<p>新对象的创建可以通过new操作符后跟一个构造函数来创建</p>
+</blockquote>
+<p>例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="keyword">new</span> <span class="built_in">Object</span>()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a>Object类型</h2><h3 id="创建Object实例的两个方法"><a href="#创建Object实例的两个方法" class="headerlink" title="创建Object实例的两个方法"></a>创建Object实例的两个方法</h3><h4 id="new操作符"><a href="#new操作符" class="headerlink" title="new操作符"></a>new操作符</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="keyword">new</span> <span class="built_in">Object</span>()</span><br></pre></td></tr></table></figure>
+
+<h4 id="对象字面量法"><a href="#对象字面量法" class="headerlink" title="对象字面量法"></a>对象字面量法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;<span class="attr">item</span>:<span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在使用对象字面量语法时，属性名也可以使用字符串和可计算属性名</p>
+<p>字符串属性名</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    <span class="string">'item'</span>:<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a.item); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>可计算属性名(方括号语法：使用变量来访问属性)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n=<span class="number">123</span>;</span><br><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    [n+<span class="string">'abc'</span>]:<span class="string">'hello'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a[<span class="string">'123abc'</span>]); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Array类型"><a href="#Array类型" class="headerlink" title="Array类型"></a>Array类型</h2><h3 id="创建数组的几种方式"><a href="#创建数组的几种方式" class="headerlink" title="创建数组的几种方式"></a>创建数组的几种方式</h3><ol>
+<li><p>Array构造函数</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// [1,2,3]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组字面量法</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//[1,2,3]</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="数组的length属性"><a href="#数组的length属性" class="headerlink" title="数组的length属性"></a>数组的length属性</h3><h4 id="设置值的索引下标超过数组长度"><a href="#设置值的索引下标超过数组长度" class="headerlink" title="设置值的索引下标超过数组长度"></a>设置值的索引下标超过数组长度</h4><p>当设置值的索引下标超过数组长度时，那么数组的长度会自动加到该索引值加一的长度，并且中间未设置的元素还是undefined</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">a[<span class="number">8</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//[ 1, 2, 3, &lt;5 empty items&gt;, 1 ]</span></span><br><span class="line"><span class="built_in">console</span>.log(a[<span class="number">5</span>]); <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="利用数组的length属性来移除数组项和添加项"><a href="#利用数组的length属性来移除数组项和添加项" class="headerlink" title="利用数组的length属性来移除数组项和添加项"></a>利用数组的length属性来移除数组项和添加项</h4><p>当将数组的length值设置为小于原数组的length时，则会将原数组后面的几项移除掉</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">a.length=<span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//[1]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="常用的数组方法"><a href="#常用的数组方法" class="headerlink" title="常用的数组方法"></a>常用的数组方法</h3><h4 id="栈方法"><a href="#栈方法" class="headerlink" title="栈方法"></a>栈方法</h4>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/leetcode-1051/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2073,217 +2281,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/布尔操作符/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/03/布尔操作符/" itemprop="url">布尔操作符(1&&2和1||2)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T10:45:43+08:00">
-                2019-08-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
-                    <span itemprop="name">javaScript基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  398
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="mdn总结"><a href="#mdn总结" class="headerlink" title="mdn总结"></a>mdn总结</h2><table>
-<thead>
-<tr>
-<th>运算符</th>
-<th>语法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>逻辑与，AND（&amp;&amp;）</td>
-<td>expr1 &amp;&amp; expr2</td>
-<td>若 expr1 可转换为 true，则返回 expr2；否则，返回 expr1。</td>
-</tr>
-<tr>
-<td>逻辑或，OR（||）</td>
-<td>expr1 || expr2</td>
-<td>若 expr1 可转换为 true，则返回 expr1；否则，返回 expr2。</td>
-</tr>
-<tr>
-<td>逻辑非，NOT（!）</td>
-<td>!expr</td>
-<td>若 expr 可转换为 true，则返回 false；否则，返回 true。</td>
-</tr>
-</tbody></table>
-<h2 id="逻辑非-–"><a href="#逻辑非-–" class="headerlink" title="逻辑非 – !"></a>逻辑非 – !</h2><p>逻辑非操作符首先会将它的操作数转换为一个布尔值，然后再对其求反</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(!<span class="number">123</span>); <span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(!<span class="string">''</span>); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(!<span class="literal">undefined</span>); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(!<span class="literal">null</span>); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(!<span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'1'</span>)); <span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(!<span class="literal">false</span>); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="逻辑与-–-amp-amp"><a href="#逻辑与-–-amp-amp" class="headerlink" title="逻辑与 – &amp;&amp;"></a>逻辑与 – &amp;&amp;</h2><p>注意：逻辑与(&amp;&amp;)操作可以应用于任何类型的操纵数，而不仅仅是布尔值。</p>
-<p>在有一个操作数不是布尔值的情况下，逻辑与操作就不一定返回布尔值；因此若要显示返回布尔值，则可以使用<strong>Boolean转型函数</strong>显示返回</p>
-<p>逻辑与操作属于短路操作，即如果第一个操作数能够决定结果，那么就不会再对第二个操作数求值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>&amp;&amp;<span class="number">2</span>); <span class="comment">//2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">0</span>&amp;&amp;<span class="number">1</span>); <span class="comment">//0</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">123</span>&amp;&amp;<span class="string">'qwe'</span>); <span class="comment">//'qwe'</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;&#125;&amp;&amp;<span class="literal">null</span>); <span class="comment">//null 因为&#123;&#125;并不等于null，&#123;&#125;是一个不完全为空的对象，所以&#123;&#125;转换为逻辑值会是true</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="逻辑或-–"><a href="#逻辑或-–" class="headerlink" title="逻辑或 – ||"></a>逻辑或 – ||</h2><p>与逻辑与操作类似，逻辑或操作也是短路操作。也就是说，如果第一个操作数的求值结果为true,就不会对第二个操作数求值了</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>||<span class="number">2</span>); <span class="comment">//1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">0</span>||<span class="number">1</span>); <span class="comment">//1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">123</span>||<span class="string">'qwe'</span>); <span class="comment">//123</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;&#125;||<span class="literal">null</span>); <span class="comment">//&#123;&#125;</span></span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2336,7 +2333,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2417,7 +2414,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">21.4k</span>
+    <span title="Site words total count">21.8k</span>
   
 </div>
 
@@ -2447,7 +2444,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共21.4k字</span>
+  <span class="post-count">博客全站共21.8k字</span>
 </div>
         
 
