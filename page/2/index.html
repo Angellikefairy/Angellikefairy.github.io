@@ -307,6 +307,205 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/循环/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/03/循环/" itemprop="url">循环 (for...of与for...in)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T13:14:43+08:00">
+                2019-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  482
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="循环语句类型"><a href="#循环语句类型" class="headerlink" title="循环语句类型"></a>循环语句类型</h2><ol>
+<li>for 语句</li>
+<li>do…while 语句</li>
+<li>while 语句</li>
+<li>labeled 语句</li>
+<li>break 语句</li>
+<li>continue 语句</li>
+<li>for…in 语句</li>
+<li>for…of 语句</li>
+</ol>
+<h2 id="for…in"><a href="#for…in" class="headerlink" title="for…in"></a>for…in</h2><p>for…in 语句循环一个指定的变量来循环一个对象所有可枚举的属性。JavaScript 会为每一个不同的属性执行指定的语句。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> items=&#123;</span><br><span class="line">    item1:<span class="number">1</span>,</span><br><span class="line">    item2:<span class="number">2</span>,</span><br><span class="line">    item3:<span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> a <span class="keyword">in</span> items)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);  <span class="comment">// item1,item2,item3</span></span><br><span class="line">    <span class="built_in">console</span>.log(items[a]); <span class="comment">//1,2,3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="for…of"><a href="#for…of" class="headerlink" title="for…of"></a>for…of</h2><p>for…of语句在<strong>可迭代的对象</strong>(在es6中，所有的集合对象(数组、Set集合及Map集合)和字符串都是可迭代对象)上创建了一个循环 ，对值的每一个独特的属性调用一个将被执行的自定义的和语句挂钩的迭代。</p>
+<p>for…of循环每执行一次都会调用可迭代对象的next()方法，并将迭代器返回的结果对象的value属性存储在一个变量中，循环将持续执行这一过程直到返回对象的done属性的值为true</p>
+<p>与 for…in 循环遍历的结果是数组元素的下标不同的是， for…of 遍历的结果是元素的值：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>];</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'string'</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="keyword">set</span>=new Set([1,'a',3]);</span><br><span class="line">let map=new Map([['a',1],['b',2]]);</span><br><span class="line">//遍历数组</span><br><span class="line">for(let a of arr)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">//4,5,6</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//遍历字符串</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> s <span class="keyword">of</span> str)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(s); <span class="comment">//s,t,r,i,n,g</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//遍历set集合</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> k <span class="keyword">of</span> <span class="keyword">set</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(k); <span class="comment">//1,'a',3</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//遍历map集合</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> m <span class="keyword">of</span> map)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(m); <span class="comment">//[ 'a', 1 ],[ 'b', 2 ]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>倘若是遍历普通对象(非迭代对象)，那么使用for…in最佳，遍历得到属性名</li>
+<li>倘若是遍历可迭代对象，那么根据需求来，如果不需要一些下标信息（例如set集合，字符串）那么使用for…of最佳</li>
+<li>如果是数组和map，那么使用forEach会更加方便</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/空对象/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2187,229 +2386,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/二分查找/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/27/二分查找/" itemprop="url">二分查找</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-27T17:49:17+08:00">
-                2019-07-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">算法笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  595
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="二分查找概述"><a href="#二分查找概述" class="headerlink" title="二分查找概述"></a>二分查找概述</h2><blockquote>
-<p>二分查找的高效之处在于，每一步都可以去除当前区间中的一半元素，因此时间复杂度为O(logn)</p>
-</blockquote>
-<h2 id="严格递增序列的二分查找"><a href="#严格递增序列的二分查找" class="headerlink" title="严格递增序列的二分查找"></a>严格递增序列的二分查找</h2><blockquote>
-<p>输入：[1,2,3,7,9,11] , 3<br>返回: 2</p>
-</blockquote>
-<blockquote>
-<p>输入：[1,2,3,7,9,11] , 8<br>返回：false</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">n,m</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> left=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> right=n.length<span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">    <span class="keyword">let</span> mid=<span class="built_in">Math</span>.floor((left+right)/<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">if</span>(m===n[mid])&#123;</span><br><span class="line">      <span class="keyword">return</span> mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(m&lt;n[mid])&#123;</span><br><span class="line">      right=mid<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      left=mid+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="在整体递增，局部重复的序列中二分查找第一个符合要求的元素位置"><a href="#在整体递增，局部重复的序列中二分查找第一个符合要求的元素位置" class="headerlink" title="在整体递增，局部重复的序列中二分查找第一个符合要求的元素位置"></a>在整体递增，局部重复的序列中二分查找第一个符合要求的元素位置</h2><blockquote>
-<p>输入：[1,2,3,3,3,7,9,11],3<br>返回: 2</p>
-</blockquote>
-<blockquote>
-<p>输入：[1,2,3,3,3,7,9,11],8<br>返回：false</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">n,m</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> left=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> right=n.length;</span><br><span class="line">  <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">    <span class="keyword">let</span> mid=<span class="built_in">Math</span>.floor((left+right)/<span class="number">2</span>);  <span class="comment">//floor()函数，不大于当前数的最大数</span></span><br><span class="line">    <span class="keyword">if</span>(m&lt;=n[mid])&#123;</span><br><span class="line">      right=mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      left=mid+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(n[left]===m) <span class="keyword">return</span> left;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="在整体递增，局部重复的序列中二分查找第一个大于给定元素的元素位置"><a href="#在整体递增，局部重复的序列中二分查找第一个大于给定元素的元素位置" class="headerlink" title="在整体递增，局部重复的序列中二分查找第一个大于给定元素的元素位置"></a>在整体递增，局部重复的序列中二分查找第一个大于给定元素的元素位置</h2><blockquote>
-<p>输入：[1,2,3,3,3,7,9,11],3<br>返回：5</p>
-</blockquote>
-<blockquote>
-<p>输入：[1,2,3,3,3,7,9,11],4<br>返回: ‘给定元素不存在’</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">n,m</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> left=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> right=n.length<span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">    <span class="keyword">let</span> mid=<span class="built_in">Math</span>.ceil((left+right)/<span class="number">2</span>);  <span class="comment">//ceil()函数，不小于当前数的最小整数</span></span><br><span class="line">    <span class="keyword">if</span>(m&gt;=n[mid])&#123;</span><br><span class="line">      left=mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      right=mid<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(n[right]===m) <span class="keyword">return</span> right+<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="string">'给定元素不存在'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="求根号2的近似值"><a href="#求根号2的近似值" class="headerlink" title="求根号2的近似值"></a>求根号2的近似值</h2><blockquote>
-<p>输入：0.00001  //精确度<br>返回：(1.4142074584960938,1.414215087890625)</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> left=<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">let</span> right=<span class="number">2</span>;</span><br><span class="line">  <span class="keyword">let</span> num=<span class="built_in">Math</span>.sqrt(<span class="number">2</span>);</span><br><span class="line">  <span class="keyword">while</span>(right-left&gt;x)&#123;</span><br><span class="line">    <span class="keyword">let</span> mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(num&lt;mid)&#123;</span><br><span class="line">      right=mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(num&gt;mid)&#123;</span><br><span class="line">      left=mid;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`(<span class="subst">$&#123;left&#125;</span>,<span class="subst">$&#123;right&#125;</span>)`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><p>用于求解高次幂的快速求法<br>比如2^10</p>
-<blockquote>
-<p>基于二分的思想，又被称之为二分幂</p>
-</blockquote>
-<p>快速幂基于以下原理：</p>
-<ol>
-<li>如果b是奇数，那么有a^b=a*a^(b-1)</li>
-<li>如果b是偶数，那么有a^b=(a^(b/2))*(a^(b/2))</li>
-</ol>
-<p>因此可以利用递归来求解快速幂</p>
-<blockquote>
-<p>输入 2,10<br>返回: 1024</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">a,n</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(n===<span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span>(n%<span class="number">2</span>===<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> F(a,n<span class="number">-1</span>)*a;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> F(a,n/<span class="number">2</span>)*F(a,n/<span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2462,7 +2438,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2543,7 +2519,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">23.6k</span>
+    <span title="Site words total count">23.9k</span>
   
 </div>
 
@@ -2573,7 +2549,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共23.6k字</span>
+  <span class="post-count">博客全站共23.9k字</span>
 </div>
         
 

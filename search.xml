@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-561 数组拆分 I]]></title>
+    <url>%2F2019%2F08%2F09%2Fleetcode-561%2F</url>
+    <content type="text"><![CDATA[数组拆分 I题目描述给定长度为 2n 的数组, 你的任务是将这些数分成 n 对, 例如 (a1, b1), (a2, b2), …, (an, bn) ，使得从1 到 n 的 min(ai, bi) 总和最大。 示例 1: 输入: [1,4,3,2]输出: 4解释: n 等于 2, 最大总和为 4 = min(1, 2) + min(3, 4). 提示: n 是正整数,范围在 [1, 10000]. 数组中的元素范围在 [-10000, 10000]. 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/array-partition-i著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述当将整个数组排序后，第一个数必定为最小的数也是必须参加和运算的数假设为a。那么假如与这个最小的数a配对的数n并不是这个数组排序后a的后一个数b，那么b此时成为了剩下的数中最小的数因此必定也要参加和运算；但显然的是，此时a+b所组成的和运算中必定不是最大的和了 解题步骤 将原数组按从小到大进行排序 将数组中所有下标为偶数的数组元素相加得到的和返回 Coding实现1234567891011121314/** * @param &#123;number[]&#125; nums * @return &#123;number&#125; */var arrayPairSum = function(nums) &#123; let ans=0; nums.sort((a,b)=&gt;&#123; return a-b; &#125;); for(let i=0;i&lt;nums.length;i=i+2)&#123; ans+=nums[i]; &#125; return ans;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-905 按奇偶排序数组]]></title>
     <url>%2F2019%2F08%2F08%2Fleetcode-905%2F</url>
     <content type="text"><![CDATA[按奇偶排序数组题目描述给定一个非负整数数组 A，返回一个数组，在该数组中， A 的所有偶数元素之后跟着所有奇数元素。 你可以返回满足此条件的任何数组作为答案。 示例： 输入：[3,1,2,4]输出：[2,4,3,1]输出 [4,2,3,1]，[2,4,1,3] 和 [4,2,1,3] 也会被接受。 提示： 1&lt;= A.length &lt;= 5000 0&lt;= A[i] &lt;= 5000 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/sort-array-by-parity著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述 数组 遍历原数组，将奇数放到奇数数组，偶数放到偶数数组，concat后返回 双指针 left指针从前往后遍历,right指针从后往前遍历，如果left指针指向奇数而right指针指向偶数，那么两数交换，直到left&gt;=right 解题步骤数组 设定奇数数组、偶数数组 遍历原数组，将奇数放到奇数数组，偶数放到偶数数组 返回 奇数数组concat偶数数组 双指针 设定left=0,right=A.length-1 left指针从前往后遍历,right指针从后往前遍历，如果left指针指向奇数而right指针指向偶数，那么两数交换，直到left&gt;=right 返回ACoding实现数组实现1234567891011121314151617/** * @param &#123;number[]&#125; A * @return &#123;number[]&#125; */var sortArrayByParity = function(A) &#123; let odd=[]; let even=[]; A.forEach(value=&gt;&#123; if(value%2===0)&#123; even.push(value); &#125; else &#123; odd.push(value); &#125; &#125;) return even.concat(odd);&#125;; 双指针实现12345678910111213141516171819202122/** * @param &#123;number[]&#125; A * @return &#123;number[]&#125; */var sortArrayByParity = function(A) &#123; let left=0; let right=A.length-1; while(left&lt;right)&#123; if(A[left]%2===0)&#123; left++; continue; &#125; if(A[right]%2!==0)&#123; right--; continue; &#125; let temp=A[left]; A[left]=A[right]; A[right]=temp; &#125; return A;&#125;;]]></content>
@@ -204,8 +215,8 @@
         <category>leetcode题解与算法</category>
       </categories>
       <tags>
-        <tag>双指针</tag>
         <tag>哈希表</tag>
+        <tag>双指针</tag>
       </tags>
   </entry>
   <entry>
