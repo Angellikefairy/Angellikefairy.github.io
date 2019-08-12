@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  869
+                  933
                 </span>
               
 
@@ -474,8 +474,13 @@
 </ol>
 <p>访问器属性不像数据属性一样可以直接被定义，它只能通过Object.defineProperty()来定义</p>
 <p>如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test=&#123;</span><br><span class="line">    _item:<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(test,<span class="string">'item'</span>,&#123;</span><br><span class="line">    <span class="keyword">get</span>:function()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(test);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test=&#123;</span><br><span class="line">    _item:<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(test,<span class="string">'item'</span>,&#123;</span><br><span class="line">    <span class="keyword">get</span>:function()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>:function(num)&#123;</span><br><span class="line">        <span class="keyword">if</span>(num&gt;<span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>._item++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">test.item=<span class="number">15</span>;</span><br><span class="line"><span class="built_in">console</span>.log(test.item); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 
+<p>访问器属性的意义</p>
+<ol>
+<li>修改访问器属性动态修改相关联的数据属性</li>
+<li>监听访问器属性的修改去操作其它业务逻辑</li>
+</ol>
 
           
         
