@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[对象的属性类型与特性]]></title>
+    <url>%2F2019%2F08%2F12%2F%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E7%B1%BB%E5%9E%8B%E4%B8%8E%E7%89%B9%E6%80%A7%2F</url>
+    <content type="text"><![CDATA[对象的属性类型对象包括两种属性类型，分别是 数据属性 访问器属性 数据属性定义及特性数据属性相对于访问器属性来说，它拥有数据值 数据属性有4个描述其行为的特性，分别是 configurable：可配置。（具体来说指的是，1.能否通过delete删除属性从而重新定义属性； 2.能否修改属性的特性；3.能否把属性修改为访问器属性；默认为true） enumerable：可枚举。（表示是否可以通过for-in循环来返回属性；默认为true） writable：可写。（表示能否修改属性的值；默认为true） 以上三个属性取值为true或false。 value：属性值。 我们可以通过Object.getOwnPropertyDescriptor()这个方法来查看对象属性的特性 此方法可得到对象的数据属性，传入两个参数：第一个是要查找的对象名；第二个是要查找的属性名。 如下： 12345let test=&#123; item:1&#125;console.log(Object.getOwnPropertyDescriptor(test,'item')) //&#123; value: 1, writable: true, enumerable: true, configurable: true &#125; Object.defineProperty()要修改属性的默认特性，我们可以使用Object.defineProperty()来进行修改。当然我们也可以使用该方法来新建属性并同时制定它的属性特性 注意： 在调用该方法创建新的属性时，如果不指定，默认会将除value外的特性值置为false;如果调用该方法只是修改已有属性，则无此限制 这个方法接收三个参数：属性所在的对象、属性的名字(字符串类型),一个描述符对象。其中描述符对象的属性必须是数据属性四个特性中的一或多个 12345678910111213141516171819202122232425let test=&#123; item:1, name:2&#125;Object.defineProperty(test,'item',&#123; enumerable:false // 该属性无法被枚举&#125;)for(let i in test)&#123; console.log(i) // name&#125;Object.defineProperty(test,'item',&#123; configurable:false //让该属性不能被配置，具体指无法被删除，无法修改属性特性，无法修改为访问器属性&#125;)delete test.item // 该属性无法被删除console.log(test); // &#123;item:1&#125;Object.defineProperty(test,'item',&#123; value:2 // 修改该属性的值为2&#125;)console.log(test); // &#123;item:2&#125;Object.defineProperty(test,'item',&#123; writable:false // 该属性的值无法被修改&#125;)test.item=3;console.log(test); // &#123;item:2&#125; 访问器属性访问器属性不包含数据值；他们包含一对儿getter和setter函数；在读取访问器属性时，会调用getter函数，这个函数负责返回有效的值；在写入访问器属性时，会调用setter函数并传入新值，这个函数负责决定如何处理数据 访问器属性有4个描述其行为的特性，分别是 configurable：可配置。（具体来说指的是，1.能否通过delete删除属性从而重新定义属性； 2.能否修改属性的特性；3.能否把属性修改为访问器属性；默认为true） enumerable：可枚举。（表示是否可以通过for-in循环来返回属性；默认为true） get：在读取属性时调用的函数。默认值为undefined set：在写入属性时调用的函数。默认值为undefined 访问器属性不像数据属性一样可以直接被定义，它只能通过Object.defineProperty()来定义 如下： 1234567891011let test=&#123; _item:1&#125;Object.defineProperty(test,'item',&#123; get:function()&#123; return this._item; &#125;&#125;)console.log(test);]]></content>
+      <categories>
+        <category>javaScript基础</category>
+      </categories>
+      <tags>
+        <tag>基础语法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-509 斐波那契数]]></title>
     <url>%2F2019%2F08%2F12%2Fleetcode-509%2F</url>
     <content type="text"><![CDATA[斐波那契数题目描述斐波那契数，通常用 F(n) 表示，形成的序列称为斐波那契数列。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是： F(0) = 0, F(1) = 1F(N) = F(N - 1) + F(N - 2), 其中 N &gt; 1.给定 N，计算 F(N)。 示例 1： 输入：2输出：1解释：F(2) = F(1) + F(0) = 1 + 0 = 1. 示例 2： 输入：3输出：2解释：F(3) = F(2) + F(1) = 1 + 1 = 2. 示例 3： 输入：4输出：3解释：F(4) = F(3) + F(2) = 2 + 1 = 3. 提示： 0 ≤ N ≤ 30 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/fibonacci-number著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述一开始会很容易想到用递归的方式来解决，但是递归会很容易超出时间限制。因此，利用动态规划就很容易解决这个问题 解题步骤 建立一个数组，数组的第一项和第二项分别为0,1 从第三项开始一直到第N项，每一项等于前两项的和，并存放到数组中 返回数组第N项存储的值 Coding实现1234567891011/** * @param &#123;number&#125; N * @return &#123;number&#125; */var fib = function(N) &#123; let arr=[0,1]; for(let i=2;i&lt;=N;i++)&#123; arr[i]=arr[i-1]+arr[i-2]; &#125; return arr[N];&#125;;]]></content>
