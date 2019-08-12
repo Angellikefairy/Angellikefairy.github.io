@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-09T06:24:13.980Z</updated>
+  <updated>2019-08-12T08:09:29.976Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-509 斐波那契数</title>
+    <link href="http://yoursite.com/2019/08/12/leetcode-509/"/>
+    <id>http://yoursite.com/2019/08/12/leetcode-509/</id>
+    <published>2019-08-12T07:58:28.000Z</published>
+    <updated>2019-08-12T08:09:29.976Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="斐波那契数"><a href="#斐波那契数" class="headerlink" title="斐波那契数"></a>斐波那契数</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>斐波那契数，通常用 F(n) 表示，形成的序列称为斐波那契数列。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：</p><p>F(0) = 0,   F(1) = 1<br>F(N) = F(N - 1) + F(N - 2), 其中 N &gt; 1.<br>给定 N，计算 F(N)。</p><p>示例 1：</p><blockquote><p>输入：2<br>输出：1<br>解释：F(2) = F(1) + F(0) = 1 + 0 = 1.</p></blockquote><p>示例 2：</p><blockquote><p>输入：3<br>输出：2<br>解释：F(3) = F(2) + F(1) = 1 + 1 = 2.</p></blockquote><p>示例 3：</p><blockquote><p>输入：4<br>输出：3<br>解释：F(4) = F(3) + F(2) = 2 + 1 = 3.</p></blockquote><p>提示：</p><p>0 ≤ N ≤ 30</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/fibonacci-number" target="_blank" rel="noopener">https://leetcode-cn.com/problems/fibonacci-number</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>一开始会很容易想到用递归的方式来解决，但是递归会很容易超出时间限制。因此，利用动态规划就很容易解决这个问题</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>建立一个数组，数组的第一项和第二项分别为0,1</li><li>从第三项开始一直到第N项，每一项等于前两项的和，并存放到数组中</li><li>返回数组第N项存储的值</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; N</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> fib = <span class="function"><span class="keyword">function</span>(<span class="params">N</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> arr=[<span class="number">0</span>,<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">2</span>;i&lt;=N;i++)&#123;</span><br><span class="line">        arr[i]=arr[i<span class="number">-1</span>]+arr[i<span class="number">-2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr[N];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;斐波那契数&quot;&gt;&lt;a href=&quot;#斐波那契数&quot; class=&quot;headerlink&quot; title=&quot;斐波那契数&quot;&gt;&lt;/a&gt;斐波那契数&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;斐波那契数，通常用 F(n) 表示，形成的序列称为斐波那契数列。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：&lt;/p&gt;
+&lt;p&gt;F(0) = 0,   F(1) = 1&lt;br&gt;F(N) = F(N - 1) + F(N - 2), 其中 N &amp;gt; 1.&lt;br&gt;给定 N，计算 F(N)。&lt;/p&gt;
+&lt;p&gt;示例 1：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：2&lt;br&gt;输出：1&lt;br&gt;解释：F(2) = F(1) + F(0) = 1 + 0 = 1.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 2：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：3&lt;br&gt;输出：2&lt;br&gt;解释：F(3) = F(2) + F(1) = 1 + 1 = 2.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 3：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：4&lt;br&gt;输出：3&lt;br&gt;解释：F(4) = F(3) + F(2) = 2 + 1 = 3.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;提示：&lt;/p&gt;
+&lt;p&gt;0 ≤ N ≤ 30&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode-561 数组拆分 I</title>
@@ -610,45 +649,6 @@
     
     
       <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-350 两个数组的交集 II</title>
-    <link href="http://yoursite.com/2019/07/28/leetcode-350/"/>
-    <id>http://yoursite.com/2019/07/28/leetcode-350/</id>
-    <published>2019-07-28T09:11:39.000Z</published>
-    <updated>2019-07-29T14:11:48.595Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="两个数组的交集-II"><a href="#两个数组的交集-II" class="headerlink" title="两个数组的交集 II"></a>两个数组的交集 II</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定两个数组，编写一个函数来计算它们的交集。</p><p>示例 1:</p><blockquote><p>输入: nums1 = [1,2,2,1], nums2 = [2,2]<br>输出: [2,2]</p></blockquote><p>示例 2:</p><blockquote><p>输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]<br>输出: [4,9]</p></blockquote><p>说明：</p><p>输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。<br>我们可以不考虑输出结果的顺序。</p><p>进阶:</p><ol><li>如果给定的数组已经排好序呢？你将如何优化你的算法？</li><li>如果 nums1 的大小比 nums2 小很多，哪种方法更优？</li><li>如果 nums2 的元素存储在磁盘上，磁盘内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？<a id="more"></a>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/intersection-of-two-arrays-ii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/intersection-of-two-arrays-ii</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li></ol><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>该题可以考虑用双指针方法和哈希表去解决。双指针主要循环比较两个数是否相等；哈希表主要是记录每个数组中每个元素出现的次数</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><h4 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h4><ol><li>将两个数组进行排序</li><li>设定两个指针，分别指向两个数组的第一个元素</li><li>如果两个指针指向的元素相等，那么就把该元素push入ans数组；并且两个指针向后移动</li><li>如果不等，那么指向较小元素的那个指针向后移动 </li></ol><h4 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h4><ol><li>建立两个哈希表，分别存储每个数组中的每个元素存储的个数</li><li>遍历其中一个哈希表，如果另一个哈希表中也存在该键，比较两个键值大小，按照小的那个键值循环则将该键push入ans数组；</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><h3 id="双指针解法代码"><a href="#双指针解法代码" class="headerlink" title="双指针解法代码"></a>双指针解法代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums1</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums2</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> intersect = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, nums2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> nums1Index=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> nums2Index=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> ans=[];</span><br><span class="line">    nums1.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;<span class="keyword">return</span> a-b;&#125;);</span><br><span class="line">    nums2.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;<span class="keyword">return</span> a-b;&#125;);</span><br><span class="line">    <span class="keyword">while</span>(nums1Index&lt;nums1.length&amp;&amp;nums2Index&lt;nums2.length)&#123;</span><br><span class="line">        <span class="keyword">let</span> num1=nums1[nums1Index];</span><br><span class="line">        <span class="keyword">let</span> num2=nums2[nums2Index];</span><br><span class="line">        <span class="keyword">if</span>(num1===num2)&#123;</span><br><span class="line">            ans.push(num1);</span><br><span class="line">            nums1Index++;</span><br><span class="line">            nums2Index++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(num1&lt;num2)&#123;</span><br><span class="line">            nums1Index++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            nums2Index++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="哈希表解法代码"><a href="#哈希表解法代码" class="headerlink" title="哈希表解法代码"></a>哈希表解法代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums1</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums2</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> intersect = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, nums2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> map1=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">  <span class="keyword">let</span> map2=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">  <span class="keyword">let</span> ans=[];</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">nums,map</span>)</span>&#123;</span><br><span class="line">      nums.forEach(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">          <span class="keyword">if</span>(!map.has(value))&#123;</span><br><span class="line">              map.set(value,<span class="number">1</span>);</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">else</span> &#123;</span><br><span class="line">              map.set(value,map.get(value)+<span class="number">1</span>);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  count(nums1,map1);</span><br><span class="line">  count(nums2,map2);</span><br><span class="line">  map1.forEach(<span class="function">(<span class="params">value,key</span>)=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(map2.has(key))&#123;</span><br><span class="line">          <span class="keyword">let</span> num=value&gt;map2.get(key)?map2.get(key):value;</span><br><span class="line">          <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">              ans.push(key);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;两个数组的交集-II&quot;&gt;&lt;a href=&quot;#两个数组的交集-II&quot; class=&quot;headerlink&quot; title=&quot;两个数组的交集 II&quot;&gt;&lt;/a&gt;两个数组的交集 II&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定两个数组，编写一个函数来计算它们的交集。&lt;/p&gt;
-&lt;p&gt;示例 1:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: nums1 = [1,2,2,1], nums2 = [2,2]&lt;br&gt;输出: [2,2]&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;示例 2:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]&lt;br&gt;输出: [4,9]&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;说明：&lt;/p&gt;
-&lt;p&gt;输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。&lt;br&gt;我们可以不考虑输出结果的顺序。&lt;/p&gt;
-&lt;p&gt;进阶:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;如果给定的数组已经排好序呢？你将如何优化你的算法？&lt;/li&gt;
-&lt;li&gt;如果 nums1 的大小比 nums2 小很多，哪种方法更优？&lt;/li&gt;
-&lt;li&gt;如果 nums2 的元素存储在磁盘上，磁盘内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="哈希表" scheme="http://yoursite.com/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
-    
-      <category term="双指针" scheme="http://yoursite.com/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   

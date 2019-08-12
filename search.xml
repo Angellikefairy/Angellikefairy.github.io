@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-509 斐波那契数]]></title>
+    <url>%2F2019%2F08%2F12%2Fleetcode-509%2F</url>
+    <content type="text"><![CDATA[斐波那契数题目描述斐波那契数，通常用 F(n) 表示，形成的序列称为斐波那契数列。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是： F(0) = 0, F(1) = 1F(N) = F(N - 1) + F(N - 2), 其中 N &gt; 1.给定 N，计算 F(N)。 示例 1： 输入：2输出：1解释：F(2) = F(1) + F(0) = 1 + 0 = 1. 示例 2： 输入：3输出：2解释：F(3) = F(2) + F(1) = 1 + 1 = 2. 示例 3： 输入：4输出：3解释：F(4) = F(3) + F(2) = 2 + 1 = 3. 提示： 0 ≤ N ≤ 30 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/fibonacci-number著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述一开始会很容易想到用递归的方式来解决，但是递归会很容易超出时间限制。因此，利用动态规划就很容易解决这个问题 解题步骤 建立一个数组，数组的第一项和第二项分别为0,1 从第三项开始一直到第N项，每一项等于前两项的和，并存放到数组中 返回数组第N项存储的值 Coding实现1234567891011/** * @param &#123;number&#125; N * @return &#123;number&#125; */var fib = function(N) &#123; let arr=[0,1]; for(let i=2;i&lt;=N;i++)&#123; arr[i]=arr[i-1]+arr[i-2]; &#125; return arr[N];&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-561 数组拆分 I]]></title>
     <url>%2F2019%2F08%2F09%2Fleetcode-561%2F</url>
     <content type="text"><![CDATA[数组拆分 I题目描述给定长度为 2n 的数组, 你的任务是将这些数分成 n 对, 例如 (a1, b1), (a2, b2), …, (an, bn) ，使得从1 到 n 的 min(ai, bi) 总和最大。 示例 1: 输入: [1,4,3,2]输出: 4解释: n 等于 2, 最大总和为 4 = min(1, 2) + min(3, 4). 提示: n 是正整数,范围在 [1, 10000]. 数组中的元素范围在 [-10000, 10000]. 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/array-partition-i著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述当将整个数组排序后，第一个数必定为最小的数也是必须参加和运算的数假设为a。那么假如与这个最小的数a配对的数n并不是这个数组排序后a的后一个数b，那么b此时成为了剩下的数中最小的数因此必定也要参加和运算；但显然的是，此时a+b所组成的和运算中必定不是最大的和了 解题步骤 将原数组按从小到大进行排序 将数组中所有下标为偶数的数组元素相加得到的和返回 Coding实现1234567891011121314/** * @param &#123;number[]&#125; nums * @return &#123;number&#125; */var arrayPairSum = function(nums) &#123; let ans=0; nums.sort((a,b)=&gt;&#123; return a-b; &#125;); for(let i=0;i&lt;nums.length;i=i+2)&#123; ans+=nums[i]; &#125; return ans;&#125;;]]></content>
