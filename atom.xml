@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-12T10:31:02.843Z</updated>
+  <updated>2019-08-13T06:02:20.873Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-867 转置矩阵</title>
+    <link href="http://yoursite.com/2019/08/13/leetcode-867/"/>
+    <id>http://yoursite.com/2019/08/13/leetcode-867/</id>
+    <published>2019-08-13T05:58:25.000Z</published>
+    <updated>2019-08-13T06:02:20.873Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="转置矩阵"><a href="#转置矩阵" class="headerlink" title="转置矩阵"></a>转置矩阵</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个矩阵 A， 返回 A 的转置矩阵。</p><p>矩阵的转置是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p><p>示例 1：</p><blockquote><p>输入：[[1,2,3],[4,5,6],[7,8,9]]<br>输出：[[1,4,7],[2,5,8],[3,6,9]]</p></blockquote><p>示例 2：</p><blockquote><p>输入：[[1,2,3],[4,5,6]]<br>输出：[[1,4],[2,5],[3,6]]</p></blockquote><p>提示：</p><ol><li>1&lt;= A.length &lt;= 1000</li><li>1&lt;= A[0].length &lt;= 1000<a id="more"></a>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/transpose-matrix" target="_blank" rel="noopener">https://leetcode-cn.com/problems/transpose-matrix</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li></ol><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>对于转置矩阵的特点，我们很容易得到，对于原数组A，ans[k][i]=A[i][k]</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>根据矩阵列数来创建ans二维数组的行数</li><li>由ans[k][i]=A[i][k]循环得到ans数组并返回</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; A</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> transpose = <span class="function"><span class="keyword">function</span>(<span class="params">A</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ans=[];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;A[<span class="number">0</span>].length;i++)&#123;</span><br><span class="line">        ans[i]=[];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;A.length;k++)&#123;</span><br><span class="line">            ans[i][k]=A[k][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;转置矩阵&quot;&gt;&lt;a href=&quot;#转置矩阵&quot; class=&quot;headerlink&quot; title=&quot;转置矩阵&quot;&gt;&lt;/a&gt;转置矩阵&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定一个矩阵 A， 返回 A 的转置矩阵。&lt;/p&gt;
+&lt;p&gt;矩阵的转置是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。&lt;/p&gt;
+&lt;p&gt;示例 1：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：[[1,2,3],[4,5,6],[7,8,9]]&lt;br&gt;输出：[[1,4,7],[2,5,8],[3,6,9]]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 2：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：[[1,2,3],[4,5,6]]&lt;br&gt;输出：[[1,4],[2,5],[3,6]]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;提示：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;1&amp;lt;= A.length &amp;lt;= 1000&lt;/li&gt;
+&lt;li&gt;1&amp;lt;= A[0].length &amp;lt;= 1000
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
   
   <entry>
     <title>对象的属性类型与特性</title>
@@ -610,38 +645,6 @@
     
       <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-344 反转字符串</title>
-    <link href="http://yoursite.com/2019/07/30/leetcode-344/"/>
-    <id>http://yoursite.com/2019/07/30/leetcode-344/</id>
-    <published>2019-07-30T05:42:24.000Z</published>
-    <updated>2019-07-30T06:14:13.403Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="反转字符串"><a href="#反转字符串" class="headerlink" title="反转字符串"></a>反转字符串</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。</p><p>不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。</p><p>你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</p><p>示例 1：</p><blockquote><p>输入：[“h”,”e”,”l”,”l”,”o”]<br>输出：[“o”,”l”,”l”,”e”,”h”]</p></blockquote><p>示例 2：</p><blockquote><p>输入：[“H”,”a”,”n”,”n”,”a”,”h”]<br>输出：[“h”,”a”,”n”,”n”,”a”,”H”]</p></blockquote><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-string" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-string</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>题目要求是原地修改数组，并且只能使用O(1)的额外空间。因此，不能创建新的数组来存放数组元素，此时可以考虑使用双指针，一个置首，一个置尾。首向后，尾向前，交换两个指针的值即可。</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>建立left,right双指针</li><li>当left&lt;=right时，交换两指针元素</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;character[]&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;void&#125; Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> reverseString = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> left=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> right=s.length<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">        [s[left],s[right]]=[s[right],s[left]];</span><br><span class="line">        left++;</span><br><span class="line">        right--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;反转字符串&quot;&gt;&lt;a href=&quot;#反转字符串&quot; class=&quot;headerlink&quot; title=&quot;反转字符串&quot;&gt;&lt;/a&gt;反转字符串&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。&lt;/p&gt;
-&lt;p&gt;不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。&lt;/p&gt;
-&lt;p&gt;你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。&lt;/p&gt;
-&lt;p&gt;示例 1：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入：[“h”,”e”,”l”,”l”,”o”]&lt;br&gt;输出：[“o”,”l”,”l”,”e”,”h”]&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;示例 2：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入：[“H”,”a”,”n”,”n”,”a”,”h”]&lt;br&gt;输出：[“h”,”a”,”n”,”n”,”a”,”H”]&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="双指针" scheme="http://yoursite.com/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   

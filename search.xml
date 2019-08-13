@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-867 转置矩阵]]></title>
+    <url>%2F2019%2F08%2F13%2Fleetcode-867%2F</url>
+    <content type="text"><![CDATA[转置矩阵题目描述给定一个矩阵 A， 返回 A 的转置矩阵。 矩阵的转置是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。 示例 1： 输入：[[1,2,3],[4,5,6],[7,8,9]]输出：[[1,4,7],[2,5,8],[3,6,9]] 示例 2： 输入：[[1,2,3],[4,5,6]]输出：[[1,4],[2,5],[3,6]] 提示： 1&lt;= A.length &lt;= 1000 1&lt;= A[0].length &lt;= 1000 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/transpose-matrix著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述对于转置矩阵的特点，我们很容易得到，对于原数组A，ans[k][i]=A[i][k] 解题步骤 根据矩阵列数来创建ans二维数组的行数 由ans[k][i]=A[i][k]循环得到ans数组并返回 Coding实现1234567891011121314/** * @param &#123;number[][]&#125; A * @return &#123;number[][]&#125; */var transpose = function(A) &#123; let ans=[]; for(let i=0;i&lt;A[0].length;i++)&#123; ans[i]=[]; for(let k=0;k&lt;A.length;k++)&#123; ans[i][k]=A[k][i]; &#125; &#125; return ans;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[对象的属性类型与特性]]></title>
     <url>%2F2019%2F08%2F12%2F%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E7%B1%BB%E5%9E%8B%E4%B8%8E%E7%89%B9%E6%80%A7%2F</url>
     <content type="text"><![CDATA[对象的属性类型对象包括两种属性类型，分别是 数据属性 访问器属性 数据属性定义及特性数据属性相对于访问器属性来说，它拥有数据值 数据属性有4个描述其行为的特性，分别是 configurable：可配置。（具体来说指的是，1.能否通过delete删除属性从而重新定义属性； 2.能否修改属性的特性；3.能否把属性修改为访问器属性；默认为true） enumerable：可枚举。（表示是否可以通过for-in循环来返回属性；默认为true） writable：可写。（表示能否修改属性的值；默认为true） 以上三个属性取值为true或false。 value：属性值。 我们可以通过Object.getOwnPropertyDescriptor()这个方法来查看对象属性的特性 此方法可得到对象的数据属性，传入两个参数：第一个是要查找的对象名；第二个是要查找的属性名。 如下： 12345let test=&#123; item:1&#125;console.log(Object.getOwnPropertyDescriptor(test,'item')) //&#123; value: 1, writable: true, enumerable: true, configurable: true &#125; Object.defineProperty()要修改属性的默认特性，我们可以使用Object.defineProperty()来进行修改。当然我们也可以使用该方法来新建属性并同时制定它的属性特性 注意： 在调用该方法创建新的属性时，如果不指定，默认会将除value外的特性值置为false;如果调用该方法只是修改已有属性，则无此限制 这个方法接收三个参数：属性所在的对象、属性的名字(字符串类型),一个描述符对象。其中描述符对象的属性必须是数据属性四个特性中的一或多个 12345678910111213141516171819202122232425let test=&#123; item:1, name:2&#125;Object.defineProperty(test,'item',&#123; enumerable:false // 该属性无法被枚举&#125;)for(let i in test)&#123; console.log(i) // name&#125;Object.defineProperty(test,'item',&#123; configurable:false //让该属性不能被配置，具体指无法被删除，无法修改属性特性，无法修改为访问器属性&#125;)delete test.item // 该属性无法被删除console.log(test); // &#123;item:1&#125;Object.defineProperty(test,'item',&#123; value:2 // 修改该属性的值为2&#125;)console.log(test); // &#123;item:2&#125;Object.defineProperty(test,'item',&#123; writable:false // 该属性的值无法被修改&#125;)test.item=3;console.log(test); // &#123;item:2&#125; 访问器属性访问器属性不包含数据值；他们包含一对儿getter和setter函数；在读取访问器属性时，会调用getter函数，这个函数负责返回有效的值；在写入访问器属性时，会调用setter函数并传入新值，这个函数负责决定如何处理数据 访问器属性有4个描述其行为的特性，分别是 configurable：可配置。（具体来说指的是，1.能否通过delete删除属性从而重新定义属性； 2.能否修改属性的特性；3.能否把属性修改为访问器属性；默认为true） enumerable：可枚举。（表示是否可以通过for-in循环来返回属性；默认为true） get：在读取属性时调用的函数。默认值为undefined set：在写入属性时调用的函数。默认值为undefined 访问器属性不像数据属性一样可以直接被定义，它只能通过Object.defineProperty()来定义 如下： 12345678910111213141516let test=&#123; _item:1&#125;Object.defineProperty(test,'item',&#123; get:function()&#123; return this._item; &#125;, set:function(num)&#123; if(num&gt;10)&#123; this._item++; &#125; &#125;&#125;)test.item=15;console.log(test.item); // 2 访问器属性的意义 修改访问器属性动态修改相关联的数据属性 监听访问器属性的修改去操作其它业务逻辑]]></content>
