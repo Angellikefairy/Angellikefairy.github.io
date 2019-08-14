@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="什么是this对于this,我们可以下一个定义  this是在执行上下文创建时确定的一个在执行过程中不可更改的变量。  简单来说,this应当是当前执行代码的环境对象 在函数中使用this函数调用一般会有以下四种情境：  在全局环境或是普通函数中直接调用 作为对象的方法 使用apply和call 作为构造函数  在全局环境或是普通函数中直接调用ps：全文均在浏览器环境下执行 在全局环境中直接调用1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-14T08:17:59.391Z">
+<meta property="og:updated_time" content="2019-08-14T09:09:53.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Js中的this到底指向哪">
 <meta name="twitter:description" content="什么是this对于this,我们可以下一个定义  this是在执行上下文创建时确定的一个在执行过程中不可更改的变量。  简单来说,this应当是当前执行代码的环境对象 在函数中使用this函数调用一般会有以下四种情境：  在全局环境或是普通函数中直接调用 作为对象的方法 使用apply和call 作为构造函数  在全局环境或是普通函数中直接调用ps：全文均在浏览器环境下执行 在全局环境中直接调用1">
@@ -463,6 +463,8 @@
 </li>
 <li>bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。</li>
 </ol>
+<p>其中，apply和call方法返回的是调用有指定this值和参数的函数的结果。</p>
+<p>而bind方法是返回构建的新的函数</p>
 <h4 id="apply与call的使用例子"><a href="#apply与call的使用例子" class="headerlink" title="apply与call的使用例子"></a>apply与call的使用例子</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a=<span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>===<span class="built_in">window</span>); <span class="comment">// true</span></span><br><span class="line">    test.apply(<span class="keyword">this</span>); <span class="comment">// 1</span></span><br><span class="line">&#125;</span><br><span class="line">func();</span><br></pre></td></tr></table></figure>
 
 <p>执行func函数，因为func函数被直接调用，因此func函数内部的this指向全局对象，在浏览器中即为window。然后，test函数通过apply方法被调用，因此test函数被传入的this值也是指向window的。</p>
@@ -715,7 +717,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">27.8k</span>
+    <span title="Site words total count">28.2k</span>
   
 </div>
 
@@ -745,7 +747,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共27.8k字</span>
+  <span class="post-count">博客全站共28.2k字</span>
 </div>
         
 

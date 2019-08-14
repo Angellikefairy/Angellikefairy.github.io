@@ -556,7 +556,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  339
                 </span>
               
 
@@ -595,7 +595,19 @@
       
         
           
-            
+            <h2 id="new操作符的作用"><a href="#new操作符的作用" class="headerlink" title="new操作符的作用"></a>new操作符的作用</h2><p>new操作符可以快速创建构造函数的实例，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age,job</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name=name;</span><br><span class="line">    <span class="keyword">this</span>.age=age;</span><br><span class="line">    <span class="keyword">this</span>.job=job;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.sayHello=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> man=<span class="keyword">new</span> Person(<span class="string">'zjb'</span>,<span class="string">'18'</span>,<span class="string">'frontEnd'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(man); <span class="comment">// Object &#123; name: "zjb", age: "18", job: "frontEnd" &#125;</span></span><br><span class="line">man.sayHello(); <span class="comment">// 'hello'</span></span><br></pre></td></tr></table></figure>
+
+<p>那么，使用new操作符来创建某构造函数的实例会经历以下四个步骤：</p>
+<ol>
+<li>内部创建一个新对象</li>
+<li>将构造函数的作用域赋给新对象（因此this就指向了这个新对象）</li>
+<li>执行构造函数中的代码</li>
+<li>返回新对象</li>
+</ol>
+<h2 id="自己实现一个new操作符"><a href="#自己实现一个new操作符" class="headerlink" title="自己实现一个new操作符"></a>自己实现一个new操作符</h2><p>既然new操作符的作用是创建一个构造函数的实例，那么new操作无非就是创建一个新的对象，将这个新对象的<strong>proto</strong>属性指向其构造函数的原型对象，然后该新对象绑定到构造函数上并获得传入的值，从而执行代码获得自身的对象属性</p>
+<p>new操作符的代码实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span>(<span class="params">obj,...arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ans=&#123;&#125;;</span><br><span class="line">    ans.__proto__=obj.prototype; <span class="comment">// 连接原型对象</span></span><br><span class="line">    <span class="comment">//Object.setPrototypeOf(ans, obj.prototype) 也可以，或许更高效</span></span><br><span class="line">    <span class="keyword">let</span> result=obj.apply(ans,arr); <span class="comment">// 获得构造函数的返回值</span></span><br><span class="line">    <span class="keyword">return</span> ans===<span class="built_in">Object</span>?ans:result;</span><br><span class="line">    <span class="comment">//用来判断构造函数的返回值是否与创建的实例不同</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1023,6 +1035,8 @@
 </li>
 <li>bind()方法创建一个新的函数，在bind()被调用时，这个新函数的this被bind的第一个参数指定，其余的参数将作为新函数的参数供调用时使用。</li>
 </ol>
+<p>其中，apply和call方法返回的是调用有指定this值和参数的函数的结果。</p>
+<p>而bind方法是返回构建的新的函数</p>
 <h4 id="apply与call的使用例子"><a href="#apply与call的使用例子" class="headerlink" title="apply与call的使用例子"></a>apply与call的使用例子</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a=<span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>===<span class="built_in">window</span>); <span class="comment">// true</span></span><br><span class="line">    test.apply(<span class="keyword">this</span>); <span class="comment">// 1</span></span><br><span class="line">&#125;</span><br><span class="line">func();</span><br></pre></td></tr></table></figure>
 
 <p>执行func函数，因为func函数被直接调用，因此func函数内部的this指向全局对象，在浏览器中即为window。然后，test函数通过apply方法被调用，因此test函数被传入的this值也是指向window的。</p>
@@ -2628,7 +2642,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">27.8k</span>
+    <span title="Site words total count">28.2k</span>
   
 </div>
 
@@ -2658,7 +2672,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共27.8k字</span>
+  <span class="post-count">博客全站共28.2k字</span>
 </div>
         
 
