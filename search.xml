@@ -19,7 +19,13 @@
   <entry>
     <title><![CDATA[如何优雅地使用箭头函数]]></title>
     <url>%2F2019%2F08%2F13%2F%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[什么是箭头函数箭头函数是ES6新增语法特性，它是一种使用箭头（=&gt;）定义函数的新语法，但是，他与传统的函数有些许的不同，主要集中在以下方面： 没有this,super,arguments和new.target绑定 箭头函数中的this,supper,arguments及new.target这些值有外围最近一层非箭头函数决定 不能通过new关键字调用 箭头函数没有[ [Constuct]]方法，所以不能被作为构造函数 没有原型 箭头函数不存在prototype这个属性 不可以改变this的绑定 箭头函数语法当函数右侧的表达式只有一个时，可以没有显式的返回语句 12const test=a=&gt;a+1;console.log(test(1)); // 2 如果函数没有参数，也要在声明的时候写一组没有内容的小括号 12const test=()=&gt;'hello';console.log(test()); // 'hello' 如果想要返回一个对象字面量，则需要将该字面量包裹在小括号里 12const test=()=&gt;(&#123;item:1&#125;);console.log(test()); // &#123;item:1&#125; 没有this绑定箭头函数中没有this绑定，必须通过查找作用域链来确定this的值。 箭头函数的this在定义时就确定了，是由其外层代码的this决定 12345678const obj=&#123; a()&#123; return ()=&gt;&#123; console.log(this); &#125; &#125;&#125;obj.a()(); // obj &#123; a: a() &#125; 全局环境下定义 12const a=()=&gt;this;console.log(a()); // window 被另一个箭头函数包含 12345678910111213const obj=&#123; a()&#123; return ()=&gt;&#123; console.log('outter'); console.log(this); // Object &#123; a: a() &#125; (()=&gt;&#123; console.log('inner'); console.log(this); // Object &#123; a: a() &#125; &#125;)() &#125; &#125;&#125;obj.a()(); 最后，因为箭头函数没有 this，所以也不能用 call()、apply()、bind() 这些方法改变 this 的指向 123const test=()=&gt;this;const obj=&#123;&#125;console.log(test.apply(obj)); // window 创建立即执行表达式立即执行表达式，即可以定义一个匿名函数并调用，自始至终不保存对该函数的引用 123(()=&gt;&#123; console.log('hello'); // 'hello'&#125;)(); 没有arguments绑定箭头函数没有自己的arguments对象，且未来无论函数在哪个上下文中执行，箭头函数始终可以访问到外围函数的arguments对象 123456(function a()&#123; console.log(arguments[0]); // 5 ((m)=&gt;&#123; console.log(arguments[0]); // 5 &#125;)(1)&#125;)(5)]]></content>
+      <categories>
+        <category>ES6</category>
+      </categories>
+      <tags>
+        <tag>基础语法</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Js中的this到底指向哪]]></title>

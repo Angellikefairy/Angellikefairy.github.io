@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="基础语法,">
 
 
 
@@ -88,17 +88,18 @@
 
 
 
-<meta name="description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta name="description" content="什么是箭头函数箭头函数是ES6新增语法特性，它是一种使用箭头（=&amp;gt;）定义函数的新语法，但是，他与传统的函数有些许的不同，主要集中在以下方面：  没有this,super,arguments和new.target绑定 箭头函数中的this,supper,arguments及new.target这些值有外围最近一层非箭头函数决定 不能通过new关键字调用 箭头函数没有[  [Constuct]]">
+<meta name="keywords" content="基础语法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何优雅地使用箭头函数">
 <meta property="og:url" content="http://yoursite.com/2019/08/13/如何优雅地使用箭头函数/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta property="og:description" content="什么是箭头函数箭头函数是ES6新增语法特性，它是一种使用箭头（=&amp;gt;）定义函数的新语法，但是，他与传统的函数有些许的不同，主要集中在以下方面：  没有this,super,arguments和new.target绑定 箭头函数中的this,supper,arguments及new.target这些值有外围最近一层非箭头函数决定 不能通过new关键字调用 箭头函数没有[  [Constuct]]">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-13T10:26:18.753Z">
+<meta property="og:updated_time" content="2019-08-14T08:07:24.394Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何优雅地使用箭头函数">
-<meta name="twitter:description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta name="twitter:description" content="什么是箭头函数箭头函数是ES6新增语法特性，它是一种使用箭头（=&amp;gt;）定义函数的新语法，但是，他与传统的函数有些许的不同，主要集中在以下方面：  没有this,super,arguments和new.target绑定 箭头函数中的this,supper,arguments及new.target这些值有外围最近一层非箭头函数决定 不能通过new关键字调用 箭头函数没有[  [Constuct]]">
 
 
 
@@ -347,6 +348,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -368,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  578
                 </span>
               
 
@@ -384,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -405,7 +428,42 @@
       
 
       
-        
+        <h2 id="什么是箭头函数"><a href="#什么是箭头函数" class="headerlink" title="什么是箭头函数"></a>什么是箭头函数</h2><p>箭头函数是ES6新增语法特性，它是一种使用箭头（=&gt;）定义函数的新语法，但是，他与传统的函数有些许的不同，主要集中在以下方面：</p>
+<ol>
+<li><strong>没有this,super,arguments和new.target绑定</strong> 箭头函数中的this,supper,arguments及new.target这些值有外围最近一层非箭头函数决定</li>
+<li><strong>不能通过new关键字调用</strong> 箭头函数没有[  [Constuct]]方法，所以不能被作为构造函数</li>
+<li><strong>没有原型</strong> 箭头函数不存在prototype这个属性</li>
+<li>不可以改变this的绑定</li>
+</ol>
+<h2 id="箭头函数语法"><a href="#箭头函数语法" class="headerlink" title="箭头函数语法"></a>箭头函数语法</h2><p>当函数右侧的表达式只有一个时，可以没有显式的返回语句</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> test=<span class="function"><span class="params">a</span>=&gt;</span>a+<span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(test(<span class="number">1</span>)); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>如果函数没有参数，也要在声明的时候写一组没有内容的小括号</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> test=<span class="function"><span class="params">()</span>=&gt;</span><span class="string">'hello'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(test()); <span class="comment">// 'hello'</span></span><br></pre></td></tr></table></figure>
+
+<p>如果想要返回一个对象字面量，则需要将该字面量包裹在小括号里</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> test=<span class="function"><span class="params">()</span>=&gt;</span>(&#123;<span class="attr">item</span>:<span class="number">1</span>&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(test()); <span class="comment">// &#123;item:1&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="没有this绑定"><a href="#没有this绑定" class="headerlink" title="没有this绑定"></a>没有this绑定</h2><p>箭头函数中没有this绑定，必须通过查找作用域链来确定this的值。</p>
+<p>箭头函数的this在定义时就确定了，是由其外层代码的this决定</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj=&#123;</span><br><span class="line">    a()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.a()(); <span class="comment">// obj &#123; a: a() &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>全局环境下定义</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a=<span class="function"><span class="params">()</span>=&gt;</span><span class="keyword">this</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a()); <span class="comment">// window</span></span><br></pre></td></tr></table></figure>
+
+<p>被另一个箭头函数包含</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj=&#123;</span><br><span class="line">    a()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'outter'</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// Object &#123; a: a() &#125;</span></span><br><span class="line">            (<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'inner'</span>);</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// Object &#123; a: a() &#125;</span></span><br><span class="line">            &#125;)()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.a()();</span><br></pre></td></tr></table></figure>
+
+<p>最后，因为箭头函数没有 this，所以也不能用 call()、apply()、bind() 这些方法改变 this 的指向</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> test=<span class="function"><span class="params">()</span>=&gt;</span><span class="keyword">this</span>;</span><br><span class="line"><span class="keyword">const</span> obj=&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(test.apply(obj)); <span class="comment">// window</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="创建立即执行表达式"><a href="#创建立即执行表达式" class="headerlink" title="创建立即执行表达式"></a>创建立即执行表达式</h2><p>立即执行表达式，即可以定义一个匿名函数并调用，自始至终不保存对该函数的引用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>); <span class="comment">// 'hello'</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<h2 id="没有arguments绑定"><a href="#没有arguments绑定" class="headerlink" title="没有arguments绑定"></a>没有arguments绑定</h2><p>箭头函数没有自己的arguments对象，且未来无论函数在哪个上下文中执行，箭头函数始终可以访问到外围函数的arguments对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">// 5</span></span><br><span class="line">    (<span class="function">(<span class="params">m</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">// 5</span></span><br><span class="line">    &#125;)(<span class="number">1</span>)</span><br><span class="line">&#125;)(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     
@@ -419,6 +477,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/基础语法/" rel="tag"># 基础语法</a>
+          
+        </div>
       
 
       <div>
@@ -499,8 +563,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -528,7 +601,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -570,6 +643,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是箭头函数"><span class="nav-number">1.</span> <span class="nav-text">什么是箭头函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#箭头函数语法"><span class="nav-number">2.</span> <span class="nav-text">箭头函数语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#没有this绑定"><span class="nav-number">3.</span> <span class="nav-text">没有this绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建立即执行表达式"><span class="nav-number">4.</span> <span class="nav-text">创建立即执行表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#没有arguments绑定"><span class="nav-number">5.</span> <span class="nav-text">没有arguments绑定</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -598,7 +687,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">27.1k</span>
+    <span title="Site words total count">27.7k</span>
   
 </div>
 
@@ -628,7 +717,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共27.1k字</span>
+  <span class="post-count">博客全站共27.7k字</span>
 </div>
         
 
