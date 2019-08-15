@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[二叉树与二叉搜索树]]></title>
+    <url>%2F2019%2F08%2F15%2F%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%2F</url>
+    <content type="text"><![CDATA[二叉树的定义二叉树的递归定义 要么二叉树没有根节点，是一棵空树 要么二叉树是由根节点、左子树、右子树组成，且左子树和右子树都是二叉树 简单来说，就是二叉树要么是一棵空树，要么这棵树的每一个节点最多只有两个节点，并且左右子树是严格区分的 二叉搜索树（BST）定义二叉搜索树（Binary Search Tree）是一种特殊的二叉树，又称为排序二叉树，二叉查找树、二叉排序树。 二叉搜索树的递归定义 要么二叉搜索树是一棵空树 要么二叉搜索树是由根节点、左子树、右子树组成，其中左子树和右子树都是二叉搜索树，且左子树上所有节点的数据域均小于根节点的数据域，右子树上所有节点的数据域均大于或等于根节点的数据域 简单来说，二叉搜索树是二叉树的一种，但是它只允许你在左侧节点存储比父节点小的值；在右侧节点存储比父节点大或等于的值 二叉搜索树的插入如果要插入的树为空树，那么就将要插入的节点作为这颗二叉搜索树的根节点； 如果不是，那么就根据二叉搜索树的特性，判断它与根节点的大小关系不断递归直到找到它的位置 二叉搜索树的插入实现 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162class Node&#123; // 节点类 constructor(key)&#123; this.key=key; this.left=null; this.right=null; &#125;&#125;class BinarySearchTree&#123; // 二叉搜索树类 constructor(root)&#123; this.root=root; &#125; insert(node)&#123; // 二叉搜索树的插入方法 if(this.root===null)&#123; this.root=node; &#125; else &#123; this.insertNode(this.root,node); &#125; &#125; insertNode(root,node)&#123; // insertNode方法（用来找到合适的位置进行插入） if(node.key&lt;root.key)&#123; if(root.left===null) &#123; root.left=node; return; &#125; else &#123; this.insertNode(root.left,node); &#125; &#125; else &#123; if(root.right===null) &#123; root.right=node; return; &#125; else &#123; this.insertNode(root.right,node); &#125; &#125; &#125;&#125;let A=new Node(10);let B=new Node(15);let C=new Node(13);let D=new Node(7);let root=new BinarySearchTree(A);root.insert(B);root.insert(C);root.insert(D);console.log(root);/** 输出结果*//*BinarySearchTree &#123; root: Node &#123; key: 10, left: Node &#123; key: 7, left: null, right: null &#125;, right: Node &#123; key: 15, left: [Node], right: null &#125; &#125;&#125;*/]]></content>
+      <categories>
+        <category>算法笔记</category>
+      </categories>
+      <tags>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-118 杨辉三角]]></title>
     <url>%2F2019%2F08%2F14%2Fleetcode-118%2F</url>
     <content type="text"><![CDATA[杨辉三角题目描述给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。 在杨辉三角中，每个数是它左上方和右上方的数的和。 示例: 输入: 5输出:[ [1], [1,1], [1,2,1], [1,3,3,1], [1,4,6,4,1]] 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/pascals-triangle著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路杨辉三角的每一行，除了首尾都是为1外，每一项都是前一行的两项之和 解题步骤 设置一个数组 建立numRows行二维数组，每一行除了首尾都是为1外，每一项都是前一行的两项之和 返回数组 coding实现12345678910111213141516/** * @param &#123;number&#125; numRows * @return &#123;number[][]&#125; */var generate = function(numRows) &#123; let ans=[]; for(let i=0;i&lt;numRows;i++)&#123; ans[i]=[]; ans[i][0]=1; ans[i][i]=1; for(let k=1;k&lt;i;k++)&#123; ans[i][k]=ans[i-1][k-1]+ans[i-1][k]; &#125; &#125; return ans;&#125;;]]></content>
@@ -333,6 +344,9 @@
       <categories>
         <category>算法笔记</category>
       </categories>
+      <tags>
+        <tag>排序</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[leetcode-1002 查找常用字符]]></title>
