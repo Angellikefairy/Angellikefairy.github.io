@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="基础语法,">
+  <meta name="keywords" content="树,">
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="argumentsarguments对象是所有（非箭头）函数中都可用的局部变量。 通过该对象可以访问参数数组。因为此对象包含传递给函数的每个参数，第一个参数在索引0处。 12345function a()&amp;#123;    console.log(arguments); //Arguments &amp;#123; 0: 1, 1: 2, 2: 3, … &amp;#125;    console.log(arg">
-<meta name="keywords" content="基础语法">
+<meta name="description" content="报数题目描述给定两个二叉树，编写一个函数来检验它们是否相同。 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。 示例 1:  输入:              1       1             / \       / \             2   3     2   3 [1,2,3],   [1,2,3] 输出: true  示例 2:  输入  1 / 2 1">
+<meta name="keywords" content="树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="arguments与模拟函数重载">
-<meta property="og:url" content="http://yoursite.com/2019/08/03/arguments与模拟函数重载/index.html">
+<meta property="og:title" content="leetcode-100">
+<meta property="og:url" content="http://yoursite.com/2019/08/16/leetcode-100/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="argumentsarguments对象是所有（非箭头）函数中都可用的局部变量。 通过该对象可以访问参数数组。因为此对象包含传递给函数的每个参数，第一个参数在索引0处。 12345function a()&amp;#123;    console.log(arguments); //Arguments &amp;#123; 0: 1, 1: 2, 2: 3, … &amp;#125;    console.log(arg">
+<meta property="og:description" content="报数题目描述给定两个二叉树，编写一个函数来检验它们是否相同。 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。 示例 1:  输入:              1       1             / \       / \             2   3     2   3 [1,2,3],   [1,2,3] 输出: true  示例 2:  输入  1 / 2 1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-03T06:51:51.528Z">
+<meta property="og:updated_time" content="2019-08-16T07:45:11.749Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="arguments与模拟函数重载">
-<meta name="twitter:description" content="argumentsarguments对象是所有（非箭头）函数中都可用的局部变量。 通过该对象可以访问参数数组。因为此对象包含传递给函数的每个参数，第一个参数在索引0处。 12345function a()&amp;#123;    console.log(arguments); //Arguments &amp;#123; 0: 1, 1: 2, 2: 3, … &amp;#125;    console.log(arg">
+<meta name="twitter:title" content="leetcode-100">
+<meta name="twitter:description" content="报数题目描述给定两个二叉树，编写一个函数来检验它们是否相同。 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。 示例 1:  输入:              1       1             / \       / \             2   3     2   3 [1,2,3],   [1,2,3] 输出: true  示例 2:  输入  1 / 2 1">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/03/arguments与模拟函数重载/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/16/leetcode-100/">
 
 
 
 
 
-  <title>arguments与模拟函数重载 | Hexo</title>
+  <title>leetcode-100 | Hexo</title>
   
 
 
@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/arguments与模拟函数重载/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/16/leetcode-100/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -325,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">arguments与模拟函数重载</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode-100</h1>
         
 
         <div class="post-meta">
@@ -337,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T13:57:50+08:00">
-                2019-08-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-16T15:19:51+08:00">
+                2019-08-16
               </time>
             
 
@@ -360,8 +360,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
-                    <span itemprop="name">javaScript基础</span>
+                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode题解与算法</span>
                   </a>
                 </span>
 
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  400
+                  420
                 </span>
               
 
@@ -428,23 +428,25 @@
       
 
       
-        <h2 id="arguments"><a href="#arguments" class="headerlink" title="arguments"></a>arguments</h2><p>arguments对象是所有（非箭头）函数中都可用的局部变量。</p>
-<p>通过该对象可以访问参数数组。因为此对象包含传递给函数的每个参数，第一个参数在索引0处。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>); <span class="comment">//Arguments &#123; 0: 1, 1: 2, 2: 3, … &#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">//1</span></span><br><span class="line">&#125;</span><br><span class="line">a(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
-
-<p>由此可以看到，arguments对象并不是Array的实例，它是类数组对象。因此，可以通过方括号语法访问它的每一个元素</p>
+        <h1 id="报数"><a href="#报数" class="headerlink" title="报数"></a>报数</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定两个二叉树，编写一个函数来检验它们是否相同。</p>
+<p>如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。</p>
+<p>示例 1:</p>
 <blockquote>
-<p>arguments对象内的属性值永远与对应命名参数的值保持同步</p>
+<p>输入:<br>              1       1<br>             / \       / \ <br>            2   3     2   3 <br>[1,2,3],   [1,2,3] <br>输出: true</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">//1</span></span><br><span class="line">    num=<span class="number">11</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">//11</span></span><br><span class="line">&#125;</span><br><span class="line">a(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="模拟函数重载"><a href="#模拟函数重载" class="headerlink" title="模拟函数重载"></a>模拟函数重载</h2><h3 id="重载的概念"><a href="#重载的概念" class="headerlink" title="重载的概念"></a>重载的概念</h3><p>在Java语言中，函数或者方法有相同的名称，但是参数的类型或数量不同，这样的同名不同参数的函数或者方法之间，互相称之为重载函数。</p>
-<h3 id="为什么js没有重载"><a href="#为什么js没有重载" class="headerlink" title="为什么js没有重载"></a>为什么js没有重载</h3><p>然而，js中并没有重载的概念，因为：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">num1,num2</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line">a(); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<p>如果定义了多个同名函数，那么该名字只属于后定义的函数，所以js中不能像Java一样有传统意义上的重载</p>
-<h3 id="js模拟函数重载"><a href="#js模拟函数重载" class="headerlink" title="js模拟函数重载"></a>js模拟函数重载</h3><p>其实，通过arguments,我们就可以通过检查传入函数中的参数类型和数量来做出不同的反应，从而模拟方法的重载</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">arguments</span>.length===<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">arguments</span>.length===<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">a(); <span class="comment">// 0</span></span><br><span class="line">a(<span class="number">1</span>); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<blockquote>
+<p>输入 <br> 1 <br>/ <br>2 <br><br>1<br> \ <br> 2<br>[1,2],     [1,null,2]<br>输出: false</p>
+</blockquote>
+<a id="more"></a>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/same-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/same-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>确定两棵树是否结构相同，并且节点的值也相同。可以采用四大遍历中的任意一种。当遇到子树为null时，将’null’加入到数组中，否则，加入节点的值入数组</p>
+<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
+<li>构建先序遍历函数，传入根节点和一个已知定义的空数组</li>
+<li>当遇到子树为null时，将’null’加入到数组中，同时结束当前递归函数调用；否则，加入节点的值入数组</li>
+<li>比较两个数组的值是否相等(因为数组是对象，所以不能直接进行相等比较，可以转化为字符串进行比较)；若相同则返回true，否则false</li>
+</ol>
+<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * function TreeNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.left = this.right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;TreeNode&#125; p</span></span><br><span class="line"><span class="comment"> * @param &#123;TreeNode&#125; q</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isSameTree = <span class="function"><span class="keyword">function</span>(<span class="params">p, q</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">preOrder</span>(<span class="params">root,ans</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root===<span class="literal">null</span>) &#123;</span><br><span class="line">            ans.push(<span class="string">'null'</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            ans.push(root.val);</span><br><span class="line">            preOrder(root.left,ans);</span><br><span class="line">            preOrder(root.right,ans);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> ansP=[],ansQ=[];</span><br><span class="line">    preOrder(p,ansP);</span><br><span class="line">    preOrder(q,ansQ);</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">String</span>(ansP)===<span class="built_in">String</span>(ansQ)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -463,7 +465,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/基础语法/" rel="tag"># 基础语法</a>
+            <a href="/tags/树/" rel="tag"># 树</a>
           
         </div>
       
@@ -482,8 +484,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/03/循环/" rel="next" title="循环 (for...of与for...in)">
-                <i class="fa fa-chevron-left"></i> 循环 (for...of与for...in)
+              <a href="/2019/08/15/leetcode-38/" rel="next" title="leetcode-38 报数">
+                <i class="fa fa-chevron-left"></i> leetcode-38 报数
               </a>
             
           </div>
@@ -491,10 +493,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/03/leetcode-237/" rel="prev" title="leetcode-237 删除链表中的节点">
-                leetcode-237 删除链表中的节点 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -635,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#arguments"><span class="nav-number">1.</span> <span class="nav-text">arguments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟函数重载"><span class="nav-number">2.</span> <span class="nav-text">模拟函数重载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重载的概念"><span class="nav-number">2.1.</span> <span class="nav-text">重载的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么js没有重载"><span class="nav-number">2.2.</span> <span class="nav-text">为什么js没有重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js模拟函数重载"><span class="nav-number">2.3.</span> <span class="nav-text">js模拟函数重载</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#报数"><span class="nav-number">1.</span> <span class="nav-text">报数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
             
 
           </div>

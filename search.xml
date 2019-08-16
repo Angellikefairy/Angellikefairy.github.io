@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-100]]></title>
+    <url>%2F2019%2F08%2F16%2Fleetcode-100%2F</url>
+    <content type="text"><![CDATA[报数题目描述给定两个二叉树，编写一个函数来检验它们是否相同。 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。 示例 1: 输入: 1 1 / \ / \ 2 3 2 3 [1,2,3], [1,2,3] 输出: true 示例 2: 输入 1 / 2 1 \ 2[1,2], [1,null,2]输出: false 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/same-tree著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述确定两棵树是否结构相同，并且节点的值也相同。可以采用四大遍历中的任意一种。当遇到子树为null时，将’null’加入到数组中，否则，加入节点的值入数组 解题步骤 构建先序遍历函数，传入根节点和一个已知定义的空数组 当遇到子树为null时，将’null’加入到数组中，同时结束当前递归函数调用；否则，加入节点的值入数组 比较两个数组的值是否相等(因为数组是对象，所以不能直接进行相等比较，可以转化为字符串进行比较)；若相同则返回true，否则false Coding实现123456789101112131415161718192021222324252627282930/** * Definition for a binary tree node. * function TreeNode(val) &#123; * this.val = val; * this.left = this.right = null; * &#125; *//** * @param &#123;TreeNode&#125; p * @param &#123;TreeNode&#125; q * @return &#123;boolean&#125; */var isSameTree = function(p, q) &#123; function preOrder(root,ans)&#123; if(root===null) &#123; ans.push('null'); return null; &#125; else &#123; ans.push(root.val); preOrder(root.left,ans); preOrder(root.right,ans); &#125; &#125; let ansP=[],ansQ=[]; preOrder(p,ansP); preOrder(q,ansQ); if(String(ansP)===String(ansQ)) return true; else return false;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-38 报数]]></title>
     <url>%2F2019%2F08%2F15%2Fleetcode-38%2F</url>
     <content type="text"><![CDATA[报数题目描述报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下： 1. 1 2. 11 3. 21 4. 1211 5. 1112211 被读作 “one 1” (“一个一”) , 即 11。11 被读作 “two 1s” (“两个一”）, 即 21。21 被读作 “one 2”, “one 1” （”一个二” , “一个一”) , 即 1211。 给定一个正整数 n（1 ≤ n ≤ 30），输出报数序列的第 n 项。 注意：整数顺序将表示为一个字符串。 示例 1: 输入: 1输出: “1” 示例 2: 输入: 4输出: “1211” 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/count-and-say著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述报数，指报的是前一个数。当前一个数有连续个同样地数比如’111’，那么把这个念作（3个1），因此会输出31；又比如’123’，因为这三个数都不同，我们会报数为（1个1；1个2；1个3），因此会输出111213 解题步骤不想多说，直接上代码 Coding实现12345678910111213141516171819202122/** * @param &#123;number&#125; n * @return &#123;string&#125; */var countAndSay = function(n) &#123; let ans=[]; ans[0]='1'; for(let i=1;i&lt;n;i++)&#123; let sum=1; ans[i]=''; for(let k=0;k&lt;ans[i-1].length;k++)&#123; if(ans[i-1][k]!==ans[i-1][k+1])&#123; ans[i]+=sum.toString()+ans[i-1][k]; sum=1; &#125; else &#123; sum++; &#125; &#125; &#125; return ans[n-1];&#125;;]]></content>
