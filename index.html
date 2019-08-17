@@ -326,7 +326,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/16/leetcode-100/" itemprop="url">leetcode-100</a></h1>
+                <a class="post-title-link" href="/2019/08/16/leetcode-100/" itemprop="url">leetcode-100 相同的树</a></h1>
         
 
         <div class="post-meta">
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  420
+                  422
                 </span>
               
 
@@ -430,7 +430,7 @@
 
       
         
-          <h1 id="报数"><a href="#报数" class="headerlink" title="报数"></a>报数</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定两个二叉树，编写一个函数来检验它们是否相同。</p>
+          <h1 id="相同的树"><a href="#相同的树" class="headerlink" title="相同的树"></a>相同的树</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定两个二叉树，编写一个函数来检验它们是否相同。</p>
 <p>如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。</p>
 <p>示例 1:</p>
 <blockquote>
@@ -778,7 +778,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.1k
+                  1.5k
                 </span>
               
 
@@ -794,7 +794,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  6
                 </span>
               
             </div>
@@ -854,7 +854,13 @@
 
 <h3 id="根据遍历序列重建二叉树"><a href="#根据遍历序列重建二叉树" class="headerlink" title="根据遍历序列重建二叉树"></a>根据遍历序列重建二叉树</h3><p>中序序列可以与先序序列、后序序列、层序序列中的任意一个来构建唯一的二叉树，而后三者两两搭配或是三个一起上都无法构建唯一的二叉树</p>
 <p>原因是先序、后序、层序均是提供根节点。然而只有中序序列才能区分出左右子树</p>
-
+<h4 id="给定二叉树的先序遍历和中序遍历来重建二叉树的步骤"><a href="#给定二叉树的先序遍历和中序遍历来重建二叉树的步骤" class="headerlink" title="给定二叉树的先序遍历和中序遍历来重建二叉树的步骤"></a>给定二叉树的先序遍历和中序遍历来重建二叉树的步骤</h4><ol>
+<li>通过先序遍历来确定根节点，一开始会是数组的第一项</li>
+<li>通过中序遍历来确定这棵树根节点的左子树和右子树，左子树会是数组中根节点项的前面那所有项；右子树会是数组中根节点项的后面的所有值</li>
+<li>通过步骤2确定的中序遍历中的左子树数组和右子树数组来确定先序遍历中的左子树数组和右子树数组</li>
+<li>递归左子树数组和右子树数组，重复步骤1,2,3直到数组为空</li>
+</ol>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(key)&#123;</span><br><span class="line">        <span class="keyword">this</span>.key=key;</span><br><span class="line">        <span class="keyword">this</span>.left=<span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">this</span>.right=<span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> A=<span class="keyword">new</span> Node(<span class="string">'A'</span>);</span><br><span class="line"><span class="keyword">let</span> B=<span class="keyword">new</span> Node(<span class="string">'B'</span>);</span><br><span class="line"><span class="keyword">let</span> C=<span class="keyword">new</span> Node(<span class="string">'C'</span>);</span><br><span class="line"><span class="keyword">let</span> D=<span class="keyword">new</span> Node(<span class="string">'D'</span>);</span><br><span class="line"><span class="keyword">let</span> E=<span class="keyword">new</span> Node(<span class="string">'E'</span>);</span><br><span class="line"><span class="keyword">let</span> F=<span class="keyword">new</span> Node(<span class="string">'F'</span>);</span><br><span class="line"><span class="keyword">let</span> G=<span class="keyword">new</span> Node(<span class="string">'G'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 给定二叉树的先序遍历和中序遍历重建二叉树函数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createTree</span>(<span class="params">m,n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(m.length===<span class="number">0</span>) &#123;<span class="keyword">return</span>;&#125;;</span><br><span class="line">    <span class="keyword">let</span> root=m[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> rootIndex=n.indexOf(root);</span><br><span class="line">    <span class="keyword">let</span> leftNTree=n.slice(<span class="number">0</span>,rootIndex);</span><br><span class="line">    <span class="keyword">let</span> rightNTree=n.slice(rootIndex+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">let</span> leftMTree=m.slice(<span class="number">1</span>,leftNTree.length+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">let</span> rightMTree=m.slice(rootIndex+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(leftMTree[<span class="number">0</span>])&#123;root.left=leftMTree[<span class="number">0</span>];&#125;</span><br><span class="line">    <span class="keyword">if</span>(rightMTree[<span class="number">0</span>])&#123;root.right=rightMTree[<span class="number">0</span>];&#125;</span><br><span class="line">    createTree(leftMTree,leftNTree);</span><br><span class="line">    createTree(rightMTree,rightNTree);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">createTree([A,B,C,D,E,F,G],[B,D,C,A,F,E,G]);</span><br><span class="line"><span class="built_in">console</span>.log(A);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 输出结果</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Node &#123;</span></span><br><span class="line"><span class="comment">  key: 'A',</span></span><br><span class="line"><span class="comment">  left: Node &#123;</span></span><br><span class="line"><span class="comment">    key: 'B',</span></span><br><span class="line"><span class="comment">    left: null,</span></span><br><span class="line"><span class="comment">    right: Node &#123; key: 'C', left: [Node], right: null &#125;</span></span><br><span class="line"><span class="comment">  &#125;,</span></span><br><span class="line"><span class="comment">  right: Node &#123;</span></span><br><span class="line"><span class="comment">    key: 'E',</span></span><br><span class="line"><span class="comment">    left: Node &#123; key: 'F', left: null, right: null &#125;,</span></span><br><span class="line"><span class="comment">    right: Node &#123; key: 'G', left: null, right: null &#125;</span></span><br><span class="line"><span class="comment">  &#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
           
         
       
@@ -2452,7 +2458,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">30k</span>
+    <span title="Site words total count">30.5k</span>
   
 </div>
 
@@ -2482,7 +2488,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共30k字</span>
+  <span class="post-count">博客全站共30.5k字</span>
 </div>
         
 
