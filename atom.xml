@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-18T02:40:59.294Z</updated>
+  <updated>2019-08-18T06:54:44.655Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-104 二叉树的最大深度</title>
+    <link href="http://yoursite.com/2019/08/18/leetcode-104/"/>
+    <id>http://yoursite.com/2019/08/18/leetcode-104/</id>
+    <published>2019-08-18T06:46:43.000Z</published>
+    <updated>2019-08-18T06:54:44.655Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="二叉树的最大深度"><a href="#二叉树的最大深度" class="headerlink" title="二叉树的最大深度"></a>二叉树的最大深度</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个二叉树，找出其最大深度。</p><p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p><p>说明: 叶子节点是指没有子节点的节点。</p><p>示例：<br>给定二叉树 [3,9,20,null,null,15,7]，</p><pre><code>3</code></pre><p>   / <br>  9  20<br>    /  <br>   15   7<br>返回它的最大深度 3 。</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/maximum-depth-of-binary-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>获取一棵树的二叉树地最大深度，也就是需要获得该树的层数。那么，很自然可以想到利用层序遍历来获取到层数</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>利用队列来实现层序遍历，为根节点设置属性depth=1；并使最大层数max=1;</li><li>判断当前节点是否有左右子树，若有，则左右子树的根节点的属性depth=当前节点的属性depth值+1；并且将子树入队列</li><li>每个节点depth值与max值进行比较，将max赋予较大值</li><li>返回max</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * function TreeNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.left = this.right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;TreeNode&#125; root</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxDepth = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> max=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(root===<span class="literal">null</span>) <span class="keyword">return</span> max;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> queue=[];</span><br><span class="line">            queue.push(root);</span><br><span class="line">            max=root.depth=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(queue.length!==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">let</span> key=queue.shift();</span><br><span class="line">                <span class="keyword">if</span>(key.left!==<span class="literal">null</span>) &#123;</span><br><span class="line">                    key.left.depth=key.depth+<span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">if</span>(key.left.depth&gt;max) max=key.left.depth;</span><br><span class="line">                    queue.push(key.left)</span><br><span class="line">                &#125;;</span><br><span class="line">                <span class="keyword">if</span>(key.right!==<span class="literal">null</span>) &#123;</span><br><span class="line">                    key.right.depth=key.depth+<span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">if</span>(key.right.depth&gt;max) max=key.right.depth;</span><br><span class="line">                    queue.push(key.right)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> max;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;二叉树的最大深度&quot;&gt;&lt;a href=&quot;#二叉树的最大深度&quot; class=&quot;headerlink&quot; title=&quot;二叉树的最大深度&quot;&gt;&lt;/a&gt;二叉树的最大深度&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定一个二叉树，找出其最大深度。&lt;/p&gt;
+&lt;p&gt;二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。&lt;/p&gt;
+&lt;p&gt;说明: 叶子节点是指没有子节点的节点。&lt;/p&gt;
+&lt;p&gt;示例：&lt;br&gt;给定二叉树 [3,9,20,null,null,15,7]，&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;3&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;   / &lt;br&gt;  9  20&lt;br&gt;    /  &lt;br&gt;   15   7&lt;br&gt;返回它的最大深度 3 。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="树" scheme="http://yoursite.com/tags/%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode-101 对称二叉树</title>
@@ -586,43 +612,6 @@
     
     
       <category term="基础语法" scheme="http://yoursite.com/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-237 删除链表中的节点</title>
-    <link href="http://yoursite.com/2019/08/03/leetcode-237/"/>
-    <id>http://yoursite.com/2019/08/03/leetcode-237/</id>
-    <published>2019-08-03T07:10:36.000Z</published>
-    <updated>2019-08-03T07:16:57.922Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="删除链表中的节点"><a href="#删除链表中的节点" class="headerlink" title="删除链表中的节点"></a>删除链表中的节点</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。</p><p>现有一个链表 – head = [4,5,1,9]，它可以表示为:</p><p>示例 1:</p><blockquote><p>输入: head = [4,5,1,9], node = 5<br>输出: [4,1,9]<br>解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9.</p></blockquote><p>示例 2:</p><blockquote><p>输入: head = [4,5,1,9], node = 1<br>输出: [4,5,9]<br>解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 5 -&gt; 9.</p></blockquote><p>说明:</p><ol><li>链表至少包含两个节点。</li><li>链表中所有节点的值都是唯一的。</li><li>给定的节点为非末尾节点并且一定是链表中的一个有效节点。</li><li>不要从你的函数中返回任何结果。<a id="more"></a>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/delete-node-in-a-linked-list" target="_blank" rel="noopener">https://leetcode-cn.com/problems/delete-node-in-a-linked-list</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li></ol><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>一开始看到这个题目也是傻了一下，为什么只是传入一个要删除的节点，而不传入整个链表。后来一想，题目给定的初始链表中，每个节点的next存在的指向关系是一定的。那么我们就可以不需要考虑要删除节点之前的节点，只需要将要删除的节点的val值和next指向改变就可以了</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>改变要删除节点的val值为其下一个节点的val值</li><li>改变要删除节点的next指向为其下一个节点的下一个节点</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * function ListNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.next = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;ListNode&#125; node</span></span><br><span class="line"><span class="comment"> * @return &#123;void&#125; Do not return anything, modify node in-place instead.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> deleteNode = <span class="function"><span class="keyword">function</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">    node.val=node.next.val;</span><br><span class="line">    node.next=node.next.next;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;删除链表中的节点&quot;&gt;&lt;a href=&quot;#删除链表中的节点&quot; class=&quot;headerlink&quot; title=&quot;删除链表中的节点&quot;&gt;&lt;/a&gt;删除链表中的节点&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。&lt;/p&gt;
-&lt;p&gt;现有一个链表 – head = [4,5,1,9]，它可以表示为:&lt;/p&gt;
-&lt;p&gt;示例 1:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: head = [4,5,1,9], node = 5&lt;br&gt;输出: [4,1,9]&lt;br&gt;解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 1 -&amp;gt; 9.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;示例 2:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: head = [4,5,1,9], node = 1&lt;br&gt;输出: [4,5,9]&lt;br&gt;解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 5 -&amp;gt; 9.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;说明:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;链表至少包含两个节点。&lt;/li&gt;
-&lt;li&gt;链表中所有节点的值都是唯一的。&lt;/li&gt;
-&lt;li&gt;给定的节点为非末尾节点并且一定是链表中的一个有效节点。&lt;/li&gt;
-&lt;li&gt;不要从你的函数中返回任何结果。
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="链表" scheme="http://yoursite.com/tags/%E9%93%BE%E8%A1%A8/"/>
     
   </entry>
   

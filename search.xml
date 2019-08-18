@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-104 二叉树的最大深度]]></title>
+    <url>%2F2019%2F08%2F18%2Fleetcode-104%2F</url>
+    <content type="text"><![CDATA[二叉树的最大深度题目描述给定一个二叉树，找出其最大深度。 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。 说明: 叶子节点是指没有子节点的节点。 示例：给定二叉树 [3,9,20,null,null,15,7]， 3 / 9 20 / 15 7返回它的最大深度 3 。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/maximum-depth-of-binary-tree著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述获取一棵树的二叉树地最大深度，也就是需要获得该树的层数。那么，很自然可以想到利用层序遍历来获取到层数 解题步骤 利用队列来实现层序遍历，为根节点设置属性depth=1；并使最大层数max=1; 判断当前节点是否有左右子树，若有，则左右子树的根节点的属性depth=当前节点的属性depth值+1；并且将子树入队列 每个节点depth值与max值进行比较，将max赋予较大值 返回max Coding实现12345678910111213141516171819202122232425262728293031323334/** * Definition for a binary tree node. * function TreeNode(val) &#123; * this.val = val; * this.left = this.right = null; * &#125; *//** * @param &#123;TreeNode&#125; root * @return &#123;number&#125; */var maxDepth = function(root) &#123; let max=0; if(root===null) return max; else &#123; let queue=[]; queue.push(root); max=root.depth=1; while(queue.length!==0)&#123; let key=queue.shift(); if(key.left!==null) &#123; key.left.depth=key.depth+1; if(key.left.depth&gt;max) max=key.left.depth; queue.push(key.left) &#125;; if(key.right!==null) &#123; key.right.depth=key.depth+1; if(key.right.depth&gt;max) max=key.right.depth; queue.push(key.right) &#125; &#125; return max; &#125;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-101 对称二叉树]]></title>
     <url>%2F2019%2F08%2F18%2Fleetcode-101%2F</url>
     <content type="text"><![CDATA[对称二叉树题目描述给定一个二叉树，检查它是否是镜像对称的。 例如，二叉树 [1,2,2,3,4,4,3] 是对称的。 1 / 2 2 / \ / 3 4 4 3但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的: 1 / 2 2 \ 3 3说明: 如果你可以运用递归和迭代两种方法解决这个问题，会很加分。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/symmetric-tree著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述对于对称二叉树，我们只需要判断根节点的左子树和右子树是否是镜像对称的。那么，我们只需要将其中一个子树的所有节点的子树对换位置，再与另一个子树比较是否是相同的树（树结构相同，节点值也一样，参考leetcode100-相同的树） 那么按照这个思路，我们可以直接比较根节点的左子树中的每一个节点的左右子树是否都与右子树中的每一个节点的左右子树镜像对称，也就是leftTree.left===rightTree.right&amp;&amp;leftTree.right===rightTree.left对于每个节点是否成立 解题步骤 如果树为空，那么该树为对称数组，直接返回true 如果该树非空，那么遍历根节点的左右子树的每一个节点，如果他们的左右子树都相同那么返回true，否则返回false Coding实现1234567891011121314151617181920212223/** * Definition for a binary tree node. * function TreeNode(val) &#123; * this.val = val; * this.left = this.right = null; * &#125; *//** * @param &#123;TreeNode&#125; root * @return &#123;boolean&#125; */var isSymmetric = function(root) &#123; if(root===null) return true; let rightTree=root.right; let leftTree=root.left; function isSame(leftTree,rightTree)&#123; if(leftTree==null&amp;&amp;rightTree==null) return true; if(leftTree==null||rightTree==null) return false; if(leftTree.val!==rightTree.val) return false; return isSame(leftTree.left,rightTree.right)&amp;&amp;isSame(leftTree.right,rightTree.left); &#125; return isSame(root.left,root.right);&#125;;]]></content>
