@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="数组,">
+  <meta name="keywords" content="树,">
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="高度检查器题目描述学校在拍年度纪念照时，一般要求学生按照 非递减 的高度顺序排列。 请你返回至少有多少个学生没有站在正确位置数量。该人数指的是：能让所有学生以 非递减 高度排列的必要移动人数。 示例：  输入：[1,1,4,2,1,3]输出：3解释：高度为 4、3 和最后一个 1 的学生，没有站在正确的位置。  提示：  1&amp;lt;= heights.length &amp;lt;= 100 1&amp;lt;=">
-<meta name="keywords" content="数组">
+<meta name="description" content="对称二叉树题目描述给定一个二叉树，检查它是否是镜像对称的。 例如，二叉树 [1,2,2,3,4,4,3] 是对称的。 1   /   2   2 / \ / 3  4 4  3但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的: 1   /   2   2   \      3    3说明: 如果你可以运用递归和迭代两种方法解决这个问题，会很加分。">
+<meta name="keywords" content="树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-1051 高度检查器">
-<meta property="og:url" content="http://yoursite.com/2019/08/07/leetcode-1051/index.html">
+<meta property="og:title" content="leetcode-101 对称二叉树">
+<meta property="og:url" content="http://yoursite.com/2019/08/18/leetcode-101/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="高度检查器题目描述学校在拍年度纪念照时，一般要求学生按照 非递减 的高度顺序排列。 请你返回至少有多少个学生没有站在正确位置数量。该人数指的是：能让所有学生以 非递减 高度排列的必要移动人数。 示例：  输入：[1,1,4,2,1,3]输出：3解释：高度为 4、3 和最后一个 1 的学生，没有站在正确的位置。  提示：  1&amp;lt;= heights.length &amp;lt;= 100 1&amp;lt;=">
+<meta property="og:description" content="对称二叉树题目描述给定一个二叉树，检查它是否是镜像对称的。 例如，二叉树 [1,2,2,3,4,4,3] 是对称的。 1   /   2   2 / \ / 3  4 4  3但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的: 1   /   2   2   \      3    3说明: 如果你可以运用递归和迭代两种方法解决这个问题，会很加分。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-07T10:19:40.254Z">
+<meta property="og:updated_time" content="2019-08-18T02:09:20.765Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-1051 高度检查器">
-<meta name="twitter:description" content="高度检查器题目描述学校在拍年度纪念照时，一般要求学生按照 非递减 的高度顺序排列。 请你返回至少有多少个学生没有站在正确位置数量。该人数指的是：能让所有学生以 非递减 高度排列的必要移动人数。 示例：  输入：[1,1,4,2,1,3]输出：3解释：高度为 4、3 和最后一个 1 的学生，没有站在正确的位置。  提示：  1&amp;lt;= heights.length &amp;lt;= 100 1&amp;lt;=">
+<meta name="twitter:title" content="leetcode-101 对称二叉树">
+<meta name="twitter:description" content="对称二叉树题目描述给定一个二叉树，检查它是否是镜像对称的。 例如，二叉树 [1,2,2,3,4,4,3] 是对称的。 1   /   2   2 / \ / 3  4 4  3但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的: 1   /   2   2   \      3    3说明: 如果你可以运用递归和迭代两种方法解决这个问题，会很加分。">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/07/leetcode-1051/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/18/leetcode-101/">
 
 
 
 
 
-  <title>leetcode-1051 高度检查器 | Hexo</title>
+  <title>leetcode-101 对称二叉树 | Hexo</title>
   
 
 
@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/leetcode-1051/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/18/leetcode-101/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -325,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode-1051 高度检查器</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode-101 对称二叉树</h1>
         
 
         <div class="post-meta">
@@ -337,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-07T18:15:11+08:00">
-                2019-08-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-18T09:44:33+08:00">
+                2019-08-18
               </time>
             
 
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  313
+                  468
                 </span>
               
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -428,25 +428,20 @@
       
 
       
-        <h1 id="高度检查器"><a href="#高度检查器" class="headerlink" title="高度检查器"></a>高度检查器</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>学校在拍年度纪念照时，一般要求学生按照 非递减 的高度顺序排列。</p>
-<p>请你返回至少有多少个学生没有站在正确位置数量。该人数指的是：能让所有学生以 非递减 高度排列的必要移动人数。</p>
-<p>示例：</p>
-<blockquote>
-<p>输入：[1,1,4,2,1,3]<br>输出：3<br>解释：<br>高度为 4、3 和最后一个 1 的学生，没有站在正确的位置。</p>
-</blockquote>
-<p>提示：</p>
-<ol>
-<li>1&lt;= heights.length &lt;= 100</li>
-<li>1&lt;= heights[i] &lt;= 100<a id="more"></a>
-来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/height-checker" target="_blank" rel="noopener">https://leetcode-cn.com/problems/height-checker</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li>
-</ol>
-<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>只需比较原数组和排序后的数组的每个位置上的元素有几个不一样即可</p>
+        <h1 id="对称二叉树"><a href="#对称二叉树" class="headerlink" title="对称二叉树"></a>对称二叉树</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个二叉树，检查它是否是镜像对称的。</p>
+<p>例如，二叉树 [1,2,2,3,4,4,3] 是对称的。</p>
+<pre><code>1</code></pre><p>   / <br>  2   2<br> / \ / <br>3  4 4  3<br>但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:</p>
+<pre><code>1</code></pre><p>   / <br>  2   2<br>   \   <br>   3    3<br>说明:</p>
+<p>如果你可以运用递归和迭代两种方法解决这个问题，会很加分。</p>
+<a id="more"></a>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/symmetric-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/symmetric-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>对于对称二叉树，我们只需要判断根节点的左子树和右子树是否是镜像对称的。那么，我们只需要将其中一个子树的所有节点的子树对换位置，再与另一个子树比较是否是相同的树（树结构相同，节点值也一样，参考<a href="http://angellikefairy.coding.me/2019/08/16/leetcode-100/" target="_blank" rel="noopener">leetcode100-相同的树</a>）</p>
 <h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
-<li>复制原数组，并排序</li>
-<li>比较原数组和排序后的数组的各个位置上的元素，若不同则ans++</li>
-<li>返回ans</li>
+<li>如果树为空，那么该树为对称数组，直接返回true</li>
+<li>如果该树非空，那么遍历根节点的其中一个子树，交换每个节点的左右子树</li>
+<li>比较交换后的子树与另一个子树是否相同</li>
 </ol>
-<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; heights</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> heightChecker = <span class="function"><span class="keyword">function</span>(<span class="params">heights</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> heightsSort=<span class="function">(<span class="params"><span class="keyword">new</span> <span class="built_in">Array</span>(...heights</span>)).<span class="params">sort</span>(<span class="params">(a,b</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a-b;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">let</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> heights)&#123;</span><br><span class="line">        <span class="keyword">if</span>(heights[i]!==heightsSort[i])&#123;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * function TreeNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.left = this.right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;TreeNode&#125; root</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isSymmetric = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root===<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">let</span> rightTree=root.right;</span><br><span class="line">    <span class="comment">// 每个节点的左右子树交换函数</span></span><br><span class="line">    (<span class="function"><span class="keyword">function</span> <span class="title">treeSwap</span>(<span class="params">root</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root===<span class="literal">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> temp;</span><br><span class="line">            temp=root.left;</span><br><span class="line">            root.left=root.right;</span><br><span class="line">            root.right=temp;</span><br><span class="line">            treeSwap(root.left);</span><br><span class="line">            treeSwap(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)(rightTree)</span><br><span class="line">    <span class="comment">// 判断两树是否相同函数</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">isSame</span>(<span class="params">leftTree,rightTree</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(leftTree==<span class="literal">null</span>&amp;&amp;rightTree==<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(leftTree==<span class="literal">null</span>||rightTree==<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(leftTree.val!==rightTree.val) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> isSame(leftTree.left,rightTree.left)&amp;&amp;isSame(leftTree.right,rightTree.right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> isSame(root.left,root.right);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -465,7 +460,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数组/" rel="tag"># 数组</a>
+            <a href="/tags/树/" rel="tag"># 树</a>
           
         </div>
       
@@ -484,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/06/leetcode-832/" rel="next" title="leetcode-832 翻转图像">
-                <i class="fa fa-chevron-left"></i> leetcode-832 翻转图像
+              <a href="/2019/08/16/leetcode-100/" rel="next" title="leetcode-100 相同的树">
+                <i class="fa fa-chevron-left"></i> leetcode-100 相同的树
               </a>
             
           </div>
@@ -493,10 +488,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/07/引用类型/" rel="prev" title="引用类型">
-                引用类型 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -637,7 +628,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#高度检查器"><span class="nav-number">1.</span> <span class="nav-text">高度检查器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#对称二叉树"><span class="nav-number">1.</span> <span class="nav-text">对称二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
             
 
           </div>
