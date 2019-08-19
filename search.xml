@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-107 二叉树的层次遍历 II]]></title>
+    <url>%2F2019%2F08%2F19%2Fleetcode-107%2F</url>
+    <content type="text"><![CDATA[二叉树的层次遍历 II题目描述给定一个二叉树，返回其节点值自底向上的层次遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历） 例如： 给定二叉树 [3,9,20,null,null,15,7], 返回其自底向上的层次遍历为： [ [15,7], [9,20], [3]] 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述返回节点值自底部向上的遍历，也就是相当于节点值自顶部向下的遍历的倒转；那么，利用队列将二叉树进行层序遍历的同时，为节点添加depth属性（表示这为第几层）；根据depth值，添加到对应的二维数组ans中;最后，返回ans数组的倒序 解题步骤 利用队列queue来实现层序遍历，为根节点设置属性depth=0； 判断ans数组的key.depth项是否为数组，若是则直接将该值加入数组；若不是，则创建数组[key] 判断当前节点是否有左右子树，若有，则左右子树的根节点的属性depth=当前节点的属性depth值+1；并且将子树入队列； 重复2,3步骤直到queue为空 返回ans.reverse() Coding实现1234567891011121314151617181920212223242526272829303132333435363738/** * Definition for a binary tree node. * function TreeNode(val) &#123; * this.val = val; * this.left = this.right = null; * &#125; *//** * @param &#123;TreeNode&#125; root * @return &#123;number[][]&#125; */var levelOrderBottom = function(root) &#123; let ans=[]; if(root===null) return ans; else &#123; let queue=[]; queue.push(root); root.depth=0; while(queue.length!==0) &#123; let key=queue.shift(); if(Array.isArray(ans[key.depth])) &#123; ans[key.depth].push(key.val); &#125; else &#123; ans[key.depth]=[key.val]; &#125; if(key.left) &#123; key.left.depth=key.depth+1; queue.push(key.left); &#125; if(key.right) &#123; key.right.depth=key.depth+1; queue.push(key.right); &#125; &#125; &#125; return ans.reverse();&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-104 二叉树的最大深度]]></title>
     <url>%2F2019%2F08%2F18%2Fleetcode-104%2F</url>
     <content type="text"><![CDATA[二叉树的最大深度题目描述给定一个二叉树，找出其最大深度。 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。 说明: 叶子节点是指没有子节点的节点。 示例： 给定二叉树 [3,9,20,null,null,15,7]， 返回它的最大深度 3 。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/maximum-depth-of-binary-tree著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述获取一棵树的二叉树地最大深度，也就是需要获得该树的层数。那么，很自然可以想到利用层序遍历来获取到层数 解题步骤 利用队列来实现层序遍历，为根节点设置属性depth=1；并使最大层数max=1; 判断当前节点是否有左右子树，若有，则左右子树的根节点的属性depth=当前节点的属性depth值+1；并且将子树入队列 每个节点depth值与max值进行比较，将max赋予较大值 返回max Coding实现12345678910111213141516171819202122232425262728293031323334/** * Definition for a binary tree node. * function TreeNode(val) &#123; * this.val = val; * this.left = this.right = null; * &#125; *//** * @param &#123;TreeNode&#125; root * @return &#123;number&#125; */var maxDepth = function(root) &#123; let max=0; if(root===null) return max; else &#123; let queue=[]; queue.push(root); max=root.depth=1; while(queue.length!==0)&#123; let key=queue.shift(); if(key.left!==null) &#123; key.left.depth=key.depth+1; if(key.left.depth&gt;max) max=key.left.depth; queue.push(key.left) &#125;; if(key.right!==null) &#123; key.right.depth=key.depth+1; if(key.right.depth&gt;max) max=key.right.depth; queue.push(key.right) &#125; &#125; return max; &#125;&#125;;]]></content>
