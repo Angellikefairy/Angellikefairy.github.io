@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-20T07:08:59.494Z</updated>
+  <updated>2019-08-21T12:34:27.460Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,72 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>滑动窗口</title>
+    <link href="http://yoursite.com/2019/08/21/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/"/>
+    <id>http://yoursite.com/2019/08/21/滑动窗口/</id>
+    <published>2019-08-21T11:29:52.000Z</published>
+    <updated>2019-08-21T12:34:27.460Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什么是滑动窗口算法"><a href="#什么是滑动窗口算法" class="headerlink" title="什么是滑动窗口算法"></a>什么是滑动窗口算法</h2><p>滑动窗口可以看做是一个区间。但是，这个区间是可以动态变化的。可以左右移动，也可以变大或变小</p><p>例如，假如有一个字符串为’abcabcbb’，那么对于大小为5的滑动窗口在该字符串上滑动，则有</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">abcab</span><br><span class="line"> bcabc</span><br><span class="line">  cabcb</span><br><span class="line">   abcbb</span><br></pre></td></tr></table></figure><p>滑动窗口，在我理解看来无非是一种用来大幅降低时间复杂度的算法。在某一个字符串或者一个数组中，要找到某个子字符串或者子数组来满足某些条件，那么利用滑动窗口便可以将时间复杂度降低到O(n)</p><h2 id="用什么来实现滑动窗口"><a href="#用什么来实现滑动窗口" class="headerlink" title="用什么来实现滑动窗口"></a>用什么来实现滑动窗口</h2><h3 id="leetcode题目引入"><a href="#leetcode题目引入" class="headerlink" title="leetcode题目引入"></a>leetcode题目引入</h3><p>题目引入：leetcode-3 无重复字符的最长子串<br>给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。</p><blockquote><p>示例 1:<br>输入: “abcabcbb”<br>输出: 3 <br>解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。</p></blockquote><blockquote><p>示例 2:<br>输入: “bbbbb”<br>输出: 1<br>解释: 因为无重复字符的最长子串是 “b”，所以其长度为 1。</p></blockquote><blockquote><p>示例 3:<br>输入: “pwwkew”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “wke”，所以其长度为 3。</p></blockquote><p>请注意，你的答案必须是 子串 的长度，”pwke” 是一个子序列，不是子串。</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-substring-without-repeating-characters</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>如果使用常规的暴力解法。因为要找到一个字符串没有任何重复字符且是最长的。那么，很容易想到，找到以该字符串的每个字符为开头的最长无重复字符的字符串，然后比较那个字符串更长返回即可。思路很简单，但是，稍加考虑就会发现这样的时间复杂度会达到O(n^2)，很可能无法通过题目要求的时间限制</p><p>那么，滑动窗口呢。照着暴力解法的思路，在外循环遍历每一个字符时，如果遇到了与子串中已经重复的字符那么就会停止内循环遍历下去（因为这会是以当前字符为开头的最长子串）。按照暴力的思路，接下来我们会以外循环中的下一个字符来开始内循环。那么，我们很容易就会发现一个问题，倘若那个重复字符并不是外循环中立即接下去的那一个呢，那么遇到那个重复字符，我们依然要停下来。因此，我们可以直接滑动窗口到那个重复字符的后一位，再接着遍历后面的字符</p><h3 id="队列来实现滑动窗口"><a href="#队列来实现滑动窗口" class="headerlink" title="队列来实现滑动窗口"></a>队列来实现滑动窗口</h3><p>我们很容易可以想到利用队列来实现滑动窗口，当该窗口向右移动时，左边不需要的元素只要shift()移除队列即可</p><p>对于上题的队列实现滑动窗口解法</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> lengthOfLongestSubstring = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.length===<span class="number">0</span>) <span class="keyword">return</span> s.length;</span><br><span class="line">    <span class="keyword">let</span> maxLength=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> queue=[];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> v <span class="keyword">of</span> s)&#123;</span><br><span class="line">        <span class="keyword">if</span>(queue.includes(v)) &#123;</span><br><span class="line">            <span class="keyword">while</span>(queue[<span class="number">0</span>]!==v) &#123;</span><br><span class="line">                queue.shift()</span><br><span class="line">            &#125;</span><br><span class="line">            queue.shift();</span><br><span class="line">        &#125;</span><br><span class="line">            queue.push(v);</span><br><span class="line">        maxLength=queue.length&gt;maxLength?queue.length:maxLength;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLength;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="双指针来实现滑动窗口"><a href="#双指针来实现滑动窗口" class="headerlink" title="双指针来实现滑动窗口"></a>双指针来实现滑动窗口</h3><p>滑动窗口不过就是个动态的区间，那么使用双指针来表示区间也是不错的选择。而且对于队列滑动只能一格一格滑动，而双指针可以直接滑动多格</p><p>使用双指针来实现核心就是，要找到该次滑动的终点位置</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> lengthOfLongestSubstring = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.length===<span class="number">0</span>) <span class="keyword">return</span> s.length;</span><br><span class="line">    <span class="keyword">let</span> maxLength=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> left=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> right=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> arr=[];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> v <span class="keyword">of</span> s) &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr.includes(v)) &#123;</span><br><span class="line">            <span class="keyword">let</span> index=s.indexOf(v,left);</span><br><span class="line">            left=index+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        right++;</span><br><span class="line">        arr=s.slice(left,right);</span><br><span class="line">        maxLength=arr.length&gt;maxLength?arr.length:maxLength;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLength;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="双指针实现的优化：利用哈希表map来使字符搜索时间复杂度降至为O-1"><a href="#双指针实现的优化：利用哈希表map来使字符搜索时间复杂度降至为O-1" class="headerlink" title="双指针实现的优化：利用哈希表map来使字符搜索时间复杂度降至为O(1)"></a>双指针实现的优化：利用哈希表map来使字符搜索时间复杂度降至为O(1)</h3><p>上面的解法中，找到重复字符的位置，利用了indexOf()函数，实际上该函数的时间复杂度为O(n)，但是，如果在遍历的同时将字符下标不断更新的话，那么查找起来时间复杂度就会变为O(1)</p><p>这也是常用的以空间换时间的策略</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> lengthOfLongestSubstring = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.length===<span class="number">0</span>) <span class="keyword">return</span> s.length;</span><br><span class="line">    <span class="keyword">let</span> maxLength=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> left=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> right=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> arr=[];</span><br><span class="line">    <span class="keyword">let</span> map=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;s.length;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr.includes(s[i])) &#123;</span><br><span class="line">            <span class="keyword">let</span> index=map.get(s[i]);</span><br><span class="line">            left=index+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        map.set(s[i],i)</span><br><span class="line">        right++;</span><br><span class="line">        arr=s.slice(left,right);</span><br><span class="line">        maxLength=arr.length&gt;maxLength?arr.length:maxLength;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLength;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>当然，对于队列也可以像这样进行优化</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;什么是滑动窗口算法&quot;&gt;&lt;a href=&quot;#什么是滑动窗口算法&quot; class=&quot;headerlink&quot; title=&quot;什么是滑动窗口算法&quot;&gt;&lt;/a&gt;什么是滑动窗口算法&lt;/h2&gt;&lt;p&gt;滑动窗口可以看做是一个区间。但是，这个区间是可以动态变化的。可以左右移动，也可以变大或变小&lt;/p&gt;
+&lt;p&gt;例如，假如有一个字符串为’abcabcbb’，那么对于大小为5的滑动窗口在该字符串上滑动，则有&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;abcab&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; bcabc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  cabcb&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   abcbb&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;滑动窗口，在我理解看来无非是一种用来大幅降低时间复杂度的算法。在某一个字符串或者一个数组中，要找到某个子字符串或者子数组来满足某些条件，那么利用滑动窗口便可以将时间复杂度降低到O(n)&lt;/p&gt;
+&lt;h2 id=&quot;用什么来实现滑动窗口&quot;&gt;&lt;a href=&quot;#用什么来实现滑动窗口&quot; class=&quot;headerlink&quot; title=&quot;用什么来实现滑动窗口&quot;&gt;&lt;/a&gt;用什么来实现滑动窗口&lt;/h2&gt;&lt;h3 id=&quot;leetcode题目引入&quot;&gt;&lt;a href=&quot;#leetcode题目引入&quot; class=&quot;headerlink&quot; title=&quot;leetcode题目引入&quot;&gt;&lt;/a&gt;leetcode题目引入&lt;/h3&gt;&lt;p&gt;题目引入：leetcode-3 无重复字符的最长子串&lt;br&gt;给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;示例 1:&lt;br&gt;输入: “abcabcbb”&lt;br&gt;输出: 3 &lt;br&gt;解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;示例 2:&lt;br&gt;输入: “bbbbb”&lt;br&gt;输出: 1&lt;br&gt;解释: 因为无重复字符的最长子串是 “b”，所以其长度为 1。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;示例 3:&lt;br&gt;输入: “pwwkew”&lt;br&gt;输出: 3&lt;br&gt;解释: 因为无重复字符的最长子串是 “wke”，所以其长度为 3。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;请注意，你的答案必须是 子串 的长度，”pwke” 是一个子序列，不是子串。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="算法笔记" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>leetcode-112 路径总和</title>
+    <link href="http://yoursite.com/2019/08/21/leetcode-112/"/>
+    <id>http://yoursite.com/2019/08/21/leetcode-112/</id>
+    <published>2019-08-21T08:19:15.000Z</published>
+    <updated>2019-08-21T11:26:09.166Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="路径总和"><a href="#路径总和" class="headerlink" title="路径总和"></a>路径总和</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。</p><p>说明: 叶子节点是指没有子节点的节点。</p><p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p><pre><code>      5     / \    4   8   /   / \  11  13  4 /  \      \7    2      1</code></pre><p>返回 true, 因为存在目标和为 22 的根节点到叶子节点的路径 5-&gt;4-&gt;11-&gt;2。</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/path-sum" target="_blank" rel="noopener">https://leetcode-cn.com/problems/path-sum</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>求根节点到叶子节点上的路径和，利用深度优先搜索（DFS）即可做到。当遍历到某节点时，若该节点不为空就加上该节点的值，如果遇到是叶子节点，那么就说明一条路径已经出现。比较该路径和与给定sum,若相同则返回true;否则返回false</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><p>递归</p><ol><li>递归式 return test(root.left,count)||test(root.right,count); 或运算是短路运算</li><li>递归终止条件：<ol><li>该节点为null，返回false</li><li>该节点为叶子节点，如果路径和等于给定sum返回true,否则返回false</li></ol></li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * function TreeNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.left = this.right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;TreeNode&#125; root</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; sum</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> hasPathSum = <span class="function"><span class="keyword">function</span>(<span class="params">root, sum</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> (<span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">root,count</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root===<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        count+=root.val;</span><br><span class="line">        <span class="keyword">if</span>(root.left===<span class="literal">null</span>&amp;&amp;root.right===<span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(count===sum) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">return</span> test(root.left,count)||test(root.right,count);</span><br><span class="line">    &#125;)(root,<span class="number">0</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;路径总和&quot;&gt;&lt;a href=&quot;#路径总和&quot; class=&quot;headerlink&quot; title=&quot;路径总和&quot;&gt;&lt;/a&gt;路径总和&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。&lt;/p&gt;
+&lt;p&gt;说明: 叶子节点是指没有子节点的节点。&lt;/p&gt;
+&lt;p&gt;示例:&lt;br&gt;给定如下二叉树，以及目标和 sum = 22，&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \      \
+7    2      1&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回 true, 因为存在目标和为 22 的根节点到叶子节点的路径 5-&amp;gt;4-&amp;gt;11-&amp;gt;2。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="树" scheme="http://yoursite.com/tags/%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode-111</title>
@@ -539,73 +605,6 @@
     
     
       <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-832 翻转图像</title>
-    <link href="http://yoursite.com/2019/08/06/leetcode-832/"/>
-    <id>http://yoursite.com/2019/08/06/leetcode-832/</id>
-    <published>2019-08-06T10:13:35.000Z</published>
-    <updated>2019-08-06T10:18:37.494Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="翻转图像"><a href="#翻转图像" class="headerlink" title="翻转图像"></a>翻转图像</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p> 给定一个二进制矩阵 A，我们想先水平翻转图像，然后反转图像并返回结果。</p><p>水平翻转图片就是将图片的每一行都进行翻转，即逆序。例如，水平翻转 [1, 1, 0] 的结果是 [0, 1, 1]。</p><p>反转图片的意思是图片中的 0 全部被 1 替换， 1 全部被 0 替换。例如，反转 [0, 1, 1] 的结果是 [1, 0, 0]。</p><p>示例 1:</p><blockquote><p>输入: [[1,1,0],[1,0,1],[0,0,0]]<br>输出: [[1,0,0],[0,1,0],[1,1,1]]<br>解释: 首先翻转每一行: [[0,1,1],[1,0,1],[0,0,0]]；<br>     然后反转图片: [[1,0,0],[0,1,0],[1,1,1]]</p></blockquote><p>示例 2:</p><blockquote><p>输入: [[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]<br>输出: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]<br>解释: 首先翻转每一行: [[0,0,1,1],[1,0,0,1],[1,1,1,0],[0,1,0,1]]；<br>     然后反转图片: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]</p></blockquote><p>说明:</p><ol><li>1&lt;= A.length = A[0].length &lt;= 20</li><li>0&lt;= A[i][j] &lt;= 1<a id="more"></a>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/flipping-an-image" target="_blank" rel="noopener">https://leetcode-cn.com/problems/flipping-an-image</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li></ol><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>利用es6数组方法map()快速地修改数组元素</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>因为是二维数组，遍历该二维数组将一维数组倒序，并且1变成0,0变成1</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; A</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> flipAndInvertImage = <span class="function"><span class="keyword">function</span>(<span class="params">A</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> A.map(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">        value.reverse();</span><br><span class="line">        <span class="keyword">return</span> value.map(<span class="function"><span class="params">value1</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(value1===<span class="number">0</span>)&#123;</span><br><span class="line">                value1=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> value1=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">return</span> value1;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;翻转图像&quot;&gt;&lt;a href=&quot;#翻转图像&quot; class=&quot;headerlink&quot; title=&quot;翻转图像&quot;&gt;&lt;/a&gt;翻转图像&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt; 给定一个二进制矩阵 A，我们想先水平翻转图像，然后反转图像并返回结果。&lt;/p&gt;
-&lt;p&gt;水平翻转图片就是将图片的每一行都进行翻转，即逆序。例如，水平翻转 [1, 1, 0] 的结果是 [0, 1, 1]。&lt;/p&gt;
-&lt;p&gt;反转图片的意思是图片中的 0 全部被 1 替换， 1 全部被 0 替换。例如，反转 [0, 1, 1] 的结果是 [1, 0, 0]。&lt;/p&gt;
-&lt;p&gt;示例 1:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: [[1,1,0],[1,0,1],[0,0,0]]&lt;br&gt;输出: [[1,0,0],[0,1,0],[1,1,1]]&lt;br&gt;解释: 首先翻转每一行: [[0,1,1],[1,0,1],[0,0,0]]；&lt;br&gt;     然后反转图片: [[1,0,0],[0,1,0],[1,1,1]]&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;示例 2:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: [[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]&lt;br&gt;输出: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]&lt;br&gt;解释: 首先翻转每一行: [[0,0,1,1],[1,0,0,1],[1,1,1,0],[0,1,0,1]]；&lt;br&gt;     然后反转图片: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;说明:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;1&amp;lt;= A.length = A[0].length &amp;lt;= 20&lt;/li&gt;
-&lt;li&gt;0&amp;lt;= A[i][j] &amp;lt;= 1
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-345 反转字符串中的元音字母</title>
-    <link href="http://yoursite.com/2019/08/05/leetcode-345/"/>
-    <id>http://yoursite.com/2019/08/05/leetcode-345/</id>
-    <published>2019-08-05T06:58:17.000Z</published>
-    <updated>2019-08-05T07:05:00.190Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="反转字符串中的元音字母"><a href="#反转字符串中的元音字母" class="headerlink" title="反转字符串中的元音字母"></a>反转字符串中的元音字母</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>编写一个函数，以字符串作为输入，反转该字符串中的元音字母。</p><p>示例 1:</p><blockquote><p>输入: “hello”<br>输出: “holle”</p></blockquote><p>示例 2:</p><blockquote><p>输入: “leetcode”<br>输出: “leotcede”</p></blockquote><p>说明:<br>元音字母不包含字母”y”。</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-vowels-of-a-string" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-vowels-of-a-string</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>元音字母一共有5个，分别为’a’,’e’,’i’,’o’,’u’; 当然该题要注意元音字母对应的大写形式也算</p><p>因此，使用双指针，一个在首，一个在尾，当两指针未相遇时，如果两个指针指的都是元音字母或其大写形式，那么就交换两个字母；如果不是，那么就左指针向后，右指针往前</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>建立left,right双指针；将字符串s转换为字符串数组</li><li>left与right双指针，一个在首，一个在尾，当两指针未相遇时，如果两个指针指的都是元音字母或其大写形式，那么就交换两个字母；如果不是，那么就左指针向后，右指针往前</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> reverseVowels = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    s=s.split(<span class="string">''</span>);</span><br><span class="line">    <span class="keyword">let</span> left=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> yuan=[<span class="string">'a'</span>,<span class="string">'e'</span>,<span class="string">'i'</span>,<span class="string">'o'</span>,<span class="string">'u'</span>];</span><br><span class="line">    <span class="keyword">let</span> right=s.length<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">        <span class="keyword">if</span>(yuan.includes(s[left].toLowerCase())&amp;&amp;yuan.includes(s[right].toLowerCase()))&#123;</span><br><span class="line">            [s[left],s[right]]=[s[right],s[left]];</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!yuan.includes(s[left].toLowerCase())) &#123;</span><br><span class="line">            left++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!yuan.includes(s[right].toLowerCase())) &#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s.join(<span class="string">''</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;反转字符串中的元音字母&quot;&gt;&lt;a href=&quot;#反转字符串中的元音字母&quot; class=&quot;headerlink&quot; title=&quot;反转字符串中的元音字母&quot;&gt;&lt;/a&gt;反转字符串中的元音字母&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;编写一个函数，以字符串作为输入，反转该字符串中的元音字母。&lt;/p&gt;
-&lt;p&gt;示例 1:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: “hello”&lt;br&gt;输出: “holle”&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;示例 2:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: “leetcode”&lt;br&gt;输出: “leotcede”&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;说明:&lt;br&gt;元音字母不包含字母”y”。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="双指针" scheme="http://yoursite.com/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
