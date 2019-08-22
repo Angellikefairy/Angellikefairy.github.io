@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="哈希表,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -88,18 +88,16 @@
 
 
 
-<meta name="description" content="求众数核心方法：哈希表题目描述 给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。  你可以假设数组是非空的，并且给定的数组总是存在众数。">
-<meta name="keywords" content="哈希表">
-<meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-169 求众数">
-<meta property="og:url" content="http://yoursite.com/2019/07/09/leetcode-169/index.html">
+<meta name="description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/tags/数组/page/2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="求众数核心方法：哈希表题目描述 给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。  你可以假设数组是非空的，并且给定的数组总是存在众数。">
+<meta property="og:description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-09T12:34:08.347Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-169 求众数">
-<meta name="twitter:description" content="求众数核心方法：哈希表题目描述 给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。  你可以假设数组是非空的，并且给定的数组总是存在众数。">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
 
 
 
@@ -129,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/09/leetcode-169/">
+  <link rel="canonical" href="http://yoursite.com/tags/数组/page/2/">
 
 
 
 
 
-  <title>leetcode-169 求众数 | Hexo</title>
+  <title>标签: 数组 | Hexo</title>
   
 
 
@@ -156,7 +154,7 @@
   
  
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband">
          <a href="https://github.com/Angellikefairy"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149" alt="Fork me on GitHub"></a>
     </div>
@@ -294,232 +292,56 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-
   
   
   
+  <div class="post-block tag">
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/leetcode-169/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">leetcode-169 求众数</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-09T13:18:25+08:00">
-                2019-07-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode题解与算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  345
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h1 id="求众数"><a href="#求众数" class="headerlink" title="求众数"></a>求众数</h1><h2 id="核心方法：哈希表"><a href="#核心方法：哈希表" class="headerlink" title="核心方法：哈希表"></a>核心方法：哈希表</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><blockquote>
-<p>给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。</p>
-</blockquote>
-<p>你可以假设数组是非空的，并且给定的数组总是存在众数。</p>
-<a id="more"></a>
-<blockquote>
-<p>示例 1:</p>
-</blockquote>
-<p>输入: [3,2,3]<br>输出: 3</p>
-<blockquote>
-<p>示例 2:</p>
-</blockquote>
-<p>输入: [2,2,1,1,1,2,2]<br>输出: 2</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/majority-element" target="_blank" rel="noopener">https://leetcode-cn.com/problems/majority-element</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h3 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h3><blockquote>
-<p>利用哈希表这一数据结构来存储每个数的出现次数。元素作为键名，他们所出现的次数作为键值，进行存储。</p>
-</blockquote>
-<ol>
-<li><p>遍历给定数组，若当前数组元素未在哈希表map中（map.has(key)===false），则以该元素为键名添加该元素，并置键值为1（map.set(value,1)）；若已存在，则更新该键值（键值加1:map.set(value,map.get(value)+1)）</p>
-</li>
-<li><p>遍历哈希表map，找到键值最大的那个键名并返回</p>
-</li>
-</ol>
-<h3 id="coding实现"><a href="#coding实现" class="headerlink" title="coding实现"></a>coding实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> majorityElement = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> maxCount=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> num=<span class="number">0</span>;</span><br><span class="line">   <span class="keyword">let</span> numsMap=<span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">   nums.forEach(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(!numsMap.has(value))&#123;</span><br><span class="line">        numsMap.set(value,<span class="number">1</span>);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">else</span>&#123;</span><br><span class="line">       numsMap.set(value,numsMap.get(value)+<span class="number">1</span>);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;)</span><br><span class="line">   numsMap.forEach(<span class="function">(<span class="params">value,key</span>)=&gt;</span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(value&gt;maxCount)&#123;</span><br><span class="line">       maxCount=value;</span><br><span class="line">       num=key;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;)</span><br><span class="line">   <span class="keyword">return</span> num;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/哈希表/" rel="tag"># 哈希表</a>
-          
-        </div>
-      
-
-      <div>
-      
-        
-      
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>数组<small>标签</small>
+        </h1>
       </div>
 
       
-      
-      
+        
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/07/08/leetcode-167/" rel="next" title="leetcode-167 两数之和|| - 输入有序数组">
-                <i class="fa fa-chevron-left"></i> leetcode-167 两数之和|| - 输入有序数组
-              </a>
-            
-          </div>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-          <span class="post-nav-divider"></span>
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2019/07/13/leetcode-171/" itemprop="url">
+              
+                <span itemprop="name">leetcode-171 Excel表列序号</span>
+              
+            </a>
+        
+      </h2>
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/11/Vue项目的快速搭建/" rel="prev" title="Vue项目的快速搭建">
-                Vue项目的快速搭建 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-07-13T11:59:25+08:00" content="2019-07-13">
+          07-13
+        </time>
+      </div>
 
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
       
     </div>
+
   </div>
+  
+  
+  
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/tags/数组/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/tags/数组/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
@@ -527,10 +349,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -551,17 +369,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -630,22 +439,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#求众数"><span class="nav-number">1.</span> <span class="nav-text">求众数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心方法：哈希表"><span class="nav-number">1.1.</span> <span class="nav-text">核心方法：哈希表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心思路"><span class="nav-number">1.1.2.</span> <span class="nav-text">核心思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#coding实现"><span class="nav-number">1.1.3.</span> <span class="nav-text">coding实现</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -817,10 +610,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
