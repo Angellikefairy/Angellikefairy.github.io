@@ -100,7 +100,7 @@
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/25/16b8c0b5752823f6?imageView2/0/w/1280/h/960/ignore-error/1">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/25/16b8c0b73d4ebd08?imageView2/0/w/1280/h/960/ignore-error/1">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/25/16b8c0b9df03d885?imageView2/0/w/1280/h/960/ignore-error/1">
-<meta property="og:updated_time" content="2019-08-04T08:38:02.692Z">
+<meta property="og:updated_time" content="2019-08-22T02:47:27.845Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="变量、作用域和内存问题">
 <meta name="twitter:description" content="基本类型值和引用类型值的存储与复制变量类型与内存的关系栈内存基本数据类型保存在栈内存中，因为基本数据类型占用空间小、大小固定，通过按值来访问，属于被频繁使用的数据  堆内存引用数据类型存储在堆内存中，因为引用数据类型占据空间大、大小不固定。 如果存储在栈中，将会影响程序运行的性能； 引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址。 当解释器寻找引用值时，会首先检索其在栈中的地址，取得">
@@ -467,7 +467,7 @@
 </ol>
 <p>每个执行环境中都有一个与之关联的变量对象，用来存储在该环境中定义的变量和函数(但是我们无法访问到这个变量对象，是解析器在后台处理数据时会使用到)</p>
 <h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><p>对于作用域，我的理解是它在某种程度上相当于执行环境，每个作用域都有当前作用域的变量和对象。但是作用域之间的变量和函数时相互隔离的，也就说不同作用域下的同名变量不会产生冲突</p>
-<h5 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h5><p>当代码在一个环境中执行时，会创建变量对象的一个作用链。</p>
+<h5 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h5><p>当代码在一个环境中执行时，会创建变量对象的一个作用域链。</p>
 <p>作用域链的用途：是用来保证对执行环境有权访问的所有变量和函数的有序访问。</p>
 <p>作用域的前端，始终都是当前的执行环境的变量对象。如果这个环境是函数，那么将其环境对象作为变量对象。作用链中的下一个对象是包含当前执行环境的执行环境的变量对象。这样，一直延续到全局执行环境。全局执行环境的变量对象始终都是作用域链的最后一个对象</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> m=<span class="number">1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> m=<span class="number">2</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(m); <span class="comment">// 2</span></span><br><span class="line">    &#125;</span><br><span class="line">    b();</span><br><span class="line">    <span class="built_in">console</span>.log(m); <span class="comment">// 1</span></span><br><span class="line">&#125;</span><br><span class="line">a();</span><br></pre></td></tr></table></figure>
@@ -612,7 +612,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -709,7 +709,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">33.8k</span>
+    <span title="Site words total count">35.5k</span>
   
 </div>
 
@@ -739,7 +739,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共33.8k字</span>
+  <span class="post-count">博客全站共35.5k字</span>
 </div>
         
 

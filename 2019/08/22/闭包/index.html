@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="树,">
+  <meta name="keywords" content="基础语法,">
 
 
 
@@ -88,20 +88,18 @@
 
 
 
-<meta name="description" content="二叉树的层次遍历 II题目描述给定一个二叉树，找出其最小深度。 最小深度是从根节点到最近叶子节点的最短路径上的节点数量。 说明: 叶子节点是指没有子节点的节点。 示例: 给定二叉树 [3,9,20,null,null,15,7],  返回它的最小深度  2.">
-<meta name="keywords" content="树">
+<meta name="description" content="什么是闭包闭包，实际上也是个函数，只不过他的外部被另外一个函数包围。因此，在一个函数内部创建另一个函数，就会产生闭包。 红宝书是这么定义的：  闭包是指有权访问另一个函数作用域中的变量的函数  那么这段话又该如何理解？ 执行环境分为全局执行环境和局部执行环境。全局执行环境永远存在于某条作用域链的最末端。那么，局部执行环境呢？当进入某个函数时，该函数的局部执行环境就会被压入环境栈，同时会生成一个存储">
+<meta name="keywords" content="基础语法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-111">
-<meta property="og:url" content="http://yoursite.com/2019/08/20/leetcode-111/index.html">
+<meta property="og:title" content="闭包">
+<meta property="og:url" content="http://yoursite.com/2019/08/22/闭包/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="二叉树的层次遍历 II题目描述给定一个二叉树，找出其最小深度。 最小深度是从根节点到最近叶子节点的最短路径上的节点数量。 说明: 叶子节点是指没有子节点的节点。 示例: 给定二叉树 [3,9,20,null,null,15,7],  返回它的最小深度  2.">
+<meta property="og:description" content="什么是闭包闭包，实际上也是个函数，只不过他的外部被另外一个函数包围。因此，在一个函数内部创建另一个函数，就会产生闭包。 红宝书是这么定义的：  闭包是指有权访问另一个函数作用域中的变量的函数  那么这段话又该如何理解？ 执行环境分为全局执行环境和局部执行环境。全局执行环境永远存在于某条作用域链的最末端。那么，局部执行环境呢？当进入某个函数时，该函数的局部执行环境就会被压入环境栈，同时会生成一个存储">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/20/mJEmlQ.png">
-<meta property="og:updated_time" content="2019-08-20T07:08:59.494Z">
+<meta property="og:updated_time" content="2019-08-22T08:34:35.822Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-111">
-<meta name="twitter:description" content="二叉树的层次遍历 II题目描述给定一个二叉树，找出其最小深度。 最小深度是从根节点到最近叶子节点的最短路径上的节点数量。 说明: 叶子节点是指没有子节点的节点。 示例: 给定二叉树 [3,9,20,null,null,15,7],  返回它的最小深度  2.">
-<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/20/mJEmlQ.png">
+<meta name="twitter:title" content="闭包">
+<meta name="twitter:description" content="什么是闭包闭包，实际上也是个函数，只不过他的外部被另外一个函数包围。因此，在一个函数内部创建另一个函数，就会产生闭包。 红宝书是这么定义的：  闭包是指有权访问另一个函数作用域中的变量的函数  那么这段话又该如何理解？ 执行环境分为全局执行环境和局部执行环境。全局执行环境永远存在于某条作用域链的最末端。那么，局部执行环境呢？当进入某个函数时，该函数的局部执行环境就会被压入环境栈，同时会生成一个存储">
 
 
 
@@ -131,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/20/leetcode-111/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/22/闭包/">
 
 
 
 
 
-  <title>leetcode-111 | Hexo</title>
+  <title>闭包 | Hexo</title>
   
 
 
@@ -310,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/20/leetcode-111/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/22/闭包/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -327,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode-111</h1>
+          <h1 class="post-title" itemprop="name headline">闭包</h1>
         
 
         <div class="post-meta">
@@ -339,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-20T14:57:09+08:00">
-                2019-08-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-22T10:27:14+08:00">
+                2019-08-22
               </time>
             
 
@@ -362,8 +360,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode题解与算法</span>
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
                   </a>
                 </span>
 
@@ -393,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  437
+                  1.7k
                 </span>
               
 
@@ -409,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  6
                 </span>
               
             </div>
@@ -430,24 +428,56 @@
       
 
       
-        <h1 id="二叉树的层次遍历-II"><a href="#二叉树的层次遍历-II" class="headerlink" title="二叉树的层次遍历 II"></a>二叉树的层次遍历 II</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个二叉树，找出其最小深度。</p>
-<p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:</p>
-<p>给定二叉树 [3,9,20,null,null,15,7],</p>
-<p><img src="https://s2.ax1x.com/2019/08/20/mJEmlQ.png" alt></p>
-<p>返回它的最小深度  2.</p>
-<a id="more"></a>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/minimum-depth-of-binary-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/minimum-depth-of-binary-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>关于二叉树的最小深度，我们可以考虑利用广度优先搜索，在这里即层序遍历的思想。当遍历到第一个叶子节点时，返回其深度即可。因为，层序遍历是从定至下，从左至右遍历的，所以遍历到的第一个叶子节点的深度必定是二叉树的最小深度</p>
-<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
-<li>利用队列queue来实现层序遍历，为根节点设置属性depth=0；</li>
-<li>判断当前节点是否有左右子树，若有，则左右子树的根节点的属性depth=当前节点的属性depth值+1；并且将子树入队列；</li>
-<li>若没有，则返回该节点的深度</li>
-<li>重复2,3步骤</li>
-</ol>
-<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * function TreeNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.left = this.right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;TreeNode&#125; root</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> minDepth = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root===<span class="literal">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> queue=[root];</span><br><span class="line">        root.depth=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(queue.length!==<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> key=queue.shift();</span><br><span class="line">            <span class="keyword">if</span>(!key.left&amp;&amp;!key.right) <span class="keyword">return</span> key.depth;</span><br><span class="line">            <span class="keyword">if</span>(key.left) &#123;</span><br><span class="line">                key.left.depth=key.depth+<span class="number">1</span>;</span><br><span class="line">                queue.push(key.left);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(key.right) &#123;</span><br><span class="line">                key.right.depth=key.depth+<span class="number">1</span>;</span><br><span class="line">                queue.push(key.right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        <h2 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h2><p>闭包，实际上也是个函数，只不过他的外部被另外一个函数包围。因此，在一个函数内部创建另一个函数，就会产生闭包。</p>
+<p>红宝书是这么定义的：</p>
+<blockquote>
+<p>闭包是指有权访问另一个函数作用域中的变量的函数</p>
+</blockquote>
+<p>那么这段话又该如何理解？</p>
+<p>执行环境分为全局执行环境和局部执行环境。全局执行环境永远存在于某条作用域链的最末端。那么，局部执行环境呢？当进入某个函数时，该函数的局部执行环境就会被压入环境栈，同时会生成一个存储当前环境所有变量、函数的活动对象。</p>
+<p>因此，在一个函数中创建了另外一个函数，那么内部那个函数的作用域链上就包含了外部函数的活动对象，而该活动对象又具有其作用域中的所有的变量</p>
+<p>来看一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> a=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">test()(); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// ReferenceError: a is not defined</span></span><br></pre></td></tr></table></figure>
 
+<p>我们首先在全局作用域下创建了一个test函数，在当前作用域中定义了a变量为1；然后在内部定义了一个新的匿名函数并返回；</p>
+<p>从输出上，我们很容易就能验证闭包的特性。闭包的作用域链包含着自己的作用域，以及外部函数的作用域直到全局作用域</p>
+<h2 id="定时器与闭包"><a href="#定时器与闭包" class="headerlink" title="定时器与闭包"></a>定时器与闭包</h2><p>我们经常可以看到这样的例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i); <span class="comment">// 10个10 后输出</span></span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'i'</span>,i); <span class="comment">// i 10 先输出</span></span><br></pre></td></tr></table></figure>
+
+<p>初学者们一般都会以为会按照0~9的顺序依次输出，然而并不是，它会打印出10个10.</p>
+<p>那么，这又是为什么呢？</p>
+<p>定时器的作用是当定时器到期时，会执行传入定时器的函数；</p>
+<p>我们往该函数中传入了一个新的匿名函数去打印i；那么对于该段代码，定时器中的匿名函数会在全局作用中被执行。因袭该匿名函数的作用域链会是其自身的作用域以及全局作用域</p>
+<p>我们需要注意的是，在定时器开始启动之前，这10次循环已经结束了，相当于已经创建了10个还未执行的定时器，于此同时i已经变为了10</p>
+<p>在执行定时器时，也就是每1000毫秒要去执行一次匿名函数。匿名函数就会顺着作用域去寻找i，那么，显然它会在全局作用域中找到i为10，所以也就会输出10个10了</p>
+<p>那么如果我们顺着作用域链查找的思路稍微修改一下代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        i=<span class="number">1</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(i); <span class="comment">// 10个1 后输出</span></span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'i'</span>,i); <span class="comment">// i 10 先输出</span></span><br></pre></td></tr></table></figure>
+
+<p>显然，查找作用域链时在自身作用域中就找到了i，因此不会再向上查找位于全局作用域的i</p>
+<h3 id="定时器函数的优化"><a href="#定时器函数的优化" class="headerlink" title="定时器函数的优化"></a>定时器函数的优化</h3><p>我们已经发现了以上那个函数并不能达到想要的效果。本质上是因为作用域链的缘故。</p>
+<p>那么使用es6的let就可以解决这个问题</p>
+<p>let会将当前变量的作用域限制在当前代码块内，因此，上面的10次循环就会形成10个作用域，每一个函数都能够查找到正确的i</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i); <span class="comment">// 0~9 </span></span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行以上代码会是如下情形</span></span><br><span class="line"></span><br><span class="line">&#123;i=<span class="number">0</span>;setTimeout();&#125;</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">&#123;i=<span class="number">9</span>;setTimeout();&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果，此时在全局作用域下去执行console.log(i)；会报出错误i为定义。因为，全局作用下并没有定义i</p>
+<h2 id="闭包的应用"><a href="#闭包的应用" class="headerlink" title="闭包的应用"></a>闭包的应用</h2><h3 id="私有变量"><a href="#私有变量" class="headerlink" title="私有变量"></a>私有变量</h3><p>闭包的主要应用是设计私有变量</p>
+<p>任何在函数中定义的变量，都可以被认为是私有变量，因为不能在函数外部访问这些变量。</p>
+<p>私有变量包括函数的参数，局部变量和在函数内部定义的其他函数</p>
+<p>然而，闭包可以通过自身的作用域链访问到这些私有变量。因此我们经常利用闭包来创建用于访问私有变量的共有方法，又被称之为特权方法。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 私有变量</span></span><br><span class="line">    <span class="keyword">let</span> rigion=<span class="string">'Hang Zhou'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 特权方法</span></span><br><span class="line">    <span class="keyword">this</span>.get=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> rigion;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> ming=<span class="keyword">new</span> Person(<span class="string">'ming'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(ming); <span class="comment">// Person &#123; get: [Function] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(ming.get()); <span class="comment">// Hang Zhou</span></span><br><span class="line">consoel.log(ming.rigion); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>这个Person构造函数不同于一般的构造函数，一般的构造函数会像下例一样声明属性与方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 公有属性</span></span><br><span class="line">    <span class="keyword">this</span>.rigion=<span class="string">'Hang Zhou'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> ming=<span class="keyword">new</span> Person(<span class="string">'ming'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(ming.rigion); <span class="comment">// 'Hang Zhou'</span></span><br><span class="line">ming.rigion=<span class="string">'Shang Hai'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(ming.rigion); <span class="comment">// 'Shang Hai'</span></span><br><span class="line"><span class="comment">// 此时rigion属性是公有属性，实例化之后可以直接访问和修改</span></span><br></pre></td></tr></table></figure>
+
+<p>而该构造函数创建的实例并不会直接添加私有变量到实例的属性上，而是需要通过get()方法去访问。此时get()方法是一个闭包，其作用链上拥有外部构造函数的作用域，因此可以访问到私有变量</p>
+<h3 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h3><p>模块模式是用来为单例创建私有变量和特权方法的。所谓单例，指的就是只有一个实例的对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 私有变量和私有函数</span></span><br><span class="line">    <span class="keyword">let</span> rigion=<span class="string">'Hang Zhou'</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">get</span>=function ()&#123;</span><br><span class="line">        <span class="keyword">return</span> rigion;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 特权方法和属性</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="keyword">get</span>:<span class="keyword">get</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let ming=new Person();</span><br><span class="line">console.log(ming); // &#123; <span class="keyword">get</span>: [Function: <span class="keyword">get</span>] &#125;</span><br><span class="line">console.log(ming.<span class="keyword">get</span>()); // 'Hang Zhou'</span><br></pre></td></tr></table></figure>
+
+<h2 id="闭包的缺陷"><a href="#闭包的缺陷" class="headerlink" title="闭包的缺陷"></a>闭包的缺陷</h2><p>一般来说，一个函数执行完毕后，会销毁其作用域及其变量对象；但是，在创建了一个闭包以后，这个函数的的作用域会一直保存到闭包不存在（手动令这个闭包函数为null）为止。</p>
+<pre><code>在javascript中，如果一个对象不再被引用，那么这个对象就会被垃圾回收机制回收；
+如果两个对象互相引用，而不再被第3者所引用，那么这两个互相引用的对象也会被回收。</code></pre><p>有些闭包可能会被返回到全局作用域被执行</p>
+<p>因此，闭包会携带包含它的函数的作用域，从而会占用比其他函数更多的内存。过得使用闭包会导致内存占用过多。</p>
 
       
     </div>
@@ -465,7 +495,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/树/" rel="tag"># 树</a>
+            <a href="/tags/基础语法/" rel="tag"># 基础语法</a>
           
         </div>
       
@@ -484,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/19/leetcode-107/" rel="next" title="leetcode-107 二叉树的层次遍历 II">
-                <i class="fa fa-chevron-left"></i> leetcode-107 二叉树的层次遍历 II
+              <a href="/2019/08/21/滑动窗口/" rel="next" title="滑动窗口">
+                <i class="fa fa-chevron-left"></i> 滑动窗口
               </a>
             
           </div>
@@ -493,10 +523,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/21/leetcode-112/" rel="prev" title="leetcode-112 路径总和">
-                leetcode-112 路径总和 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -637,7 +663,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉树的层次遍历-II"><span class="nav-number">1.</span> <span class="nav-text">二叉树的层次遍历 II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是闭包"><span class="nav-number">1.</span> <span class="nav-text">什么是闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器与闭包"><span class="nav-number">2.</span> <span class="nav-text">定时器与闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定时器函数的优化"><span class="nav-number">2.1.</span> <span class="nav-text">定时器函数的优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包的应用"><span class="nav-number">3.</span> <span class="nav-text">闭包的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#私有变量"><span class="nav-number">3.1.</span> <span class="nav-text">私有变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块模式"><span class="nav-number">3.2.</span> <span class="nav-text">模块模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包的缺陷"><span class="nav-number">4.</span> <span class="nav-text">闭包的缺陷</span></a></li></ol></div>
             
 
           </div>
