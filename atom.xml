@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-23T12:44:30.801Z</updated>
+  <updated>2019-08-24T14:08:31.022Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-268 缺失数字</title>
+    <link href="http://yoursite.com/2019/08/24/leetcode-268/"/>
+    <id>http://yoursite.com/2019/08/24/leetcode-268/</id>
+    <published>2019-08-24T13:52:00.000Z</published>
+    <updated>2019-08-24T14:08:31.022Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="缺失数字"><a href="#缺失数字" class="headerlink" title="缺失数字"></a>缺失数字</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个包含 0, 1, 2, …, n 中 n 个数的序列，找出 0 .. n 中没有出现在序列中的那个数。</p><p>示例 1:</p><blockquote><p>输入: [3,0,1]<br>输出: 2</p></blockquote><p>示例 2:</p><blockquote><p>输入: [9,6,4,2,3,5,7,0,1]<br>输出: 8</p></blockquote><p>说明:<br>你的算法应具有线性时间复杂度。你能否仅使用额外常数空间来实现?</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/missing-number" target="_blank" rel="noopener">https://leetcode-cn.com/problems/missing-number</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ol><li>第一种方法是将数组排序后再遍历，如果某个数与下标不相同的话，那么那个下标就是缺失的数</li><li>第二种方法是利用哈希表，在第一次遍历数组时将值记录在哈希表中。然后从0遍历到n，查看每个数是否在哈希表中，若无，则是缺失的数</li><li>第三种方法，是将0~n的和减去数组的和就是缺失的数</li><li>第四种方法，利用位运算（待补充）</li></ol><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><p>步骤易懂，直接贴代码</p><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><p>第一种方法：排序遍历</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> missingNumber = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    nums.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>a-b);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;=nums.length;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i!==nums[i]) <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>第二种方法：哈希表存值</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> missingNumber = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> map=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nums.length;i++) &#123;</span><br><span class="line">        map.set(nums[i],<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;=nums.length;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!map.has(i)) <span class="keyword">return</span> i;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>第三种方法：数组求和</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> missingNumber = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> sum=nums.reduce(<span class="function">(<span class="params">pre,value</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> pre+value;</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> ((<span class="number">0</span>+nums.length)*(nums.length+<span class="number">1</span>)/<span class="number">2</span>)-sum;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>第四种方法：位运算</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;缺失数字&quot;&gt;&lt;a href=&quot;#缺失数字&quot; class=&quot;headerlink&quot; title=&quot;缺失数字&quot;&gt;&lt;/a&gt;缺失数字&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定一个包含 0, 1, 2, …, n 中 n 个数的序列，找出 0 .. n 中没有出现在序列中的那个数。&lt;/p&gt;
+&lt;p&gt;示例 1:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: [3,0,1]&lt;br&gt;输出: 2&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 2:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: [9,6,4,2,3,5,7,0,1]&lt;br&gt;输出: 8&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;说明:&lt;br&gt;你的算法应具有线性时间复杂度。你能否仅使用额外常数空间来实现?&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode-121 买卖股票的最佳时机</title>
@@ -566,36 +597,6 @@
       <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
     
       <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-561 数组拆分 I</title>
-    <link href="http://yoursite.com/2019/08/09/leetcode-561/"/>
-    <id>http://yoursite.com/2019/08/09/leetcode-561/</id>
-    <published>2019-08-09T06:14:51.000Z</published>
-    <updated>2019-08-09T06:24:13.980Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="数组拆分-I"><a href="#数组拆分-I" class="headerlink" title="数组拆分 I"></a>数组拆分 I</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定长度为 2n 的数组, 你的任务是将这些数分成 n 对, 例如 (a1, b1), (a2, b2), …, (an, bn) ，使得从1 到 n 的 min(ai, bi) 总和最大。</p><p>示例 1:</p><blockquote><p>输入: [1,4,3,2]<br>输出: 4<br>解释: n 等于 2, 最大总和为 4 = min(1, 2) + min(3, 4).</p></blockquote><p>提示:</p><ol><li>n 是正整数,范围在 [1, 10000].</li><li>数组中的元素范围在 [-10000, 10000].<a id="more"></a>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/array-partition-i" target="_blank" rel="noopener">https://leetcode-cn.com/problems/array-partition-i</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li></ol><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>当将整个数组排序后，第一个数必定为最小的数也是必须参加和运算的数假设为a。那么假如与这个最小的数a配对的数n并不是这个数组排序后a的后一个数b，那么b此时成为了剩下的数中最小的数因此必定也要参加和运算；但显然的是，此时a+b所组成的和运算中必定不是最大的和了</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>将原数组按从小到大进行排序</li><li>将数组中所有下标为偶数的数组元素相加得到的和返回</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> arrayPairSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ans=<span class="number">0</span>;</span><br><span class="line">    nums.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a-b;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nums.length;i=i+<span class="number">2</span>)&#123;</span><br><span class="line">        ans+=nums[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;数组拆分-I&quot;&gt;&lt;a href=&quot;#数组拆分-I&quot; class=&quot;headerlink&quot; title=&quot;数组拆分 I&quot;&gt;&lt;/a&gt;数组拆分 I&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定长度为 2n 的数组, 你的任务是将这些数分成 n 对, 例如 (a1, b1), (a2, b2), …, (an, bn) ，使得从1 到 n 的 min(ai, bi) 总和最大。&lt;/p&gt;
-&lt;p&gt;示例 1:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: [1,4,3,2]&lt;br&gt;输出: 4&lt;br&gt;解释: n 等于 2, 最大总和为 4 = min(1, 2) + min(3, 4).&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;提示:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;n 是正整数,范围在 [1, 10000].&lt;/li&gt;
-&lt;li&gt;数组中的元素范围在 [-10000, 10000].
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
     
   </entry>
   

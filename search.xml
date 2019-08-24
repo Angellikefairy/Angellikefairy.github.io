@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-268 缺失数字]]></title>
+    <url>%2F2019%2F08%2F24%2Fleetcode-268%2F</url>
+    <content type="text"><![CDATA[缺失数字题目描述给定一个包含 0, 1, 2, …, n 中 n 个数的序列，找出 0 .. n 中没有出现在序列中的那个数。 示例 1: 输入: [3,0,1]输出: 2 示例 2: 输入: [9,6,4,2,3,5,7,0,1]输出: 8 说明:你的算法应具有线性时间复杂度。你能否仅使用额外常数空间来实现? 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/missing-number著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述 第一种方法是将数组排序后再遍历，如果某个数与下标不相同的话，那么那个下标就是缺失的数 第二种方法是利用哈希表，在第一次遍历数组时将值记录在哈希表中。然后从0遍历到n，查看每个数是否在哈希表中，若无，则是缺失的数 第三种方法，是将0~n的和减去数组的和就是缺失的数 第四种方法，利用位运算（待补充） 解题步骤步骤易懂，直接贴代码 Coding实现第一种方法：排序遍历 12345678910/** * @param &#123;number[]&#125; nums * @return &#123;number&#125; */var missingNumber = function(nums) &#123; nums.sort((a,b)=&gt;a-b); for(let i=0;i&lt;=nums.length;i++) &#123; if(i!==nums[i]) return i; &#125;&#125;; 第二种方法：哈希表存值 12345678910111213/** * @param &#123;number[]&#125; nums * @return &#123;number&#125; */var missingNumber = function(nums) &#123; let map=new Map(); for(let i=0;i&lt;nums.length;i++) &#123; map.set(nums[i],1); &#125; for(let i=0;i&lt;=nums.length;i++) &#123; if(!map.has(i)) return i; &#125; &#125;; 第三种方法：数组求和 12345678910/** * @param &#123;number[]&#125; nums * @return &#123;number&#125; */var missingNumber = function(nums) &#123; let sum=nums.reduce((pre,value)=&gt;&#123; return pre+value; &#125;,0) return ((0+nums.length)*(nums.length+1)/2)-sum;&#125;; 第四种方法：位运算 12]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-121 买卖股票的最佳时机]]></title>
     <url>%2F2019%2F08%2F23%2Fleetcode-121%2F</url>
     <content type="text"><![CDATA[买卖股票的最佳时机题目描述给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 如果你最多只允许完成一笔交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。 注意你不能在买入股票前卖出股票。 示例 1: 输入: [7,1,5,3,6,4]输出: 5解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格。 示例 2: 输入: [7,6,4,3,1]输出: 0解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路如果使用暴力解法，对每一天作为买入天进行遍历，再遍历每一天的后面的几天，找到差值最大的天数，这样就会有O(n^2)的时间复杂度。那么，一次遍历可以解决吗？ 当然，我们换一种思路，加入第一次遍历不把它当做买入天，而是当做卖出天。那么，我们只要找到当前天之前的那几天中价格最小的即可。而这最小价格，我们可以设定一个min，在遍历中不断改变。 解题步骤 设定min为第一天价格，最大差值max=0 从第二天开始遍历，因为卖出天需要在买入天之后，如果当前天的股票价格大于min，那么求得差价与max比较，赋予max较大值；若小于min，那么将当日股票价格赋予min 循环结束，返回max coding实现123456789101112131415/** * @param &#123;number[]&#125; prices * @return &#123;number&#125; */var maxProfit = function(prices) &#123; let min=prices[0]; let max=0; for(let i=1;i&lt;prices.length;i++)&#123; if(prices[i]&gt;min) &#123; max=max&gt;prices[i]-min?max:prices[i]-min; &#125; else min=prices[i]; &#125; return max;&#125;;]]></content>
