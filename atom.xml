@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-24T14:08:31.022Z</updated>
+  <updated>2019-08-25T08:27:18.918Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-160 相交链表</title>
+    <link href="http://yoursite.com/2019/08/25/leetcode-160/"/>
+    <id>http://yoursite.com/2019/08/25/leetcode-160/</id>
+    <published>2019-08-25T08:07:06.000Z</published>
+    <updated>2019-08-25T08:27:18.918Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="相交链表"><a href="#相交链表" class="headerlink" title="相交链表"></a>相交链表</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>编写一个程序，找到两个单链表相交的起始节点。</p><p>如下面的两个链表：</p><p><img src="https://s2.ax1x.com/2019/08/25/mgImSU.png" alt></p><p>在节点 c1 开始相交。</p><p>示例 1：</p><p><img src="https://s2.ax1x.com/2019/08/25/mgIVYV.png" alt></p><blockquote><p>输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3<br>输出：Reference of the node with value = 8<br>输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</p></blockquote><p>示例 2：</p><p><img src="https://s2.ax1x.com/2019/08/25/mgIZWT.png" alt></p><blockquote><p>输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1<br>输出：Reference of the node with value = 2<br>输入解释：相交节点的值为 2 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</p></blockquote><p>示例 3：</p><p><img src="https://s2.ax1x.com/2019/08/25/mgIEF0.png" alt></p><blockquote><p>输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2<br>输出：null<br>输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。<br>解释：这两个链表不相交，因此返回 null。</p></blockquote><p>注意：</p><ol><li>如果两个链表没有交点，返回 null.</li><li>在返回结果后，两个链表仍须保持原有的结构。</li><li>可假定整个链表结构中没有循环。</li><li>程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。<a id="more"></a>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists" target="_blank" rel="noopener">https://leetcode-cn.com/problems/intersection-of-two-linked-lists</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li></ol><h3 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h3><p>因为题目要求使用O(1)内存，那么显然就不能使用多余的数组。并且程序尽量满足O(n)时间复杂度。因此，解法有二：</p><ol><li><strong>哈希表法</strong> 哈希表的内存占用为O(1)，遍历第一条链表，将链表内的所有节点存入哈希表中。再遍历第二条链表，如果遇到某节点存在于哈希表中，那么就将结果返回</li><li><strong>双指针</strong> 创建两个指针 pA 和 pB，分别初始化为链表 A 和 B 的头结点。然后让它们向后逐结点遍历。<br>当 pA 到达链表的尾部时，将它重定位到链表 B 的头结点 (你没看错，就是链表 B); 类似的，当 pB 到达链表的尾部时，将它重定位到链表 A 的头结点。<br>若在某一时刻 pApA 和 pBpB 相遇，则 pApA/pBpB 为相交结点。（原因如下，若两链表相交，那么相交部分加上两链表之前未相交部分的和是一定的。那么若能相交，这样子移动指针必能相遇）</li></ol><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><h3 id="coding实现"><a href="#coding实现" class="headerlink" title="coding实现"></a>coding实现</h3><p>哈希表法</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * function ListNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.next = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;ListNode&#125; headA</span></span><br><span class="line"><span class="comment"> * @param &#123;ListNode&#125; headB</span></span><br><span class="line"><span class="comment"> * @return &#123;ListNode&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> getIntersectionNode = <span class="function"><span class="keyword">function</span>(<span class="params">headA, headB</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> map=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">let</span> cur=headA;</span><br><span class="line">    <span class="keyword">while</span>(cur) &#123;</span><br><span class="line">        map.set(cur,<span class="number">1</span>);</span><br><span class="line">        cur=cur.next;</span><br><span class="line">    &#125;</span><br><span class="line">    cur=headB;</span><br><span class="line">    <span class="keyword">while</span>(cur) &#123;</span><br><span class="line">        <span class="keyword">if</span>(map.has(cur)) <span class="keyword">return</span> cur;</span><br><span class="line">        cur=cur.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>双指针法</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * function ListNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.next = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;ListNode&#125; headA</span></span><br><span class="line"><span class="comment"> * @param &#123;ListNode&#125; headB</span></span><br><span class="line"><span class="comment"> * @return &#123;ListNode&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> getIntersectionNode = <span class="function"><span class="keyword">function</span>(<span class="params">headA, headB</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> top=headA;</span><br><span class="line">    <span class="keyword">let</span> down=headB;</span><br><span class="line">    <span class="keyword">let</span> bool=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">while</span>(top&amp;&amp;down) &#123;</span><br><span class="line">        <span class="keyword">if</span>(top===down) <span class="keyword">return</span> top;</span><br><span class="line">        <span class="keyword">if</span>(top.next===<span class="literal">null</span>) &#123;</span><br><span class="line">            top=headB;</span><br><span class="line">            bool=!bool;</span><br><span class="line">            <span class="keyword">if</span>(bool===<span class="literal">false</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            top=top.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(down.next===<span class="literal">null</span>) &#123;</span><br><span class="line">            down=headA;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            down=down.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;相交链表&quot;&gt;&lt;a href=&quot;#相交链表&quot; class=&quot;headerlink&quot; title=&quot;相交链表&quot;&gt;&lt;/a&gt;相交链表&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;编写一个程序，找到两个单链表相交的起始节点。&lt;/p&gt;
+&lt;p&gt;如下面的两个链表：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://s2.ax1x.com/2019/08/25/mgImSU.png&quot; alt&gt;&lt;/p&gt;
+&lt;p&gt;在节点 c1 开始相交。&lt;/p&gt;
+&lt;p&gt;示例 1：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://s2.ax1x.com/2019/08/25/mgIVYV.png&quot; alt&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3&lt;br&gt;输出：Reference of the node with value = 8&lt;br&gt;输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 2：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://s2.ax1x.com/2019/08/25/mgIZWT.png&quot; alt&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1&lt;br&gt;输出：Reference of the node with value = 2&lt;br&gt;输入解释：相交节点的值为 2 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 3：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://s2.ax1x.com/2019/08/25/mgIEF0.png&quot; alt&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2&lt;br&gt;输出：null&lt;br&gt;输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。&lt;br&gt;解释：这两个链表不相交，因此返回 null。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;注意：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;如果两个链表没有交点，返回 null.&lt;/li&gt;
+&lt;li&gt;在返回结果后，两个链表仍须保持原有的结构。&lt;/li&gt;
+&lt;li&gt;可假定整个链表结构中没有循环。&lt;/li&gt;
+&lt;li&gt;程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="链表" scheme="http://yoursite.com/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode-268 缺失数字</title>
@@ -558,45 +604,6 @@
     
     
       <category term="基础语法" scheme="http://yoursite.com/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-509 斐波那契数</title>
-    <link href="http://yoursite.com/2019/08/12/leetcode-509/"/>
-    <id>http://yoursite.com/2019/08/12/leetcode-509/</id>
-    <published>2019-08-12T07:58:28.000Z</published>
-    <updated>2019-08-12T08:09:29.976Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="斐波那契数"><a href="#斐波那契数" class="headerlink" title="斐波那契数"></a>斐波那契数</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>斐波那契数，通常用 F(n) 表示，形成的序列称为斐波那契数列。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：</p><p>F(0) = 0,   F(1) = 1<br>F(N) = F(N - 1) + F(N - 2), 其中 N &gt; 1.<br>给定 N，计算 F(N)。</p><p>示例 1：</p><blockquote><p>输入：2<br>输出：1<br>解释：F(2) = F(1) + F(0) = 1 + 0 = 1.</p></blockquote><p>示例 2：</p><blockquote><p>输入：3<br>输出：2<br>解释：F(3) = F(2) + F(1) = 1 + 1 = 2.</p></blockquote><p>示例 3：</p><blockquote><p>输入：4<br>输出：3<br>解释：F(4) = F(3) + F(2) = 2 + 1 = 3.</p></blockquote><p>提示：</p><p>0 ≤ N ≤ 30</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/fibonacci-number" target="_blank" rel="noopener">https://leetcode-cn.com/problems/fibonacci-number</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>一开始会很容易想到用递归的方式来解决，但是递归会很容易超出时间限制。因此，利用动态规划就很容易解决这个问题</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>建立一个数组，数组的第一项和第二项分别为0,1</li><li>从第三项开始一直到第N项，每一项等于前两项的和，并存放到数组中</li><li>返回数组第N项存储的值</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; N</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> fib = <span class="function"><span class="keyword">function</span>(<span class="params">N</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> arr=[<span class="number">0</span>,<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">2</span>;i&lt;=N;i++)&#123;</span><br><span class="line">        arr[i]=arr[i<span class="number">-1</span>]+arr[i<span class="number">-2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr[N];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;斐波那契数&quot;&gt;&lt;a href=&quot;#斐波那契数&quot; class=&quot;headerlink&quot; title=&quot;斐波那契数&quot;&gt;&lt;/a&gt;斐波那契数&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;斐波那契数，通常用 F(n) 表示，形成的序列称为斐波那契数列。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：&lt;/p&gt;
-&lt;p&gt;F(0) = 0,   F(1) = 1&lt;br&gt;F(N) = F(N - 1) + F(N - 2), 其中 N &amp;gt; 1.&lt;br&gt;给定 N，计算 F(N)。&lt;/p&gt;
-&lt;p&gt;示例 1：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入：2&lt;br&gt;输出：1&lt;br&gt;解释：F(2) = F(1) + F(0) = 1 + 0 = 1.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;示例 2：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入：3&lt;br&gt;输出：2&lt;br&gt;解释：F(3) = F(2) + F(1) = 1 + 1 = 2.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;示例 3：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入：4&lt;br&gt;输出：3&lt;br&gt;解释：F(4) = F(3) + F(2) = 2 + 1 = 3.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;提示：&lt;/p&gt;
-&lt;p&gt;0 ≤ N ≤ 30&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
-    
-      <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
   </entry>
   
