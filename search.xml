@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Js中的字符与Unicode编码操作]]></title>
+    <url>%2F2019%2F08%2F27%2FJs%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%8EUnicode%E7%BC%96%E7%A0%81%E6%93%8D%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[字符转化为Unicode编码charAt()概述charAt() 方法从一个字符串中返回指定的字符。 语法 str.charAt(index) 参数： index: 一个介于0和字符转长度减1之间的整数。即0~str.length-1。如果没有提供索引值，那么index默认为0，即第一位 返回值： 返回值是一个根据给定索引的指定字符；如果，给定值超过了上述的要求范围（0~str.length-1），那么该方法返回一个空字符串 例子12345let str='abc'console.log(str.charAt()); // 'a'console.log(str.charAt(1)); // 'b'console.log(str.charAt(2)); // 'c'console.log(str.charAt(7)); // '' charCodeAt()概述charCodeAt()方法 返回给定索引处（String中index索引处）字符的 UTF-16 代码单元值的数字 语法 str.charCodeAt(index) 参数 index:一个大于等于0，小于字符串长度的整数。如果不是一个数值，则默认为0 返回值 返回值是一表示给定索引处（String中index索引处）字符的 UTF-16 代码单元值的数字；如果索引超出范围，则返回 NaN。 例子123456let str1='a';console.log(str1.charCodeAt()); // 97let str2='abc';console.log(str2.charCodeAt(0)); // 97console.log(str2.charCodeAt(1)); // 98console.log(str2.charCodeAt(7)); // NaN Unicode编码转化为字符String.fromCharCode()概述静态 String.fromCharCode() 方法返回由指定的UTF-16代码单元序列创建的字符串。 语法 String.fromCharCode(num1, …, numN) 参数 num1, …, numN一系列UTF-16代码单元的数字。 范围介于0到65535（0xFFFF）之间。 大于0xFFFF的数字将被截断。 不进行有效性检查。 返回值 一个长度为N的字符串，由N个指定的UTF-16代码单元组成；如果不给定参数，那么则返回空字符串 例子123console.log(String.fromCharCode(97)); 'a'console.log(String.fromCharCode(97,98,99)) // 'abc'console.log(String.fromCharCode()); // '']]></content>
+      <categories>
+        <category>javaScript基础</category>
+      </categories>
+      <tags>
+        <tag>基础语法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-168 Excel表列名称]]></title>
     <url>%2F2019%2F08%2F27%2Fleetcode-168%2F</url>
     <content type="text"><![CDATA[Excel表列名称题目描述给定一个正整数，返回它在 Excel 表中相对应的列名称。 例如， 1 -&gt; A 2 -&gt; B 3 -&gt; C ... 26 -&gt; Z 27 -&gt; AA 28 -&gt; AB ...示例 1: 输入: 1输出: “A” 示例 2: 输入: 28输出: “AB” 示例 3: 输入: 701输出: “ZY” 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/excel-sheet-column-title著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述题目要求的是126对应的是AZ，然而如果使用进制来表示的话，我们一般习惯使用0开始的。因此，我们可以用025来表示AZ；这样，我们之后在利用类似二进制中的模二取余法时就可以避免遇到余数0没有对应值的问题。 那么，对于输入值，每次取余时我们就应该讲值减去一之后再进行取余。这样就可以将0~25对应到输入值 解题步骤 建立哈希表，将025作为键，对应到AZ的键值 使用类似二进制的模二取余法，将给定值取余；每次取余先将值减一；取得的余数放入unshift入队列数组中 遍历队列数组，从哈希表中取出对应的键值，添加到字符串ans中 返回ans Coding实现123456789101112131415161718192021/** * @param &#123;number&#125; n * @return &#123;string&#125; */var convertToTitle = function(n) &#123; let map=new Map(); let queue=[]; let ans=''; for(let i=0;i&lt;26;i++) &#123; map.set(i,String.fromCharCode(65+i)); &#125; while(n) &#123; n--; queue.unshift(n%26); n=Math.floor(n/26); &#125; queue.forEach(value=&gt;&#123; ans+=map.get(value); &#125;) return ans;&#125;;]]></content>
