@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="基础语法,">
 
 
 
@@ -88,19 +88,18 @@
 
 
 
-<meta name="description" content="散列的定义 简单来说：就是将某个元素通过一个函数转换为整数，使得该整数可以尽量唯一地代表这个元素  常用的散列函数 直接定址法 直接把key值作为哈希表的下标   平方取中法 取key的平方的中间若干位作为哈希表的下标   除留余数法（常用） 指把key除以一个数得到的余数作为hash值的方法    冲突处理 线性探查法  如果该hash值已经被占用，那么就不断检查下一个位置，直到找到没被占用的。">
+<meta name="description" content="全局变量的声明 全局变量会成为全局对象的属性  那种方式的变量声明会形成全局变量呢？ Javascript运行环境分为浏览器环境和非浏览器环境（比如Node.js） 在浏览器环境中,有三种方式可以声明全局变量  使用var关键字在全局作用域下显示声明 不适用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明 使用全局对象作为其属性来声明  浏览器环境中（全局对象为windo">
+<meta name="keywords" content="基础语法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="散列">
-<meta property="og:url" content="http://yoursite.com/2019/07/22/散列/index.html">
+<meta property="og:title" content="全局变量的声明以及如何避免声明全局变量">
+<meta property="og:url" content="http://yoursite.com/2019/08/27/全局变量的声明以及如何避免声明全局变量/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="散列的定义 简单来说：就是将某个元素通过一个函数转换为整数，使得该整数可以尽量唯一地代表这个元素  常用的散列函数 直接定址法 直接把key值作为哈希表的下标   平方取中法 取key的平方的中间若干位作为哈希表的下标   除留余数法（常用） 指把key除以一个数得到的余数作为hash值的方法    冲突处理 线性探查法  如果该hash值已经被占用，那么就不断检查下一个位置，直到找到没被占用的。">
+<meta property="og:description" content="全局变量的声明 全局变量会成为全局对象的属性  那种方式的变量声明会形成全局变量呢？ Javascript运行环境分为浏览器环境和非浏览器环境（比如Node.js） 在浏览器环境中,有三种方式可以声明全局变量  使用var关键字在全局作用域下显示声明 不适用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明 使用全局对象作为其属性来声明  浏览器环境中（全局对象为windo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=249bc83ec45c10383073c690d378f876/c9fcc3cec3fdfc035f8e2b9cd63f8794a4c22624.jpg">
-<meta property="og:updated_time" content="2019-07-22T14:01:33.355Z">
+<meta property="og:updated_time" content="2019-08-27T10:03:43.647Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="散列">
-<meta name="twitter:description" content="散列的定义 简单来说：就是将某个元素通过一个函数转换为整数，使得该整数可以尽量唯一地代表这个元素  常用的散列函数 直接定址法 直接把key值作为哈希表的下标   平方取中法 取key的平方的中间若干位作为哈希表的下标   除留余数法（常用） 指把key除以一个数得到的余数作为hash值的方法    冲突处理 线性探查法  如果该hash值已经被占用，那么就不断检查下一个位置，直到找到没被占用的。">
-<meta name="twitter:image" content="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=249bc83ec45c10383073c690d378f876/c9fcc3cec3fdfc035f8e2b9cd63f8794a4c22624.jpg">
+<meta name="twitter:title" content="全局变量的声明以及如何避免声明全局变量">
+<meta name="twitter:description" content="全局变量的声明 全局变量会成为全局对象的属性  那种方式的变量声明会形成全局变量呢？ Javascript运行环境分为浏览器环境和非浏览器环境（比如Node.js） 在浏览器环境中,有三种方式可以声明全局变量  使用var关键字在全局作用域下显示声明 不适用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明 使用全局对象作为其属性来声明  浏览器环境中（全局对象为windo">
 
 
 
@@ -130,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/22/散列/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/27/全局变量的声明以及如何避免声明全局变量/">
 
 
 
 
 
-  <title>散列 | Hexo</title>
+  <title>全局变量的声明以及如何避免声明全局变量 | Hexo</title>
   
 
 
@@ -309,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/22/散列/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/全局变量的声明以及如何避免声明全局变量/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -326,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">散列</h1>
+          <h1 class="post-title" itemprop="name headline">全局变量的声明以及如何避免声明全局变量</h1>
         
 
         <div class="post-meta">
@@ -338,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T16:53:04+08:00">
-                2019-07-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-27T17:33:17+08:00">
+                2019-08-27
               </time>
             
 
@@ -361,8 +360,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">算法笔记</span>
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
                   </a>
                 </span>
 
@@ -392,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  517
+                  434
                 </span>
               
 
@@ -429,52 +428,31 @@
       
 
       
-        <h2 id="散列的定义"><a href="#散列的定义" class="headerlink" title="散列的定义"></a>散列的定义</h2><blockquote>
-<p>简单来说：就是将某个元素通过一个函数转换为整数，使得该整数可以尽量唯一地代表这个元素</p>
+        <h2 id="全局变量的声明"><a href="#全局变量的声明" class="headerlink" title="全局变量的声明"></a>全局变量的声明</h2><blockquote>
+<p>全局变量会成为全局对象的属性</p>
 </blockquote>
-<h2 id="常用的散列函数"><a href="#常用的散列函数" class="headerlink" title="常用的散列函数"></a>常用的散列函数</h2><ol>
-<li>直接定址法<blockquote>
-<p>直接把key值作为哈希表的下标</p>
-</blockquote>
-</li>
-<li>平方取中法<blockquote>
-<p>取key的平方的中间若干位作为哈希表的下标</p>
-</blockquote>
-</li>
-<li>除留余数法（常用）<blockquote>
-<p>指把key除以一个数得到的余数作为hash值的方法</p>
-</blockquote>
-</li>
+<p>那种方式的变量声明会形成全局变量呢？</p>
+<p>Javascript运行环境分为浏览器环境和非浏览器环境（比如Node.js）</p>
+<p>在浏览器环境中,有三种方式可以声明全局变量</p>
+<ol>
+<li>使用var关键字在全局作用域下显示声明</li>
+<li>不适用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明</li>
+<li>使用全局对象作为其属性来声明</li>
 </ol>
-<h2 id="冲突处理"><a href="#冲突处理" class="headerlink" title="冲突处理"></a>冲突处理</h2><ol>
-<li><p>线性探查法</p>
-<blockquote>
-<p>如果该hash值已经被占用，那么就不断检查下一个位置，直到找到没被占用的。如果检查过程中超过了表长，则返回到哈希表的首位继续循环查找，或是发现所有的位置都被占用</p>
-</blockquote>
-<p> 该方法容易造成扎堆现象，即表中的若干个连续位置都被使用</p>
-</li>
-<li><p>平方探查法</p>
-<blockquote>
-<p>按照下列的顺序进行探查：<br> H(key)+1^2,H(key)-1^2,<br> H(key)+2^2,H(key)-2^2,<br> H(key)+3^2,H(key)-3^2,<br> …  …</p>
-</blockquote>
-<p> 如果，检查过程中H(key)+k^2超过了表长Tsize，那么就把(H(key)+k^2) % Tsize 作为hash值</p>
-</li>
-<li><p>链地址法</p>
-<blockquote>
-<p>链地址法不计算新的hash值，而是把所有H(key)相同的key连接成一条单链表</p>
-</blockquote>
-<p> <img src="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=249bc83ec45c10383073c690d378f876/c9fcc3cec3fdfc035f8e2b9cd63f8794a4c22624.jpg" alt></p>
-</li>
-</ol>
-<h2 id="字符串hash"><a href="#字符串hash" class="headerlink" title="字符串hash"></a>字符串hash</h2><p>字符串hash是指将字符串S映射为一个整数，使得该整数尽可能唯一地代表该字符串</p>
-<p>假设字符串只由A<del>Z构成，那么可以将A</del>Z映射为0~25；比如，ABC则就可以看作是012。显然，与二进制类似，我们可以把其看作为26进制，再将其转化为10进制，即可得到该字符串唯一地hash映射。</p>
-<blockquote>
-<p>代码</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> hashFunc(str,length)&#123;</span><br><span class="line">    <span class="keyword">let</span> hash=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;length;i++)&#123;</span><br><span class="line">        hash=hash*<span class="number">26</span>+str[i].charCodeAt()-<span class="string">'A'</span>.charCodeAt();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hash;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>浏览器环境中（全局对象为window对象）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">window</span>.c=<span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a===<span class="built_in">window</span>.a); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(b===<span class="built_in">window</span>.b); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
 
-<p>如果外加有小写字母，则就是52进制转换<br>若还有数字，则就是62进制转换</p>
-<h2 id="一些散列表算法题"><a href="#一些散列表算法题" class="headerlink" title="一些散列表算法题"></a>一些散列表算法题</h2><p><a href="http://angellikefairy.coding.me/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" target="_blank" rel="noopener">散列表相关算法题</a></p>
+<p>但是，在Node.js中，上述方法中的方法2就不成立</p>
+<p>Node.js环境（全局对象为global对象)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b=<span class="number">2</span>;</span><br><span class="line">global.c=<span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a===global.a); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(b===global.b); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(c===global.c); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="如何避免声明全局变量"><a href="#如何避免声明全局变量" class="headerlink" title="如何避免声明全局变量"></a>如何避免声明全局变量</h2><p>使用let与const声明关键字</p>
+<p>如果你在全局作用域中使用let或const来声明变量，那么会在全局作用域下创建一个新的绑定，但该绑定不会添加为全局对象的属性。</p>
+<p>换句话说，用let或const不能覆盖全局变量，而只能遮蔽它</p>
+<p>浏览器环境中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> a=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 2 全局对象的属性a被var声明修改了</span></span><br><span class="line"><span class="built_in">console</span>.log(a===<span class="built_in">window</span>.a); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.b=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(b===<span class="built_in">window</span>.b); <span class="comment">// false</span></span><br><span class="line"><span class="comment">// b不是全局变量，因为使用let声明的b没有成为全局对象的属性</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果不想为全局变量创建属性或修改全局变量的属性，那么使用let和const要安全的多</p>
 
       
     </div>
@@ -489,6 +467,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/基础语法/" rel="tag"># 基础语法</a>
+          
+        </div>
       
 
       <div>
@@ -505,8 +489,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/22/leetcode-771/" rel="next" title="leetcode-771 宝石与石头">
-                <i class="fa fa-chevron-left"></i> leetcode-771 宝石与石头
+              <a href="/2019/08/27/Js中的字符与Unicode编码操作/" rel="next" title="Js中的字符与Unicode编码操作">
+                <i class="fa fa-chevron-left"></i> Js中的字符与Unicode编码操作
               </a>
             
           </div>
@@ -514,10 +498,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/23/leetcode-500/" rel="prev" title="leetcode-500 键盘行">
-                leetcode-500 键盘行 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -658,7 +638,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#散列的定义"><span class="nav-number">1.</span> <span class="nav-text">散列的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的散列函数"><span class="nav-number">2.</span> <span class="nav-text">常用的散列函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#冲突处理"><span class="nav-number">3.</span> <span class="nav-text">冲突处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串hash"><span class="nav-number">4.</span> <span class="nav-text">字符串hash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些散列表算法题"><span class="nav-number">5.</span> <span class="nav-text">一些散列表算法题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全局变量的声明"><span class="nav-number">1.</span> <span class="nav-text">全局变量的声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何避免声明全局变量"><span class="nav-number">2.</span> <span class="nav-text">如何避免声明全局变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
