@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="哈希表,">
 
 
 
@@ -88,17 +88,18 @@
 
 
 
-<meta name="description" content="报数题目描述报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下： 1.     1 2.     11 3.     21 4.     1211 5.     1112211 被读作  “one 1”  (“一个一”) , 即 11。11 被读作 “two 1s” (“两个一”）, 即 21。21 被读作 “one 2”,  “one 1” （”一个二” ,  “一">
+<meta name="description" content="Excel表列名称题目描述给定一个正整数，返回它在 Excel 表中相对应的列名称。 例如， 1 -&amp;gt; A 2 -&amp;gt; B 3 -&amp;gt; C ... 26 -&amp;gt; Z 27 -&amp;gt; AA 28 -&amp;gt; AB  ...示例 1:  输入: 1输出: “A”  示例 2:  输入: 28输出: “AB”  示例 3:  输入: 701输出: “ZY”">
+<meta name="keywords" content="哈希表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-38 报数">
-<meta property="og:url" content="http://yoursite.com/2019/08/15/leetcode-38/index.html">
+<meta property="og:title" content="leetcode-168 Excel表列名称">
+<meta property="og:url" content="http://yoursite.com/2019/08/27/leetcode-168/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="报数题目描述报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下： 1.     1 2.     11 3.     21 4.     1211 5.     1112211 被读作  “one 1”  (“一个一”) , 即 11。11 被读作 “two 1s” (“两个一”）, 即 21。21 被读作 “one 2”,  “one 1” （”一个二” ,  “一">
+<meta property="og:description" content="Excel表列名称题目描述给定一个正整数，返回它在 Excel 表中相对应的列名称。 例如， 1 -&amp;gt; A 2 -&amp;gt; B 3 -&amp;gt; C ... 26 -&amp;gt; Z 27 -&amp;gt; AA 28 -&amp;gt; AB  ...示例 1:  输入: 1输出: “A”  示例 2:  输入: 28输出: “AB”  示例 3:  输入: 701输出: “ZY”">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-15T07:32:04.190Z">
+<meta property="og:updated_time" content="2019-08-27T05:41:05.193Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-38 报数">
-<meta name="twitter:description" content="报数题目描述报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下： 1.     1 2.     11 3.     21 4.     1211 5.     1112211 被读作  “one 1”  (“一个一”) , 即 11。11 被读作 “two 1s” (“两个一”）, 即 21。21 被读作 “one 2”,  “one 1” （”一个二” ,  “一">
+<meta name="twitter:title" content="leetcode-168 Excel表列名称">
+<meta name="twitter:description" content="Excel表列名称题目描述给定一个正整数，返回它在 Excel 表中相对应的列名称。 例如， 1 -&amp;gt; A 2 -&amp;gt; B 3 -&amp;gt; C ... 26 -&amp;gt; Z 27 -&amp;gt; AA 28 -&amp;gt; AB  ...示例 1:  输入: 1输出: “A”  示例 2:  输入: 28输出: “AB”  示例 3:  输入: 701输出: “ZY”">
 
 
 
@@ -128,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/15/leetcode-38/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/27/leetcode-168/">
 
 
 
 
 
-  <title>leetcode-38 报数 | Hexo</title>
+  <title>leetcode-168 Excel表列名称 | Hexo</title>
   
 
 
@@ -307,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/15/leetcode-38/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/leetcode-168/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -324,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode-38 报数</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode-168 Excel表列名称</h1>
         
 
         <div class="post-meta">
@@ -336,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-15T15:17:29+08:00">
-                2019-08-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-27T13:28:36+08:00">
+                2019-08-27
               </time>
             
 
@@ -390,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  362
+                  421
                 </span>
               
 
@@ -427,27 +428,38 @@
       
 
       
-        <h1 id="报数"><a href="#报数" class="headerlink" title="报数"></a>报数</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下：</p>
-<pre><code>1.     1
-2.     11
-3.     21
-4.     1211
-5.     111221</code></pre><p>1 被读作  “one 1”  (“一个一”) , 即 11。<br>11 被读作 “two 1s” (“两个一”）, 即 21。<br>21 被读作 “one 2”,  “one 1” （”一个二” ,  “一个一”) , 即 1211。</p>
-<p>给定一个正整数 n（1 ≤ n ≤ 30），输出报数序列的第 n 项。</p>
-<p>注意：整数顺序将表示为一个字符串。</p>
-<p>示例 1:</p>
+        <h1 id="Excel表列名称"><a href="#Excel表列名称" class="headerlink" title="Excel表列名称"></a>Excel表列名称</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个正整数，返回它在 Excel 表中相对应的列名称。</p>
+<p>例如，</p>
+<pre><code>1 -&gt; A
+2 -&gt; B
+3 -&gt; C
+...
+26 -&gt; Z
+27 -&gt; AA
+28 -&gt; AB 
+...</code></pre><p>示例 1:</p>
 <blockquote>
-<p>输入: 1<br>输出: “1”</p>
+<p>输入: 1<br>输出: “A”</p>
 </blockquote>
 <p>示例 2:</p>
 <blockquote>
-<p>输入: 4<br>输出: “1211”</p>
+<p>输入: 28<br>输出: “AB”</p>
+</blockquote>
+<p>示例 3:</p>
+<blockquote>
+<p>输入: 701<br>输出: “ZY”</p>
 </blockquote>
 <a id="more"></a>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/count-and-say" target="_blank" rel="noopener">https://leetcode-cn.com/problems/count-and-say</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>报数，指报的是前一个数。当前一个数有连续个同样地数比如’111’，那么把这个念作（3个1），因此会输出31；又比如’123’，因为这三个数都不同，我们会报数为（1个1；1个2；1个3），因此会输出111213</p>
-<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><p>不想多说，直接上代码</p>
-<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> countAndSay = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ans=[];</span><br><span class="line">    ans[<span class="number">0</span>]=<span class="string">'1'</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="keyword">let</span> sum=<span class="number">1</span>;</span><br><span class="line">        ans[i]=<span class="string">''</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;ans[i<span class="number">-1</span>].length;k++)&#123;</span><br><span class="line">             <span class="keyword">if</span>(ans[i<span class="number">-1</span>][k]!==ans[i<span class="number">-1</span>][k+<span class="number">1</span>])&#123;</span><br><span class="line">                ans[i]+=sum.toString()+ans[i<span class="number">-1</span>][k];</span><br><span class="line">                sum=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                sum++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans[n<span class="number">-1</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/excel-sheet-column-title" target="_blank" rel="noopener">https://leetcode-cn.com/problems/excel-sheet-column-title</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>题目要求的是1<del>26对应的是A</del>Z，然而如果使用进制来表示的话，我们一般习惯使用0开始的。因此，我们可以用0<del>25来表示A</del>Z；这样，我们之后在利用类似二进制中的模二取余法时就可以避免遇到余数0没有对应值的问题。</p>
+<p>那么，对于输入值，每次取余时我们就应该讲值减去一之后再进行取余。这样就可以将0~25对应到输入值</p>
+<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
+<li>建立哈希表，将0<del>25作为键，对应到A</del>Z的键值</li>
+<li>使用类似二进制的模二取余法，将给定值取余；每次取余先将值减一；取得的余数放入unshift入队列数组中</li>
+<li>遍历队列数组，从哈希表中取出对应的键值，添加到字符串ans中</li>
+<li>返回ans</li>
+</ol>
+<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> convertToTitle = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> map=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">let</span> queue=[];</span><br><span class="line">    <span class="keyword">let</span> ans=<span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;i++) &#123;</span><br><span class="line">        map.set(i,<span class="built_in">String</span>.fromCharCode(<span class="number">65</span>+i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(n) &#123;</span><br><span class="line">        n--;</span><br><span class="line">        queue.unshift(n%<span class="number">26</span>);</span><br><span class="line">        n=<span class="built_in">Math</span>.floor(n/<span class="number">26</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    queue.forEach(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">        ans+=map.get(value);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span>  ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -464,6 +476,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/哈希表/" rel="tag"># 哈希表</a>
+          
+        </div>
+      
 
       <div>
       
@@ -479,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/15/二叉树与二叉搜索树/" rel="next" title="二叉树与二叉搜索树">
-                <i class="fa fa-chevron-left"></i> 二叉树与二叉搜索树
+              <a href="/2019/08/26/leetcode-811/" rel="next" title="leetcode-811 子域名访问计数">
+                <i class="fa fa-chevron-left"></i> leetcode-811 子域名访问计数
               </a>
             
           </div>
@@ -488,10 +506,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/16/leetcode-100/" rel="prev" title="leetcode-100 相同的树">
-                leetcode-100 相同的树 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -632,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#报数"><span class="nav-number">1.</span> <span class="nav-text">报数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Excel表列名称"><span class="nav-number">1.</span> <span class="nav-text">Excel表列名称</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
             
 
           </div>
