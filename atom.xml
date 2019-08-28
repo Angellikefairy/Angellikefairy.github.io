@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-27T10:03:43.647Z</updated>
+  <updated>2019-08-28T02:38:06.600Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-190 颠倒二进制位</title>
+    <link href="http://yoursite.com/2019/08/28/leetcode-190/"/>
+    <id>http://yoursite.com/2019/08/28/leetcode-190/</id>
+    <published>2019-08-28T02:09:31.000Z</published>
+    <updated>2019-08-28T02:38:06.600Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="颠倒二进制位"><a href="#颠倒二进制位" class="headerlink" title="颠倒二进制位"></a>颠倒二进制位</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>颠倒给定的 32 位无符号整数的二进制位。</p><p>示例 1：</p><blockquote><p>输入: 00000010100101000001111010011100<br>输出: 00111001011110000010100101000000<br>解释: 输入的二进制串 00000010100101000001111010011100 表示无符号整数 43261596，<br>      因此返回 964176192，其二进制表示形式为 00111001011110000010100101000000。</p></blockquote><p>示例 2：</p><blockquote><p>输入：11111111111111111111111111111101<br>输出：10111111111111111111111111111111<br>解释：输入的二进制串 11111111111111111111111111111101 表示无符号整数 4294967293，<br>      因此返回 3221225471 其二进制表示形式为 10101111110010110010011101101001。</p></blockquote><p>提示：</p><ol><li>请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。</li><li>在 Java 中，编译器使用二进制补码记法来表示有符号整数。因此，在上面的 示例 2 中，输入表示有符号整数 -3，输出表示有符号整数 -1073741825。</li></ol><p>进阶:<br>如果多次调用这个函数，你将如何优化你的算法？</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-bits" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-bits</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>输入的会是一个无符号整数可以转化为32位二进制表示；要求输出的是反转该32位二进制并转化为整数输出</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>利用模二取余法得到32位二进制数</li><li>将32位二进制数反转后转化为整数并返回</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n - a positive integer</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125; - a positive integer</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> reverseBits = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> s=[];</span><br><span class="line">    <span class="keyword">while</span>(n) &#123;</span><br><span class="line">        s.unshift(n%<span class="number">2</span>);</span><br><span class="line">        n=<span class="built_in">Math</span>.floor(n/<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(s.length&lt;<span class="number">32</span>) &#123;</span><br><span class="line">        s.unshift(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s.reduce(<span class="function">(<span class="params">pre,cur,curIndex</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> pre+cur*<span class="built_in">Math</span>.pow(<span class="number">2</span>,curIndex);</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;颠倒二进制位&quot;&gt;&lt;a href=&quot;#颠倒二进制位&quot; class=&quot;headerlink&quot; title=&quot;颠倒二进制位&quot;&gt;&lt;/a&gt;颠倒二进制位&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;颠倒给定的 32 位无符号整数的二进制位。&lt;/p&gt;
+&lt;p&gt;示例 1：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: 00000010100101000001111010011100&lt;br&gt;输出: 00111001011110000010100101000000&lt;br&gt;解释: 输入的二进制串 00000010100101000001111010011100 表示无符号整数 43261596，&lt;br&gt;      因此返回 964176192，其二进制表示形式为 00111001011110000010100101000000。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 2：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入：11111111111111111111111111111101&lt;br&gt;输出：10111111111111111111111111111111&lt;br&gt;解释：输入的二进制串 11111111111111111111111111111101 表示无符号整数 4294967293，&lt;br&gt;      因此返回 3221225471 其二进制表示形式为 10101111110010110010011101101001。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;提示：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。&lt;/li&gt;
+&lt;li&gt;在 Java 中，编译器使用二进制补码记法来表示有符号整数。因此，在上面的 示例 2 中，输入表示有符号整数 -3，输出表示有符号整数 -1073741825。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;进阶:&lt;br&gt;如果多次调用这个函数，你将如何优化你的算法？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>全局变量的声明以及如何避免声明全局变量</title>
@@ -600,28 +634,6 @@
     
     
       <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>操作符new到底做了哪些事</title>
-    <link href="http://yoursite.com/2019/08/13/%E6%93%8D%E4%BD%9C%E7%AC%A6new%E5%88%B0%E5%BA%95%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B/"/>
-    <id>http://yoursite.com/2019/08/13/操作符new到底做了哪些事/</id>
-    <published>2019-08-13T10:27:17.000Z</published>
-    <updated>2019-08-14T09:09:53.116Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="new操作符的作用"><a href="#new操作符的作用" class="headerlink" title="new操作符的作用"></a>new操作符的作用</h2><p>new操作符可以快速创建构造函数的实例，如：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age,job</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name=name;</span><br><span class="line">    <span class="keyword">this</span>.age=age;</span><br><span class="line">    <span class="keyword">this</span>.job=job;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.sayHello=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> man=<span class="keyword">new</span> Person(<span class="string">'zjb'</span>,<span class="string">'18'</span>,<span class="string">'frontEnd'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(man); <span class="comment">// Object &#123; name: "zjb", age: "18", job: "frontEnd" &#125;</span></span><br><span class="line">man.sayHello(); <span class="comment">// 'hello'</span></span><br></pre></td></tr></table></figure><p>那么，使用new操作符来创建某构造函数的实例会经历以下四个步骤：</p><ol><li>内部创建一个新对象</li><li>将构造函数的作用域赋给新对象（因此this就指向了这个新对象）</li><li>执行构造函数中的代码</li><li>返回新对象</li></ol><h2 id="自己实现一个new操作符"><a href="#自己实现一个new操作符" class="headerlink" title="自己实现一个new操作符"></a>自己实现一个new操作符</h2><p>既然new操作符的作用是创建一个构造函数的实例，那么new操作无非就是创建一个新的对象，将这个新对象的<strong>proto</strong>属性指向其构造函数的原型对象，然后该新对象绑定到构造函数上并获得传入的值，从而执行代码获得自身的对象属性</p><p>new操作符的代码实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span>(<span class="params">obj,...arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ans=&#123;&#125;;</span><br><span class="line">    ans.__proto__=obj.prototype; <span class="comment">// 连接原型对象</span></span><br><span class="line">    <span class="comment">//Object.setPrototypeOf(ans, obj.prototype) 也可以，或许更高效</span></span><br><span class="line">    <span class="keyword">let</span> result=obj.apply(ans,arr); <span class="comment">// 获得构造函数的返回值</span></span><br><span class="line">    <span class="keyword">return</span> ans===<span class="built_in">Object</span>?ans:result;</span><br><span class="line">    <span class="comment">//用来判断构造函数的返回值是否与创建的实例不同</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;new操作符的作用&quot;&gt;&lt;a href=&quot;#new操作符的作用&quot; class=&quot;headerlink&quot; title=&quot;new操作符的作用&quot;&gt;&lt;/a&gt;new操作符的作用&lt;/h2&gt;&lt;p&gt;new操作符可以快速创建构造函数的实例，如：&lt;/p&gt;
-&lt;figure class=&quot;
-      
-    
-    </summary>
-    
     
   </entry>
   

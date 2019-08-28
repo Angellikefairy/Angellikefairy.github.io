@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-190 颠倒二进制位]]></title>
+    <url>%2F2019%2F08%2F28%2Fleetcode-190%2F</url>
+    <content type="text"><![CDATA[颠倒二进制位题目描述颠倒给定的 32 位无符号整数的二进制位。 示例 1： 输入: 00000010100101000001111010011100输出: 00111001011110000010100101000000解释: 输入的二进制串 00000010100101000001111010011100 表示无符号整数 43261596， 因此返回 964176192，其二进制表示形式为 00111001011110000010100101000000。 示例 2： 输入：11111111111111111111111111111101输出：10111111111111111111111111111111解释：输入的二进制串 11111111111111111111111111111101 表示无符号整数 4294967293， 因此返回 3221225471 其二进制表示形式为 10101111110010110010011101101001。 提示： 请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。 在 Java 中，编译器使用二进制补码记法来表示有符号整数。因此，在上面的 示例 2 中，输入表示有符号整数 -3，输出表示有符号整数 -1073741825。 进阶:如果多次调用这个函数，你将如何优化你的算法？ 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/reverse-bits著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述输入的会是一个无符号整数可以转化为32位二进制表示；要求输出的是反转该32位二进制并转化为整数输出 解题步骤 利用模二取余法得到32位二进制数 将32位二进制数反转后转化为整数并返回 Coding实现1234567891011121314151617/** * @param &#123;number&#125; n - a positive integer * @return &#123;number&#125; - a positive integer */var reverseBits = function(n) &#123; let s=[]; while(n) &#123; s.unshift(n%2); n=Math.floor(n/2); &#125; while(s.length&lt;32) &#123; s.unshift(0); &#125; return s.reduce((pre,cur,curIndex)=&gt;&#123; return pre+cur*Math.pow(2,curIndex); &#125;,0)&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[全局变量的声明以及如何避免声明全局变量]]></title>
     <url>%2F2019%2F08%2F27%2F%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%A3%B0%E6%98%8E%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%2F</url>
     <content type="text"><![CDATA[全局变量的声明 全局变量会成为全局对象的属性 那种方式的变量声明会形成全局变量呢？ Javascript运行环境分为浏览器环境和非浏览器环境（比如Node.js） 在浏览器环境中,有三种方式可以声明全局变量 使用var关键字在全局作用域下显示声明 不适用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明 使用全局对象作为其属性来声明 浏览器环境中（全局对象为window对象） 123456a=1;var b=2;window.c=3;console.log(a===window.a); // trueconsole.log(b===window.b); // trueconsole.log(c); // 3 但是，在Node.js中，上述方法中的方法2就不成立 Node.js环境（全局对象为global对象) 123456a=1;var b=2;global.c=3;console.log(a===global.a); // trueconsole.log(b===global.b); // falseconsole.log(c===global.c); // 3 如何避免声明全局变量使用let与const声明关键字 如果你在全局作用域中使用let或const来声明变量，那么会在全局作用域下创建一个新的绑定，但该绑定不会添加为全局对象的属性。 换句话说，用let或const不能覆盖全局变量，而只能遮蔽它 浏览器环境中 12345678910window.a=1;var a=2;console.log(a); // 2 全局对象的属性a被var声明修改了console.log(a===window.a); // truewindow.b=1;let b=2;console.log(b); // 2console.log(b===window.b); // false// b不是全局变量，因为使用let声明的b没有成为全局对象的属性 总结如果不想为全局变量创建属性或修改全局变量的属性，那么使用let和const要安全的多]]></content>
