@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="正则表达式,">
 
 
 
@@ -88,17 +88,18 @@
 
 
 
-<meta name="description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta name="description" content="正则表达式正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。 Js怎么支持正则表达式Es是通过RegExp类型来支持正则表达式。 怎么创建正则表达式使用正则表达式字面量语法  let pat=/pattern/flags  其中,pattern部分是正则表达式，">
+<meta name="keywords" content="正则表达式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Javascript与正则表达式">
+<meta property="og:title" content="Javascript与简单正则表达式">
 <meta property="og:url" content="http://yoursite.com/2019/08/28/Javascript与正则表达式/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta property="og:description" content="正则表达式正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。 Js怎么支持正则表达式Es是通过RegExp类型来支持正则表达式。 怎么创建正则表达式使用正则表达式字面量语法  let pat=/pattern/flags  其中,pattern部分是正则表达式，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-28T08:01:01.590Z">
+<meta property="og:updated_time" content="2019-08-29T12:25:18.980Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Javascript与正则表达式">
-<meta name="twitter:description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta name="twitter:title" content="Javascript与简单正则表达式">
+<meta name="twitter:description" content="正则表达式正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。 Js怎么支持正则表达式Es是通过RegExp类型来支持正则表达式。 怎么创建正则表达式使用正则表达式字面量语法  let pat=/pattern/flags  其中,pattern部分是正则表达式，">
 
 
 
@@ -134,7 +135,7 @@
 
 
 
-  <title>Javascript与正则表达式 | Hexo</title>
+  <title>Javascript与简单正则表达式 | Hexo</title>
   
 
 
@@ -324,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Javascript与正则表达式</h1>
+          <h1 class="post-title" itemprop="name headline">Javascript与简单正则表达式</h1>
         
 
         <div class="post-meta">
@@ -347,6 +348,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -368,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  1.9k
                 </span>
               
 
@@ -384,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  7
                 </span>
               
             </div>
@@ -405,7 +428,182 @@
       
 
       
-        
+        <h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p>正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。</p>
+<h2 id="Js怎么支持正则表达式"><a href="#Js怎么支持正则表达式" class="headerlink" title="Js怎么支持正则表达式"></a>Js怎么支持正则表达式</h2><p>Es是通过RegExp类型来支持正则表达式。</p>
+<h3 id="怎么创建正则表达式"><a href="#怎么创建正则表达式" class="headerlink" title="怎么创建正则表达式"></a>怎么创建正则表达式</h3><h4 id="使用正则表达式字面量"><a href="#使用正则表达式字面量" class="headerlink" title="使用正则表达式字面量"></a>使用正则表达式字面量</h4><p>语法</p>
+<blockquote>
+<p>let pat=/pattern/flags</p>
+</blockquote>
+<p>其中,pattern部分是正则表达式，而flags部分是标志，可以是0或多个，其中标志包括下列三种：</p>
+<ol>
+<li>g: 表示全局模式，即模式将被应用到所有的字符串，而非在发现第一个匹配项时就立刻停止；若没有该标志，则表示该模式时在发现第一个匹配项时就立刻停止</li>
+<li>i: 表示不区分大小写模式，即在确定匹配项时忽略模式与字符串的大小写</li>
+<li>m: 表示多行模式，即在到达一行文本末尾时还会继续查找下一行中是否存在于模式匹配的项</li>
+</ol>
+<h4 id="使用RegExp构造函数创建"><a href="#使用RegExp构造函数创建" class="headerlink" title="使用RegExp构造函数创建"></a>使用RegExp构造函数创建</h4><p>语法</p>
+<blockquote>
+<p>let re=new RegExp(“pattern”,”flags”);</p>
+</blockquote>
+<p>其中，pattern与flags意义同上</p>
+<h3 id="正则表达式的一些相关重要方法"><a href="#正则表达式的一些相关重要方法" class="headerlink" title="正则表达式的一些相关重要方法"></a>正则表达式的一些相关重要方法</h3><h4 id="exec-方法"><a href="#exec-方法" class="headerlink" title="exec()方法"></a>exec()方法</h4><p>exec()方法是专门为捕获组而设计的。exec()接受一个参数，即要应用模式的字符串，然后返回包括第一个匹配项信息的数组；或者在没有匹配的情况下返回null</p>
+<p>例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/.at/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'cat pat hat'</span>;</span><br><span class="line"><span class="built_in">console</span>.oog(pattern.exec(str)); <span class="comment">// [ 'cat', index: 0, input: 'cat pat hat', groups: undefined ]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="test-方法"><a href="#test-方法" class="headerlink" title="test()方法"></a>test()方法</h4><p>test()方法接受一个字符串参数。在模式与该参数匹配的情况下返回true;否则，返回false。经常被用于if判断语句</p>
+<p>只要在字符串中存在某字符串能够匹配正则表达式的模式，那么就会返回true</p>
+<p>例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/.at/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'cat pat hat'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(pattern.test(str)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="String-match-方法"><a href="#String-match-方法" class="headerlink" title="String.match()方法"></a>String.match()方法</h4><p>match() 方法检索返回一个字符串匹配正则表达式的的结果。</p>
+<p>语法：</p>
+<blockquote>
+<p>str.match(regexp);</p>
+</blockquote>
+<p>参数：</p>
+<p>regexp:<br>一个正则表达式对象。如果传入的是一个非正则表达式对象，则会隐式地使用new RegExp(obj)将其转化为一个正则表达式对象。如果没有给定任何参数，那么则会返回一个空数组</p>
+<p>返回值：</p>
+<ol>
+<li>如果使用g标志，那么则返回所有与正则表达式匹配的结果(Array)，但不会返回捕获组；或者没有匹配项返回null</li>
+<li>如果不使用g标志，那么则返回第一个完整匹配及相关的捕获组。</li>
+</ol>
+<p>例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/.at/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'cat pat hat'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// ['cat','pat','hat']</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h2><p>元字符是正则表达式的基本组成元素。</p>
+<p>具体元字符如下：</p>
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td>匹配除了换行符以外的任意字符</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>匹配方括号中的任意一个字符,可以使用连字符’-‘来表示范围，例如 [a,b,c]可以表示为[a-c]</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td>上一个的反状态，即匹配除了括号内的任意一个字符</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>匹配前面的字符[n,m]次，即至少n次，但是不超过m次</td>
+</tr>
+<tr>
+<td>(xyz)</td>
+<td>相当于四则运算中常用的小括号，解释为按照确切的顺序来匹配字符xyz</td>
+</tr>
+<tr>
+<td>|</td>
+<td>分支结构，匹配符号之前的字符或后面的字符</td>
+</tr>
+<tr>
+<td>\</td>
+<td>转义符，它可以还原元字符原来的含义，允许你匹配保留元字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式0次或多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前面的子表达式0次货一次，或指定一个非贪婪限定符</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配行的开始</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配行的结束</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>表示[0-9]，即1位数字</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>表示除数字外的任意字符</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>表示[0-9a-zA-z_]，即数字、大小写字母或下划线</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>表示非单词字符，\w的对立</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>表示空白符，包括空格、水平制表符、垂直制表符、换行符、回车符、换页符</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>非空白符</td>
+</tr>
+</tbody></table>
+<p>如果想要匹配任意字符，根据以上元字符可以使用</p>
+<ol>
+<li>\d|\D 或 [\d\D]</li>
+<li>\w|\W 或 [\w\W]</li>
+<li>\s|\S 或 [\s\S]</li>
+<li>[^]</li>
+</ol>
+<h3 id="元字符详解与例子"><a href="#元字符详解与例子" class="headerlink" title="元字符详解与例子"></a>元字符详解与例子</h3><h4 id="元字符-1"><a href="#元字符-1" class="headerlink" title="元字符 ."></a>元字符 .</h4><p>元字符.可以用来匹配除了换行符之外的所有单个字符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/.at/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'cat pat hat'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// ['cat','pat','hat']</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="元字符-2"><a href="#元字符-2" class="headerlink" title="元字符 []"></a>元字符 []</h4><p>元字符 []用来匹配方括号内的任意一个字符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/[cph]at/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'cat pat hat'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// ['cat','pat','hat']</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="元字符-3"><a href="#元字符-3" class="headerlink" title="元字符 [^]"></a>元字符 [^]</h4><p>元字符 [^]用来匹配除了方括号内字符的任意一个字符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/[^cph]at/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'cat pat hat'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="元字符-n-m"><a href="#元字符-n-m" class="headerlink" title="元字符 {n,m}"></a>元字符 {n,m}</h4><p>元字符 {n,m}用来匹配该元字符的前一个字符[n,m]次（即至少n次但不超过m次）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/.a&#123;1,2&#125;t/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'cat paat haaat'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// ['cat','paat','aaat']</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="元字符-xyz"><a href="#元字符-xyz" class="headerlink" title="元字符 (xyz)"></a>元字符 (xyz)</h4><p>元字符 (xyz)我觉得其实相当于四则运算中的小括号，先执行小括号内的部分</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/.(a|b|c)t/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'cat pbt hct'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// ['cat','pbt','hct']</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="元字符-4"><a href="#元字符-4" class="headerlink" title="元字符 |"></a>元字符 |</h4><p>元字符 | 用来定义分支结构，分支结构就是相当于或运算。即要么执行元字符之前的字符要么执行之后的字符或者都不；</p>
+<p>注意： 该元字符类似于或运算具有短路操作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/.(a|b|c)t/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'cat pbt hct'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// ['cat','pbt','hct']</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/good|goodbye/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'good goodbye'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// ['good','good']</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 元字符 | 类似或运算具有短路操作，当前面的字符成立时就不会执行元字符之后的字符。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 上面的代码中，str字符串中的第一个'good'字符串满足正则表达式模式中的'good'，而后一个'goodbye'字符串虽然也满足'goodbye'，但是它先满足元字符之前的字符'good'，因此该运算被短路了，所以只返回了'good'</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/goodbye|good/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'good goodbye'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// ['good','goodbye']</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="元字符-5"><a href="#元字符-5" class="headerlink" title="元字符 \"></a>元字符 \</h4><p>元字符 \用来转义它的下一个字符。这将允许你使用保留字符来作为匹配元字符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/.at\./g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'cat\ pat/ hat.'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// ['hat.']</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="元字符-6"><a href="#元字符-6" class="headerlink" title="元字符 *"></a>元字符 *</h4><p>元字符 *用来匹配上一个匹配规则的0次或多次</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/zk*/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'zk z zkkk'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// [ 'zk', 'z', 'zkkk' ]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="元字符-7"><a href="#元字符-7" class="headerlink" title="元字符 +"></a>元字符 +</h4><p>元字符 +用来匹配上一个字符的一次或多次</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/zk+/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'zk z zkkk'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// [ 'zk','zkkk' ]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="元字符-8"><a href="#元字符-8" class="headerlink" title="元字符 ?"></a>元字符 ?</h4><p>元字符 ?用来匹配前一个字符的0次或一次</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/zk?/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'zk z zkkk'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// [ 'zk','z','zk' ]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="元字符-9"><a href="#元字符-9" class="headerlink" title="元字符 ^"></a>元字符 ^</h4><p>元字符 ^用来检查匹配字符是否是输入字符串的第一个字符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/(T|t)he/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'The the'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// ['The','the']</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/^(T|t)he/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'The the'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// ['The']</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="元字符-10"><a href="#元字符-10" class="headerlink" title="元字符 $"></a>元字符 $</h4><p>元字符 $用来检查匹配字符是否是输入字符串的最后一个字符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/.he/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'The the'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// ['The','the']</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pattern=<span class="regexp">/.he$/g</span>;</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">'The the'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(pattern)); <span class="comment">// ['the']</span></span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     
@@ -419,6 +617,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/正则表达式/" rel="tag"># 正则表达式</a>
+          
+        </div>
       
 
       <div>
@@ -499,8 +703,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -539,7 +752,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -570,6 +783,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式"><span class="nav-number">1.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Js怎么支持正则表达式"><span class="nav-number">2.</span> <span class="nav-text">Js怎么支持正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么创建正则表达式"><span class="nav-number">2.1.</span> <span class="nav-text">怎么创建正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用正则表达式字面量"><span class="nav-number">2.1.1.</span> <span class="nav-text">使用正则表达式字面量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用RegExp构造函数创建"><span class="nav-number">2.1.2.</span> <span class="nav-text">使用RegExp构造函数创建</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式的一些相关重要方法"><span class="nav-number">2.2.</span> <span class="nav-text">正则表达式的一些相关重要方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#exec-方法"><span class="nav-number">2.2.1.</span> <span class="nav-text">exec()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#test-方法"><span class="nav-number">2.2.2.</span> <span class="nav-text">test()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String-match-方法"><span class="nav-number">2.2.3.</span> <span class="nav-text">String.match()方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元字符"><span class="nav-number">3.</span> <span class="nav-text">元字符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#元字符详解与例子"><span class="nav-number">3.1.</span> <span class="nav-text">元字符详解与例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#元字符-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">元字符 .</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元字符-2"><span class="nav-number">3.1.2.</span> <span class="nav-text">元字符 []</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元字符-3"><span class="nav-number">3.1.3.</span> <span class="nav-text">元字符 [^]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元字符-n-m"><span class="nav-number">3.1.4.</span> <span class="nav-text">元字符 {n,m}</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元字符-xyz"><span class="nav-number">3.1.5.</span> <span class="nav-text">元字符 (xyz)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元字符-4"><span class="nav-number">3.1.6.</span> <span class="nav-text">元字符 |</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元字符-5"><span class="nav-number">3.1.7.</span> <span class="nav-text">元字符 \</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元字符-6"><span class="nav-number">3.1.8.</span> <span class="nav-text">元字符 *</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元字符-7"><span class="nav-number">3.1.9.</span> <span class="nav-text">元字符 +</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元字符-8"><span class="nav-number">3.1.10.</span> <span class="nav-text">元字符 ?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元字符-9"><span class="nav-number">3.1.11.</span> <span class="nav-text">元字符 ^</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元字符-10"><span class="nav-number">3.1.12.</span> <span class="nav-text">元字符 $</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -598,7 +827,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">42.3k</span>
+    <span title="Site words total count">44.2k</span>
   
 </div>
 
@@ -628,7 +857,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共42.3k字</span>
+  <span class="post-count">博客全站共44.2k字</span>
 </div>
         
 
