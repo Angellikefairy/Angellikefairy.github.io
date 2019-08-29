@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-29T03:06:35.886Z</updated>
+  <updated>2019-08-29T10:19:32.547Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数组扁平化</title>
+    <link href="http://yoursite.com/2019/08/29/%E6%95%B0%E7%BB%84%E6%89%81%E5%B9%B3%E5%8C%96/"/>
+    <id>http://yoursite.com/2019/08/29/数组扁平化/</id>
+    <published>2019-08-29T03:20:03.000Z</published>
+    <updated>2019-08-29T10:19:32.547Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="数组扁平化"><a href="#数组扁平化" class="headerlink" title="数组扁平化"></a>数组扁平化</h2><p>数组的扁平化，就是将一个嵌套多层的数组按照给定深度转化为原本深度减去给定深度的数组</p><p>例如：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>]];</span><br><span class="line"><span class="built_in">console</span>.log(arr.flat()); <span class="comment">// [1,2,3,4]</span></span><br></pre></td></tr></table></figure><h2 id="flat-方法"><a href="#flat-方法" class="headerlink" title="flat()方法"></a>flat()方法</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>flat() 方法会按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组中的元素合并为一个新数组返回。</p><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><blockquote><p>var newArray = arr.flat(depth)</p></blockquote><h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>depth(可选)</p><p>指定要提取嵌套数组的结构深度，默认值为1</p><h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>一个包含数组与子数组所有元素的新数组</p><h2 id="实现数组扁平化flat-方法"><a href="#实现数组扁平化flat-方法" class="headerlink" title="实现数组扁平化flat()方法"></a>实现数组扁平化flat()方法</h2><h3 id="利用递归实现"><a href="#利用递归实现" class="headerlink" title="利用递归实现"></a>利用递归实现</h3><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>根据给定深度遍历，那么我们需要知道每一层数组的深度。当遍历每一层数组时，若遇到了内一层的数组，那么对该数组再执行Flat函数，也就是进行递归；若不是，则放入ans数组</p><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Flat</span>(<span class="params">arr,depth</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ans=[];</span><br><span class="line">    (<span class="function"><span class="keyword">function</span> <span class="title">flat</span>(<span class="params">arr,dep</span>)</span>&#123;</span><br><span class="line">        dep++;</span><br><span class="line">        <span class="keyword">if</span>(dep&gt;depth) &#123;ans.push(arr);<span class="keyword">return</span>;&#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length;i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(arr[i])) &#123;</span><br><span class="line">                flat(arr[i],dep);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[i]) ans.push(arr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)(arr,<span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Flat([<span class="number">1</span>,<span class="number">2</span>, ,[<span class="number">3</span>,<span class="number">4</span>,[<span class="number">5</span>,<span class="number">6</span>]],[<span class="number">7</span>,<span class="number">8</span>,[<span class="number">9</span>,<span class="number">10</span>,[<span class="number">11</span>,<span class="number">12</span>]]]],<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line">[ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, [ <span class="number">11</span>, <span class="number">12</span> ] ]</span><br></pre></td></tr></table></figure><h3 id="利用reduce方法实现"><a href="#利用reduce方法实现" class="headerlink" title="利用reduce方法实现"></a>利用reduce方法实现</h3><p>reduce方法就是遍历原数组，将每个元素利用concat方法进行拼接。因为concat方法进行拼接时会将被拼接的数组的最外层数组去掉，只取得内部的元素</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Flat</span>(<span class="params">arr,depth</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="function"><span class="keyword">function</span> <span class="title">flat</span>(<span class="params">arr,dep</span>) </span>&#123;</span><br><span class="line">        dep++;</span><br><span class="line">        <span class="keyword">return</span> arr.reduce(<span class="function">(<span class="params">pre,cur</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(dep&gt;=depth) &#123;</span><br><span class="line">                <span class="keyword">return</span> pre.concat(cur);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">Array</span>.isArray(cur)?pre.concat(flat(cur,dep)):pre.concat(cur);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,[])</span><br><span class="line">    &#125;)(arr,<span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Flat([<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>,[<span class="number">5</span>,<span class="number">6</span>,[<span class="number">7</span>,<span class="number">8</span>]]]],<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line">[ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, [ <span class="number">7</span>, <span class="number">8</span> ] ]</span><br></pre></td></tr></table></figure><h3 id="利用toString-方法实现"><a href="#利用toString-方法实现" class="headerlink" title="利用toString()方法实现"></a>利用toString()方法实现</h3><p>使用toString()方法我目前能想到的好像只能将数组完全扁平化到一维数组，而不能根据给定深度来扁平化</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Flat</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arr.toString().split(<span class="string">','</span>).map(<span class="function"><span class="params">value</span>=&gt;</span><span class="built_in">parseInt</span>(value));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Flat([<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>,[<span class="number">5</span>,<span class="number">6</span>]]]));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line">[ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span> ]</span><br></pre></td></tr></table></figure><h3 id="使用展开运算符…"><a href="#使用展开运算符…" class="headerlink" title="使用展开运算符…"></a>使用展开运算符…</h3><p>类似于使用reduce配合concat,但是还是离不开递归</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;数组扁平化&quot;&gt;&lt;a href=&quot;#数组扁平化&quot; class=&quot;headerlink&quot; title=&quot;数组扁平化&quot;&gt;&lt;/a&gt;数组扁平化&lt;/h2&gt;&lt;p&gt;数组的扁平化，就是将一个嵌套多层的数组按照给定深度转化为原本深度减去给定深度的数组&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="javaScript基础" scheme="http://yoursite.com/categories/javaScript%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="基础语法" scheme="http://yoursite.com/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode-566 重塑矩阵</title>
@@ -595,41 +622,6 @@
     
     
       <category term="树" scheme="http://yoursite.com/tags/%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-38 报数</title>
-    <link href="http://yoursite.com/2019/08/15/leetcode-38/"/>
-    <id>http://yoursite.com/2019/08/15/leetcode-38/</id>
-    <published>2019-08-15T07:17:29.000Z</published>
-    <updated>2019-08-15T07:32:04.190Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="报数"><a href="#报数" class="headerlink" title="报数"></a>报数</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下：</p><pre><code>1.     12.     113.     214.     12115.     111221</code></pre><p>1 被读作  “one 1”  (“一个一”) , 即 11。<br>11 被读作 “two 1s” (“两个一”）, 即 21。<br>21 被读作 “one 2”,  “one 1” （”一个二” ,  “一个一”) , 即 1211。</p><p>给定一个正整数 n（1 ≤ n ≤ 30），输出报数序列的第 n 项。</p><p>注意：整数顺序将表示为一个字符串。</p><p>示例 1:</p><blockquote><p>输入: 1<br>输出: “1”</p></blockquote><p>示例 2:</p><blockquote><p>输入: 4<br>输出: “1211”</p></blockquote><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/count-and-say" target="_blank" rel="noopener">https://leetcode-cn.com/problems/count-and-say</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>报数，指报的是前一个数。当前一个数有连续个同样地数比如’111’，那么把这个念作（3个1），因此会输出31；又比如’123’，因为这三个数都不同，我们会报数为（1个1；1个2；1个3），因此会输出111213</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><p>不想多说，直接上代码</p><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> countAndSay = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ans=[];</span><br><span class="line">    ans[<span class="number">0</span>]=<span class="string">'1'</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="keyword">let</span> sum=<span class="number">1</span>;</span><br><span class="line">        ans[i]=<span class="string">''</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;ans[i<span class="number">-1</span>].length;k++)&#123;</span><br><span class="line">             <span class="keyword">if</span>(ans[i<span class="number">-1</span>][k]!==ans[i<span class="number">-1</span>][k+<span class="number">1</span>])&#123;</span><br><span class="line">                ans[i]+=sum.toString()+ans[i<span class="number">-1</span>][k];</span><br><span class="line">                sum=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                sum++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans[n<span class="number">-1</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;报数&quot;&gt;&lt;a href=&quot;#报数&quot; class=&quot;headerlink&quot; title=&quot;报数&quot;&gt;&lt;/a&gt;报数&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1.     1
-2.     11
-3.     21
-4.     1211
-5.     111221&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;1 被读作  “one 1”  (“一个一”) , 即 11。&lt;br&gt;11 被读作 “two 1s” (“两个一”）, 即 21。&lt;br&gt;21 被读作 “one 2”,  “one 1” （”一个二” ,  “一个一”) , 即 1211。&lt;/p&gt;
-&lt;p&gt;给定一个正整数 n（1 ≤ n ≤ 30），输出报数序列的第 n 项。&lt;/p&gt;
-&lt;p&gt;注意：整数顺序将表示为一个字符串。&lt;/p&gt;
-&lt;p&gt;示例 1:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: 1&lt;br&gt;输出: “1”&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;示例 2:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: 4&lt;br&gt;输出: “1211”&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
     
   </entry>
   
