@@ -786,7 +786,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1.8k
                 </span>
               
 
@@ -802,7 +802,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  7
                 </span>
               
             </div>
@@ -875,7 +875,30 @@
 <p>上述参数赋值阶段的行为类似于以下</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="literal">undefined</span>;</span><br><span class="line">a=b; <span class="comment">// 此时b还在临时死区内，无法被访问</span></span><br><span class="line"><span class="keyword">let</span> b=<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
 
+<h2 id="不定参数"><a href="#不定参数" class="headerlink" title="不定参数"></a>不定参数</h2><p>当传入的实参数量小于形参数量时，我们可以使用默认参数值；</p>
+<p>那么，如果，当传入的实参数量大于形参数量，我们一般会想到使用arguments对象来表示这些实参；<br>而Es6给我们引入了不定参数的特性，来方便地表示传入的实参</p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>在函数的命名参数前添加三个点（…）就表明这是一个不定参数，该参数为一个数组，包含着自它之后传入的所有实参，通过这个数组名可以逐一访问到里面的参数</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">a,...arr</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a,arr); <span class="comment">// 1,[2,3,4]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
 
+<p>注意：</p>
+<ol>
+<li>每个函数最多只能声明一个不定参数，并且该不定参数一定要放在所有的参数的末尾</li>
+<li>不定参数不能用于对象字面量的setter函数中,因为，setter函数的参数有且只能有一个。因此不能传入不定参数，哪怕即使只是传入一个值 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    item:<span class="number">1</span>,</span><br><span class="line">    <span class="keyword">set</span> _item(...item)&#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a._item=<span class="number">3</span>;</span><br><span class="line"><span class="comment">// 赋值时会报错</span></span><br><span class="line"><span class="comment">// Setter function argument must not be a rest parameter</span></span><br><span class="line"><span class="built_in">console</span>.log(a.item);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="怎么判断函数是被new还是被普通调用"><a href="#怎么判断函数是被new还是被普通调用" class="headerlink" title="怎么判断函数是被new还是被普通调用"></a>怎么判断函数是被new还是被普通调用</h2><p>JavaScript函数有两个内部方法：[[Call]]和[[Construct]]。当通过new关键字调用函数时，执行的是[[Construct]]；而当为普通调用时，执行的时[[Call]]函数。</p>
+<p>具有[[construct]]方法的函数被称为构造函数，但不是所有的函数都有[[Construct]]方法，比如箭头函数，因此箭头函数不能被new关键字调用</p>
+<h3 id="元素性-new-target"><a href="#元素性-new-target" class="headerlink" title="元素性 new.target"></a>元素性 new.target</h3><p>为了解决判断函数是否通过new关键字调用的问题，Es6引入了new.target元属性。</p>
+<p>当调用[[Construct]]方法，即使用new关键字调用函数时，new.target被赋值为当前构造函数；<br>如果是普通调用，那么new.target值为undefined</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">new</span>.target);</span><br><span class="line">    <span class="keyword">this</span>.item=item;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test=<span class="keyword">new</span> Test(<span class="number">1</span>); <span class="comment">// [Function Test]</span></span><br><span class="line">Test(<span class="number">1</span>); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(test); <span class="comment">// &#123;item:1&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：<br>在函数外面使用new.target会造成语法错误</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span>.target);</span><br><span class="line"><span class="comment">// SyntaxError: new.target only allowed within functions</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="尾调用优化"><a href="#尾调用优化" class="headerlink" title="尾调用优化"></a>尾调用优化</h2>
           
         
       
@@ -2600,7 +2623,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">48.3k</span>
+    <span title="Site words total count">48.8k</span>
   
 </div>
 
@@ -2630,7 +2653,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共48.3k字</span>
+  <span class="post-count">博客全站共48.8k字</span>
 </div>
         
 

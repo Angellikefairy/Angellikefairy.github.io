@@ -433,7 +433,7 @@
           
             <h2 id="什么是箭头函数"><a href="#什么是箭头函数" class="headerlink" title="什么是箭头函数"></a>什么是箭头函数</h2><p>箭头函数是ES6新增语法特性，它是一种使用箭头（=&gt;）定义函数的新语法，但是，他与传统的函数有些许的不同，主要集中在以下方面：</p>
 <ol>
-<li><strong>没有this,super,arguments和new.target绑定</strong> 箭头函数中的this,supper,arguments及new.target这些值有外围最近一层非箭头函数决定</li>
+<li><strong>没有this,super,arguments和new.target绑定</strong> 箭头函数中的this,supper,arguments及new.target这些值由外围最近一层非箭头函数决定</li>
 <li><strong>不能通过new关键字调用</strong> 箭头函数没有[  [Constuct]]方法，所以不能被作为构造函数</li>
 <li><strong>没有原型</strong> 箭头函数不存在prototype这个属性</li>
 <li>不可以改变this的绑定</li>
@@ -441,7 +441,7 @@
 <h2 id="箭头函数语法"><a href="#箭头函数语法" class="headerlink" title="箭头函数语法"></a>箭头函数语法</h2><p>当函数右侧的表达式只有一个时，可以没有显式的返回语句</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> test=<span class="function"><span class="params">a</span>=&gt;</span>a+<span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(test(<span class="number">1</span>)); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 
-<p>如果函数没有参数，也要在声明的时候写一组没有内容的小括号</p>
+<p>如果函数没有参数，则要在声明的时候写一组没有内容的小括号</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> test=<span class="function"><span class="params">()</span>=&gt;</span><span class="string">'hello'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(test()); <span class="comment">// 'hello'</span></span><br></pre></td></tr></table></figure>
 
 <p>如果想要返回一个对象字面量，则需要将该字面量包裹在小括号里</p>
@@ -2675,7 +2675,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">48.3k</span>
+    <span title="Site words total count">48.8k</span>
   
 </div>
 
@@ -2705,7 +2705,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共48.3k字</span>
+  <span class="post-count">博客全站共48.8k字</span>
 </div>
         
 
