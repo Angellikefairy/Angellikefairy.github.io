@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-232 用栈实现队列]]></title>
+    <url>%2F2019%2F09%2F02%2Fleetcode-232%2F</url>
+    <content type="text"><![CDATA[用栈实现队列题目描述使用栈实现队列的下列操作： push(x) -- 将一个元素放入队列的尾部。 pop() -- 从队列首部移除元素。 peek() -- 返回队列首部的元素。 empty() -- 返回队列是否为空。示例: MyQueue queue = new MyQueue(); queue.push(1); queue.push(2); queue.peek(); // 返回 1 queue.pop(); // 返回 1 queue.empty(); // 返回 false说明: 你只能使用标准的栈操作 – 也就是只有 push to top, peek/pop from top, size, 和 is empty 操作是合法的。 你所使用的语言也许不支持栈。你可以使用 list 或者 deque（双端队列）来模拟一个栈，只要是标准的栈操作即可。 假设所有操作都是有效的 （例如，一个空的队列不会调用 pop 或者 peek 操作）。 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/implement-queue-using-stacks著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述队列与栈不一样的地方就在于，栈是先进后出，而队列是先进先出；因此，在利用栈实现队列，只有出队列方法不一样而已； 解题步骤 在实现出队列的方法时，需要准备一个备用栈，来存储出栈的元素。 当需要出队列时，将栈内所有元素出栈并以此存入到备用栈中； 将备用栈的栈顶元素出栈并保存到一个变量ans中； 将备用栈的所有元素出栈并以此存入回基本栈中 返回ans Coding实现1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556/** * Initialize your data structure here. */var MyQueue = function() &#123; this.stack=[];&#125;;/** * Push element x to the back of queue. * @param &#123;number&#125; x * @return &#123;void&#125; */MyQueue.prototype.push = function(x) &#123; this.stack.push(x);&#125;;/** * Removes the element from in front of queue and returns that element. * @return &#123;number&#125; */MyQueue.prototype.pop = function() &#123; let anotherStack=[]; while(this.stack.length) &#123; anotherStack.push(this.stack.pop()); &#125; let ans=anotherStack.pop(); while(anotherStack.length) &#123; this.stack.push(anotherStack.pop()); &#125; return ans;&#125;;/** * Get the front element. * @return &#123;number&#125; */MyQueue.prototype.peek = function() &#123; return this.stack[0];&#125;;/** * Returns whether the queue is empty. * @return &#123;boolean&#125; */MyQueue.prototype.empty = function() &#123; return this.stack.length===0;&#125;;/** * Your MyQueue object will be instantiated and called as such: * var obj = new MyQueue() * obj.push(x) * var param_2 = obj.pop() * var param_3 = obj.peek() * var param_4 = obj.empty() */]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
+        <tag>队列</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-113 路径总和 II]]></title>
     <url>%2F2019%2F09%2F01%2Fleetcode-113%2F</url>
     <content type="text"><![CDATA[路径总和 II题目描述给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。 说明: 叶子节点是指没有子节点的节点。 示例:给定如下二叉树，以及目标和 sum = 22， 返回: 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/path-sum-ii著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述不同于上题，这次还要记录路径和为给定值的路径上的所有值。那么我们可以用数组来进行记录，每次传入一个新的数组（包括该条路径上当前记录的所有的值）。 采用先序遍历，当遍历到叶子节点时，判断路径和是否为给定值，如果是，那么将该数组插入到ans数组中；否则，return； 解题步骤 创建ans数组 创建遍历函数(传入的参数为当前节点，当前路径和，当前已经被记录的节点值的数组)，如果节点为空，那么return 否则，将该节点的值记录到传入的数组中；如果当前节点为叶子节点，那么判断此时的路径和是否为给定值，如果是，那么将此时的数组push入ans数组中；如果不是，则return，接着遍历直到整棵树遍历完毕 Coding实现123456789101112131415161718192021222324252627282930313233/** * Definition for a binary tree node. * function TreeNode(val) &#123; * this.val = val; * this.left = this.right = null; * &#125; *//** * @param &#123;TreeNode&#125; root * @param &#123;number&#125; sum * @return &#123;number[][]&#125; */var pathSum = function(root, sum) &#123; let ans=[]; (function path(root,s,array) &#123; if(root===null) return; else &#123; array.push(root.val); let arrayCloneLeft=array.slice(0); let arrayCloneRight=array.slice(0); s+=root.val; if(!root.left&amp;&amp;!root.right) &#123; if(s===sum) &#123; ans.push(array); &#125; return; &#125; path(root.left,s,arrayCloneLeft); path(root.right,s,arrayCloneRight); &#125; &#125;)(root,0,[]) return ans;&#125;;]]></content>
