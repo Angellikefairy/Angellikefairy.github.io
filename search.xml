@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[获取对象属性名的几种方法]]></title>
+    <url>%2F2019%2F09%2F03%2F%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%90%8D%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[什么是可枚举属性和不可枚举属性可枚举属性是指那些内部 “可枚举” 标志（[[ Enumerable]]）设置为 true 的属性。 对于通过直接的赋值和属性初始化的属性，该标识值默认为即为 true; 对于通过 Object.defineProperty 等定义的属性，该标识值默认为 false（当然该方法也可以设置 enumerable的值为true，使其变为可枚举属性）。 Object.keys() –只返回自身对象的可枚举属性Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用 for…in 循环遍历该对象时返回的顺序一致 。如果对象的键-值都不可枚举，那么将返回由键组成的数组。 1234567891011121314151617181920212223242526let a=&#123; item:1&#125;let b=&#123; b:2, c() &#123; return this.b; &#125;&#125;// 设置a对象的不可枚举属性Object.defineProperty(a,'_item',&#123; get:function() &#123; return this.item; &#125;, set:function(item) &#123; this.item=item; &#125;&#125;)// 设置b对象为a的原型对象Object.setPrototypeOf(a,b);// 只会返回当前对象的所有可枚举属性，而不会返回其原型对象上的可枚举属性console.log(Object.keys(a)); // ['item'] for…in –返回整条原型链上的可枚举属性for…in语句以任意顺序遍历一个对象的除Symbol以外的可枚举属性。 循环将遍历对象本身的所有可枚举属性，以及对象从其构造函数原型中继承的属性（更接近原型链中对象的属性覆盖原型属性）。 123456789101112131415161718192021222324252627282930let a=&#123; item:1&#125;let b=&#123; b:2, c() &#123; return this.b; &#125;&#125;// 设置a对象的不可枚举属性Object.defineProperty(a,'_item',&#123; get:function() &#123; return this.item; &#125;, set:function(item) &#123; this.item=item; &#125;&#125;)// 设置b对象为a对象的原型对象Object.setPrototypeOf(a,b);// 会返回其自身的所有可枚举属性以及其原型链上的所有可枚举属性(包括其原型对象，其原型对象的原型对象一直到除Object,prototype的顶端原型对象)let ans=[];for(let i in a) &#123; ans.push(i);&#125;console.log(ans); // ['item','b','c'] getOwnPropertyNames() –返回自身对象的所有属性（包括不可枚举但不包括Symbol值）Object.getOwnPropertyNames()方法返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）组成的数组。 它与上述两种方法的不同之处在于其可以返回不可枚举属性 1234567891011121314151617181920212223242526let a=&#123; item:1&#125;let b=&#123; b:2, c() &#123; return this.b; &#125;&#125;// 设置a对象的不可枚举属性Object.defineProperty(a,'_item',&#123; get:function() &#123; return this.item; &#125;, set:function(item) &#123; this.item=item; &#125;&#125;)// 设置b对象为a对象的原型对象Object.setPrototypeOf(a,b);// 返回自身对象的所有属性，包括可枚举属性和不可枚举属性console.log(Object.getOwnpropertyNames(a)); //['item','_item']]]></content>
+      <categories>
+        <category>javaScript基础</category>
+      </categories>
+      <tags>
+        <tag>基础语法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-234 回文链表]]></title>
     <url>%2F2019%2F09%2F03%2Fleetcode-234%2F</url>
     <content type="text"><![CDATA[回文链表题目描述请判断一个链表是否为回文链表。 示例 1: 输入: 1-&gt;2输出: false 示例 2: 输入: 1-&gt;2-&gt;2-&gt;1输出: true 进阶：你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？ 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/palindrome-linked-list著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述一个简单的想法就是，将该链表的所有节点值都取出来，然后判断是否回文。但是，题目要求为O(1)的空间复杂度，因此不能使用数组来存储。因此，我们可以使用哈希表来存储，以链表节点的下标为键名，节点值为键值来存入哈希表 之后利用双指针来判断是否回文 解题步骤 建立哈希表 遍历该链表，以链表节点的下标为键名，节点值为键值来存入哈希表 设置前后双指针，如果指针未相遇时，前后指针在哈希表中的键值不相同的话那么返回false 否则，返回true Coding实现1234567891011121314151617181920212223242526272829/** * Definition for singly-linked list. * function ListNode(val) &#123; * this.val = val; * this.next = null; * &#125; *//** * @param &#123;ListNode&#125; head * @return &#123;boolean&#125; */var isPalindrome = function(head) &#123; let cur=head; let map=new Map(); let index=0; while(cur) &#123; map.set(index,cur.val); index++; cur=cur.next; &#125; let left=0; let right=index-1; while(left&lt;right) &#123; if(map.get(left)!==map.get(right)) return false; left++; right--; &#125; return true;&#125;;]]></content>
