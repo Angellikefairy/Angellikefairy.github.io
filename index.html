@@ -307,6 +307,275 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/05/set集合与map集合/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/05/set集合与map集合/" itemprop="url">set集合与map集合</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-05T18:31:41+08:00">
+                2019-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Set集合"><a href="#Set集合" class="headerlink" title="Set集合"></a>Set集合</h2><h3 id="Set集合的使用"><a href="#Set集合的使用" class="headerlink" title="Set集合的使用"></a>Set集合的使用</h3><p>语法</p>
+<p>new Set([iterable]);</p>
+<p>参数</p>
+<p>iterable<br>    如果传递一个可迭代对象，它的所有元素将不重复地被添加到新的 Set中。如果不指定此参数或其值为null，则新的 Set为空。</p>
+<p>返回值</p>
+<p>一个新的Set对象</p>
+<h3 id="set的一些基本操作"><a href="#set的一些基本操作" class="headerlink" title="set的一些基本操作"></a>set的一些基本操作</h3><p>Set对象的一些基本方法</p>
+<ol>
+<li>add() 向集合添加一个元素</li>
+<li>delete() 向集合删除某个指定元素</li>
+<li>clear() 清除集合内所有元素</li>
+<li>has() 检查集合内是否有指定元素</li>
+</ol>
+<p>Set对象的一些属性</p>
+<ol>
+<li>size 集合大小</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span>=new Set();</span><br><span class="line"><span class="keyword">set</span>.add(1);</span><br><span class="line"><span class="keyword">set</span>.add('1');</span><br><span class="line"></span><br><span class="line">console.log(<span class="keyword">set</span>.size); // 2</span><br><span class="line"><span class="keyword">set</span>.delete('1'); </span><br><span class="line">console.log(<span class="keyword">set</span>); // Set &#123; <span class="number">1</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Set的特性"><a href="#Set的特性" class="headerlink" title="Set的特性"></a>Set的特性</h3><p>在set集合内，存入元素的时候不会对值进行任何强制的类型转换，这也意味着，5和’5’在set集合内是两个不同的独立的元素</p>
+<p>另外,如果往set集合内多次传入同一数据，那么后面的操作就会被忽略。因此，set集合内的元素是不重复的</p>
+<h3 id="利用Set特性来实现数组去重"><a href="#利用Set特性来实现数组去重" class="headerlink" title="利用Set特性来实现数组去重"></a>利用Set特性来实现数组去重</h3><p>因为展开运算符可以将诸如set集合的可迭代对象转化为数组</p>
+<p>因此，我们可以将数组传入set集合内，利用set内元素不能重复的特性实现去重。之后利用展开运算符，将set集合转化回数组、</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>]; <span class="comment">// 创建一个具有重复元素的数组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">set</span>=new Set(test);</span><br><span class="line">console.log([...<span class="keyword">set</span>]); // [1,2,3,4]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Set集合的遍历"><a href="#Set集合的遍历" class="headerlink" title="Set集合的遍历"></a>Set集合的遍历</h3><p>set集合使用forEach()方法来实现遍历</p>
+<p>该方法的回调函数接受三个参数</p>
+<ol>
+<li>元素的值</li>
+<li>元素的键名</li>
+<li>自身set集合</li>
+</ol>
+<p>因为set集合存储的是单个元素而不是键值对，但是为了大多数方法中回调参数的统一，该回调函数的参数也按照键值的形式传参。</p>
+<blockquote>
+<p>但，值得注意的是，元素的键名与键值相同</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span>=new Set([3,4,5]);</span><br><span class="line"><span class="keyword">set</span>.forEach((value,key,ownerSet)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value,key,ownerSet);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3,3,&#123;3,4,5&#125;</span></span><br><span class="line"><span class="comment">// 4,4,&#123;3,4,5&#125;</span></span><br><span class="line"><span class="comment">// 5,5,&#123;3,4,5&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="WeakSet集合"><a href="#WeakSet集合" class="headerlink" title="WeakSet集合"></a>WeakSet集合</h3><h4 id="什么是WeakSet集合"><a href="#什么是WeakSet集合" class="headerlink" title="什么是WeakSet集合"></a>什么是WeakSet集合</h4><p>WeakSet 集合是一个弱引用Set集合，里面只能存储的弱引用，而不能存储基本类型值</p>
+<h4 id="为什么要使用WeakSet"><a href="#为什么要使用WeakSet" class="headerlink" title="为什么要使用WeakSet"></a>为什么要使用WeakSet</h4><p>如果往set集合内加入某个引用类型值，那么set集合中的该元素也有了某个对象的引用。那么，就算在set集合外部释放了该对象（令该对象的值为null），set集合内部的那个元素仍然保持着那个对象的引用。因此，这会很容易造成内存泄漏</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    item:<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 往set内传入a对象</span></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">set</span>=new Set([a]);</span><br><span class="line"></span><br><span class="line">// 将a对象置为空对象</span><br><span class="line">a=null;</span><br><span class="line"></span><br><span class="line">// 但是<span class="keyword">set</span>集合中的元素仍然保持着该对象的引用</span><br><span class="line">console.log([...<span class="keyword">set</span>][0]); // &#123; item: <span class="number">1</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<p>对于上述程序，显然我们可以看到，我们在set集合外部想要释放对象a，但是set集合引用着该对象，因此该对象的内存无法被释放</p>
+<h4 id="WeakSet的使用"><a href="#WeakSet的使用" class="headerlink" title="WeakSet的使用"></a>WeakSet的使用</h4><p>WeakSet 对象中存储的对象值都是被弱引用的, 如果没有其他的变量或属性引用这个对象值, 则这个对象值会被当成垃圾回收掉. 正因为这样, WeakSet 对象是无法被枚举的, 没有办法拿到它包含的所有元素.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    item:<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 往weakSet内传入a对象</span></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">set</span>=new WeakSet([a]);</span><br><span class="line"></span><br><span class="line">// 将a对象置为空对象</span><br><span class="line">a=null;</span><br><span class="line"></span><br><span class="line">console.log(a); // null</span><br></pre></td></tr></table></figure>
+
+<p>当WeakSet集合外部的引用被释放后，该引用就会被真正地完全释放</p>
+<h4 id="weakSet集合的一些注意点"><a href="#weakSet集合的一些注意点" class="headerlink" title="weakSet集合的一些注意点"></a>weakSet集合的一些注意点</h4><p>weakSet只支持3个方法</p>
+<ol>
+<li>add()</li>
+<li>has()</li>
+<li>delete</li>
+</ol>
+<p>weakSet集合不可迭代和枚举，因此其不支持</p>
+<ol>
+<li>for…of循环</li>
+<li>…展开运算符</li>
+<li>forEach()方法</li>
+<li>size属性</li>
+</ol>
+<h2 id="Map集合"><a href="#Map集合" class="headerlink" title="Map集合"></a>Map集合</h2><p>Map类型是一种存储着许多键值对的有序列表，其中的键名和键值支持所有的数据类型。</p>
+<p>键名的等价性判断是通过Object.is()方法来进行判断的，所以数字5和字符串’5’会被判定为两种类型，可以分IE作为独立的两个键名来存储在Map结合内</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">map.set(<span class="string">'1'</span>,<span class="number">1</span>);</span><br><span class="line">map.set(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(map); <span class="comment">// Map &#123; '1' =&gt; 1, 1 =&gt; 1 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Map集合的使用"><a href="#Map集合的使用" class="headerlink" title="Map集合的使用"></a>Map集合的使用</h3><p>语法</p>
+<p>new Map([iterable])</p>
+<p>参数</p>
+<p>iterable<br>    Iterable 可以是一个数组或者其他 iterable 对象，其元素为键值对(两个元素的数组，例如: [[ 1, ‘one’ ],[ 2, ‘two’ ]])。 每个键值对都会添加到新的 Map。null 会被当做 undefined。 </p>
+<h3 id="Map的一些基本方法"><a href="#Map的一些基本方法" class="headerlink" title="Map的一些基本方法"></a>Map的一些基本方法</h3><p>Map集合具有以下一些基本方法</p>
+<ol>
+<li>set() 传入键名和键值来设定一个键值对</li>
+<li>delete() 删除指定键值对</li>
+<li>clear() 删除全部键值对</li>
+<li>has() 判断某个键值对是否存在</li>
+<li>get() 传入键名来获取键值</li>
+</ol>
+<p>Map集合具有以下一些属性</p>
+<ol>
+<li>size Map集合的大小</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">map.set(<span class="string">'a'</span>,<span class="string">'a'</span>);</span><br><span class="line">map.set(<span class="string">'b'</span>,<span class="string">'b'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(map.get(<span class="string">'a'</span>)); <span class="comment">// 'a'</span></span><br><span class="line">map.delete(<span class="string">'a'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(map.size); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(map.has(<span class="string">'a'</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Map集合的遍历"><a href="#Map集合的遍历" class="headerlink" title="Map集合的遍历"></a>Map集合的遍历</h3><p>Map集合也是使用forEach()方法来进行遍历</p>
+<p>其回调函数接受三个参数</p>
+<ol>
+<li>value 键值</li>
+<li>key 键名<br>3，ownerMap 自身map集合</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map=<span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="number">1</span>,<span class="number">1</span>],[<span class="string">'1'</span>,<span class="string">'1'</span>]]);</span><br><span class="line">map.forEach(<span class="function">(<span class="params">value,key,ownerMap</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value,key,ownerMap);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 1 1 Map &#123; 1 =&gt; 1, '1' =&gt; '1' &#125;</span></span><br><span class="line"><span class="comment">// '1' '1' Map &#123; 1 =&gt; 1, '1' =&gt; '1' &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="WeakMap集合"><a href="#WeakMap集合" class="headerlink" title="WeakMap集合"></a>WeakMap集合</h3><p>类似于WeakSet集合，WeakMap是弱引用Map集合。其中，它的键名必须是非null类型的对象，键值则可以使任意类型的值</p>
+<p>WeakMap集合中保存的是键名弱引用着的引用对象，如果在弱引用之外不再有任何其他强引用，那么垃圾回收机制就会自动回收这个对象</p>
+<p>只有集合的键名遵守以上规则，如果键值是一个对象，那么该引用是强引用，不会触发垃圾回收机制</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/04/解构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2166,219 +2435,11 @@ queue.empty(); // 返回 false</code></pre><p>说明:</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/31/getter与setter函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/31/getter与setter函数/" itemprop="url">getter与setter函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-31T20:20:59+08:00">
-                2019-08-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
-                    <span itemprop="name">javaScript基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  719
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h2><p>对象属性分为数据属性与访问器属性。访问器属性不包含数据值，它们包含一对getter与setter函数。在读取访问器属性时，会调用getter函数，这个函数负责返回有效的值；在写入访问器属性时，会调用setter函数并传入新值</p>
-<h2 id="什么是getter-setter"><a href="#什么是getter-setter" class="headerlink" title="什么是getter/setter"></a>什么是getter/setter</h2><ol>
-<li>getter是获得属性值的方法，setter是设置属性值的方法</li>
-<li>get与set并不是对象的属性，可以说是伪属性，特性只有内部才用，一般利用Object.getOwnPropertyDescriptor()方法来查询属性的特性；利用Object.defineProperty来定义和修改属性的特性</li>
-</ol>
-<h2 id="怎么定义getter与setter"><a href="#怎么定义getter与setter" class="headerlink" title="怎么定义getter与setter"></a>怎么定义getter与setter</h2><h3 id="get与set语法"><a href="#get与set语法" class="headerlink" title="get与set语法"></a>get与set语法</h3><p>get/set语法会将对象属性绑定到查询/调用的函数</p>
-<p>例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    item:<span class="number">1</span>,</span><br><span class="line">    <span class="keyword">get</span> getItem() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> setItem(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// &#123; item: 1, getItem: [Getter], setItem: [Setter] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(a.getItem); <span class="comment">// 1</span></span><br><span class="line">a.setItem=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a.getItem); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<p>get与set绑定的函数名可以是一样的</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    item:<span class="number">1</span>,</span><br><span class="line">    <span class="keyword">get</span> _item() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> _item(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// &#123; item: 1, _item: [Getter/Setter] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 1</span></span><br><span class="line">a._item=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<p>当然,get与set也可以绑定多个函数名</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    item:<span class="number">1</span>,</span><br><span class="line">    name:<span class="string">'ming'</span>,</span><br><span class="line">    <span class="keyword">get</span> _item() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> _item(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">get</span> _name() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> _name(name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name=name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// &#123;item: 1,name: 'ming',_item: [Getter/Setter],_name: [Getter/Setter]&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 1</span></span><br><span class="line">a._item=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(a._name); <span class="comment">// ming</span></span><br><span class="line">a._name=<span class="string">'xiao ming'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a._name); <span class="comment">// xioa ming</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="defineProperty-方法"><a href="#defineProperty-方法" class="headerlink" title="defineProperty()方法"></a>defineProperty()方法</h3><p>Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。</p>
-<p>语法：</p>
-<blockquote>
-<p>Object.defineProperty(obj, prop, descriptor)</p>
-</blockquote>
-<p>参数</p>
-<p>obj<br>    要在其上定义属性的对象。</p>
-<p>prop<br>    要定义或修改的属性的名称。</p>
-<p>descriptor<br>    将被定义或修改的属性描述符</p>
-<p>例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;<span class="attr">item</span>:<span class="number">1</span>&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(a,<span class="string">'_item'</span>,&#123;</span><br><span class="line">    <span class="keyword">get</span>: function () &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>: function (item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 1</span></span><br><span class="line">a._item=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="getter与setter的作用"><a href="#getter与setter的作用" class="headerlink" title="getter与setter的作用"></a>getter与setter的作用</h2><p>getter与setter的作用我觉得是可以在对赋值和取值之前做一层封装，拦截这些操作，定义一些其他操作（在赋值与取值之前进行一些额外的操作）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;<span class="attr">item</span>:<span class="number">1</span>&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(a,<span class="string">'_item'</span>,&#123;</span><br><span class="line">    <span class="keyword">get</span>: function () &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>: function (item) &#123;</span><br><span class="line">        <span class="keyword">let</span> date=<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`a.item的值在<span class="subst">$&#123;date.toLocaleString()&#125;</span>被修改`</span>);</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 1</span></span><br><span class="line">a._item=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a._item);</span><br><span class="line"><span class="comment">// a.item的值在2019-8-31 20:50:59被修改</span></span><br><span class="line"><span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<p>在上述代码中,我在setter函数赋值后，输出属性值被修改的时间。从而可以监测到值何时被修改。</p>
-<p>这就是拦截了赋值操作,先进行了额外定义的检测值被修改的方法</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2426,7 +2487,7 @@ queue.empty(); // 返回 false</code></pre><p>说明:</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">91</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2507,7 +2568,7 @@ queue.empty(); // 返回 false</code></pre><p>说明:</p>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">57k</span>
+    <span title="Site words total count">58.5k</span>
   
 </div>
 
@@ -2537,7 +2598,7 @@ queue.empty(); // 返回 false</code></pre><p>说明:</p>
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共57k字</span>
+  <span class="post-count">博客全站共58.5k字</span>
 </div>
         
 
