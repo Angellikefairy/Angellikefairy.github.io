@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-05T11:37:29.172Z</updated>
+  <updated>2019-09-05T12:03:39.170Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-242 有效的字母异位词</title>
+    <link href="http://yoursite.com/2019/09/05/leetcode-242/"/>
+    <id>http://yoursite.com/2019/09/05/leetcode-242/</id>
+    <published>2019-09-05T11:58:38.000Z</published>
+    <updated>2019-09-05T12:03:39.170Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="有效的字母异位词"><a href="#有效的字母异位词" class="headerlink" title="有效的字母异位词"></a>有效的字母异位词</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。</p><p>示例 1:</p><blockquote><p>输入: s = “anagram”, t = “nagaram”<br>输出: true</p></blockquote><p>示例 2:</p><blockquote><p>输入: s = “rat”, t = “car”<br>输出: false</p></blockquote><p>说明:<br>你可以假设字符串只包含小写字母。</p><p>进阶:<br>如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/valid-anagram" target="_blank" rel="noopener">https://leetcode-cn.com/problems/valid-anagram</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>判断两个字符串互相是不是字母异位词，这也就意味着，两个字符串内的每个字符数量都是相同的。因此，我们只需要设定一个map集合来存储每个字符的数量即可</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>如果两字符的长度不一样则返回false</li><li>如果两字符相等，返回true</li><li>设定map集合，遍历其中一个字符串，以字符和字符个数为键值对存入哈希表中</li><li>遍历另一个字符串，如果出现哈希表中没有的字符，则返回false；如果是哈希表中已有的字符，那么将该键值减一</li><li>遍历哈希表，如果所有的键值都为0，那么返回true；否则返回false</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; t</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isAnagram = <span class="function"><span class="keyword">function</span>(<span class="params">s, t</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.length!==t.length) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(s===t) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">let</span> map=<span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">let</span> flag=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> v <span class="keyword">of</span> s) &#123;</span><br><span class="line">        <span class="keyword">if</span>(map.has(v)) &#123;</span><br><span class="line">            map.set(v,map.get(v)+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            map.set(v,<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> v <span class="keyword">of</span> t) &#123;</span><br><span class="line">        <span class="keyword">if</span>(map.has(v)) &#123;</span><br><span class="line">            map.set(v,map.get(v)<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    map.forEach(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(v!==<span class="number">0</span>) flag=<span class="number">0</span>; </span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Boolean</span>(flag);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;有效的字母异位词&quot;&gt;&lt;a href=&quot;#有效的字母异位词&quot; class=&quot;headerlink&quot; title=&quot;有效的字母异位词&quot;&gt;&lt;/a&gt;有效的字母异位词&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。&lt;/p&gt;
+&lt;p&gt;示例 1:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: s = “anagram”, t = “nagaram”&lt;br&gt;输出: true&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;示例 2:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: s = “rat”, t = “car”&lt;br&gt;输出: false&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;说明:&lt;br&gt;你可以假设字符串只包含小写字母。&lt;/p&gt;
+&lt;p&gt;进阶:&lt;br&gt;如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="哈希表" scheme="http://yoursite.com/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>set集合与map集合</title>
@@ -541,34 +573,6 @@ queue.empty(); // 返回 false&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;说明:&lt;/p&gt
     
       <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>全局变量的声明以及如何避免声明全局变量</title>
-    <link href="http://yoursite.com/2019/08/27/%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%A3%B0%E6%98%8E%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F/"/>
-    <id>http://yoursite.com/2019/08/27/全局变量的声明以及如何避免声明全局变量/</id>
-    <published>2019-08-27T09:33:17.000Z</published>
-    <updated>2019-08-27T10:03:43.647Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="全局变量的声明"><a href="#全局变量的声明" class="headerlink" title="全局变量的声明"></a>全局变量的声明</h2><blockquote><p>全局变量会成为全局对象的属性</p></blockquote><p>那种方式的变量声明会形成全局变量呢？</p><p>Javascript运行环境分为浏览器环境和非浏览器环境（比如Node.js）</p><p>在浏览器环境中,有三种方式可以声明全局变量</p><ol><li>使用var关键字在全局作用域下显示声明</li><li>不适用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明</li><li>使用全局对象作为其属性来声明</li></ol><p>浏览器环境中（全局对象为window对象）</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">window</span>.c=<span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a===<span class="built_in">window</span>.a); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(b===<span class="built_in">window</span>.b); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure><p>但是，在Node.js中，上述方法中的方法2就不成立</p><p>Node.js环境（全局对象为global对象)</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b=<span class="number">2</span>;</span><br><span class="line">global.c=<span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a===global.a); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(b===global.b); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(c===global.c); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure><h2 id="如何避免声明全局变量"><a href="#如何避免声明全局变量" class="headerlink" title="如何避免声明全局变量"></a>如何避免声明全局变量</h2><p>使用let与const声明关键字</p><p>如果你在全局作用域中使用let或const来声明变量，那么会在全局作用域下创建一个新的绑定，但该绑定不会添加为全局对象的属性。</p><p>换句话说，用let或const不能覆盖全局变量，而只能遮蔽它</p><p>浏览器环境中</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> a=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 2 全局对象的属性a被var声明修改了</span></span><br><span class="line"><span class="built_in">console</span>.log(a===<span class="built_in">window</span>.a); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.b=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(b===<span class="built_in">window</span>.b); <span class="comment">// false</span></span><br><span class="line"><span class="comment">// b不是全局变量，因为使用let声明的b没有成为全局对象的属性</span></span><br></pre></td></tr></table></figure><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果不想为全局变量创建属性或修改全局变量的属性，那么使用let和const要安全的多</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;全局变量的声明&quot;&gt;&lt;a href=&quot;#全局变量的声明&quot; class=&quot;headerlink&quot; title=&quot;全局变量的声明&quot;&gt;&lt;/a&gt;全局变量的声明&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;全局变量会成为全局对象的属性&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;那
-      
-    
-    </summary>
-    
-      <category term="javaScript基础" scheme="http://yoursite.com/categories/javaScript%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="基础语法" scheme="http://yoursite.com/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"/>
     
   </entry>
   
