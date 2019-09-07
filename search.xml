@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-257 二叉树的所有路径]]></title>
+    <url>%2F2019%2F09%2F07%2Fleetcode-257%2F</url>
+    <content type="text"><![CDATA[二叉树的所有路径题目描述给定一个二叉树，返回所有从根节点到叶子节点的路径。 说明: 叶子节点是指没有子节点的节点。 示例: 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/binary-tree-paths著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述二叉树的路径是根节点到叶子节点上的路径。因此，我们可以传入一个数组，在递归的时候存储每个节点当前的路径，如果遇到叶子节点，就将叶子节点上的路径加入到ans数组 解题步骤 设立一个ans数组，用来存放二叉树的路径 先序遍历二叉树，同时传入一个数组，用来保存当前节点的路径 如果遇到叶子节点，则将数组存入ans数组中，并return 访问其左子树和右子树 递归2,3,4步骤，直到二叉树遍历完毕 利用map()方法和join()方法将输出满足题目要求 Coding实现1234567891011121314151617181920212223242526272829303132/** * Definition for a binary tree node. * function TreeNode(val) &#123; * this.val = val; * this.left = this.right = null; * &#125; *//** * @param &#123;TreeNode&#125; root * @return &#123;string[]&#125; */var binaryTreePaths = function(root) &#123; let ans=[]; (function getPath(root,arr) &#123; if(root===null) return; else &#123; arr.push(root.val); let arrLeft=arr.concat(); let arrRight=arr.concat(); if(!root.left&amp;&amp;!root.right) &#123; ans.push(arr); return; &#125; getPath(root.left,arrLeft); getPath(root.right,arrRight); &#125; &#125;)(root,[]) ans=ans.map(v=&gt;&#123; return v.join('-&gt;'); &#125;) return ans;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[leetcode-242 有效的字母异位词]]></title>
     <url>%2F2019%2F09%2F05%2Fleetcode-242%2F</url>
     <content type="text"><![CDATA[有效的字母异位词题目描述给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。 示例 1: 输入: s = “anagram”, t = “nagaram”输出: true 示例 2: 输入: s = “rat”, t = “car”输出: false 说明:你可以假设字符串只包含小写字母。 进阶:如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？ 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/valid-anagram著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述判断两个字符串互相是不是字母异位词，这也就意味着，两个字符串内的每个字符数量都是相同的。因此，我们只需要设定一个map集合来存储每个字符的数量即可 解题步骤 如果两字符的长度不一样则返回false 如果两字符相等，返回true 设定map集合，遍历其中一个字符串，以字符和字符个数为键值对存入哈希表中 遍历另一个字符串，如果出现哈希表中没有的字符，则返回false；如果是哈希表中已有的字符，那么将该键值减一 遍历哈希表，如果所有的键值都为0，那么返回true；否则返回false Coding实现1234567891011121314151617181920212223242526272829303132/** * @param &#123;string&#125; s * @param &#123;string&#125; t * @return &#123;boolean&#125; */var isAnagram = function(s, t) &#123; if(s.length!==t.length) return false; if(s===t) return true; let map=new Map(); let flag=1; for(let v of s) &#123; if(map.has(v)) &#123; map.set(v,map.get(v)+1); &#125; else &#123; map.set(v,1); &#125; &#125; for(let v of t) &#123; if(map.has(v)) &#123; map.set(v,map.get(v)-1); &#125; else &#123; return false; &#125; &#125; map.forEach(v=&gt;&#123; if(v!==0) flag=0; &#125;) return Boolean(flag);&#125;;]]></content>

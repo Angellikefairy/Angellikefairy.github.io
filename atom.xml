@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-05T12:03:39.170Z</updated>
+  <updated>2019-09-07T04:57:43.739Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-257 二叉树的所有路径</title>
+    <link href="http://yoursite.com/2019/09/07/leetcode-257/"/>
+    <id>http://yoursite.com/2019/09/07/leetcode-257/</id>
+    <published>2019-09-07T04:49:58.000Z</published>
+    <updated>2019-09-07T04:57:43.739Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="二叉树的所有路径"><a href="#二叉树的所有路径" class="headerlink" title="二叉树的所有路径"></a>二叉树的所有路径</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个二叉树，返回所有从根节点到叶子节点的路径。</p><p>说明: 叶子节点是指没有子节点的节点。</p><p>示例:</p><p><img src="https://s2.ax1x.com/2019/09/07/nlmn4s.png" alt></p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/binary-tree-paths" target="_blank" rel="noopener">https://leetcode-cn.com/problems/binary-tree-paths</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>二叉树的路径是根节点到叶子节点上的路径。因此，我们可以传入一个数组，在递归的时候存储每个节点当前的路径，如果遇到叶子节点，就将叶子节点上的路径加入到ans数组</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>设立一个ans数组，用来存放二叉树的路径</li><li>先序遍历二叉树，同时传入一个数组，用来保存当前节点的路径</li><li>如果遇到叶子节点，则将数组存入ans数组中，并return</li><li>访问其左子树和右子树</li><li>递归2,3,4步骤，直到二叉树遍历完毕</li><li>利用map()方法和join()方法将输出满足题目要求</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * function TreeNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.left = this.right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;TreeNode&#125; root</span></span><br><span class="line"><span class="comment"> * @return &#123;string[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> binaryTreePaths = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ans=[];</span><br><span class="line">    (<span class="function"><span class="keyword">function</span> <span class="title">getPath</span>(<span class="params">root,arr</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root===<span class="literal">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            arr.push(root.val);</span><br><span class="line">            <span class="keyword">let</span> arrLeft=arr.concat();</span><br><span class="line">            <span class="keyword">let</span> arrRight=arr.concat();</span><br><span class="line">            <span class="keyword">if</span>(!root.left&amp;&amp;!root.right) &#123;</span><br><span class="line">                ans.push(arr);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            getPath(root.left,arrLeft);</span><br><span class="line">            getPath(root.right,arrRight);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)(root,[])</span><br><span class="line">    ans=ans.map(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> v.join(<span class="string">'-&gt;'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;二叉树的所有路径&quot;&gt;&lt;a href=&quot;#二叉树的所有路径&quot; class=&quot;headerlink&quot; title=&quot;二叉树的所有路径&quot;&gt;&lt;/a&gt;二叉树的所有路径&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定一个二叉树，返回所有从根节点到叶子节点的路径。&lt;/p&gt;
+&lt;p&gt;说明: 叶子节点是指没有子节点的节点。&lt;/p&gt;
+&lt;p&gt;示例:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://s2.ax1x.com/2019/09/07/nlmn4s.png&quot; alt&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="树" scheme="http://yoursite.com/tags/%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode-242 有效的字母异位词</title>
@@ -539,40 +564,6 @@ queue.empty(); // 返回 false&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;说明:&lt;/p&gt
     
     
       <category term="正则表达式" scheme="http://yoursite.com/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-190 颠倒二进制位</title>
-    <link href="http://yoursite.com/2019/08/28/leetcode-190/"/>
-    <id>http://yoursite.com/2019/08/28/leetcode-190/</id>
-    <published>2019-08-28T02:09:31.000Z</published>
-    <updated>2019-08-28T02:38:06.600Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="颠倒二进制位"><a href="#颠倒二进制位" class="headerlink" title="颠倒二进制位"></a>颠倒二进制位</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>颠倒给定的 32 位无符号整数的二进制位。</p><p>示例 1：</p><blockquote><p>输入: 00000010100101000001111010011100<br>输出: 00111001011110000010100101000000<br>解释: 输入的二进制串 00000010100101000001111010011100 表示无符号整数 43261596，<br>      因此返回 964176192，其二进制表示形式为 00111001011110000010100101000000。</p></blockquote><p>示例 2：</p><blockquote><p>输入：11111111111111111111111111111101<br>输出：10111111111111111111111111111111<br>解释：输入的二进制串 11111111111111111111111111111101 表示无符号整数 4294967293，<br>      因此返回 3221225471 其二进制表示形式为 10101111110010110010011101101001。</p></blockquote><p>提示：</p><ol><li>请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。</li><li>在 Java 中，编译器使用二进制补码记法来表示有符号整数。因此，在上面的 示例 2 中，输入表示有符号整数 -3，输出表示有符号整数 -1073741825。</li></ol><p>进阶:<br>如果多次调用这个函数，你将如何优化你的算法？</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-bits" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-bits</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>输入的会是一个无符号整数可以转化为32位二进制表示；要求输出的是反转该32位二进制并转化为整数输出</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>利用模二取余法得到32位二进制数</li><li>将32位二进制数反转后转化为整数并返回</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n - a positive integer</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125; - a positive integer</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> reverseBits = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> s=[];</span><br><span class="line">    <span class="keyword">while</span>(n) &#123;</span><br><span class="line">        s.unshift(n%<span class="number">2</span>);</span><br><span class="line">        n=<span class="built_in">Math</span>.floor(n/<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(s.length&lt;<span class="number">32</span>) &#123;</span><br><span class="line">        s.unshift(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s.reduce(<span class="function">(<span class="params">pre,cur,curIndex</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> pre+cur*<span class="built_in">Math</span>.pow(<span class="number">2</span>,curIndex);</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;颠倒二进制位&quot;&gt;&lt;a href=&quot;#颠倒二进制位&quot; class=&quot;headerlink&quot; title=&quot;颠倒二进制位&quot;&gt;&lt;/a&gt;颠倒二进制位&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;颠倒给定的 32 位无符号整数的二进制位。&lt;/p&gt;
-&lt;p&gt;示例 1：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: 00000010100101000001111010011100&lt;br&gt;输出: 00111001011110000010100101000000&lt;br&gt;解释: 输入的二进制串 00000010100101000001111010011100 表示无符号整数 43261596，&lt;br&gt;      因此返回 964176192，其二进制表示形式为 00111001011110000010100101000000。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;示例 2：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入：11111111111111111111111111111101&lt;br&gt;输出：10111111111111111111111111111111&lt;br&gt;解释：输入的二进制串 11111111111111111111111111111101 表示无符号整数 4294967293，&lt;br&gt;      因此返回 3221225471 其二进制表示形式为 10101111110010110010011101101001。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;提示：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。&lt;/li&gt;
-&lt;li&gt;在 Java 中，编译器使用二进制补码记法来表示有符号整数。因此，在上面的 示例 2 中，输入表示有符号整数 -3，输出表示有符号整数 -1073741825。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;进阶:&lt;br&gt;如果多次调用这个函数，你将如何优化你的算法？&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
     
   </entry>
   
