@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-07T08:41:37.115Z</updated>
+  <updated>2019-09-08T06:41:00.721Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-258 各位相加</title>
+    <link href="http://yoursite.com/2019/09/08/leetcode-258/"/>
+    <id>http://yoursite.com/2019/09/08/leetcode-258/</id>
+    <published>2019-09-08T06:21:30.000Z</published>
+    <updated>2019-09-08T06:41:00.721Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="各位相加"><a href="#各位相加" class="headerlink" title="各位相加"></a>各位相加</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个非负整数 num，反复将各个位上的数字相加，直到结果为一位数。</p><p>示例:</p><blockquote><p>输入: 38<br>输出: 2 <br>解释: 各位相加的过程为：3 + 8 = 11, 1 + 1 = 2。 由于 2 是一位数，所以返回 2。</p></blockquote><p>进阶:<br>你可以不使用循环或者递归，且在 O(1) 时间复杂度内解决这个问题吗？</p><a id="more"></a><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/add-digits" target="_blank" rel="noopener">https://leetcode-cn.com/problems/add-digits</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ol><li>如果不考虑进阶的要求的话，那么第一直觉就会是使用循环或者递归，将数的各位和一直相加，直到和为个位数</li><li>如果需要满足进阶的要求的话，那么我们需要一些数学的技巧。对于一个数abc,它等于a*100+b*10+c。将它求和的话，就会变为a+b+c,也就是求和之后减少了99*a+9*b=9*(11*a+b);因此，每次求和这个数就会减少9的倍数的值；也就是相当于，原数-9*未知值=和；这个式子可以转化为：原数%9=和；因此，若结果为 0 则考虑num本身是否为 0，若本身不为不为 0，则返回 9；此外，返回结果</li></ol><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><p>循环版</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; num</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> addDigits = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(num&gt;=<span class="number">10</span>) &#123;</span><br><span class="line">        num=num.toString().split(<span class="string">''</span>).reduce(<span class="function">(<span class="params">pre,value</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> pre+<span class="built_in">parseInt</span>(value);</span><br><span class="line">        &#125;,<span class="number">0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>数学推断版</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; num</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> addDigits = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num&gt;<span class="number">9</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(num%<span class="number">9</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> num%<span class="number">9</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">9</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> num;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;各位相加&quot;&gt;&lt;a href=&quot;#各位相加&quot; class=&quot;headerlink&quot; title=&quot;各位相加&quot;&gt;&lt;/a&gt;各位相加&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定一个非负整数 num，反复将各个位上的数字相加，直到结果为一位数。&lt;/p&gt;
+&lt;p&gt;示例:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;输入: 38&lt;br&gt;输出: 2 &lt;br&gt;解释: 各位相加的过程为：3 + 8 = 11, 1 + 1 = 2。 由于 2 是一位数，所以返回 2。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;进阶:&lt;br&gt;你可以不使用循环或者递归，且在 O(1) 时间复杂度内解决这个问题吗？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>迭代器与生成器</title>
@@ -527,43 +552,6 @@ queue.empty(); // 返回 false&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;说明:&lt;/p&gt
     
     
       <category term="基础语法" scheme="http://yoursite.com/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode-566 重塑矩阵</title>
-    <link href="http://yoursite.com/2019/08/29/leetcode-566/"/>
-    <id>http://yoursite.com/2019/08/29/leetcode-566/</id>
-    <published>2019-08-29T03:00:07.000Z</published>
-    <updated>2019-08-29T03:06:35.886Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="重塑矩阵"><a href="#重塑矩阵" class="headerlink" title="重塑矩阵"></a>重塑矩阵</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在MATLAB中，有一个非常有用的函数 reshape，它可以将一个矩阵重塑为另一个大小不同的新矩阵，但保留其原始数据。</p><p>给出一个由二维数组表示的矩阵，以及两个正整数r和c，分别表示想要的重构的矩阵的行数和列数。</p><p>重构后的矩阵需要将原始矩阵的所有元素以相同的行遍历顺序填充。</p><p>如果具有给定参数的reshape操作是可行且合理的，则输出新的重塑矩阵；否则，输出原始矩阵。</p><p>示例 1:</p><blockquote><p>输入:\<br>nums = <br>[[1,2],<br> [3,4]]<br>r = 1, c = 4<br>输出: <br>[[1,2,3,4]]<br>解释:<br>行遍历nums的结果是 [1,2,3,4]。新的矩阵是 1 * 4 矩阵, 用之前的元素值一行一行填充新矩阵。</p></blockquote><p>示例 2:</p><blockquote><p>输入: <br>nums = <br>[[1,2],<br> [3,4]]<br>r = 2, c = 4<br>输出: <br>[[1,2],<br> [3,4]]<br>解释:<br>没有办法将 2 * 2 矩阵转化为 2 * 4 矩阵。 所以输出原矩阵。</p></blockquote><p>注意：</p><ol><li>给定矩阵的宽和高范围在 [1, 100]。</li><li>给定的 r 和 c 都是正数。<a id="more"></a>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reshape-the-matrix" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reshape-the-matrix</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li></ol><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>重塑矩阵，意思也就是将原先的n<em>m矩阵转化为题目要求的r</em>c矩阵；一种思路是我们在遍历数组的所有元素的时候就插入到r<em>c新矩阵中；另一种思路是，将整个二维数组扁平化为一维数组，然后再转化为新的r</em>c矩阵</p><h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol><li>将数组扁平化</li><li>转化为r*c矩阵</li></ol><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; nums</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; r</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; c</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> matrixReshape = <span class="function"><span class="keyword">function</span>(<span class="params">nums, r, c</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ans=[];</span><br><span class="line">    <span class="keyword">let</span> numsFlat=nums.flat();</span><br><span class="line">    <span class="keyword">if</span>(r*c!==numsFlat.length) <span class="keyword">return</span> nums;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;r;i++) &#123;</span><br><span class="line">            ans[i]=[];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;c;k++) &#123;</span><br><span class="line">                ans[i].push(numsFlat.shift());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;重塑矩阵&quot;&gt;&lt;a href=&quot;#重塑矩阵&quot; class=&quot;headerlink&quot; title=&quot;重塑矩阵&quot;&gt;&lt;/a&gt;重塑矩阵&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;在MATLAB中，有一个非常有用的函数 reshape，它可以将一个矩阵重塑为另一个大小不同的新矩阵，但保留其原始数据。&lt;/p&gt;
-&lt;p&gt;给出一个由二维数组表示的矩阵，以及两个正整数r和c，分别表示想要的重构的矩阵的行数和列数。&lt;/p&gt;
-&lt;p&gt;重构后的矩阵需要将原始矩阵的所有元素以相同的行遍历顺序填充。&lt;/p&gt;
-&lt;p&gt;如果具有给定参数的reshape操作是可行且合理的，则输出新的重塑矩阵；否则，输出原始矩阵。&lt;/p&gt;
-&lt;p&gt;示例 1:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入:\&lt;br&gt;nums = &lt;br&gt;[[1,2],&lt;br&gt; [3,4]]&lt;br&gt;r = 1, c = 4&lt;br&gt;输出: &lt;br&gt;[[1,2,3,4]]&lt;br&gt;解释:&lt;br&gt;行遍历nums的结果是 [1,2,3,4]。新的矩阵是 1 * 4 矩阵, 用之前的元素值一行一行填充新矩阵。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;示例 2:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;输入: &lt;br&gt;nums = &lt;br&gt;[[1,2],&lt;br&gt; [3,4]]&lt;br&gt;r = 2, c = 4&lt;br&gt;输出: &lt;br&gt;[[1,2],&lt;br&gt; [3,4]]&lt;br&gt;解释:&lt;br&gt;没有办法将 2 * 2 矩阵转化为 2 * 4 矩阵。 所以输出原矩阵。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;注意：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;给定矩阵的宽和高范围在 [1, 100]。&lt;/li&gt;
-&lt;li&gt;给定的 r 和 c 都是正数。
-    
-    </summary>
-    
-      <category term="leetcode题解与算法" scheme="http://yoursite.com/categories/leetcode%E9%A2%98%E8%A7%A3%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
     
   </entry>
   
