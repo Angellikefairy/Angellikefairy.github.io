@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="什么是异步编程异步编程是什么？为什么需要异步编程；这都要从同步说起 因为JavaScript语言是一门单线程语言。我们只能在一个线程上运行任务，该线程被称之为主线程。就像下面的例子一样，代码是按照顺序执行的 12345(function getA()&amp;#123;    a=1;&amp;#125;)()console.log(a); // 1  显然的是，以上会先执行getA函数并设置全局变量a=1，然后">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-10T09:05:28.342Z">
+<meta property="og:updated_time" content="2019-09-12T09:37:10.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Promise与异步编程">
 <meta name="twitter:description" content="什么是异步编程异步编程是什么？为什么需要异步编程；这都要从同步说起 因为JavaScript语言是一门单线程语言。我们只能在一个线程上运行任务，该线程被称之为主线程。就像下面的例子一样，代码是按照顺序执行的 12345(function getA()&amp;#123;    a=1;&amp;#125;)()console.log(a); // 1  显然的是，以上会先执行getA函数并设置全局变量a=1，然后">
@@ -422,6 +422,7 @@
 <h2 id="异步编程具有的几种形式"><a href="#异步编程具有的几种形式" class="headerlink" title="异步编程具有的几种形式"></a>异步编程具有的几种形式</h2><h3 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h3><p>在进行事件操作的时候，例如用户点击按钮就会触发一个click事件。当点击按钮之后，onclick事件所要执行的任务就会放入异步任务队列中，只有当主线程内的所有任务完成后它才会被执行</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> button=<span class="built_in">document</span>.getElementById(<span class="string">'btn'</span>);</span><br><span class="line">button.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Button is clicked'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行结果</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line">Button is clicked</span><br></pre></td></tr></table></figure>
 
+<p>click单击事件一开始就会被注册，但是只有被监听到click事件发生后才会执行click需要响应的操作</p>
 <h3 id="回调模式"><a href="#回调模式" class="headerlink" title="回调模式"></a>回调模式</h3><p>什么是回调函数？</p>
 <p>一个回调函数，也被称为高阶函数，是一个被作为参数传递给另一个函数的函数，回调函数在另外一个函数中被调用。一个回调函数本质上是一种编程模式（为一个常见问题创建的解决方案），因此，使用回调函数也叫做回调模式。</p>
 <p>例如：</p>
@@ -439,7 +440,7 @@
 <p>接口大致意思可能如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readFile</span>(<span class="params">fileName,func</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 读取fileName文件</span></span><br><span class="line">    <span class="keyword">if</span>(success) &#123;</span><br><span class="line">        contents=<span class="string">'文件内容'</span>;</span><br><span class="line">        err=<span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> err=<span class="string">'失败原因'</span>;</span><br><span class="line">    func(err,contents);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
+<h3 id="事件发布与订阅"><a href="#事件发布与订阅" class="headerlink" title="事件发布与订阅"></a>事件发布与订阅</h3>
       
     </div>
     
@@ -560,7 +561,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">101</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -622,7 +623,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是异步编程"><span class="nav-number">1.</span> <span class="nav-text">什么是异步编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步编程具有的几种形式"><span class="nav-number">2.</span> <span class="nav-text">异步编程具有的几种形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件监听"><span class="nav-number">2.1.</span> <span class="nav-text">事件监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回调模式"><span class="nav-number">2.2.</span> <span class="nav-text">回调模式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是异步编程"><span class="nav-number">1.</span> <span class="nav-text">什么是异步编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步编程具有的几种形式"><span class="nav-number">2.</span> <span class="nav-text">异步编程具有的几种形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件监听"><span class="nav-number">2.1.</span> <span class="nav-text">事件监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回调模式"><span class="nav-number">2.2.</span> <span class="nav-text">回调模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件发布与订阅"><span class="nav-number">2.3.</span> <span class="nav-text">事件发布与订阅</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -657,7 +658,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">66.4k</span>
+    <span title="Site words total count">67k</span>
   
 </div>
 
@@ -687,7 +688,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共66.4k字</span>
+  <span class="post-count">博客全站共67k字</span>
 </div>
         
 
