@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="双指针,">
+  <meta name="keywords" content="哈希表,">
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="两数之和|| - 输入有序数组核心方法：双指针题目描述给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。 说明:  返回的下标值（index1 和 index2）不是从零开始的。  你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。   示例:  输入:">
-<meta name="keywords" content="双指针">
+<meta name="description" content="区域和检索 - 数组不可变题目描述给定一个整数数组  nums，求出数组从索引 i 到 j  (i ≤ j) 范围内元素的总和，包含 i,  j 两点。 示例： 给定 nums = [-2, 0, 3, -5, 2, -1]，求和函数为 sumRange()  sumRange(0, 2) -&amp;gt; 1 sumRange(2, 5) -&amp;gt; -1 sumRange(0, 5) -&amp;gt; -">
+<meta name="keywords" content="哈希表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-167 两数之和|| - 输入有序数组">
-<meta property="og:url" content="http://yoursite.com/2019/07/08/leetcode-167/index.html">
+<meta property="og:title" content="leetcode-303 区域和检索 - 数组不可变">
+<meta property="og:url" content="http://yoursite.com/2019/09/13/leetcode-303/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="两数之和|| - 输入有序数组核心方法：双指针题目描述给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。 说明:  返回的下标值（index1 和 index2）不是从零开始的。  你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。   示例:  输入:">
+<meta property="og:description" content="区域和检索 - 数组不可变题目描述给定一个整数数组  nums，求出数组从索引 i 到 j  (i ≤ j) 范围内元素的总和，包含 i,  j 两点。 示例： 给定 nums = [-2, 0, 3, -5, 2, -1]，求和函数为 sumRange()  sumRange(0, 2) -&amp;gt; 1 sumRange(2, 5) -&amp;gt; -1 sumRange(0, 5) -&amp;gt; -">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-27T05:33:42.227Z">
+<meta property="og:updated_time" content="2019-09-13T11:55:00.064Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-167 两数之和|| - 输入有序数组">
-<meta name="twitter:description" content="两数之和|| - 输入有序数组核心方法：双指针题目描述给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。 说明:  返回的下标值（index1 和 index2）不是从零开始的。  你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。   示例:  输入:">
+<meta name="twitter:title" content="leetcode-303 区域和检索 - 数组不可变">
+<meta name="twitter:description" content="区域和检索 - 数组不可变题目描述给定一个整数数组  nums，求出数组从索引 i 到 j  (i ≤ j) 范围内元素的总和，包含 i,  j 两点。 示例： 给定 nums = [-2, 0, 3, -5, 2, -1]，求和函数为 sumRange()  sumRange(0, 2) -&amp;gt; 1 sumRange(2, 5) -&amp;gt; -1 sumRange(0, 5) -&amp;gt; -">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/08/leetcode-167/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/13/leetcode-303/">
 
 
 
 
 
-  <title>leetcode-167 两数之和|| - 输入有序数组 | Hexo</title>
+  <title>leetcode-303 区域和检索 - 数组不可变 | Hexo</title>
   
 
 
@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/leetcode-167/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/13/leetcode-303/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -325,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode-167 两数之和|| - 输入有序数组</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode-303 区域和检索 - 数组不可变</h1>
         
 
         <div class="post-meta">
@@ -337,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-08T18:18:03+08:00">
-                2019-07-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-13T19:49:46+08:00">
+                2019-09-13
               </time>
             
 
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  360
+                  409
                 </span>
               
 
@@ -428,24 +428,25 @@
       
 
       
-        <h1 id="两数之和-输入有序数组"><a href="#两数之和-输入有序数组" class="headerlink" title="两数之和|| - 输入有序数组"></a>两数之和|| - 输入有序数组</h1><h2 id="核心方法：双指针"><a href="#核心方法：双指针" class="headerlink" title="核心方法：双指针"></a>核心方法：双指针</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。</p>
-<p>函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。</p>
-<p>说明:</p>
+        <h1 id="区域和检索-数组不可变"><a href="#区域和检索-数组不可变" class="headerlink" title="区域和检索 - 数组不可变"></a>区域和检索 - 数组不可变</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个整数数组  nums，求出数组从索引 i 到 j  (i ≤ j) 范围内元素的总和，包含 i,  j 两点。</p>
+<p>示例：</p>
+<pre><code>给定 nums = [-2, 0, 3, -5, 2, -1]，求和函数为 sumRange()
+
+sumRange(0, 2) -&gt; 1
+sumRange(2, 5) -&gt; -1
+sumRange(0, 5) -&gt; -3</code></pre><p>说明:</p>
 <ol>
-<li><p>返回的下标值（index1 和 index2）不是从零开始的。</p>
-</li>
-<li><p>你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。</p>
-</li>
+<li>你可以假设数组不可变。</li>
+<li>会多次调用 sumRange 方法。<a id="more"></a>
+来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/range-sum-query-immutable" target="_blank" rel="noopener">https://leetcode-cn.com/problems/range-sum-query-immutable</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li>
 </ol>
-<p>示例:</p>
-<blockquote>
-<p>输入: numbers = [2, 7, 11, 15], target = 9<br>输出: [1,2]<br>解释: 2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。</p>
-</blockquote>
-<a id="more"></a>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted" target="_blank" rel="noopener">https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h3 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h3><p>题目给定的是有序数组，所以使用双指针方法较为方便。设定min指向第一个数组元素（也就是当前最小数），max指向最后一个数组元素。令sum=numbers[min]+numbers[max]</p>
-<p>循环比较sum与target是否相等，若想等则输出。小于target则代表min指向的元素值比输出值要小，则min++;反之，则max–;</p>
-<h3 id="coding实现"><a href="#coding实现" class="headerlink" title="coding实现"></a>coding实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">numbers, target</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">let</span> min=<span class="number">0</span>;</span><br><span class="line">   <span class="keyword">let</span> max=numbers.length<span class="number">-1</span>;</span><br><span class="line">   <span class="keyword">let</span> sum;</span><br><span class="line">   <span class="keyword">while</span>((sum=numbers[min]+numbers[max])!==target)&#123;</span><br><span class="line">      <span class="keyword">if</span>(sum&lt;target)&#123;</span><br><span class="line">        min++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span>&#123;</span><br><span class="line">        max--;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> [min+<span class="number">1</span>,max+<span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>求数组中给定范围之间的和，比如说是求i&lt;=j之间范围的和，我们可以使用前j个元素的和减去前i-1个元素的和。</p>
+<p>题目说明会多次调用求和方法，因此，我们可以在构造函数中就将前1个元素的和到第n个元素的和保存在哈希表中</p>
+<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
+<li>遍历数组，以当前元素下标为键名，以从第一个元素到当前元素的和作为键值来建立哈希表</li>
+<li>返回前j个元素的和减去前i-1个元素的和</li>
+</ol>
+<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> NumArray = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.nums=nums;</span><br><span class="line">    <span class="keyword">let</span> map=<span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="number">-1</span>,<span class="number">0</span>]]),sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nums.length;i++) &#123;</span><br><span class="line">        sum+=nums[i];</span><br><span class="line">        map.set(i,sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.map=map;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; i </span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; j</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">NumArray.prototype.sumRange = <span class="function"><span class="keyword">function</span>(<span class="params">i, j</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.map.get(j)-<span class="keyword">this</span>.map.get(i<span class="number">-1</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * Your NumArray object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * var obj = new NumArray(nums)</span></span><br><span class="line"><span class="comment"> * var param_1 = obj.sumRange(i,j)</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
 
 
       
@@ -464,7 +465,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/双指针/" rel="tag"># 双指针</a>
+            <a href="/tags/哈希表/" rel="tag"># 哈希表</a>
           
         </div>
       
@@ -483,15 +484,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/09/12/leetcode-290/" rel="next" title="leetcode-290 单词规律">
+                <i class="fa fa-chevron-left"></i> leetcode-290 单词规律
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/09/leetcode-169/" rel="prev" title="leetcode-169 求众数">
-                leetcode-169 求众数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -632,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#两数之和-输入有序数组"><span class="nav-number">1.</span> <span class="nav-text">两数之和|| - 输入有序数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心方法：双指针"><span class="nav-number">1.1.</span> <span class="nav-text">核心方法：双指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心思路"><span class="nav-number">1.1.2.</span> <span class="nav-text">核心思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#coding实现"><span class="nav-number">1.1.3.</span> <span class="nav-text">coding实现</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#区域和检索-数组不可变"><span class="nav-number">1.</span> <span class="nav-text">区域和检索 - 数组不可变</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
             
 
           </div>

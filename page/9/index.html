@@ -307,6 +307,221 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/25/排序/" itemprop="url">排序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-25T09:27:08+08:00">
+                2019-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">算法笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>选择排列是指，对一个序列A中的元素，令i从0到n-1枚举，进行n趟操作，每趟从待排序部分（i+1,n）中选择最小的元素，令其与待排序部分的第一个元素A[i]进行交换，这样在n趟操作后，所有元素都会是有序的</p>
+<h3 id="动图演示"><a href="#动图演示" class="headerlink" title="动图演示"></a>动图演示</h3><p><img src="https://lc-api-gold-cdn.xitu.io/9c3e16e6e5d0a5ac7721?imageView2/0/w/1280/h/960/ignore-error/1" alt></p>
+<h3 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectSort</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;n.length<span class="number">-1</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">let</span> min=i;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> k=i;k&lt;n.length;k++)&#123;</span><br><span class="line">      <span class="keyword">if</span>(n[k]&lt;n[min])&#123;</span><br><span class="line">       min=k;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> temp=n[min];</span><br><span class="line">    n[min]=n[i];</span><br><span class="line">    n[i]=temp;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><h3 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>直接插入排序是指，对序列A的n个元素A[0]到A[n-1],令n从1到n-1枚举，进行n-1趟操作。每一趟排序时，该待排列元素之前的所有元素已经是有序的，则在该有序队列中寻找一个位置进行插入，使得该序列依旧有序</p>
+<h4 id="动图演示-1"><a href="#动图演示-1" class="headerlink" title="动图演示"></a>动图演示</h4><p><img src="https://lc-api-gold-cdn.xitu.io/9a1264832cad9bfd4100?imageView2/0/w/1280/h/960/ignore-error/1" alt></p>
+<h4 id="Coding实现-1"><a href="#Coding实现-1" class="headerlink" title="Coding实现"></a>Coding实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertionSort</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;n.length;i++)&#123;</span><br><span class="line">    <span class="keyword">let</span> num=n[i];</span><br><span class="line">    <span class="keyword">while</span>(num&lt;n[i<span class="number">-1</span>])&#123;</span><br><span class="line">      n[i]=n[i<span class="number">-1</span>];</span><br><span class="line">      i--;</span><br><span class="line">    &#125;</span><br><span class="line">    n[i]=num;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="折半插入排序"><a href="#折半插入排序" class="headerlink" title="折半插入排序"></a>折半插入排序</h3><h4 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h4><blockquote>
+<p>有一组数据待排序，排序区间为Array[0] ~ Array[n-1]。将数据分为有序数据和无序数据，第一次排序时默认Array[0]为有序数据，Array[1]~Array[n-1]为无序数据。有序数据分区的第一个元素位置为low，最后一个元素的位置为high。</p>
+</blockquote>
+<blockquote>
+<p>遍历无序区间的所有元素，每次取无序区间的第一个元素Array[i]，因为0 ~ i-1是有序排列的，所以用中点m将其平分为两部分，然后将待排序数据同中间位置为m的数据进行比较，若待排序数据较大，则low ~ m-1分区的数据都比待排序数据小，反之，若待排序数据较小，则m+1 ~ high分区的数据都比 待排序数据大，此时将low或high重新定义为新的合适分区的边界，对新的小分区重复上面操作。直到low和high 的前后顺序改变，此时high+1所处位置为待排序数据的合适位置。</p>
+</blockquote>
+<hr>
+<p>作者：weixin_42245157<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/weixin_42245157/article/details/80458542" target="_blank" rel="noopener">https://blog.csdn.net/weixin_42245157/article/details/80458542</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+<h3 id="Coding实现-2"><a href="#Coding实现-2" class="headerlink" title="Coding实现"></a>Coding实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">BinaryInsertSortup</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;n.length;i++)&#123;</span><br><span class="line">    <span class="keyword">let</span> low=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> high=i<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">let</span> num=n[i];</span><br><span class="line">    <span class="keyword">while</span>(low&lt;=high)&#123;</span><br><span class="line">      <span class="keyword">let</span> mid=<span class="built_in">Math</span>.floor((low+high)/<span class="number">2</span>);</span><br><span class="line">      <span class="keyword">if</span>(num&lt;n[mid])&#123;</span><br><span class="line">        high=mid<span class="number">-1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span>&#123;</span><br><span class="line">        low=mid+<span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(k=i;k&gt;low;k--)&#123;</span><br><span class="line">        n[k]=n[k<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    n[k]=num;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><h3 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h3><p>冒泡排序旨在每次冒泡一个最大或最小的元素到顶端，因此需遍历n次。（若冒泡较大元素）则每次遍历，比较相邻两个元素大小，若底部元素（数组下标较小）大于其相邻顶部元素，则两元素交换位置，直至最大的元素冒泡到最顶端</p>
+<h3 id="动图演示-2"><a href="#动图演示-2" class="headerlink" title="动图演示"></a>动图演示</h3><p><img src="https://lc-api-gold-cdn.xitu.io/ffef8bdf5a3b0dd54859?imageView2/0/w/1280/h/960/ignore-error/1" alt></p>
+<h3 id="Coding实现-3"><a href="#Coding实现-3" class="headerlink" title="Coding实现"></a>Coding实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> flag;</span><br><span class="line">  <span class="keyword">do</span>&#123;</span><br><span class="line">    flag=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;n.length;i++)&#123;</span><br><span class="line">      <span class="keyword">let</span> temp;</span><br><span class="line">      <span class="keyword">if</span>(n[i]&gt;n[i+<span class="number">1</span>])&#123;</span><br><span class="line">        temp=n[i];</span><br><span class="line">        n[i]=n[i+<span class="number">1</span>];</span><br><span class="line">        n[i+<span class="number">1</span>]=temp;</span><br><span class="line">        flag=<span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;<span class="keyword">while</span>(flag===<span class="number">1</span>)</span><br><span class="line">  <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><h3 id="定义-4"><a href="#定义-4" class="headerlink" title="定义"></a>定义</h3><p>归并排序是一种基于归并思想的排序方法。</p>
+<p>实现思路：</p>
+<ol>
+<li>将序列分成Math.ceil(n/2)个组，组内单独排序</li>
+<li>将这些组两两归并，这样就会变成Math.ceil(n/4)个组，组内再单独排序</li>
+<li>以此类推，直到最后只剩下一个组为止</li>
+</ol>
+<h3 id="Coding实现-4"><a href="#Coding实现-4" class="headerlink" title="Coding实现"></a>Coding实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mergeSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> length = arr.length;</span><br><span class="line">  <span class="keyword">if</span> (length === <span class="number">1</span>) &#123; <span class="comment">//递归算法的停止条件，即为判断数组长度是否为1</span></span><br><span class="line">      <span class="keyword">return</span> arr;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> mid = <span class="built_in">Math</span>.floor(length / <span class="number">2</span>);</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">const</span> left = arr.slice(<span class="number">0</span>,  mid);</span><br><span class="line">  <span class="keyword">const</span> right = arr.slice(mid, length);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> merge(mergeSort(left), mergeSort(right)); <span class="comment">//要将原始数组分割直至只有一个元素时，才开始归并</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">left, right</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> result = [];</span><br><span class="line">  <span class="keyword">let</span> il = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> ir = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//left, right本身肯定都是从小到大排好序的</span></span><br><span class="line">  <span class="keyword">while</span>( il &lt; left.length &amp;&amp; ir &lt; right.length) &#123;</span><br><span class="line">      <span class="keyword">if</span> (left[il] &lt; right[ir]) &#123;</span><br><span class="line">          result.push(left[il]);</span><br><span class="line">          il++;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          result.push(right[ir]);</span><br><span class="line">          ir++;</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//不可能同时存在left和right都有剩余项的情况, 要么left要么right有剩余项, 把剩余项加进来即可</span></span><br><span class="line">  <span class="keyword">while</span> (il &lt; left.length) &#123; </span><br><span class="line">      result.push(left[il]);</span><br><span class="line">      il++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span>(ir &lt; right.length) &#123;</span><br><span class="line">      result.push(right[ir]);</span><br><span class="line">      ir++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><h3 id="定义-5"><a href="#定义-5" class="headerlink" title="定义"></a>定义</h3><p>快速排序是排序算法中平均时间复杂度为O(logn)的一种算法。</p>
+<p>其主要步骤为</p>
+<ol>
+<li>调整序列中的元素，使得当前序列的第一个元素在调整后所处的位置的左侧元素都小于它，在右侧的位置都大于它</li>
+<li>对该元素的左侧和右侧区间分别递归进行1的调整，直到当前调整区间的长度不大于1</li>
+</ol>
+<h3 id="Coding实现-5"><a href="#Coding实现-5" class="headerlink" title="Coding实现"></a>Coding实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(n.length&lt;<span class="number">2</span>) <span class="keyword">return</span> n;</span><br><span class="line">  <span class="keyword">let</span> first=n[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">let</span> small=[];</span><br><span class="line">  <span class="keyword">let</span> large=[];</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;n.length;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(n[i]&lt;first)&#123;</span><br><span class="line">      small.push(n[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      large.push(n[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> F(small).concat([first],F(large));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/leetcode-1002/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2059,238 +2274,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/20/Java解决算法题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/20/Java解决算法题/" itemprop="url">Java解决算法题一些记录(杂)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-20T14:30:02+08:00">
-                2019-07-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  183
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h1><h2 id="ArrayList的一些方法"><a href="#ArrayList的一些方法" class="headerlink" title="ArrayList的一些方法"></a>ArrayList的一些方法</h2><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>add()</td>
-<td>在list的末尾添加一个元素</td>
-</tr>
-<tr>
-<td>add(index: int, o: E)</td>
-<td>在指定的index处插入元素</td>
-</tr>
-<tr>
-<td>clear()</td>
-<td>从list中删除所有元素</td>
-</tr>
-<tr>
-<td>contains(o: Object)</td>
-<td>如果list含有元素o，返回true</td>
-</tr>
-<tr>
-<td>get(index: int)</td>
-<td>返回指定index处的元素</td>
-</tr>
-<tr>
-<td>indexOf(o: Object)</td>
-<td>返回list中第一个匹配元素的index</td>
-</tr>
-<tr>
-<td>isEmpty()</td>
-<td>如果list不含元素，返回true</td>
-</tr>
-<tr>
-<td>lastIndexOf(o: Object)</td>
-<td>返回list中最后一个匹配元素的index</td>
-</tr>
-<tr>
-<td>remove(o: Object)</td>
-<td>删除list中的第一个元素o，如果元素被删除，返回true</td>
-</tr>
-<tr>
-<td>size()</td>
-<td>返回list中元素个数</td>
-</tr>
-<tr>
-<td>remove(index: int)</td>
-<td>删除指定index处的元素，如果元素被删除，返回true</td>
-</tr>
-<tr>
-<td>set(index: int, o: E)</td>
-<td>设置指定index处的元素为o</td>
-</tr>
-</tbody></table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2343,7 +2326,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-count">103</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2424,7 +2407,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67k</span>
+    <span title="Site words total count">70k</span>
   
 </div>
 
@@ -2454,7 +2437,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共67k字</span>
+  <span class="post-count">博客全站共70k字</span>
 </div>
         
 
