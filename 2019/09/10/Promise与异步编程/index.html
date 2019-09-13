@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="什么是异步编程异步编程是什么？为什么需要异步编程；这都要从同步说起 因为JavaScript语言是一门单线程语言。我们只能在一个线程上运行任务，该线程被称之为主线程。就像下面的例子一样，代码是按照顺序执行的 12345(function getA()&amp;#123;    a=1;&amp;#125;)()console.log(a); // 1  显然的是，以上会先执行getA函数并设置全局变量a=1，然后">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-13T06:49:11.841Z">
+<meta property="og:updated_time" content="2019-09-13T12:20:54.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Promise与异步编程">
 <meta name="twitter:description" content="什么是异步编程异步编程是什么？为什么需要异步编程；这都要从同步说起 因为JavaScript语言是一门单线程语言。我们只能在一个线程上运行任务，该线程被称之为主线程。就像下面的例子一样，代码是按照顺序执行的 12345(function getA()&amp;#123;    a=1;&amp;#125;)()console.log(a); // 1  显然的是，以上会先执行getA函数并设置全局变量a=1，然后">
@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.9k
+                  4.1k
                 </span>
               
 
@@ -384,7 +384,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  15
+                  16
                 </span>
               
             </div>
@@ -526,6 +526,19 @@
 <p>需要注意的是，可迭代对象中promise的顺序也可能会对结果产生影响</p>
 <p>例如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p1=<span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        resolve(<span class="number">1</span>);</span><br><span class="line">    &#125;,<span class="number">2000</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p2=<span class="built_in">Promise</span>.reject(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">let</span> p3=<span class="built_in">Promise</span>.resolve(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调换p2,p3的先后顺序</span></span><br><span class="line"><span class="built_in">Promise</span>.race([p1,p3,p2]).then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v); <span class="comment">// 3</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h3><ol>
+<li><p>async function 用来定义一个返回 AsyncFunction 对象的异步函数。异步函数是指通过事件循环异步执行的函数，它会通过一个隐式的 Promise 返回其结果。</p>
+</li>
+<li><p>await  操作符用于等待一个Promise 对象。它只能在异步函数 async function 中使用。</p>
+</li>
+<li><p>async 函数返回一个 Promise 对象</p>
+</li>
+<li><p>async 函数内部 return 返回的值。会成为 then 方法回调函数的参数。</p>
+</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        resolve(<span class="number">1</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f().then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v); <span class="comment">// 1</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -646,7 +659,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">104</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -708,7 +721,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是异步编程"><span class="nav-number">1.</span> <span class="nav-text">什么是异步编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步编程具有的几种形式"><span class="nav-number">2.</span> <span class="nav-text">异步编程具有的几种形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件监听"><span class="nav-number">2.1.</span> <span class="nav-text">事件监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回调模式"><span class="nav-number">2.2.</span> <span class="nav-text">回调模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件发布与订阅"><span class="nav-number">2.3.</span> <span class="nav-text">事件发布与订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise"><span class="nav-number">2.4.</span> <span class="nav-text">Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise的生命周期"><span class="nav-number">2.4.1.</span> <span class="nav-text">Promise的生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise构造函数创建promise"><span class="nav-number">2.4.2.</span> <span class="nav-text">Promise构造函数创建promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#then-与catch"><span class="nav-number">2.4.3.</span> <span class="nav-text">then()与catch()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise-resolve-和Promise-reject-创建已处理的promise"><span class="nav-number">2.4.4.</span> <span class="nav-text">Promise.resolve()和Promise.reject()创建已处理的promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行器错误"><span class="nav-number">2.4.5.</span> <span class="nav-text">执行器错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#串联Promise"><span class="nav-number">2.4.6.</span> <span class="nav-text">串联Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#promise链中传递数据"><span class="nav-number">2.4.6.1.</span> <span class="nav-text">promise链中传递数据</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在处理程序中return一个promise"><span class="nav-number">2.4.7.</span> <span class="nav-text">在处理程序中return一个promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应多个Promise"><span class="nav-number">2.4.8.</span> <span class="nav-text">响应多个Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Promise-all"><span class="nav-number">2.4.8.1.</span> <span class="nav-text">Promise.all()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Promise-race"><span class="nav-number">2.4.8.2.</span> <span class="nav-text">Promise.race()</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是异步编程"><span class="nav-number">1.</span> <span class="nav-text">什么是异步编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步编程具有的几种形式"><span class="nav-number">2.</span> <span class="nav-text">异步编程具有的几种形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件监听"><span class="nav-number">2.1.</span> <span class="nav-text">事件监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回调模式"><span class="nav-number">2.2.</span> <span class="nav-text">回调模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件发布与订阅"><span class="nav-number">2.3.</span> <span class="nav-text">事件发布与订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise"><span class="nav-number">2.4.</span> <span class="nav-text">Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise的生命周期"><span class="nav-number">2.4.1.</span> <span class="nav-text">Promise的生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise构造函数创建promise"><span class="nav-number">2.4.2.</span> <span class="nav-text">Promise构造函数创建promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#then-与catch"><span class="nav-number">2.4.3.</span> <span class="nav-text">then()与catch()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise-resolve-和Promise-reject-创建已处理的promise"><span class="nav-number">2.4.4.</span> <span class="nav-text">Promise.resolve()和Promise.reject()创建已处理的promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行器错误"><span class="nav-number">2.4.5.</span> <span class="nav-text">执行器错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#串联Promise"><span class="nav-number">2.4.6.</span> <span class="nav-text">串联Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#promise链中传递数据"><span class="nav-number">2.4.6.1.</span> <span class="nav-text">promise链中传递数据</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在处理程序中return一个promise"><span class="nav-number">2.4.7.</span> <span class="nav-text">在处理程序中return一个promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应多个Promise"><span class="nav-number">2.4.8.</span> <span class="nav-text">响应多个Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Promise-all"><span class="nav-number">2.4.8.1.</span> <span class="nav-text">Promise.all()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Promise-race"><span class="nav-number">2.4.8.2.</span> <span class="nav-text">Promise.race()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async-await"><span class="nav-number">2.5.</span> <span class="nav-text">async/await</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -743,7 +756,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">70k</span>
+    <span title="Site words total count">70.9k</span>
   
 </div>
 
@@ -773,7 +786,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共70k字</span>
+  <span class="post-count">博客全站共70.9k字</span>
 </div>
         
 
