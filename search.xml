@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-367 有效的完全平方数]]></title>
+    <url>%2F2019%2F09%2F18%2Fleetcode-367%2F</url>
+    <content type="text"><![CDATA[有效的完全平方数题目描述给定一个正整数 num，编写一个函数，如果 num 是一个完全平方数，则返回 True，否则返回 False。 说明：不要使用任何内置的库函数，如 sqrt。 示例 1： 输入：16输出：True 示例 2： 输入：14输出：False 来源：力扣（LeetCode）链接：https://leetcode-cn.com/problems/valid-perfect-square著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 核心思路概述我们知道，对于大于等于4的完全平方数，它的平方根会小于或等于它的一半。因此，我们可以在2~n/2之间进行二分查找，来降低时间复杂度 解题步骤 如果给定的数为1，返回true 设定left为2，right为Math.floor(num/2)，mid为Math.floor((left+right)/2)；如果mid*mid===num那么返回true；如果小于，则left=mid+1;否则right=mid-1; 重复步骤2知道right&gt;left 如果上述二分过程中没有返回true，那么返回false Coding实现123456789101112131415161718192021/** * @param &#123;number&#125; num * @return &#123;boolean&#125; */var isPerfectSquare = function(num) &#123; if(num===1) return true; let left=2; let right=Math.floor(num/2); let mid; while(left&lt;=right) &#123; mid=Math.floor((left+right)/2); if(mid*mid===num) return true; else if(mid*mid&gt;num) &#123; right=mid-1; &#125; else &#123; left=mid+1; &#125; &#125; return false;&#125;;]]></content>
+      <categories>
+        <category>leetcode题解与算法</category>
+      </categories>
+      <tags>
+        <tag>二分查找</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[nowcoder-1 二维数组中的查找]]></title>
     <url>%2F2019%2F09%2F17%2Fnowcoder-1%2F</url>
     <content type="text"><![CDATA[数组的相对排序题目描述在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 核心思路概述 最直接的暴力解法遍历二维数组中的每一个元素，返回是否能找到给定的target值 利用ES6特性，将数组扁平化（但是牛客网并没有很好地支持flat()函数，因此我们可以使用concat()方法来实现扁平化）后使用includes()函数进行查找 巧妙一点的方法是：由于该二维数组的规律（每一行从左往右递增，每一列从上往下递增），我们可以发现二维数组的左下角总是当前行的最小值，当前列的最大值。因此，当给定值大于当前左下角的数值时，我们就将该数往右移动一位；当给定值小于当前左下角的数值时，我们就将该数往上移动一位。直到找到该值返回true，或者遍历到右上角仍然没有找到返回false 解题步骤Coding实现通过concat()扁平化后利用includes()来查找 12345678function Find(target, array)&#123; let arr=[].concat(...array); return arr.includes(target);&#125;module.exports = &#123; Find : Find&#125;; 左下到右上的查找 1234567891011121314151617181920function Find(target, array)&#123; let column=0; let row=array.length-1; let num; while(column&lt;array[0].length&amp;&amp;row&gt;=0)&#123; num=array[row][column]; if(target&gt;num) &#123; column++; &#125; else if(target&lt;num) &#123; row--; &#125; else return true; &#125; return false;&#125;module.exports = &#123; Find : Find&#125;;]]></content>
