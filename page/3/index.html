@@ -1056,7 +1056,7 @@
 <ol>
 <li>Array.prototype.concat()</li>
 <li>Array.prototype.slice()</li>
-<li>new Array()结合不定参数</li>
+<li>Array.of()结合不定参数</li>
 </ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test=[<span class="number">1</span>,&#123;<span class="attr">item</span>:<span class="number">1</span>&#125;]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用concat()方法</span></span><br><span class="line"><span class="keyword">let</span> arr1=test.concat();</span><br><span class="line"><span class="built_in">console</span>.log(arr1); <span class="comment">// [1,&#123;item:1&#125;]</span></span><br><span class="line"><span class="built_in">console</span>.log(arr1===test); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(arr1[<span class="number">1</span>]===test[<span class="number">1</span>]); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用slice()方法</span></span><br><span class="line"><span class="keyword">let</span> arr2=test.concat();</span><br><span class="line"><span class="built_in">console</span>.log(arr2); <span class="comment">// [1,&#123;item:1&#125;]</span></span><br><span class="line"><span class="built_in">console</span>.log(arr2===test); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(arr2[<span class="number">1</span>]===test[<span class="number">1</span>]); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用new Array()方法</span></span><br><span class="line"><span class="keyword">let</span> arr3=<span class="keyword">new</span> <span class="built_in">Array</span>(...arr1);</span><br><span class="line"><span class="built_in">console</span>.log(arr3); <span class="comment">// [1,&#123;item:1&#125;]</span></span><br><span class="line"><span class="built_in">console</span>.log(arr3===test); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(arr3[<span class="number">1</span>]===test[<span class="number">1</span>]); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改数组中引用类型元素的值</span></span><br><span class="line">test[<span class="number">1</span>].item=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`</span></span><br><span class="line"><span class="string"><span class="subst">$&#123;arr1[<span class="number">1</span>].item&#125;</span></span></span><br><span class="line"><span class="string"><span class="subst">$&#123;arr2[<span class="number">1</span>].item&#125;</span> </span></span><br><span class="line"><span class="string"><span class="subst">$&#123;arr3[<span class="number">1</span>].item&#125;</span></span></span><br><span class="line"><span class="string">`</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 
@@ -2512,7 +2512,7 @@ queue.empty(); // 返回 false</code></pre><p>说明:</p>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">73.5k</span>
+    <span title="Site words total count">73.9k</span>
   
 </div>
 
@@ -2542,7 +2542,7 @@ queue.empty(); // 返回 false</code></pre><p>说明:</p>
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共73.5k字</span>
+  <span class="post-count">博客全站共73.9k字</span>
 </div>
         
 

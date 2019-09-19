@@ -2206,7 +2206,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  933
+                  1.1k
                 </span>
               
 
@@ -2222,7 +2222,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -2255,7 +2255,7 @@
 <ol>
 <li><p>configurable：可配置。（具体来说指的是，1.能否通过delete删除属性从而重新定义属性； 2.能否修改属性的特性；3.能否把属性修改为访问器属性；默认为true）</p>
 </li>
-<li><p>enumerable：可枚举。（表示是否可以通过for-in循环来返回属性；默认为true）</p>
+<li><p>enumerable：可枚举。（表示是否可以通过for-in循环来返回属性；对于直接在对象上定义的属性，这个特性值默认为true）</p>
 </li>
 <li><p>writable：可写。（表示能否修改属性的值；默认为true）</p>
 <pre><code>以上三个属性取值为true或false。</code></pre></li>
@@ -2279,16 +2279,19 @@
 <ol>
 <li><p>configurable：可配置。（具体来说指的是，1.能否通过delete删除属性从而重新定义属性； 2.能否修改属性的特性；3.能否把属性修改为访问器属性；默认为true）</p>
 </li>
-<li><p>enumerable：可枚举。（表示是否可以通过for-in循环来返回属性；默认为true）</p>
+<li><p>enumerable：可枚举。（表示是否可以通过for-in循环来返回属性；对于直接在对象上定义的属性，这个特性值默认为true）</p>
 </li>
 <li><p>get：在读取属性时调用的函数。默认值为undefined</p>
 </li>
 <li><p>set：在写入属性时调用的函数。默认值为undefined</p>
 </li>
 </ol>
-<p>访问器属性不像数据属性一样可以直接被定义，它只能通过Object.defineProperty()来定义</p>
+<p>访问器属性不像数据属性一样可以直接被定义，它只能通过Object.defineProperty()来定义。如果通过这种方式来进行定义的话，那么[[Enumerable]]可枚举属性会默认为false,当然我们可以在定义的时候将其设置为true</p>
 <p>如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test=&#123;</span><br><span class="line">    _item:<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(test,<span class="string">'item'</span>,&#123;</span><br><span class="line">    <span class="keyword">get</span>:function()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>:function(num)&#123;</span><br><span class="line">        <span class="keyword">if</span>(num&gt;<span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>._item++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">test.item=<span class="number">15</span>;</span><br><span class="line"><span class="built_in">console</span>.log(test.item); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>除此之外，我们也可以通过在对象上直接定义访问器属性使得其可枚举</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test=&#123;</span><br><span class="line">    _item:<span class="number">1</span>,</span><br><span class="line">    <span class="keyword">get</span> item() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> item(num) &#123;</span><br><span class="line">        <span class="keyword">if</span>(num&gt;<span class="number">10</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>._item++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPropertyDescriptor(test,item));</span><br><span class="line"><span class="comment">/* &#123;</span></span><br><span class="line"><span class="comment">  get: [Function: get item],</span></span><br><span class="line"><span class="comment">  set: [Function: set item],</span></span><br><span class="line"><span class="comment">  enumerable: true,</span></span><br><span class="line"><span class="comment">  configurable: true</span></span><br><span class="line"><span class="comment">&#125; */</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> test) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i); <span class="comment">// '_item','item'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>访问器属性的意义</p>
 <ol>
@@ -2467,7 +2470,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">73.5k</span>
+    <span title="Site words total count">73.9k</span>
   
 </div>
 
@@ -2497,7 +2500,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共73.5k字</span>
+  <span class="post-count">博客全站共73.9k字</span>
 </div>
         
 
