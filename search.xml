@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[剑指Offer-求链表中的倒数第k个节点]]></title>
+    <url>%2F2019%2F09%2F23%2F%E5%89%91%E6%8C%87Offer-01%2F</url>
+    <content type="text"><![CDATA[求链表中的倒数第k个节点题目描述输入：输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾结点是倒数第一个节点。例如，一个链表有6个节点，从头结点开始，它们的值一次是1、2、3、4、5、6。这个链表的倒数第三个节点是值为4的节点。 链表节点定义如下： 1234/*function ListNode(x)&#123; this.val = x; this.next = null;&#125;*/ 核心思路我们可以设置两个双指针，cur指向头结点，anotherCur指向第k-1个节点。然后两个节点分别往下走，当anotherCur节点指向最后一个节点时，也就意味着cur指向了该链表的倒数第k个节点 但是，我们需要注意一些输入的问题以及边界情况。 输入链表head为空时的处理 k值小于等于0时的处理 k值大于链表长度时的处理 coding实现123456789101112131415161718192021222324/*function ListNode(x)&#123; this.val = x; this.next = null;&#125;*/function FindKthToTail(head, k)&#123; if(head===null||k&lt;=0) return null; let cur = head; let anotherCur = head; for(let i=1;i&lt;k;i++) &#123; if(anotherCur.next) &#123; anotherCur = anotherCur.next; &#125; else return null; &#125; while(anotherCur.next) &#123; anotherCur = anotherCur.next; cur = cur.next; &#125; return cur;&#125;module.exports = &#123; FindKthToTail : FindKthToTail&#125;; 时空复杂度分析 时间复杂度： O(n) 空间复杂度：O(1)]]></content>
+      <categories>
+        <category>剑指Offer</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[webpack打包学习（一）]]></title>
     <url>%2F2019%2F09%2F23%2Fwebpack%E6%89%93%E5%8C%85%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%2F</url>
     <content type="text"><![CDATA[项目的基本搭建 新建一个项目并npm init为npm项目 安装webpck的相关模块，如下 webpack webpack-cli(webpack的命令行工具) style-loader(通过向 DOM 中注入 &lt;style&gt; 标签实现css效果) css-loader(解析引入的css文件) file-loader(处理文件包括图片文件和字体文件) webpack-dev-server(提供一个简单的web服务器) 新建源代码文件夹src目录 新建输出文件夹dist目录，并将index.html放入改文件夹中 新建webpack.config.js配置文件 在src文件夹中引入css文件方式如下： 1import './main.css' 模块css-loader会处理引入的css代码，而style-loader则负责将该css代码注入到Dom中 引入图片和字体文件方式如下： 1import img from './image.png' 模块file-loader会处理这些图片和字体文件并进行打包 编写webpack.config.jswebpack的打包都会按照这个文件的配置进行相应的打包 以上基本的打包实现如下： 12345678910111213141516171819202122232425262728293031323334353637// Node.js的原生模块，用于将相对路径转化为绝对路径const path = require('path');// 利用Common.js模块的导出语法，导出基本的配置module.exports = &#123; // 打包的入口 entry: &#123; main: './src/main.js' &#125;, // 打包的出口 output: &#123; filename: 'bundle.js', // 打包的出口文件名 path: path.resolve(__dirname,'dist')// __dirname是指当前的根目录，然后利用resolve函数就可以将__dirname于dist目录进行拼接然后转化为绝对路径，作为bundle.js文件的生成目录 &#125;, // 用来追踪错误和警告 devtool: "inline-source-map", // 服务器配置 devServer: &#123; // 告诉服务器，将 dist 目录下的文件，作为可访问文件。 contentBase: './dist' &#125;, module: &#123;\ // 创建模块时，匹配请求的规则数组。这些规则能够修改模块的创建方式。这些规则能够对模块(module)应用 loader，或者修改解析器(parser)。 rules: [ &#123; // 正则表达式匹配rule条件 test: /.css$/, //在规则条件匹配时使用的loader use: ["style-loader","css-loader"] &#125;, &#123; test: /.(jpg|png|jpeg|gif)$/, use: ["file-loader"] &#125; ] &#125;&#125;]]></content>
