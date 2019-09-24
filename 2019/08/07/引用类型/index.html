@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="引言 新对象的创建可以通过new操作符后跟一个构造函数来创建  例： 1let a=new Object()  Object类型创建Object实例的两个方法new操作符1let a=new Object()  对象字面量法1let a=&amp;#123;item:1&amp;#125;  在使用对象字面量语法时，属性名也可以使用字符串和可计算属性名 字符串属性名 1234let a=&amp;#123;    &apos;it">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-08T07:08:24.549Z">
+<meta property="og:updated_time" content="2019-09-24T14:18:52.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="引用类型">
 <meta name="twitter:description" content="引言 新对象的创建可以通过new操作符后跟一个构造函数来创建  例： 1let a=new Object()  Object类型创建Object实例的两个方法new操作符1let a=new Object()  对象字面量法1let a=&amp;#123;item:1&amp;#125;  在使用对象字面量语法时，属性名也可以使用字符串和可计算属性名 字符串属性名 1234let a=&amp;#123;    &apos;it">
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  2k
                 </span>
               
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  7
                 </span>
               
             </div>
@@ -614,8 +614,28 @@
 </tr>
 </tbody></table>
 <p>方法参数：<br>这两个方法都接收两个参数：一个在每一项上调用的reucer函数和（可选的）作为归并基础的初始值</p>
-<p>reducer函数参数：<br>接收四个参数：前一个值、当前值、项的索引和数组对象。这个函数的返回的任何值都后悔作为第一个参数自动传给下一项</p>
-<h2 id="Date类型"><a href="#Date类型" class="headerlink" title="Date类型"></a>Date类型</h2><p>创建日期对象</p>
+<p>reducer函数参数：<br>接收四个参数：前一个值、当前值、项的索引和数组对象。这个函数的显式返回的任何值都会作为第一个参数自动传给下一项，如果没有显式返回语句，那么就将undefined传给下一项</p>
+<p>reduce()函数语法：</p>
+<blockquote>
+<p>arr.reduce(callback(accumulator, currentValue[, index[, array]])[, initialValue])</p>
+</blockquote>
+<p>参数</p>
+<p>callback<br>    执行数组中每个值的函数，包含四个参数：</p>
+<pre><code>1. accumulator
+    累计器累计回调的返回值; 它是上一次调用回调时返回的累积值，或initialValue（见于下方）。
+
+2. currentValue
+    数组中正在处理的元素。
+
+3. currentIndex可选
+    数组中正在处理的当前元素的索引。 如果提供了initialValue，则起始索引号为0，否则为1。
+
+4. array可选
+    调用reduce()的数组</code></pre><p>initialValue (可选)</p>
+<pre><code>作为第一次调用 callback函数时的第一个参数的值。 如果没有提供初始值，则将使用数组中的第一个元素。 在没有初始值的空数组上调用 reduce 将报错。</code></pre><p>返回值</p>
+<p>函数累计处理的结果</p>
+<p>值得注意的是：</p>
+<pre><code>回调函数第一次执行时，accumulator 和currentValue的取值有两种情况：如果调用reduce()时提供了initialValue，accumulator取值为initialValue，currentValue取数组中的第一个值；如果没有提供 initialValue，那么accumulator取数组中的第一个值，currentValue取数组中的第二个值。</code></pre><h2 id="Date类型"><a href="#Date类型" class="headerlink" title="Date类型"></a>Date类型</h2><p>创建日期对象</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> date=<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="built_in">console</span>.log(date.toLocaleString());</span><br></pre></td></tr></table></figure>
 
 <h2 id="RegExp类型"><a href="#RegExp类型" class="headerlink" title="RegExp类型"></a>RegExp类型</h2><h2 id="Function类型"><a href="#Function类型" class="headerlink" title="Function类型"></a>Function类型</h2><p>函数实际上是对象。因此函数名实际上也是一个指向函数对象的指针，并不会与某个函数绑定</p>
@@ -637,6 +657,9 @@
 <li>Number</li>
 <li>String</li>
 </ol>
+<h3 id="基本包装类型与基本数据类型的区别"><a href="#基本包装类型与基本数据类型的区别" class="headerlink" title="基本包装类型与基本数据类型的区别"></a>基本包装类型与基本数据类型的区别</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Boolean转型函数，创建的是基本类型值</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="literal">false</span>));</span><br><span class="line"> <span class="comment">// false</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="built_in">Boolean</span>(<span class="number">1</span>));</span><br><span class="line"> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 基本包装类型，创建的是基本包装对象</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>)); <span class="comment">//Boolean &#123; false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="number">1</span>)); <span class="comment">//Boolean &#123; false &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Number与String基本包装类型与基本数据类型的区别也是类似的</p>
 <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>每当读取一个基本类型值的时候，后台就会自动创建一个对应的基本包装类型的对象。</p>
 <p>处理步骤：\</p>
 <ol>
@@ -789,7 +812,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">111</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -851,7 +874,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object类型"><span class="nav-number">2.</span> <span class="nav-text">Object类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Object实例的两个方法"><span class="nav-number">2.1.</span> <span class="nav-text">创建Object实例的两个方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#new操作符"><span class="nav-number">2.1.1.</span> <span class="nav-text">new操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象字面量法"><span class="nav-number">2.1.2.</span> <span class="nav-text">对象字面量法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array类型"><span class="nav-number">3.</span> <span class="nav-text">Array类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数组的几种方式"><span class="nav-number">3.1.</span> <span class="nav-text">创建数组的几种方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的length属性"><span class="nav-number">3.2.</span> <span class="nav-text">数组的length属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置值的索引下标超过数组长度"><span class="nav-number">3.2.1.</span> <span class="nav-text">设置值的索引下标超过数组长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用数组的length属性来移除数组项和添加项"><span class="nav-number">3.2.2.</span> <span class="nav-text">利用数组的length属性来移除数组项和添加项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的数组方法"><span class="nav-number">3.3.</span> <span class="nav-text">常用的数组方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈方法"><span class="nav-number">3.3.1.</span> <span class="nav-text">栈方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#队列方法"><span class="nav-number">3.3.2.</span> <span class="nav-text">队列方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重排序方法"><span class="nav-number">3.3.3.</span> <span class="nav-text">重排序方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作方法"><span class="nav-number">3.3.4.</span> <span class="nav-text">操作方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#位置方法"><span class="nav-number">3.3.5.</span> <span class="nav-text">位置方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代方法"><span class="nav-number">3.3.6.</span> <span class="nav-text">迭代方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并方法"><span class="nav-number">3.3.7.</span> <span class="nav-text">归并方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Date类型"><span class="nav-number">4.</span> <span class="nav-text">Date类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RegExp类型"><span class="nav-number">5.</span> <span class="nav-text">RegExp类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Function类型"><span class="nav-number">6.</span> <span class="nav-text">Function类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">6.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作为值的函数"><span class="nav-number">6.2.</span> <span class="nav-text">作为值的函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本包装类型"><span class="nav-number">7.</span> <span class="nav-text">基本包装类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组成"><span class="nav-number">7.1.</span> <span class="nav-text">组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">7.2.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boolean类型"><span class="nav-number">7.3.</span> <span class="nav-text">Boolean类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Number类型"><span class="nav-number">7.4.</span> <span class="nav-text">Number类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String类型"><span class="nav-number">7.5.</span> <span class="nav-text">String类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符方法"><span class="nav-number">7.6.</span> <span class="nav-text">字符方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串操作方法"><span class="nav-number">7.7.</span> <span class="nav-text">字符串操作方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单体内置对象"><span class="nav-number">8.</span> <span class="nav-text">单体内置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Global对象"><span class="nav-number">8.1.</span> <span class="nav-text">Global对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math对象"><span class="nav-number">8.2.</span> <span class="nav-text">Math对象</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object类型"><span class="nav-number">2.</span> <span class="nav-text">Object类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Object实例的两个方法"><span class="nav-number">2.1.</span> <span class="nav-text">创建Object实例的两个方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#new操作符"><span class="nav-number">2.1.1.</span> <span class="nav-text">new操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象字面量法"><span class="nav-number">2.1.2.</span> <span class="nav-text">对象字面量法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array类型"><span class="nav-number">3.</span> <span class="nav-text">Array类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数组的几种方式"><span class="nav-number">3.1.</span> <span class="nav-text">创建数组的几种方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的length属性"><span class="nav-number">3.2.</span> <span class="nav-text">数组的length属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置值的索引下标超过数组长度"><span class="nav-number">3.2.1.</span> <span class="nav-text">设置值的索引下标超过数组长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用数组的length属性来移除数组项和添加项"><span class="nav-number">3.2.2.</span> <span class="nav-text">利用数组的length属性来移除数组项和添加项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的数组方法"><span class="nav-number">3.3.</span> <span class="nav-text">常用的数组方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈方法"><span class="nav-number">3.3.1.</span> <span class="nav-text">栈方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#队列方法"><span class="nav-number">3.3.2.</span> <span class="nav-text">队列方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重排序方法"><span class="nav-number">3.3.3.</span> <span class="nav-text">重排序方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作方法"><span class="nav-number">3.3.4.</span> <span class="nav-text">操作方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#位置方法"><span class="nav-number">3.3.5.</span> <span class="nav-text">位置方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代方法"><span class="nav-number">3.3.6.</span> <span class="nav-text">迭代方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并方法"><span class="nav-number">3.3.7.</span> <span class="nav-text">归并方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Date类型"><span class="nav-number">4.</span> <span class="nav-text">Date类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RegExp类型"><span class="nav-number">5.</span> <span class="nav-text">RegExp类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Function类型"><span class="nav-number">6.</span> <span class="nav-text">Function类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">6.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作为值的函数"><span class="nav-number">6.2.</span> <span class="nav-text">作为值的函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本包装类型"><span class="nav-number">7.</span> <span class="nav-text">基本包装类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组成"><span class="nav-number">7.1.</span> <span class="nav-text">组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本包装类型与基本数据类型的区别"><span class="nav-number">7.2.</span> <span class="nav-text">基本包装类型与基本数据类型的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">7.3.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boolean类型"><span class="nav-number">7.4.</span> <span class="nav-text">Boolean类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Number类型"><span class="nav-number">7.5.</span> <span class="nav-text">Number类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String类型"><span class="nav-number">7.6.</span> <span class="nav-text">String类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符方法"><span class="nav-number">7.7.</span> <span class="nav-text">字符方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串操作方法"><span class="nav-number">7.8.</span> <span class="nav-text">字符串操作方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单体内置对象"><span class="nav-number">8.</span> <span class="nav-text">单体内置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Global对象"><span class="nav-number">8.1.</span> <span class="nav-text">Global对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math对象"><span class="nav-number">8.2.</span> <span class="nav-text">Math对象</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -886,7 +909,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">76.8k</span>
+    <span title="Site words total count">78k</span>
   
 </div>
 
@@ -916,7 +939,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共76.8k字</span>
+  <span class="post-count">博客全站共78k字</span>
 </div>
         
 

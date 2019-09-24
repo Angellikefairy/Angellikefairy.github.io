@@ -91,14 +91,14 @@
 <meta name="description" content="什么是可枚举属性和不可枚举属性可枚举属性是指那些内部 “可枚举” 标志（[[ Enumerable]]）设置为 true 的属性。 对于通过直接的赋值和属性初始化的属性，该标识值默认为即为 true; 对于通过 Object.defineProperty 等定义的属性，该标识值默认为 false（当然该方法也可以设置 enumerable的值为true，使其变为可枚举属性）。 Object.key">
 <meta name="keywords" content="基础语法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="获取对象属性名的几种方法">
+<meta property="og:title" content="获取对象属性名和属性值的几种方法">
 <meta property="og:url" content="http://yoursite.com/2019/09/03/获取对象属性名的几种方法/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="什么是可枚举属性和不可枚举属性可枚举属性是指那些内部 “可枚举” 标志（[[ Enumerable]]）设置为 true 的属性。 对于通过直接的赋值和属性初始化的属性，该标识值默认为即为 true; 对于通过 Object.defineProperty 等定义的属性，该标识值默认为 false（当然该方法也可以设置 enumerable的值为true，使其变为可枚举属性）。 Object.key">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-03T08:43:36.571Z">
+<meta property="og:updated_time" content="2019-09-24T14:18:52.074Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="获取对象属性名的几种方法">
+<meta name="twitter:title" content="获取对象属性名和属性值的几种方法">
 <meta name="twitter:description" content="什么是可枚举属性和不可枚举属性可枚举属性是指那些内部 “可枚举” 标志（[[ Enumerable]]）设置为 true 的属性。 对于通过直接的赋值和属性初始化的属性，该标识值默认为即为 true; 对于通过 Object.defineProperty 等定义的属性，该标识值默认为 false（当然该方法也可以设置 enumerable的值为true，使其变为可枚举属性）。 Object.key">
 
 
@@ -135,7 +135,7 @@
 
 
 
-  <title>获取对象属性名的几种方法 | Hexo</title>
+  <title>获取对象属性名和属性值的几种方法 | Hexo</title>
   
 
 
@@ -325,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">获取对象属性名的几种方法</h1>
+          <h1 class="post-title" itemprop="name headline">获取对象属性名和属性值的几种方法</h1>
         
 
         <div class="post-meta">
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  747
+                  938
                 </span>
               
 
@@ -441,6 +441,14 @@
 <h2 id="getOwnPropertyNames-–返回自身对象的所有属性（包括不可枚举但不包括Symbol值）"><a href="#getOwnPropertyNames-–返回自身对象的所有属性（包括不可枚举但不包括Symbol值）" class="headerlink" title="getOwnPropertyNames() –返回自身对象的所有属性（包括不可枚举但不包括Symbol值）"></a>getOwnPropertyNames() –返回自身对象的所有属性（包括不可枚举但不包括Symbol值）</h2><p>Object.getOwnPropertyNames()方法返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）组成的数组。</p>
 <p>它与上述两种方法的不同之处在于其可以返回不可枚举属性</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    item:<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b=&#123;</span><br><span class="line">    b:<span class="number">2</span>,</span><br><span class="line">    c() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置a对象的不可枚举属性</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(a,<span class="string">'_item'</span>,&#123;</span><br><span class="line">    <span class="keyword">get</span>:function() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>:function(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置b对象为a对象的原型对象</span></span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(a,b);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回自身对象的所有属性，包括可枚举属性和不可枚举属性</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnpropertyNames(a)); <span class="comment">//['item','_item']</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Object-values获取对象的属性值"><a href="#Object-values获取对象的属性值" class="headerlink" title="Object.values获取对象的属性值"></a>Object.values获取对象的属性值</h2><p>Object.values()方法返回一个给定对象自身的所有可枚举属性值的数组，值的顺序与使用for…in循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test= &#123;</span><br><span class="line">    a: <span class="number">1</span>,</span><br><span class="line">    b: <span class="number">2</span>,</span><br><span class="line">    c: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.values(test));<span class="comment">// [1,2,3]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(test));</span><br><span class="line"><span class="comment">// ['a','b','c']</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Object-entries-获取对象的键值对"><a href="#Object-entries-获取对象的键值对" class="headerlink" title="Object.entries()获取对象的键值对"></a>Object.entries()获取对象的键值对</h3><p>Object.entries()方法返回一个给定对象自身可枚举属性的键值对数组，其排列与使用 for…in 循环遍历该对象时返回的顺序一致（区别在于 for-in 循环也枚举原型链中的属性）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test= &#123;</span><br><span class="line">    a: <span class="number">1</span>,</span><br><span class="line">    b: <span class="number">2</span>,</span><br><span class="line">    c: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(test));<span class="comment">// [ [ 'a', 1 ], [ 'b', 2 ], [ 'c', 3 ] ]</span></span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     
@@ -567,7 +575,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">111</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -629,7 +637,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是可枚举属性和不可枚举属性"><span class="nav-number">1.</span> <span class="nav-text">什么是可枚举属性和不可枚举属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-keys-–只返回自身对象的可枚举属性"><span class="nav-number">2.</span> <span class="nav-text">Object.keys() –只返回自身对象的可枚举属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#for…in-–返回整条原型链上的可枚举属性"><span class="nav-number">3.</span> <span class="nav-text">for…in –返回整条原型链上的可枚举属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getOwnPropertyNames-–返回自身对象的所有属性（包括不可枚举但不包括Symbol值）"><span class="nav-number">4.</span> <span class="nav-text">getOwnPropertyNames() –返回自身对象的所有属性（包括不可枚举但不包括Symbol值）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是可枚举属性和不可枚举属性"><span class="nav-number">1.</span> <span class="nav-text">什么是可枚举属性和不可枚举属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-keys-–只返回自身对象的可枚举属性"><span class="nav-number">2.</span> <span class="nav-text">Object.keys() –只返回自身对象的可枚举属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#for…in-–返回整条原型链上的可枚举属性"><span class="nav-number">3.</span> <span class="nav-text">for…in –返回整条原型链上的可枚举属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getOwnPropertyNames-–返回自身对象的所有属性（包括不可枚举但不包括Symbol值）"><span class="nav-number">4.</span> <span class="nav-text">getOwnPropertyNames() –返回自身对象的所有属性（包括不可枚举但不包括Symbol值）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-values获取对象的属性值"><span class="nav-number">5.</span> <span class="nav-text">Object.values获取对象的属性值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-entries-获取对象的键值对"><span class="nav-number">5.1.</span> <span class="nav-text">Object.entries()获取对象的键值对</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -664,7 +672,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">76.8k</span>
+    <span title="Site words total count">78k</span>
   
 </div>
 
@@ -694,7 +702,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共76.8k字</span>
+  <span class="post-count">博客全站共78k字</span>
 </div>
         
 

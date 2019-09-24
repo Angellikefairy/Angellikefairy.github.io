@@ -96,7 +96,7 @@
 <meta property="og:description" content="为什么js是单线程的众所周知，JavaScript是一门单线程语言。那么，为什么js必须是单线程的呢？ 因为，js主要的宿主环境就是浏览器，并且其一个重要的用途就是来操作Dom。反过来思考，如果js是多线程的，那么就会允许同一时间有多个代码块运行。那么，如果这多个代码块同时操作同一个Dom，比如，一个代码块要修改某dom元素，而另一个代码块又要删除这个元素，那么浏览器该如何处理这个元素。因此，为了">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/21/15fdd88994142347?imageView2/0/w/1280/h/960/ignore-error/1">
-<meta property="og:updated_time" content="2019-09-19T13:18:59.343Z">
+<meta property="og:updated_time" content="2019-09-24T07:06:12.713Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js事件循环机制 event loop">
 <meta name="twitter:description" content="为什么js是单线程的众所周知，JavaScript是一门单线程语言。那么，为什么js必须是单线程的呢？ 因为，js主要的宿主环境就是浏览器，并且其一个重要的用途就是来操作Dom。反过来思考，如果js是多线程的，那么就会允许同一时间有多个代码块运行。那么，如果这多个代码块同时操作同一个Dom，比如，一个代码块要修改某dom元素，而另一个代码块又要删除这个元素，那么浏览器该如何处理这个元素。因此，为了">
@@ -437,7 +437,7 @@
 <h4 id="异步任务"><a href="#异步任务" class="headerlink" title="异步任务"></a>异步任务</h4><p>只有当所有同步任务执行完毕后才会去执行异步任务，异步任务的执行过程如下：</p>
 <ol>
 <li>异步任务进入Event Table执行，并且注册回调函数</li>
-<li>当指定的异步任务完成时，Event Table会将这个回调函数移入Event Queue</li>
+<li>当指定的异步任务完成时，Event Table会将这个回调函数移入Event Queue（值得注意的是，当有多个异步任务时，先执行完毕的异步任务的回调函数会先进入该任务队列）</li>
 <li>主线程内的任务执行完毕为空，会去Event Queue读取对应的函数，进入主线程执行</li>
 <li>上述过程会不断重复，也就是常说的Event Loop(事件循环)</li>
 </ol>
@@ -608,7 +608,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">111</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -705,7 +705,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">76.8k</span>
+    <span title="Site words total count">78k</span>
   
 </div>
 
@@ -735,7 +735,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共76.8k字</span>
+  <span class="post-count">博客全站共78k字</span>
 </div>
         
 

@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="mdn总结   运算符 语法 说明    逻辑与，AND（&amp;amp;&amp;amp;） expr1 &amp;amp;&amp;amp; expr2 若 expr1 可转换为 true，则返回 expr2；否则，返回 expr1。   逻辑或，OR（||） expr1 || expr2 若 expr1 可转换为 true，则返回 expr1；否则，返回 expr2。   逻辑非，NOT（!） !expr 若 expr">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-03T05:01:41.396Z">
+<meta property="og:updated_time" content="2019-09-24T14:39:06.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="布尔操作符(1&amp;&amp;2和1||2)">
 <meta name="twitter:description" content="mdn总结   运算符 语法 说明    逻辑与，AND（&amp;amp;&amp;amp;） expr1 &amp;amp;&amp;amp; expr2 若 expr1 可转换为 true，则返回 expr2；否则，返回 expr1。   逻辑或，OR（||） expr1 || expr2 若 expr1 可转换为 true，则返回 expr1；否则，返回 expr2。   逻辑非，NOT（!） !expr 若 expr">
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  398
+                  526
                 </span>
               
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -460,8 +460,16 @@
 <p>逻辑与操作属于短路操作，即如果第一个操作数能够决定结果，那么就不会再对第二个操作数求值。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>&amp;&amp;<span class="number">2</span>); <span class="comment">//2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">0</span>&amp;&amp;<span class="number">1</span>); <span class="comment">//0</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">123</span>&amp;&amp;<span class="string">'qwe'</span>); <span class="comment">//'qwe'</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;&#125;&amp;&amp;<span class="literal">null</span>); <span class="comment">//null 因为&#123;&#125;并不等于null，&#123;&#125;是一个不完全为空的对象，所以&#123;&#125;转换为逻辑值会是true</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="多个与运算"><a href="#多个与运算" class="headerlink" title="多个与运算"></a>多个与运算</h3><p>当有多个与运算时，该表达式会返回第一个为false的值，或者是当前面所有值都为true时返回最后一个值</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>&amp;&amp;<span class="number">0</span>&amp;&amp;<span class="literal">true</span>); <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>&amp;&amp;<span class="literal">true</span>&amp;&amp;<span class="literal">false</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="逻辑或-–"><a href="#逻辑或-–" class="headerlink" title="逻辑或 – ||"></a>逻辑或 – ||</h2><p>与逻辑与操作类似，逻辑或操作也是短路操作。也就是说，如果第一个操作数的求值结果为true,就不会对第二个操作数求值了</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>||<span class="number">2</span>); <span class="comment">//1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">0</span>||<span class="number">1</span>); <span class="comment">//1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">123</span>||<span class="string">'qwe'</span>); <span class="comment">//123</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;&#125;||<span class="literal">null</span>); <span class="comment">//&#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="多个或运算"><a href="#多个或运算" class="headerlink" title="多个或运算"></a>多个或运算</h3><p>当有多个或运算时，该表达式会返回第一个为true的值，或者是当前面所有值都为false时返回最后一个值</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">0</span>||<span class="number">1</span>||<span class="literal">false</span>); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">0</span>||<span class="literal">false</span>||<span class="literal">false</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
 
       
@@ -590,7 +598,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">111</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -652,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mdn总结"><span class="nav-number">1.</span> <span class="nav-text">mdn总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑非-–"><span class="nav-number">2.</span> <span class="nav-text">逻辑非 – !</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑与-–-amp-amp"><span class="nav-number">3.</span> <span class="nav-text">逻辑与 – &amp;&amp;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑或-–"><span class="nav-number">4.</span> <span class="nav-text">逻辑或 – ||</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mdn总结"><span class="nav-number">1.</span> <span class="nav-text">mdn总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑非-–"><span class="nav-number">2.</span> <span class="nav-text">逻辑非 – !</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑与-–-amp-amp"><span class="nav-number">3.</span> <span class="nav-text">逻辑与 – &amp;&amp;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多个与运算"><span class="nav-number">3.1.</span> <span class="nav-text">多个与运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑或-–"><span class="nav-number">4.</span> <span class="nav-text">逻辑或 – ||</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多个或运算"><span class="nav-number">4.1.</span> <span class="nav-text">多个或运算</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -687,7 +695,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">76.8k</span>
+    <span title="Site words total count">78k</span>
   
 </div>
 
@@ -717,7 +725,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共76.8k字</span>
+  <span class="post-count">博客全站共78k字</span>
 </div>
         
 
