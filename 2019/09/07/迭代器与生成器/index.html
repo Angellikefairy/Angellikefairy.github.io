@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="什么是迭代器首先，迭代器是一个对象，一个专门为迭代过程设计的对象。所有的迭代器对象都会具有一个next()方法，用来返回一个结果对象（该结果对象包括两个属性，一个是下一个要返回的值，一个是done属性。在返回最后一个值及之前时，done值为false，否则为true）。 使用ES5模拟一个迭代器1234567891011121314151617181920212223242526272829303">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-07T08:41:37.115Z">
+<meta property="og:updated_time" content="2019-09-26T13:11:00.937Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="迭代器与生成器">
 <meta name="twitter:description" content="什么是迭代器首先，迭代器是一个对象，一个专门为迭代过程设计的对象。所有的迭代器对象都会具有一个next()方法，用来返回一个结果对象（该结果对象包括两个属性，一个是下一个要返回的值，一个是done属性。在返回最后一个值及之前时，done值为false，否则为true）。 使用ES5模拟一个迭代器1234567891011121314151617181920212223242526272829303">
@@ -429,7 +429,7 @@
 
       
         <h2 id="什么是迭代器"><a href="#什么是迭代器" class="headerlink" title="什么是迭代器"></a>什么是迭代器</h2><p>首先，迭代器是一个对象，一个专门为迭代过程设计的对象。所有的迭代器对象都会具有一个next()方法，用来返回一个结果对象（该结果对象包括两个属性，一个是下一个要返回的值，一个是done属性。在返回最后一个值及之前时，done值为false，否则为true）。</p>
-<h3 id="使用ES5模拟一个迭代器"><a href="#使用ES5模拟一个迭代器" class="headerlink" title="使用ES5模拟一个迭代器"></a>使用ES5模拟一个迭代器</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 利用闭包的特性，使得next()方法一直保存着index的变量值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createIterator</span>(<span class="params">items</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> index=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        next : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            index++;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                value:items[index],</span><br><span class="line">                done:index&lt;=items.length<span class="number">-1</span>?<span class="literal">false</span>:<span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> iterator=createIterator([<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]);</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 输出结果</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&#123; value: 3, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: 4, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: 5, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: undefined, done: true &#125;</span></span><br><span class="line"><span class="comment">&#123; value: undefined, done: true &#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用ES5模拟一个迭代器"><a href="#使用ES5模拟一个迭代器" class="headerlink" title="使用ES5模拟一个迭代器"></a>使用ES5模拟一个迭代器</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 利用闭包的特性，使得next()方法一直保存着idx的变量值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generator</span>(<span class="params">items</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> idx=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        next() &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                value: items[idx++],</span><br><span class="line">                done: items[idx<span class="number">-1</span>]!==<span class="literal">undefined</span>?<span class="literal">false</span>:<span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> gen= generator([<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>]);</span><br><span class="line"><span class="built_in">console</span>.log(gen.next());</span><br><span class="line"><span class="built_in">console</span>.log(gen.next());</span><br><span class="line"><span class="built_in">console</span>.log(gen.next());</span><br><span class="line"><span class="built_in">console</span>.log(gen.next());</span><br><span class="line"><span class="built_in">console</span>.log(gen.next());</span><br><span class="line"><span class="built_in">console</span>.log(gen.next());</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 输出结果</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&#123; value: 1, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: 3, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: 5, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: 7, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: 9, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: undefined, done: true &#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="什么是生成器"><a href="#什么是生成器" class="headerlink" title="什么是生成器"></a>什么是生成器</h2><p>生成器是一个可以返回迭代器对象的函数，通过*关键字来表示该函数为生成器函数。</p>
 <p>在生成器函数中，我们一般需要使用yield关键字来指定调用迭代器的next()方法的返回值和返回顺序。</p>
@@ -600,7 +600,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -611,7 +611,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -622,7 +622,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -697,7 +697,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">78k</span>
+    <span title="Site words total count">79.1k</span>
   
 </div>
 
@@ -727,7 +727,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共78k字</span>
+  <span class="post-count">博客全站共79.1k字</span>
 </div>
         
 

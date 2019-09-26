@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="ES5实现模拟类ES5是通过构造函数和原型来是模拟实现类的 1234567891011function Test(item) &amp;#123;    this.item=item;&amp;#125;Test.prototype.getItem=function ()&amp;#123;    return this.item;&amp;#125;let test=new Test(123);console.log(test">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-08T13:03:35.824Z">
+<meta property="og:updated_time" content="2019-09-26T13:33:51.486Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类语法不得不知的几点">
 <meta name="twitter:description" content="ES5实现模拟类ES5是通过构造函数和原型来是模拟实现类的 1234567891011function Test(item) &amp;#123;    this.item=item;&amp;#125;Test.prototype.getItem=function ()&amp;#123;    return this.item;&amp;#125;let test=new Test(123);console.log(test">
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  1.9k
                 </span>
               
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7
+                  8
                 </span>
               
             </div>
@@ -456,12 +456,20 @@
 
 </li>
 </ol>
-<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><p>静态成员通过static关键字来声明，它会作为类的一个方法属性。无法被类的实例调用，只能通过类本身被调用</p>
-<p>例如：</p>
+<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><p>静态成员通过static关键字来声明，它会作为类的一个属性。无法被类的实例调用，只能通过类本身被调用</p>
+<h3 id="静态公有方法"><a href="#静态公有方法" class="headerlink" title="静态公有方法"></a>静态公有方法</h3><p>例如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Test=<span class="class"><span class="keyword">class</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> getValue() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test=<span class="keyword">new</span> Test(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(test);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过类本身来调用静态成员</span></span><br><span class="line"><span class="built_in">console</span>.log(Test.getValue()); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 无法通过类的实例来调用，因为静态成员不会出现在构造函数的原型对象上，所以实例无法访问到该方法</span></span><br><span class="line"><span class="built_in">console</span>.log(test.getValue()); <span class="comment">// 报错：test.getValue is not a function</span></span><br></pre></td></tr></table></figure>
 
 <p>那么，静态成员一般用来做什么呢？他们通常是一些实用程序方法，例如创建或克隆对象</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Test=<span class="class"><span class="keyword">class</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 实用静态成员来创建对象</span></span><br><span class="line">    <span class="keyword">static</span> create(item) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Test(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 实用静态成员来创建对象</span></span><br><span class="line"><span class="keyword">let</span> test=Test.create(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(test); <span class="comment">// &#123;item:1&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>当然，也有可以很方便地被类中的非静态成员方法调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">    getItem() &#123;</span><br><span class="line">        <span class="comment">// 调用静态成员方法</span></span><br><span class="line">        <span class="keyword">return</span> Test.getItem.call(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> getItem() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">new</span> Test(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(test.getItem());</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态公有字段"><a href="#静态公有字段" class="headerlink" title="静态公有字段"></a>静态公有字段</h3><p>静态公有字段在你想要创建一个只在每个类里面只存在一份，而不会存在于你创建的每个类的实例中的属性时可以用到。你可以用它存放缓存数据、固定结构数据或者其他你不想在所有实例都复制一份的数据。</p>
+<p>静态公有字段是使用关键字 static 声明的。我们在声明一个类的时候，使用Object.defineProperty方法将静态公有字段添加到类的构造函数中。在类被声明之后，可以从类的构造函数访问静态公有字段。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">    getItem() &#123;</span><br><span class="line">        <span class="keyword">return</span> Test.getItem.call(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> getItem() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> a=<span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">new</span> Test(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(test.a); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(Test.a); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="静态成员的继承"><a href="#静态成员的继承" class="headerlink" title="静态成员的继承"></a>静态成员的继承</h3><p>如果基类有静态成员，那么这些静态成员在派生类中也可以被使用</p>
 <p>例如：</p>
@@ -620,7 +628,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -631,7 +639,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -642,7 +650,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -682,7 +690,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ES5实现模拟类"><span class="nav-number">1.</span> <span class="nav-text">ES5实现模拟类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6类的声明"><span class="nav-number">2.</span> <span class="nav-text">ES6类的声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类声明语法"><span class="nav-number">2.1.</span> <span class="nav-text">基本类声明语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类表达式语法"><span class="nav-number">2.2.</span> <span class="nav-text">类表达式语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类的一些特性"><span class="nav-number">3.</span> <span class="nav-text">类的一些特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态成员"><span class="nav-number">4.</span> <span class="nav-text">静态成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态成员的继承"><span class="nav-number">4.1.</span> <span class="nav-text">静态成员的继承</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承与派生类"><span class="nav-number">5.</span> <span class="nav-text">继承与派生类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ES5模拟实现继承"><span class="nav-number">5.1.</span> <span class="nav-text">ES5模拟实现继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES6的继承"><span class="nav-number">5.2.</span> <span class="nav-text">ES6的继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#super-的一些注意点"><span class="nav-number">5.3.</span> <span class="nav-text">super()的一些注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类方法的遮蔽"><span class="nav-number">5.4.</span> <span class="nav-text">类方法的遮蔽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承自表达式的类"><span class="nav-number">5.5.</span> <span class="nav-text">继承自表达式的类</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ES5实现模拟类"><span class="nav-number">1.</span> <span class="nav-text">ES5实现模拟类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6类的声明"><span class="nav-number">2.</span> <span class="nav-text">ES6类的声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类声明语法"><span class="nav-number">2.1.</span> <span class="nav-text">基本类声明语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类表达式语法"><span class="nav-number">2.2.</span> <span class="nav-text">类表达式语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类的一些特性"><span class="nav-number">3.</span> <span class="nav-text">类的一些特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态成员"><span class="nav-number">4.</span> <span class="nav-text">静态成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态公有方法"><span class="nav-number">4.1.</span> <span class="nav-text">静态公有方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态公有字段"><span class="nav-number">4.2.</span> <span class="nav-text">静态公有字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态成员的继承"><span class="nav-number">4.3.</span> <span class="nav-text">静态成员的继承</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承与派生类"><span class="nav-number">5.</span> <span class="nav-text">继承与派生类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ES5模拟实现继承"><span class="nav-number">5.1.</span> <span class="nav-text">ES5模拟实现继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES6的继承"><span class="nav-number">5.2.</span> <span class="nav-text">ES6的继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#super-的一些注意点"><span class="nav-number">5.3.</span> <span class="nav-text">super()的一些注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类方法的遮蔽"><span class="nav-number">5.4.</span> <span class="nav-text">类方法的遮蔽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承自表达式的类"><span class="nav-number">5.5.</span> <span class="nav-text">继承自表达式的类</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -717,7 +725,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">78k</span>
+    <span title="Site words total count">79.1k</span>
   
 </div>
 
@@ -747,7 +755,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共78k字</span>
+  <span class="post-count">博客全站共79.1k字</span>
 </div>
         
 

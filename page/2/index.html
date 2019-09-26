@@ -307,6 +307,430 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/13/事件循环机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/13/事件循环机制/" itemprop="url">js事件循环机制 event loop</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-13T20:36:20+08:00">
+                2019-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="为什么js是单线程的"><a href="#为什么js是单线程的" class="headerlink" title="为什么js是单线程的"></a>为什么js是单线程的</h2><p>众所周知，JavaScript是一门单线程语言。那么，为什么js必须是单线程的呢？</p>
+<p>因为，js主要的宿主环境就是浏览器，并且其一个重要的用途就是来操作Dom。反过来思考，如果js是多线程的，那么就会允许同一时间有多个代码块运行。那么，如果这多个代码块同时操作同一个Dom，比如，一个代码块要修改某dom元素，而另一个代码块又要删除这个元素，那么浏览器该如何处理这个元素。因此，为了避免这种复杂性，js必须是单线程的</p>
+<h2 id="执行栈与任务队列"><a href="#执行栈与任务队列" class="headerlink" title="执行栈与任务队列"></a>执行栈与任务队列</h2><h3 id="什么是执行栈"><a href="#什么是执行栈" class="headerlink" title="什么是执行栈"></a>什么是执行栈</h3><p>执行栈，也就是“调用栈”，是一种拥有 LIFO（后进先出）数据结构的栈，被用来存储代码运行时创建的所有执行上下文（包括全局执行上下文，局部函数执行上下文以及eval函数执行上下文）。</p>
+<h3 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h3><p>众所周知，我们可以将js的任务分为两大类：</p>
+<h4 id="同步任务"><a href="#同步任务" class="headerlink" title="同步任务"></a>同步任务</h4><p>优先级最高，运行时立刻进入主线程运行</p>
+<h4 id="异步任务"><a href="#异步任务" class="headerlink" title="异步任务"></a>异步任务</h4><p>只有当所有同步任务执行完毕后才会去执行异步任务，异步任务的执行过程如下：</p>
+<ol>
+<li>异步任务进入Event Table执行，并且注册回调函数</li>
+<li>当指定的异步任务完成时，Event Table会将这个回调函数移入Event Queue（值得注意的是，当有多个异步任务时，先执行完毕的异步任务的回调函数会先进入该任务队列）</li>
+<li>主线程内的任务执行完毕为空，会去Event Queue读取对应的函数，进入主线程执行</li>
+<li>上述过程会不断重复，也就是常说的Event Loop(事件循环)</li>
+</ol>
+<p>上述的event queue指的是就是任务队列，任务队列内存放的都是异步任务完成后要执行的函数</p>
+<p>另外，我们需要注意的是，只有异步任务完成之后要执行的回调函数才会被放入任务队列，等待主线程中的所有同步代码被执行完毕之后再执行。</p>
+<p>因此，比如在new Promise过程中不再回调函数内的代码都是同步代码，只有then()和catch()中的回调函数才是异步代码</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123; <span class="comment">// 第一行</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>);  <span class="comment">// 第二行</span></span><br><span class="line">    resolve(<span class="number">2</span>); <span class="comment">//第三行</span></span><br><span class="line">&#125;).then(<span class="function">(<span class="params">v</span>)=&gt;</span>&#123; <span class="comment">// 第四行</span></span><br><span class="line">    <span class="built_in">console</span>.log(v); <span class="comment">// 第五行</span></span><br><span class="line">&#125;) <span class="comment">// 第六行</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>其中，第1,2,3,4,6行都是同步代码，只有第5行是异步的代码</p>
+<p>以下是任务执行过程:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/11/21/15fdd88994142347?imageView2/0/w/1280/h/960/ignore-error/1" alt></p>
+<h4 id="宏任务与微任务"><a href="#宏任务与微任务" class="headerlink" title="宏任务与微任务"></a>宏任务与微任务</h4><p>任务也可以更加被细分为宏任务与微任务两种，具体如下</p>
+<ol>
+<li>宏任务(macrotask)：<br> script(整体代码)、setTimeout、setInterval、UI 渲染、 I/O、postMessage、 MessageChannel、setImmediate(Node.js 环境)、ajax、外部请求等</li>
+<li>微任务(microtask)：<br> Promise.then/catch、 MutaionObserver、process.nextTick(Node.js环境）</li>
+</ol>
+<p>那么宏任务与微任务的执行顺序是怎么样的呢？</p>
+<p>网络上有两种说法，目前我还没有看到权威文章</p>
+<ol>
+<li><p>如果，我们将整个script(整体代码)也算做是一个宏任务，那么执行顺序会是</p>
+<blockquote>
+<p>宏任务-&gt;所有微任务-&gt;下一个宏任务</p>
+</blockquote>
+</li>
+<li><p>但是如果不是的话，那么就是</p>
+<blockquote>
+<p>所有微任务-&gt;下一个宏任务</p>
+</blockquote>
+</li>
+</ol>
+<p>总之这些并不会影响代码的执行顺序</p>
+<p>例如：</p>
+<p>宏任务定时器与微任务promise</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">&#125;,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">    resolve(<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">4</span>;</span><br><span class="line">&#125;).then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行结果</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行过程</span></span><br><span class="line"><span class="number">1.</span> 先进入整体代码script这个宏任务，该任务直接进入主线程，因此要执行掉所有的同步任务</span><br><span class="line"><span class="number">2.</span> 遇到setTimeout这一宏任务，我们将其放入宏任务队列</span><br><span class="line"><span class="number">3.</span> 遇到<span class="built_in">Promise</span>构造函数，立即执行该构造函数，执行<span class="built_in">console</span>.log(<span class="number">3</span>);两个then()方法依次进入微任务队列</span><br><span class="line"><span class="number">4.</span> 执行<span class="built_in">console</span>.log(<span class="number">5</span>);</span><br><span class="line"><span class="number">5.</span> 第一个宏任务执行结束，接下来查看微任务队列是否有要解决的微任务，按照先进先出的原则执行完所有的微任务</span><br><span class="line"><span class="number">6.</span> 到这里，第一轮事件循环结束，进入下一轮事件循环</span><br><span class="line"><span class="number">7.</span> 从宏任务队列中取出下一个宏任务，也就是setTimeout的回调函数，执行它</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>宏任务ajax与微任务promise</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> axios=<span class="built_in">require</span>(<span class="string">'axios'</span>)</span><br><span class="line"></span><br><span class="line">axios.get(<span class="string">'https://www.baidu.com'</span>).then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">    resolve(<span class="number">3</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v);</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">4</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行结果</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>最后，来一段超级复杂的代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'1'</span>);</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'2'</span>);</span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'3'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'4'</span>);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'5'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'6'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'7'</span>);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'8'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'9'</span>);</span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'10'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'11'</span>);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'12'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">11</span></span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><ol>
+<li>所有同步任务都在主线程上执行，形成一个执行栈</li>
+<li>主线程之外，还存在一个”消息队列”。只要异步操作执行完成，就到消息队列中排队</li>
+<li>一旦执行栈中的所有同步任务执行完毕，系统就会按次序读取消息队列中的异步任务，于是被读取的异步任务结束等待状态，进入执行栈，开始执行</li>
+<li>主线程不断重复上面的第三步</li>
+</ol>
+<p>由于主线程不断的重复获得消息、执行消息、再取消息、再执行。所以，这种机制被称为事件循环</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/13/leetcode-303/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/13/leetcode-303/" itemprop="url">leetcode-303 区域和检索 - 数组不可变</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-13T19:49:46+08:00">
+                2019-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode题解与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  409
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="区域和检索-数组不可变"><a href="#区域和检索-数组不可变" class="headerlink" title="区域和检索 - 数组不可变"></a>区域和检索 - 数组不可变</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个整数数组  nums，求出数组从索引 i 到 j  (i ≤ j) 范围内元素的总和，包含 i,  j 两点。</p>
+<p>示例：</p>
+<pre><code>给定 nums = [-2, 0, 3, -5, 2, -1]，求和函数为 sumRange()
+
+sumRange(0, 2) -&gt; 1
+sumRange(2, 5) -&gt; -1
+sumRange(0, 5) -&gt; -3</code></pre><p>说明:</p>
+<ol>
+<li>你可以假设数组不可变。</li>
+<li>会多次调用 sumRange 方法。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/13/leetcode-303/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </li></ol></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/12/leetcode-290/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1681,7 +2105,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  1.9k
                 </span>
               
 
@@ -1697,7 +2121,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7
+                  8
                 </span>
               
             </div>
@@ -1748,12 +2172,20 @@
 
 </li>
 </ol>
-<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><p>静态成员通过static关键字来声明，它会作为类的一个方法属性。无法被类的实例调用，只能通过类本身被调用</p>
-<p>例如：</p>
+<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><p>静态成员通过static关键字来声明，它会作为类的一个属性。无法被类的实例调用，只能通过类本身被调用</p>
+<h3 id="静态公有方法"><a href="#静态公有方法" class="headerlink" title="静态公有方法"></a>静态公有方法</h3><p>例如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Test=<span class="class"><span class="keyword">class</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> getValue() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test=<span class="keyword">new</span> Test(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(test);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过类本身来调用静态成员</span></span><br><span class="line"><span class="built_in">console</span>.log(Test.getValue()); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 无法通过类的实例来调用，因为静态成员不会出现在构造函数的原型对象上，所以实例无法访问到该方法</span></span><br><span class="line"><span class="built_in">console</span>.log(test.getValue()); <span class="comment">// 报错：test.getValue is not a function</span></span><br></pre></td></tr></table></figure>
 
 <p>那么，静态成员一般用来做什么呢？他们通常是一些实用程序方法，例如创建或克隆对象</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Test=<span class="class"><span class="keyword">class</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 实用静态成员来创建对象</span></span><br><span class="line">    <span class="keyword">static</span> create(item) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Test(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 实用静态成员来创建对象</span></span><br><span class="line"><span class="keyword">let</span> test=Test.create(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(test); <span class="comment">// &#123;item:1&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>当然，也有可以很方便地被类中的非静态成员方法调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">    getItem() &#123;</span><br><span class="line">        <span class="comment">// 调用静态成员方法</span></span><br><span class="line">        <span class="keyword">return</span> Test.getItem.call(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> getItem() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">new</span> Test(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(test.getItem());</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态公有字段"><a href="#静态公有字段" class="headerlink" title="静态公有字段"></a>静态公有字段</h3><p>静态公有字段在你想要创建一个只在每个类里面只存在一份，而不会存在于你创建的每个类的实例中的属性时可以用到。你可以用它存放缓存数据、固定结构数据或者其他你不想在所有实例都复制一份的数据。</p>
+<p>静态公有字段是使用关键字 static 声明的。我们在声明一个类的时候，使用Object.defineProperty方法将静态公有字段添加到类的构造函数中。在类被声明之后，可以从类的构造函数访问静态公有字段。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">    getItem() &#123;</span><br><span class="line">        <span class="keyword">return</span> Test.getItem.call(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> getItem() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> a=<span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">new</span> Test(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(test.a); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(Test.a); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="静态成员的继承"><a href="#静态成员的继承" class="headerlink" title="静态成员的继承"></a>静态成员的继承</h3><p>如果基类有静态成员，那么这些静态成员在派生类中也可以被使用</p>
 <p>例如：</p>
@@ -2010,411 +2442,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/07/迭代器与生成器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/07/迭代器与生成器/" itemprop="url">迭代器与生成器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-07T14:34:17+08:00">
-                2019-09-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ES6/" itemprop="url" rel="index">
-                    <span itemprop="name">ES6</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.5k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="什么是迭代器"><a href="#什么是迭代器" class="headerlink" title="什么是迭代器"></a>什么是迭代器</h2><p>首先，迭代器是一个对象，一个专门为迭代过程设计的对象。所有的迭代器对象都会具有一个next()方法，用来返回一个结果对象（该结果对象包括两个属性，一个是下一个要返回的值，一个是done属性。在返回最后一个值及之前时，done值为false，否则为true）。</p>
-<h3 id="使用ES5模拟一个迭代器"><a href="#使用ES5模拟一个迭代器" class="headerlink" title="使用ES5模拟一个迭代器"></a>使用ES5模拟一个迭代器</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 利用闭包的特性，使得next()方法一直保存着index的变量值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createIterator</span>(<span class="params">items</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> index=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        next : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            index++;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                value:items[index],</span><br><span class="line">                done:index&lt;=items.length<span class="number">-1</span>?<span class="literal">false</span>:<span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> iterator=createIterator([<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]);</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 输出结果</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&#123; value: 3, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: 4, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: 5, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: undefined, done: true &#125;</span></span><br><span class="line"><span class="comment">&#123; value: undefined, done: true &#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="什么是生成器"><a href="#什么是生成器" class="headerlink" title="什么是生成器"></a>什么是生成器</h2><p>生成器是一个可以返回迭代器对象的函数，通过*关键字来表示该函数为生成器函数。</p>
-<p>在生成器函数中，我们一般需要使用yield关键字来指定调用迭代器的next()方法的返回值和返回顺序。</p>
-<p>yield关键字可以返回任何值或者表达式</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用生成器函数来返回一个迭代器，其中的yield关键字来指定调用此迭代器中的next()方法的返回值与返回顺序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">createIterator</span>(<span class="params">items</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;items.length;i++) &#123;</span><br><span class="line">        <span class="keyword">yield</span> items[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> iterator=createIterator([<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]);</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 输出结果</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&#123; value: 3, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: 4, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: 5, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: undefined, done: true &#125;</span></span><br><span class="line"><span class="comment">&#123; value: undefined, done: true &#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>对于生成器函数中的yield，每当执行完一个yield语句后，该函数就会自动停止执行，直到再次调用返回的迭代器的next()方法</p>
-<h3 id="生成器函数表达式"><a href="#生成器函数表达式" class="headerlink" title="生成器函数表达式"></a>生成器函数表达式</h3><p>上面的例子是使用函数声明的方式来创建生成器，同样我们也可以使用函数表达式的方式来创建生成器。此时，我们只需要在function关键字和小括号中间添加*号即可</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 匿名函数</span></span><br><span class="line"><span class="keyword">let</span> createIterator=<span class="function"><span class="keyword">function</span> *(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 非匿名函数</span></span><br><span class="line"><span class="keyword">let</span> createIterator=<span class="function"><span class="keyword">function</span> *<span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="生成器函数作为一个对象的方法"><a href="#生成器函数作为一个对象的方法" class="headerlink" title="生成器函数作为一个对象的方法"></a>生成器函数作为一个对象的方法</h3><p>由于生成器本身就是一个函数，因此我们可以将生成器作为一个对象的方法。</p>
-<p>这样，我们可以使用ES6对象的简写方法来创建生成器，只需要在方法名前加上*即可</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test=&#123;</span><br><span class="line">    *createIterator() &#123;</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">4</span>;</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="可迭代对象与for…of循环"><a href="#可迭代对象与for…of循环" class="headerlink" title="可迭代对象与for…of循环"></a>可迭代对象与for…of循环</h2><h3 id="什么是可迭代对象"><a href="#什么是可迭代对象" class="headerlink" title="什么是可迭代对象"></a>什么是可迭代对象</h3><p>可迭代对象都会有Symbol.iterator属性。该属性可以通过指定的函数来返回一个迭代器。</p>
-<p>在ES6中，所有的集合对象（数组，Set集合，Map集合）和字符串都是可迭代对象。这些对象都有默认的迭代器。</p>
-<p>而我们自己创建的对象一般都不是可迭代对象，当然我们可以将他们转变为可迭代对象</p>
-<blockquote>
-<p>注意：由于生成器默认会为Symbol.iterator属性赋值，因此所有通过生成器创建的迭代器都会是可迭代对象。因此，我们可以这一特性将不可迭代对象转化为可迭代对象</p>
-</blockquote>
-<h4 id="判断一个对象是否为可迭代对象"><a href="#判断一个对象是否为可迭代对象" class="headerlink" title="判断一个对象是否为可迭代对象"></a>判断一个对象是否为可迭代对象</h4><p>因为可迭代对象都会有Symbol.iterator方法属性，所以我们可以判断某对象中是否具有该方法来判断是否为可迭代对象</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isIterable</span>(<span class="params">object</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> object[<span class="built_in">Symbol</span>.iterator] === <span class="string">'function'</span></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(isIterable([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(isIterable(<span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]))); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(isIterable(<span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="number">1</span>,<span class="number">1</span>],[<span class="number">2</span>,<span class="number">2</span>]]))); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(isIterable(<span class="string">'hello'</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(isIterable(&#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125;)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="for…of循环"><a href="#for…of循环" class="headerlink" title="for…of循环"></a>for…of循环</h3><p>for…of循环只能循环可迭代对象。</p>
-<p>其实质上是会调用可迭代对象的Symbol.iterator的属性方法来获取到一个迭代器，然后不断调用迭代器的next()方法直到done属性值为true时退出</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test=[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> v <span class="keyword">of</span> test) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 输出结果</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment">4</span></span><br><span class="line"><span class="comment">5</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="访问默认迭代器"><a href="#访问默认迭代器" class="headerlink" title="访问默认迭代器"></a>访问默认迭代器</h3><p>每个可迭代对象都会有一个Symbol.iterator的方法属性，该方法被调用后可以返回一个迭代器。</p>
-<p>因此，我们可以通过该属性去访问一个可迭代对象的默认迭代器</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test=[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="comment">// 获得数组对象的默认迭代器</span></span><br><span class="line"><span class="keyword">let</span> iterator=test[<span class="built_in">Symbol</span>.iterator]();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next());</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 输出结果</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&#123; value: 3, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: 4, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: 5, done: false &#125;</span></span><br><span class="line"><span class="comment">&#123; value: undefined, done: true &#125;</span></span><br><span class="line"><span class="comment">&#123; value: undefined, done: true &#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="将不可迭代对象转化为可迭代对象"><a href="#将不可迭代对象转化为可迭代对象" class="headerlink" title="将不可迭代对象转化为可迭代对象"></a>将不可迭代对象转化为可迭代对象</h3><h4 id="通过添加Symbol-iterator属性"><a href="#通过添加Symbol-iterator属性" class="headerlink" title="通过添加Symbol.iterator属性"></a>通过添加Symbol.iterator属性</h4><p>因为一个对象是否可迭代是根据是否有Symbol.iterator属性的，因此，我们可以手动添加该生成器</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test=&#123;</span><br><span class="line">    a:<span class="number">1</span>,</span><br><span class="line">    b:<span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自建对象一般都是不可迭代的</span></span><br><span class="line"><span class="built_in">console</span>.log(test[<span class="built_in">Symbol</span>.iterator]); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 为不可迭代对象创建Symbol.iterator并赋予一个生成器,使其成为一个可迭代对象</span></span><br><span class="line">test[<span class="built_in">Symbol</span>.iterator]=<span class="function"><span class="keyword">function</span> *(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// this指向test对象</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> <span class="keyword">this</span>) &#123;</span><br><span class="line">        <span class="keyword">yield</span> <span class="keyword">this</span>[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 验证是否成为了一个可迭代对象</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> v <span class="keyword">of</span> test) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v); <span class="comment">// 1 2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="通过生成器函数"><a href="#通过生成器函数" class="headerlink" title="通过生成器函数"></a>通过生成器函数</h4><p>在前文提到过，由于生成器默认会为传入的对象Symbol.iterator属性赋值，因此，我们只需向生成器函数传入不可迭代对象即可</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">createIterator</span>(<span class="params">object</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> object) &#123;</span><br><span class="line">        <span class="keyword">yield</span> object[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test=&#123;</span><br><span class="line">    a:<span class="number">1</span>,</span><br><span class="line">    b:<span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> iterator=createIterator(test);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> v <span class="keyword">of</span> iterator) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v); <span class="comment">// 1,2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/07/leetcode-257/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/07/leetcode-257/" itemprop="url">leetcode-257 二叉树的所有路径</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-07T12:49:58+08:00">
-                2019-09-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode题解与算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  387
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="二叉树的所有路径"><a href="#二叉树的所有路径" class="headerlink" title="二叉树的所有路径"></a>二叉树的所有路径</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个二叉树，返回所有从根节点到叶子节点的路径。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:</p>
-<p><img src="https://s2.ax1x.com/2019/09/07/nlmn4s.png" alt></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/09/07/leetcode-257/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2467,7 +2494,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2478,7 +2505,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2489,7 +2516,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2548,7 +2575,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">78k</span>
+    <span title="Site words total count">79.1k</span>
   
 </div>
 
@@ -2578,7 +2605,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共78k字</span>
+  <span class="post-count">博客全站共79.1k字</span>
 </div>
         
 
