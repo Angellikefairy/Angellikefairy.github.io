@@ -97,7 +97,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/09/28/ulg28I.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/09/28/ulgJUJ.jpg">
-<meta property="og:updated_time" content="2019-09-29T14:52:07.612Z">
+<meta property="og:updated_time" content="2019-09-29T15:06:24.385Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js事件循环机制 event loop">
 <meta name="twitter:description" content="为什么js是单线程的众所周知，JavaScript是一门单线程语言。那么，为什么js必须是单线程的呢？ 因为，js主要的宿主环境就是浏览器，并且其一个重要的用途就是来操作Dom。反过来思考，如果js是多线程的，那么就会允许同一时间有多个代码块运行。那么，如果这多个代码块同时操作同一个Dom，比如，一个代码块要修改某dom元素，而另一个代码块又要删除这个元素，那么浏览器该如何处理这个元素。因此，为了">
@@ -393,7 +393,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.1k
+                  2.2k
                 </span>
               
 
@@ -512,14 +512,19 @@
 <p>以上过程可以用伪代码进行描述</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [... some initialization ...]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// The Event Loop</span></span><br><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (! EventQueue.isEmpty()) &#123;</span><br><span class="line">     event = EventQueue.pop_oldest_item();</span><br><span class="line">     event.callback(event [or some other kind <span class="keyword">of</span> args]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// [... defer to other non-JS tasks...]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="从微任务与宏任务看事件循环"><a href="#从微任务与宏任务看事件循环" class="headerlink" title="从微任务与宏任务看事件循环"></a>从微任务与宏任务看事件循环</h3><p>Event Loop(事件循环)中，每一次循环称为 tick, 每一次tick的任务如下：</p>
+<h3 id="从微任务与宏任务看事件循环"><a href="#从微任务与宏任务看事件循环" class="headerlink" title="从微任务与宏任务看事件循环"></a>从微任务与宏任务看事件循环</h3><p>准备：</p>
+<p>检查每一个进来的任务，如果是同步任务，那么压入主线程调用栈中；如果是微任务，那么放入微任务队列；如果是宏任务，那么放入宏任务队列</p>
+<p>Event Loop(事件循环)中，每一次循环称为 tick, 每一次tick的任务如下：</p>
 <ol>
-<li>执行栈选择最先进入队列的宏任务(通常是script整体代码)，如果有则执行</li>
-<li>检查是否存在 Microtask，如果存在则不停的执行，直至清空 microtask 队列</li>
+<li>执行栈执行完主线程中的所有任务（也可以&lt;script&gt;整体代码当做一个宏任务）</li>
+<li>检查微任务队列，查看是否存在 Microtask，如果存在则不停的执行，直至清空 microtask 队列</li>
 <li>更新render(每一次事件循环，浏览器都可能会去更新渲染)</li>
+<li>检查宏任务队列，查看是否存在Macrotask，如果存在则取出一个任务进行执行（执行准备阶段操作）</li>
 <li>重复以上步骤</li>
 </ol>
 <p><img src="https://s2.ax1x.com/2019/09/28/ulgJUJ.jpg" alt></p>
+<p>总结：</p>
+<p>微任务总是在下一个宏任务之前被执行完毕</p>
 
       
     </div>
@@ -738,7 +743,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">81k</span>
+    <span title="Site words total count">81.2k</span>
   
 </div>
 
@@ -768,7 +773,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共81k字</span>
+  <span class="post-count">博客全站共81.2k字</span>
 </div>
         
 
