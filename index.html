@@ -307,6 +307,310 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/Ajax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/30/Ajax/" itemprop="url">Ajax</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-30T18:39:26+08:00">
+                2019-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是Ajax"><a href="#什么是Ajax" class="headerlink" title="什么是Ajax"></a>什么是Ajax</h2><p>AJAX即“Asynchronous JavaScript and XML”（异步的JavaScript与XML技术）。使用Ajax可以无需刷新页面就可以从服务器取得数据</p>
+<h2 id="Ajax的核心–XMLHttpRequest对象"><a href="#Ajax的核心–XMLHttpRequest对象" class="headerlink" title="Ajax的核心–XMLHttpRequest对象"></a>Ajax的核心–XMLHttpRequest对象</h2><p>如果不考虑IE7以前的版本，那么对于所有的标准浏览器我们都可以使用如下来创建一个XHR对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br></pre></td></tr></table></figure>
+
+<h3 id="XHR对象的一些属性"><a href="#XHR对象的一些属性" class="headerlink" title="XHR对象的一些属性"></a>XHR对象的一些属性</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>status</td>
+<td>响应的HTTP状态码</td>
+</tr>
+<tr>
+<td>statusText</td>
+<td>HTTP状态码的说明</td>
+</tr>
+<tr>
+<td>responseText</td>
+<td>作为响应主体被返回的文本</td>
+</tr>
+<tr>
+<td>responseXml</td>
+<td>对请求的响应，解析为 XML 并作为 Document 对象返回</td>
+</tr>
+<tr>
+<td>readyState</td>
+<td>请求/响应过程的当前活动状态</td>
+</tr>
+<tr>
+<td>onreadystatechange()</td>
+<td>readyState属性值改变触发的readystatechange事件的绑定函数</td>
+</tr>
+</tbody></table>
+<p>readyState属性的说明：<br>属性可取值|名称|说明<br>–|–|–<br>0|未初始化|尚未调用open()方法<br>1|启动|已经调用open()方法，但尚未调用send()方法<br>2|发送|已经调用send()方法，但尚未接收到响应<br>3|接收|已经接收到部分响应数据<br>4|完成|已经接收到全部响应数据</p>
+<p>status（HTTP常见状态码）<br>状态码|名称|说明<br>–|–|–<br>200|OK|请求成功，信息在返回的响应报文中<br>301|Moved Permanently|请求的对象已经被永久转移了，新的URL定义在响应报文的Location: 首部行中。客户软件将自动获取新的URL<br>304|Not Modified|未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源<br>400|Bad Request|一个通用差错代码，指示该请求不能被服务器理解<br>404|Not Found|请求的资源不存在<br>500|Internal Server Error|内部服务器错误<br>505|HTTP Version Not Supported|服务器不支持请求报文使用的HTTP协议版本</p>
+<p>HTTP状态码分类</p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1**</td>
+<td>信息</td>
+<td>服务器收到请求，需要请求者继续执行操作</td>
+</tr>
+<tr>
+<td>2**</td>
+<td>成功</td>
+<td>操作被成功接收并处理</td>
+</tr>
+<tr>
+<td>3**</td>
+<td>重定向</td>
+<td>需要进一步的操作以完成请求</td>
+</tr>
+<tr>
+<td>4**</td>
+<td>客户端错误</td>
+<td>请求包含语法错误或无法完成请求</td>
+</tr>
+<tr>
+<td>5**</td>
+<td>服务器错误</td>
+<td>服务器在处理请求的过程中发生了错误</td>
+</tr>
+</tbody></table>
+<h3 id="XHR对象的一些方法"><a href="#XHR对象的一些方法" class="headerlink" title="XHR对象的一些方法"></a>XHR对象的一些方法</h3><h4 id="open"><a href="#open" class="headerlink" title="open()"></a>open()</h4><p>参数：</p>
+<p>method<br>    要使用的HTTP方法，比如「GET」、「POST」、「PUT」、「DELETE」、等。对于非HTTP(S) URL被忽略。</p>
+<p>url<br>    一个DOMString表示要向其发送请求的URL。</p>
+<p>async 可选<br>    一个可选的布尔参数，默认为true，表示要不要异步执行操作。如果值为false（表示同步执行），send()方法直到收到答复前不会返回。如果true（表示异步执行），已完成事务的通知可供事件监听器使用。</p>
+<pre><code>注意：主线程上的同步请求很容易破坏用户体验，应该避免；实际上，许多浏览器已完全弃用主线程上的同步XHR支持。在 Worker中允许同步请求</code></pre><p>user 可选<br>    可选的用户名用于认证用途；默认为null。</p>
+<p>password 可选<br>    可选的密码用于认证用途，默认为null。 </p>
+<h4 id="send"><a href="#send" class="headerlink" title="send()"></a>send()</h4><p>XMLHttpRequest.send() 方法接受一个可选的参数，其作为请求主体；如果请求方法是 GET 或者 HEAD，则应将请求主体设置为 null。（注：在HTTP请求报文中，使用GET方法时，请求实体为空，而是用POST方法时传输的内容保存在该请求实体中）</p>
+<h4 id="setRequestHeader"><a href="#setRequestHeader" class="headerlink" title="setRequestHeader"></a>setRequestHeader</h4><p>XMLHttpRequest.setRequestHeader() 是设置HTTP请求头部的方法。此方法必须在  open() 方法和 send()   之间调用。如果多次对同一个请求头赋值，只会生成一个合并了多个值的请求头。</p>
+<h4 id="abort"><a href="#abort" class="headerlink" title="abort()"></a>abort()</h4><p>如果该请求已被发出，XMLHttpRequest.abort() 方法将终止该请求。当一个请求被终止，它的 readyState 属性将被置为0（ UNSENT )。</p>
+<h3 id="使用XHR对象进行同步请求"><a href="#使用XHR对象进行同步请求" class="headerlink" title="使用XHR对象进行同步请求"></a>使用XHR对象进行同步请求</h3><p>对于同步请求，也就是意味着该次请求是阻塞的。因此，之后的代码会等到服务器响应之后才会执行。</p>
+<p>在收到响应后，响应的数据会自动填充到XHR对象的属性</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="comment">// 使用同步请求时，open()方法的第三个参数设置为false</span></span><br><span class="line">xhr.open(<span class="string">"get"</span>,<span class="string">"https://www.baidu.com"</span>,<span class="literal">false</span>);</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>((xhr.status&gt;=<span class="number">200</span>&amp;&amp;xhr.status&lt;<span class="number">300</span>)||xhr.status===<span class="number">304</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(xhr.responseText);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"Request was failed"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用XHR对象进行异步请求"><a href="#使用XHR对象进行异步请求" class="headerlink" title="使用XHR对象进行异步请求"></a>使用XHR对象进行异步请求</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState===<span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>((xhr.status&gt;=<span class="number">200</span>&amp;&amp;xhr.status&lt;<span class="number">300</span>)||xhr.status===<span class="number">304</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(xhr.responseText);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"Request was failed"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用异步请求时，open()方法的第三个参数设置为true</span></span><br><span class="line">xhr.open(<span class="string">"get"</span>,<span class="string">"https://www.baidu.com"</span>,<span class="literal">true</span>);</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'异步请求'</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：我们必须在调用open()方法之前指定onreadystatechange事件处理程序才能确保跨浏览器兼容性</p>
+</blockquote>
+<h3 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h3><p>对于GET请求，我们经常将查询字符串参数追加到URL的末尾，以便将信息发送给服务器</p>
+<p>但是，我们经常会遇到URL的编码问题（查询字符串的格式有问题，例如在传递中文字符的时候）。因此，我们需要将每个参数的名称和值使用encodeURIComponent()进行编码，然后才能放到URL的末尾</p>
+<p>encodeURIComponent()是对统一资源标识符（URI）的组成部分进行编码的方法。它使用一到四个转义序列来表示字符串中的每个字符的UTF-8编码。它会转义除了字母、数字、(、)、.、!、~、*、’、-和_之外的所有字符。</p>
+<p>decodeURIComponent() 方法用于解码由 encodeURIComponent 方法或者其它类似方法编码的部分统一资源标识符（URI）。</p>
+<p>因此，我们利用一个函数，将每个参数的键与值进行编码后加入到URL的末尾</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addURLParam</span>(<span class="params">url,key,value</span>) </span>&#123;</span><br><span class="line">    url+=url.indexOf(<span class="string">'?'</span>)&lt;<span class="number">0</span>?<span class="string">'?'</span>:<span class="string">'&amp;'</span>;</span><br><span class="line">    <span class="comment">// 编码参数</span></span><br><span class="line">    url+=<span class="built_in">encodeURIComponent</span>(key)+<span class="string">'='</span>+<span class="built_in">encodeURIComponent</span>(value);</span><br><span class="line">    <span class="keyword">return</span> url;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> url = addURLParam(<span class="string">'https://www.baidu.com'</span>,<span class="string">'a'</span>,<span class="string">'天'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(url);</span><br><span class="line"><span class="keyword">let</span> url1 = addURLParam(url,<span class="string">'b'</span>,<span class="string">'才'</span>);</span><br><span class="line"><span class="comment">// 解码URL</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">decodeURIComponent</span>(url1));</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">https://www.baidu.com?a=%E5%A4%A9</span></span><br><span class="line"><span class="comment">https://www.baidu.com?a=天&amp;b=才</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><p>POST请求的内容不会明文出现在URL上，它会存放在请求的实体部分进行传递。值得注意的是，POST请求的主体可包含非常多的数据，而且格式不限</p>
+<p>注意，在使用POST请求提交数据的时候，我们需要将请求头设置一下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.setRequestHeader(<span class="string">"Content-Type"</span>,<span class="string">"application/x-www-form-urlencoded"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>POST完整请求示例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState===<span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(xhr.status&gt;=<span class="number">200</span>&amp;&amp;xhr.status&lt;<span class="number">300</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(xhr.responseText);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'error'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.open(<span class="string">"post"</span>,<span class="string">"https://www.baidu.com"</span>,<span class="string">"true"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"Content-Type"</span>,<span class="string">"x-www-from-urlencoded"</span>);</span><br><span class="line">xhr.send(<span class="string">'123'</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="XMLHttpRequest-2级"><a href="#XMLHttpRequest-2级" class="headerlink" title="XMLHttpRequest 2级"></a>XMLHttpRequest 2级</h3><h4 id="FormData"><a href="#FormData" class="headerlink" title="FormData"></a>FormData</h4><p>在上面提到过，使用POST请求进行传输时，我们需要明确地设置请求头</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.setRequestHeader(<span class="string">"Content-Type"</span>,<span class="string">"x-www-from-urlencoded"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>但是，如果使用FormData的话，我们就不要进行设置。因为，XHR对象能够识别传入的数据类型是FormData的实例，并配置适当的头部信息</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建FormData实例</span></span><br><span class="line"><span class="keyword">let</span> data = <span class="keyword">new</span> FormData();</span><br><span class="line"><span class="comment">// 向对象添加数据，append()方法接受两个参数：键和值</span></span><br><span class="line">data.append(<span class="string">"name"</span>,<span class="string">"Ming"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 我们可以看到没有设置POST请求头</span></span><br><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState===<span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(xhr.status&gt;=<span class="number">200</span>&amp;&amp;xhr.status&lt;<span class="number">300</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(xhr.responseText);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'error'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.open(<span class="string">"post"</span>,<span class="string">"https://www.baidu.com"</span>,<span class="literal">true</span>);</span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
+
+<h4 id="进度事件"><a href="#进度事件" class="headerlink" title="进度事件"></a>进度事件</h4><p>我们可以利用进度事件来实现一个进度指示器</p>
+<p>progress事件会在浏览器接收新数据期间周期性地触发。而onprogress事件处理程序就会接收到一个events对象，其有三个关于进度的属性：lengthComputable(表示进度信息是否可用),position(表示已经接受的字节数),totalSize(表示总字节数)</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onprogress=<span class="function"><span class="keyword">function</span>(<span class="params">events</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(events.lengthComputable)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(events.position+<span class="string">"/"</span>+events.totalSize);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.open(<span class="string">"get"</span>,<span class="string">"https://www.baidu.com"</span>,<span class="literal">true</span>);</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Ajax的一些知识点总结"><a href="#Ajax的一些知识点总结" class="headerlink" title="Ajax的一些知识点总结"></a>Ajax的一些知识点总结</h3><h4 id="原生Js-Ajax请求有几个步骤"><a href="#原生Js-Ajax请求有几个步骤" class="headerlink" title="原生Js Ajax请求有几个步骤"></a>原生Js Ajax请求有几个步骤</h4><p>我们以步骤最多的POST请求为例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建XHR对象</span></span><br><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="comment">// 响应服务器返回的数据</span></span><br><span class="line">xhr.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState===<span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(xhr.status&gt;=<span class="number">200</span>&amp;&amp;xhr.status&lt;<span class="number">300</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(xhr.responseText);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'error'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 2. 准备一个请求，规定请求的类型、URL 以及是否异步处理请求</span></span><br><span class="line">xhr.open(<span class="string">"post"</span>,<span class="string">"https://www.baidu.com"</span>,<span class="string">"true"</span>);</span><br><span class="line"><span class="comment">// 3. 设置请求头中的Content-type</span></span><br><span class="line">xhr.setRequestHeader(<span class="string">"Content-Type"</span>,<span class="string">"x-www-from-urlencoded"</span>);</span><br><span class="line"><span class="comment">// 发送请求</span></span><br><span class="line">xhr.send(<span class="string">'123'</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Ajax有哪几种请求方式"><a href="#Ajax有哪几种请求方式" class="headerlink" title="Ajax有哪几种请求方式"></a>Ajax有哪几种请求方式</h4><p>常用的有GET,POST,DELETE,PUT。</p>
+<h4 id="POST请求与GET请求的区别"><a href="#POST请求与GET请求的区别" class="headerlink" title="POST请求与GET请求的区别"></a>POST请求与GET请求的区别</h4><ol>
+<li>POST请求更加安全，因为POST请求将参数存放在请求实体中，而GET请求参数在URL上</li>
+<li>GET请求传输速度更快。因为post通过请求体传参，后台通过数据流接收。速度稍微慢一些。而get通过url传参可以直接获取</li>
+<li>POST请求没有数据量的限制</li>
+<li>POST请求的参数内容没有格式限制</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/JSON的解析与序列化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2094,194 +2398,6 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/17/nowcoder-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/17/nowcoder-1/" itemprop="url">nowcoder-1 二维数组中的查找</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-17T22:51:49+08:00">
-                2019-09-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/牛客网算法题刷题记录/" itemprop="url" rel="index">
-                    <span itemprop="name">牛客网算法题刷题记录</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  446
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="数组的相对排序"><a href="#数组的相对排序" class="headerlink" title="数组的相对排序"></a>数组的相对排序</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
-<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ol>
-<li>最直接的暴力解法<br>遍历二维数组中的每一个元素，返回是否能找到给定的target值</li>
-<li>利用ES6特性，将数组扁平化（但是牛客网并没有很好地支持flat()函数，因此我们可以使用concat()方法来实现扁平化）后使用includes()函数进行查找</li>
-<li>巧妙一点的方法是：由于该二维数组的规律（每一行从左往右递增，每一列从上往下递增），我们可以发现二维数组的左下角总是当前行的最小值，当前列的最大值。因此，当给定值大于当前左下角的数值时，我们就将该数往右移动一位；当给定值小于当前左下角的数值时，我们就将该数往上移动一位。直到找到该值返回true，或者遍历到右上角仍然没有找到返回false</li>
-</ol>
-<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><p>通过concat()扁平化后利用includes()来查找</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Find</span>(<span class="params">target, array</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">let</span> arr=[].concat(...array);</span><br><span class="line">    <span class="keyword">return</span> arr.includes(target);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    Find : Find</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>左下到右上的查找</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Find</span>(<span class="params">target, array</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">let</span> column=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> row=array.length<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">let</span> num;</span><br><span class="line">    <span class="keyword">while</span>(column&lt;array[<span class="number">0</span>].length&amp;&amp;row&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">        num=array[row][column];</span><br><span class="line">        <span class="keyword">if</span>(target&gt;num) &#123;</span><br><span class="line">            column++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(target&lt;num) &#123;</span><br><span class="line">            row--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    Find : Find</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2334,7 +2450,7 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">115</span>
+                  <span class="site-state-item-count">116</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2415,7 +2531,7 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">82.3k</span>
+    <span title="Site words total count">84.6k</span>
   
 </div>
 
@@ -2445,7 +2561,7 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共82.3k字</span>
+  <span class="post-count">博客全站共84.6k字</span>
 </div>
         
 
