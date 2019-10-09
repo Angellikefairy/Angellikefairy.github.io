@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.4k
+                  2.8k
                 </span>
               
 
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9
+                  11
                 </span>
               
             </div>
@@ -550,6 +550,36 @@
 <h4 id="node-js后端"><a href="#node-js后端" class="headerlink" title="node.js后端"></a>node.js后端</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> app = express();</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>,(req,res)=&gt;&#123;</span><br><span class="line">    res.send(<span class="string">'hello'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'3000端口已打开'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>这样我们就可以通过代理服务器进行跨域请求</p>
+<h3 id="webpack配置跨域"><a href="#webpack配置跨域" class="headerlink" title="webpack配置跨域"></a>webpack配置跨域</h3><p>类似Vue这些框架都会用webpack进行打包。webpack中可以引入webpack-dev-server来进行服务器相关的配置。</p>
+<p>与上述node中间件使用http-proxy-middleware 包一样，该dev-server也使用了该包，因此语法也是一样的</p>
+<p>我们可以在webpack.config.js进行跨域相关的配置</p>
+<p>webpack.config.js的跨域配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">devServer : &#123;</span><br><span class="line">    proxy: &#123;</span><br><span class="line">        <span class="string">"/api"</span>: &#123;</span><br><span class="line">            target: <span class="string">"http://localhost:3000"</span>,</span><br><span class="line">            pathRewrite: &#123;<span class="string">"^/api"</span>: <span class="string">""</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>前端请求</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState===<span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(xhr.status&gt;=<span class="number">200</span>&amp;&amp;xhr.status&lt;<span class="number">300</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(xhr.responseText);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'error'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.open(<span class="string">'get'</span>,<span class="string">'/api/hello'</span>,<span class="literal">true</span>);</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>后端node接口</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> app = express();</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/hello'</span>,(req,res)=&gt;&#123;</span><br><span class="line">    res.setHeader(<span class="string">'Content-type'</span>,<span class="string">'application/json'</span>);</span><br><span class="line">    res.send(<span class="string">'hello'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'3000端口已打开'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>此时，请求”/api/hello”就会被代理到”<a href="http://localhost:3000/hello&quot;" target="_blank" rel="noopener">http://localhost:3000/hello&quot;</a></p>
+<h4 id="配置中的主要参数说明"><a href="#配置中的主要参数说明" class="headerlink" title="配置中的主要参数说明"></a>配置中的主要参数说明</h4><ol>
+<li><p>‘/api’</p>
+<p> 如果请求中有该字符串’/api’，那么就会开始匹配代理。比如，api请求’/api/hello’，就会被代理到请求’<a href="http://localhost:3000/api/hello&#39;" target="_blank" rel="noopener">http://localhost:3000/api/hello&#39;</a></p>
+</li>
+<li><p>target</p>
+<p> 代理的API地址。地址可以是域名也可以是IP地址，如果是域名就需要额外添加一个参数changeOrigin: true</p>
+</li>
+<li><p>pathRewrite</p>
+<p> 路径重写，也就是说会修改最终请求的API路径。设置pathRewrite:{‘^/api’:’’}后，最终代理访问的路径就会是’<a href="http://localhost:3000/hello&#39;" target="_blank" rel="noopener">http://localhost:3000/hello&#39;</a></p>
+</li>
+<li><p>changeOrigin</p>
+<p> 该参数可以让target参数是域名</p>
+</li>
+<li><p>secure</p>
+<p> secure: false，不检查安全问题；设置后，可以接受运行在https上，可以使用无效证书的后端服务器</p>
+</li>
+</ol>
 
           
         
@@ -2636,7 +2666,7 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">87k</span>
+    <span title="Site words total count">87.4k</span>
   
 </div>
 
@@ -2666,7 +2696,7 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共87k字</span>
+  <span class="post-count">博客全站共87.4k字</span>
 </div>
         
 
