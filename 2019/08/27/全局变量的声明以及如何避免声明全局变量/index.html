@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="全局变量的声明 全局变量会成为全局对象的属性  那种方式的变量声明会形成全局变量呢？ Javascript运行环境分为浏览器环境和非浏览器环境（比如Node.js） 在浏览器环境中,有三种方式可以声明全局变量  使用var关键字在全局作用域下显示声明 不适用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明 使用全局对象作为其属性来声明  浏览器环境中（全局对象为windo">
+<meta name="description" content="全局变量的声明 全局变量会成为全局对象的属性  哪种方式的变量声明会形成全局变量呢？ Javascript运行环境分为浏览器环境和非浏览器环境（比如Node.js） 在浏览器环境中,有三种方式可以声明全局变量  使用var关键字在全局作用域下显示声明 不使用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明 使用全局对象作为其属性来声明  浏览器环境中（全局对象为windo">
 <meta name="keywords" content="基础语法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="全局变量的声明以及如何避免声明全局变量">
 <meta property="og:url" content="http://yoursite.com/2019/08/27/全局变量的声明以及如何避免声明全局变量/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="全局变量的声明 全局变量会成为全局对象的属性  那种方式的变量声明会形成全局变量呢？ Javascript运行环境分为浏览器环境和非浏览器环境（比如Node.js） 在浏览器环境中,有三种方式可以声明全局变量  使用var关键字在全局作用域下显示声明 不适用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明 使用全局对象作为其属性来声明  浏览器环境中（全局对象为windo">
+<meta property="og:description" content="全局变量的声明 全局变量会成为全局对象的属性  哪种方式的变量声明会形成全局变量呢？ Javascript运行环境分为浏览器环境和非浏览器环境（比如Node.js） 在浏览器环境中,有三种方式可以声明全局变量  使用var关键字在全局作用域下显示声明 不使用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明 使用全局对象作为其属性来声明  浏览器环境中（全局对象为windo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-27T10:03:43.647Z">
+<meta property="og:updated_time" content="2019-10-13T03:02:17.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="全局变量的声明以及如何避免声明全局变量">
-<meta name="twitter:description" content="全局变量的声明 全局变量会成为全局对象的属性  那种方式的变量声明会形成全局变量呢？ Javascript运行环境分为浏览器环境和非浏览器环境（比如Node.js） 在浏览器环境中,有三种方式可以声明全局变量  使用var关键字在全局作用域下显示声明 不适用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明 使用全局对象作为其属性来声明  浏览器环境中（全局对象为windo">
+<meta name="twitter:description" content="全局变量的声明 全局变量会成为全局对象的属性  哪种方式的变量声明会形成全局变量呢？ Javascript运行环境分为浏览器环境和非浏览器环境（比如Node.js） 在浏览器环境中,有三种方式可以声明全局变量  使用var关键字在全局作用域下显示声明 不使用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明 使用全局对象作为其属性来声明  浏览器环境中（全局对象为windo">
 
 
 
@@ -431,18 +431,18 @@
         <h2 id="全局变量的声明"><a href="#全局变量的声明" class="headerlink" title="全局变量的声明"></a>全局变量的声明</h2><blockquote>
 <p>全局变量会成为全局对象的属性</p>
 </blockquote>
-<p>那种方式的变量声明会形成全局变量呢？</p>
+<p>哪种方式的变量声明会形成全局变量呢？</p>
 <p>Javascript运行环境分为浏览器环境和非浏览器环境（比如Node.js）</p>
 <p>在浏览器环境中,有三种方式可以声明全局变量</p>
 <ol>
 <li>使用var关键字在全局作用域下显示声明</li>
-<li>不适用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明</li>
+<li>不使用任何声明关键字(var,let,const)直接给变量赋值，这属于隐式声明</li>
 <li>使用全局对象作为其属性来声明</li>
 </ol>
 <p>浏览器环境中（全局对象为window对象）</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">window</span>.c=<span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a===<span class="built_in">window</span>.a); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(b===<span class="built_in">window</span>.b); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
 
-<p>但是，在Node.js中，上述方法中的方法2就不成立</p>
+<p>但是，在Node.js中，上述方法中的方法1就不成立</p>
 <p>Node.js环境（全局对象为global对象)</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b=<span class="number">2</span>;</span><br><span class="line">global.c=<span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a===global.a); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(b===global.b); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(c===global.c); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
 
@@ -677,7 +677,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">90.8k</span>
+    <span title="Site words total count">91.4k</span>
   
 </div>
 
@@ -707,7 +707,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共90.8k字</span>
+  <span class="post-count">博客全站共91.4k字</span>
 </div>
         
 

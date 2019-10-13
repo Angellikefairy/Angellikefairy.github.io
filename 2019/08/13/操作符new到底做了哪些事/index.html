@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="new操作符的作用new操作符可以快速创建构造函数的实例，如： 12345678910111213function Person(name,age,job)&amp;#123;    this.name=name;    this.age=age;    this.job=job;&amp;#125;Person.prototype.sayHello=function ()&amp;#123;    console.lo">
+<meta name="description" content="new的基本语法 new constructor[([arguments])]  参数 constructor    一个指定对象实例的类型的类或函数。 arguments    一个用于被 constructor 调用的参数列表。  从语法中可以看出，后面的参数列表不是必须的。换言之:  new Test = new Test()  new操作符的作用new操作符可以快速创建构造函数的实例，如：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="操作符new到底做了哪些事">
 <meta property="og:url" content="http://yoursite.com/2019/08/13/操作符new到底做了哪些事/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="new操作符的作用new操作符可以快速创建构造函数的实例，如： 12345678910111213function Person(name,age,job)&amp;#123;    this.name=name;    this.age=age;    this.job=job;&amp;#125;Person.prototype.sayHello=function ()&amp;#123;    console.lo">
+<meta property="og:description" content="new的基本语法 new constructor[([arguments])]  参数 constructor    一个指定对象实例的类型的类或函数。 arguments    一个用于被 constructor 调用的参数列表。  从语法中可以看出，后面的参数列表不是必须的。换言之:  new Test = new Test()  new操作符的作用new操作符可以快速创建构造函数的实例，如：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-19T12:56:24.510Z">
+<meta property="og:updated_time" content="2019-10-13T10:45:48.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作符new到底做了哪些事">
-<meta name="twitter:description" content="new操作符的作用new操作符可以快速创建构造函数的实例，如： 12345678910111213function Person(name,age,job)&amp;#123;    this.name=name;    this.age=age;    this.job=job;&amp;#125;Person.prototype.sayHello=function ()&amp;#123;    console.lo">
+<meta name="twitter:description" content="new的基本语法 new constructor[([arguments])]  参数 constructor    一个指定对象实例的类型的类或函数。 arguments    一个用于被 constructor 调用的参数列表。  从语法中可以看出，后面的参数列表不是必须的。换言之:  new Test = new Test()  new操作符的作用new操作符可以快速创建构造函数的实例，如：">
 
 
 
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  364
+                  948
                 </span>
               
 
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
@@ -427,7 +427,17 @@
       
 
       
-        <h2 id="new操作符的作用"><a href="#new操作符的作用" class="headerlink" title="new操作符的作用"></a>new操作符的作用</h2><p>new操作符可以快速创建构造函数的实例，如：</p>
+        <h2 id="new的基本语法"><a href="#new的基本语法" class="headerlink" title="new的基本语法"></a>new的基本语法</h2><blockquote>
+<p>new constructor[([arguments])]</p>
+</blockquote>
+<p>参数</p>
+<p>constructor<br>    一个指定对象实例的类型的类或函数。</p>
+<p>arguments<br>    一个用于被 constructor 调用的参数列表。 </p>
+<p>从语法中可以看出，后面的参数列表不是必须的。换言之:</p>
+<blockquote>
+<p>new Test = new Test()</p>
+</blockquote>
+<h2 id="new操作符的作用"><a href="#new操作符的作用" class="headerlink" title="new操作符的作用"></a>new操作符的作用</h2><p>new操作符可以快速创建构造函数的实例，如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age,job</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name=name;</span><br><span class="line">    <span class="keyword">this</span>.age=age;</span><br><span class="line">    <span class="keyword">this</span>.job=job;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.sayHello=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> man=<span class="keyword">new</span> Person(<span class="string">'zjb'</span>,<span class="string">'18'</span>,<span class="string">'frontEnd'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(man); <span class="comment">// Object &#123; name: "zjb", age: "18", job: "frontEnd" &#125;</span></span><br><span class="line">man.sayHello(); <span class="comment">// 'hello'</span></span><br></pre></td></tr></table></figure>
 
 <p>那么，使用new操作符来创建某构造函数的实例会经历以下四个步骤：</p>
@@ -437,9 +447,27 @@
 <li>执行构造函数中的代码</li>
 <li>返回新对象</li>
 </ol>
+<h2 id="构造函数是否返回值"><a href="#构造函数是否返回值" class="headerlink" title="构造函数是否返回值"></a>构造函数是否返回值</h2><p>在上述的例子中，我们可以看到如果new的目标构造函数没有显式返回任何值的话，那么new操作就会默认返回this</p>
+<h3 id="显式返回基本类型值"><a href="#显式返回基本类型值" class="headerlink" title="显式返回基本类型值"></a>显式返回基本类型值</h3><p>我们来测试下，如果构造函数显式返回基本类型值会有怎样的影响</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.item = item;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">new</span> Test(<span class="string">'hello'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(test); <span class="comment">// &#123; item: 'hello' &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到返回的原始值并没有对实例产生任何影响。</p>
+<p>也就是说在构造函数中显式返回一个基本类型值并不会对实例产生任何影响</p>
+<h3 id="显式返回引用类型值"><a href="#显式返回引用类型值" class="headerlink" title="显式返回引用类型值"></a>显式返回引用类型值</h3><p>那么，如果是返回复杂引用类型值呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.item = item;</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="attr">a</span>:<span class="number">1</span>&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">new</span> Test(<span class="string">'hello'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(test); <span class="comment">// &#123; a: 1 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到得到的实例发生了变化，输出值变为构造函数中显式返回的值</p>
+<p>另外，我们知道new创建的实例对象，都会有一个<strong>proro</strong>访问器属性绑定到构造函数的原型上；但是，如果，构造函数显式地返回了其他对象的话，那么该对象的<strong>proro</strong>访问器属性不会绑定到构造函数的原型上</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.item = item;</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="attr">a</span>:<span class="number">1</span>&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Test.prototype.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">new</span> Test(<span class="string">'hello'</span>);</span><br><span class="line">test.sayHello(); <span class="comment">// 报错：test.sayHello is not a function</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到，输出报错找不到该函数。也就是说，返回的对象的<strong>Proto</strong>访问器属性不是绑定到构造函数的原型上</p>
 <h2 id="自己实现一个new操作符"><a href="#自己实现一个new操作符" class="headerlink" title="自己实现一个new操作符"></a>自己实现一个new操作符</h2><p>既然new操作符的作用是创建一个构造函数的实例，那么new操作无非就是创建一个新的对象，将这个新对象的<strong>proto</strong>属性指向其构造函数的原型对象，然后该新对象绑定到构造函数上并获得传入的值，从而执行代码获得自身的对象属性</p>
 <p>new操作符的代码实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span>(<span class="params">obj,...arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ans=&#123;&#125;;</span><br><span class="line">    ans.__proto__=obj.prototype; <span class="comment">// 连接原型对象</span></span><br><span class="line">    <span class="comment">//Object.setPrototypeOf(ans, obj.prototype) 也可以，或许更高效</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 或者使用 let ans=Object.create(obj.prototype); （以obj.rototype为原型对象创建一个新对象）</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> result=obj.apply(ans,arr); <span class="comment">// 获得构造函数的返回值</span></span><br><span class="line">    <span class="keyword">return</span> ans===<span class="built_in">Object</span>?ans:result;</span><br><span class="line">    <span class="comment">//用来判断构造函数的返回值是否与创建的实例不同</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span>(<span class="params">constructor,...arr</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 检测传递进来的是否为构造函数，并且不是箭头函数（因为箭头函数没有[[construct]]方法，所以不能被作为构造函数。）</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="keyword">constructor</span>!=='function') return false;</span><br><span class="line">    else &#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">constructor</span>.prototype) return false;</span><br><span class="line">    &#125;</span><br><span class="line">    // 使用Object.create()方法将传入的参数作为创建的对象的原型对象来创建一个新的对象</span><br><span class="line">    let ans=Object.create(<span class="keyword">constructor</span>.prototype);</span><br><span class="line">    // 得到构造函数的返回值</span><br><span class="line">    let result=<span class="keyword">constructor</span>.apply(ans,arr);</span><br><span class="line">    // 根据构造函数的返回值做出相应的返回。如果，构造函数返回基本类型值，那么就返回ans对象；如果构造函数返回一个对象，那么返回该对象</span><br><span class="line">    return result instanceof Object?result:ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="另附：一道关于new优先级的面试题"><a href="#另附：一道关于new优先级的面试题" class="headerlink" title="另附：一道关于new优先级的面试题"></a>另附：一道关于new优先级的面试题</h2><p><a href="https://www.cnblogs.com/xxcanghai/p/5189353.html" target="_blank" rel="noopener">链接网址</a></p>
+
       
     </div>
     
@@ -622,7 +650,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#new操作符的作用"><span class="nav-number">1.</span> <span class="nav-text">new操作符的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自己实现一个new操作符"><span class="nav-number">2.</span> <span class="nav-text">自己实现一个new操作符</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#new的基本语法"><span class="nav-number">1.</span> <span class="nav-text">new的基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#new操作符的作用"><span class="nav-number">2.</span> <span class="nav-text">new操作符的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数是否返回值"><span class="nav-number">3.</span> <span class="nav-text">构造函数是否返回值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显式返回基本类型值"><span class="nav-number">3.1.</span> <span class="nav-text">显式返回基本类型值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显式返回引用类型值"><span class="nav-number">3.2.</span> <span class="nav-text">显式返回引用类型值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自己实现一个new操作符"><span class="nav-number">4.</span> <span class="nav-text">自己实现一个new操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#另附：一道关于new优先级的面试题"><span class="nav-number">5.</span> <span class="nav-text">另附：一道关于new优先级的面试题</span></a></li></ol></div>
             
 
           </div>
@@ -657,7 +685,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">90.8k</span>
+    <span title="Site words total count">91.4k</span>
   
 </div>
 
@@ -687,7 +715,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共90.8k字</span>
+  <span class="post-count">博客全站共91.4k字</span>
 </div>
         
 
