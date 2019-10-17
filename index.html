@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.9k
+                  3k
                 </span>
               
 
@@ -535,6 +535,11 @@
 <p>我们可以通过Promsie.all()来实现</p>
 <p>例如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> [v1,v2] = <span class="keyword">await</span> <span class="built_in">Promise</span>.all([<span class="built_in">Promise</span>.resolve(<span class="number">1</span>),<span class="built_in">Promise</span>.resolve(<span class="number">2</span>)]);</span><br><span class="line">    <span class="keyword">return</span> [v1,v2];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test().then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v); <span class="comment">// [1,2]</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>是的，我们很容易可以想到。如果并发的多个异步操作中有些抛出错误了怎么办？</p>
+<p>我们可以使用try…catch来处理。因此，在使用async函数时请尽量要确保有错误处理机制。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> [v1,v2] = <span class="keyword">await</span> <span class="built_in">Promise</span>.all([<span class="built_in">Promise</span>.resolve(<span class="number">1</span>),<span class="built_in">Promise</span>.reject(<span class="number">2</span>)]);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 停止运行</span></span><br><span class="line">        <span class="keyword">return</span> [v1,v2];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'err'</span>,e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="async函数可以保留运行堆栈"><a href="#async函数可以保留运行堆栈" class="headerlink" title="async函数可以保留运行堆栈"></a>async函数可以保留运行堆栈</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a() &#123;</span><br><span class="line">    b().then(<span class="function"><span class="params">()</span>=&gt;</span>c())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -2859,7 +2864,7 @@ super.functionOnParent([arguments]);
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">94.4k</span>
+    <span title="Site words total count">94.5k</span>
   
 </div>
 
@@ -2889,7 +2894,7 @@ super.functionOnParent([arguments]);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共94.4k字</span>
+  <span class="post-count">博客全站共94.5k字</span>
 </div>
         
 
