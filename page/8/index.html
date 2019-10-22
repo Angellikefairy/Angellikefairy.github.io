@@ -307,6 +307,224 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/如何优雅地使用箭头函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/13/如何优雅地使用箭头函数/" itemprop="url">如何优雅地使用箭头函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-13T18:26:18+08:00">
+                2019-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  700
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是箭头函数"><a href="#什么是箭头函数" class="headerlink" title="什么是箭头函数"></a>什么是箭头函数</h2><p>箭头函数是ES6新增语法特性，它是一种使用箭头（=&gt;）定义函数的新语法，但是，他与传统的函数有些许的不同，主要集中在以下方面：</p>
+<ol>
+<li><strong>没有this,super,arguments和new.target绑定</strong> 箭头函数中的this,supper,arguments及new.target这些值由外围最近一层非箭头函数决定</li>
+<li><strong>不能通过new关键字调用</strong> 箭头函数没有[  [Constuct]]方法，所以不能被作为构造函数</li>
+<li><strong>没有原型</strong> 箭头函数不存在prototype这个属性</li>
+<li>不可以改变this的绑定</li>
+<li>箭头函数不能使用函数声明式语法，只能使用表达式语法</li>
+</ol>
+<h2 id="箭头函数语法"><a href="#箭头函数语法" class="headerlink" title="箭头函数语法"></a>箭头函数语法</h2><p>当函数右侧的表达式只有一个时，可以没有显式的返回语句</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> test=<span class="function"><span class="params">a</span>=&gt;</span>a+<span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(test(<span class="number">1</span>)); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>如果函数没有参数，则要在声明的时候写一组没有内容的小括号</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> test=<span class="function"><span class="params">()</span>=&gt;</span><span class="string">'hello'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(test()); <span class="comment">// 'hello'</span></span><br></pre></td></tr></table></figure>
+
+<p>如果想要返回一个对象字面量，则需要将该字面量包裹在小括号里</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> test=<span class="function"><span class="params">()</span>=&gt;</span>(&#123;<span class="attr">item</span>:<span class="number">1</span>&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(test()); <span class="comment">// &#123;item:1&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="没有this绑定"><a href="#没有this绑定" class="headerlink" title="没有this绑定"></a>没有this绑定</h2><p>箭头函数中没有this绑定，必须通过查找作用域链来确定this的值。</p>
+<p>箭头函数的this在定义时就确定了，是由其外层代码的this决定</p>
+<p>对于其外层代码的this指向我们可以参考另一篇博文《<a href="http://angellikefairy.coding.me/2019/08/13/Js%E4%B8%AD%E7%9A%84this%E5%88%B0%E5%BA%95%E6%8C%87%E5%90%91%E5%93%AA/" target="_blank" rel="noopener">Js中的this到底指向哪</a>》</p>
+<p>简单来说，假设外层代码里有一句输出语句console.log(this); 那么输出的对象即为this的指向</p>
+<p>被全局环境中定义的函数包含</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="function">(<span class="params">(</span>)=&gt;</span><span class="keyword">this</span>)()); <span class="comment">// window</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>被对象中定义的方法包含</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj=&#123;</span><br><span class="line">    a()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.a()(); <span class="comment">// obj &#123; a: a() &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>全局环境下定义</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a=<span class="function"><span class="params">()</span>=&gt;</span><span class="keyword">this</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a()); <span class="comment">// window</span></span><br></pre></td></tr></table></figure>
+
+<p>被另一个箭头函数包含</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj=&#123;</span><br><span class="line">    a()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'outter'</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// Object &#123; a: a() &#125;</span></span><br><span class="line">            (<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'inner'</span>);</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// Object &#123; a: a() &#125;</span></span><br><span class="line">            &#125;)()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.a()();</span><br></pre></td></tr></table></figure>
+
+<p>最后，因为箭头函数没有 this，所以也不能用 call()、apply()、bind() 这些方法改变 this 的指向</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> test=<span class="function"><span class="params">()</span>=&gt;</span><span class="keyword">this</span>;</span><br><span class="line"><span class="keyword">const</span> obj=&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(test.apply(obj)); <span class="comment">// window</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="创建立即执行表达式"><a href="#创建立即执行表达式" class="headerlink" title="创建立即执行表达式"></a>创建立即执行表达式</h2><p>立即执行表达式，即可以定义一个匿名函数并调用，自始至终不保存对该函数的引用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>); <span class="comment">// 'hello'</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<h2 id="没有arguments绑定"><a href="#没有arguments绑定" class="headerlink" title="没有arguments绑定"></a>没有arguments绑定</h2><p>箭头函数没有自己的arguments对象，且未来无论函数在哪个上下文中执行，箭头函数始终可以访问到外围函数的arguments对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">// 5</span></span><br><span class="line">    (<span class="function">(<span class="params">m</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">// 5</span></span><br><span class="line">    &#125;)(<span class="number">1</span>)</span><br><span class="line">&#125;)(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/Js中的this到底指向哪/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2351,196 +2569,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/05/leetcode-345/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/05/leetcode-345/" itemprop="url">leetcode-345 反转字符串中的元音字母</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-05T14:58:17+08:00">
-                2019-08-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode题解与算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  410
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="反转字符串中的元音字母"><a href="#反转字符串中的元音字母" class="headerlink" title="反转字符串中的元音字母"></a>反转字符串中的元音字母</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>编写一个函数，以字符串作为输入，反转该字符串中的元音字母。</p>
-<p>示例 1:</p>
-<blockquote>
-<p>输入: “hello”<br>输出: “holle”</p>
-</blockquote>
-<p>示例 2:</p>
-<blockquote>
-<p>输入: “leetcode”<br>输出: “leotcede”</p>
-</blockquote>
-<p>说明:<br>元音字母不包含字母”y”。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/08/05/leetcode-345/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2593,7 +2621,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">121</span>
+                  <span class="site-state-item-count">122</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2674,7 +2702,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">97.4k</span>
+    <span title="Site words total count">100.6k</span>
   
 </div>
 
@@ -2704,7 +2732,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共97.4k字</span>
+  <span class="post-count">博客全站共100.6k字</span>
 </div>
         
 
