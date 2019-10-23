@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  477
+                  706
                 </span>
               
 
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -480,6 +480,23 @@
 </li>
 </ol>
 <p>这样，我们既可以在js文件夹中找到同名的编译好的js文件</p>
+<h2 id="执行ts文件"><a href="#执行ts文件" class="headerlink" title="执行ts文件"></a>执行ts文件</h2><p>我们可以利用ts-node这个npm包来帮助我们执行ts文件，而不用预先编译ts文件为js文件</p>
+<p>我们可以这样来执行</p>
+<blockquote>
+<p>npx ts-node ./ts/hello.ts</p>
+</blockquote>
+<h2 id="热加载ts文件执行"><a href="#热加载ts文件执行" class="headerlink" title="热加载ts文件执行"></a>热加载ts文件执行</h2><p>我们不希望每次在修改ts文件之后都要重新进行ts-node来执行。因此，我想到了利用tsc -w来监视ts文件的变动，然后用nodemon来监视ts生成的js文件的变动。</p>
+<p>因此，我们可以借助concurrently这个npm包来帮助我们同时运行多个命令</p>
+<p>安装nodemon</p>
+<blockquote>
+<p>cnpm i nodemon -D</p>
+</blockquote>
+<p>在package.json添加启动命令</p>
+<blockquote>
+<p>“start”: “concurrently &quot; tsc -w&quot; &quot;nodemon js/hello.js&quot; “</p>
+</blockquote>
+<p>因为我们要在双引号中还要使用双引号，所以要使用转义符</p>
+<p>之后我们在执行npm start的时候，修改ts文件的时候就可以看到执行结果的热更新了</p>
 
           
         
@@ -3098,7 +3115,7 @@ super.functionOnParent([arguments]);
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">101.1k</span>
+    <span title="Site words total count">101.3k</span>
   
 </div>
 
@@ -3128,7 +3145,7 @@ super.functionOnParent([arguments]);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共101.1k字</span>
+  <span class="post-count">博客全站共101.3k字</span>
 </div>
         
 
