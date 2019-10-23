@@ -307,6 +307,311 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/23/TypeScript的常用类型探秘/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/23/TypeScript的常用类型探秘/" itemprop="url">TypeScript的常用类型探秘</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-23T20:12:03+08:00">
+                2019-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="基本注解"><a href="#基本注解" class="headerlink" title="基本注解"></a>基本注解</h2><p>类型注解使用 :TypeAnnotation 语法。类型声明空间中可用的任何内容都可以用作类型注解。</p>
+<p>例如，在下面这个例子中，使用了变量、函数参数以及函数返回值的类型注解：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num: <span class="built_in">number</span> = <span class="number">123</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identity</span>(<span class="params">num: <span class="built_in">number</span></span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h2><h3 id="JS原有的基本数据类型"><a href="#JS原有的基本数据类型" class="headerlink" title="JS原有的基本数据类型"></a>JS原有的基本数据类型</h3><p>TypeScript支持JS具有的六种基本数据类型</p>
+<ol>
+<li>null</li>
+<li>undefined</li>
+<li>boolean</li>
+<li>number</li>
+<li>string</li>
+<li>symbol</li>
+</ol>
+<p>我们在声明变量的时候可以预先定义该变量的类型，使得之后定义的变量类型必须符合该类型</p>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num: <span class="built_in">number</span> = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> str: <span class="built_in">string</span> = <span class="string">'123'</span>;</span><br><span class="line"><span class="keyword">let</span> bool: <span class="built_in">boolean</span> = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> u: <span class="literal">undefined</span> = <span class="literal">undefined</span>;</span><br><span class="line"><span class="keyword">let</span> n: <span class="literal">null</span> = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是：</p>
+<blockquote>
+<p>默认情况下null和undefined（后面还会介绍到Never类型，它也是所有类型的子类型）是所有类型的子类型。也就是说我们可以把null和undefined赋值给任意类型的变量</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num: <span class="built_in">number</span> = <span class="literal">undefined</span>;</span><br><span class="line"><span class="keyword">let</span> str: <span class="built_in">string</span> = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JS原有的复杂引用类型"><a href="#JS原有的复杂引用类型" class="headerlink" title="JS原有的复杂引用类型"></a>JS原有的复杂引用类型</h3><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>TypeScript像JavaScript一样可以操作数组元素。 有两种方式可以定义数组。 </p>
+<ol>
+<li><p>可以在元素类型后面接上 []，表示由此类型元素组成的一个数组：</p>
+ <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr: <span class="built_in">number</span>[]; = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用数组泛型</p>
+ <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list: <span class="built_in">Array</span>&lt;<span class="built_in">number</span>&gt; = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>object表示非原始类型，也就是除number，string，boolean，symbol，null或undefined之外的类型。</p>
+<h3 id="TypeScript提供的一些类型"><a href="#TypeScript提供的一些类型" class="headerlink" title="TypeScript提供的一些类型"></a>TypeScript提供的一些类型</h3><h4 id="Any"><a href="#Any" class="headerlink" title="Any"></a>Any</h4><p>有时候我们在定义的时候可能不知道该变量会在之后是什么类型。又或者，我们想要在定义变量之后可以修改该变量的类型。那么，我们就可以使用Any类型。</p>
+<p>任意值（Any）用来表示允许赋值为任意类型。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a: any;</span><br><span class="line">a = <span class="number">1</span>;</span><br><span class="line">a = <span class="string">'hello'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>可能会有点匪夷所思，但是事实上：</p>
+<blockquote>
+<p>在任意值上访问和操作任何属性和方法都是允许的，哪怕该属性和方法从未定义过。</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a: <span class="built_in">any</span> = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a.num); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>如果照着js的思维，那么引擎在执行a.num时，会执行如下操作：</p>
+<ol>
+<li>创建a的基本包装类型对象，也就是new Number(1);</li>
+<li>访问a.num（a的基本包装类型对象中的num属性，当然没有该属性，那么返回undefined）</li>
+<li>销毁该实例（生命周期只会存在一行）</li>
+</ol>
+<p>这样来看，似乎说的通，但是对于undefined和null呢？</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a: <span class="built_in">any</span> = <span class="literal">undefined</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a.num);</span><br></pre></td></tr></table></figure>
+
+<p>我们利用ts-node来运行该段代码，我们会得到如下输出结果</p>
+<blockquote>
+<p>Cannot read property ‘num’ of undefined</p>
+</blockquote>
+<p>但是，他并没有报任何错。</p>
+<p>而将其编译成js代码之后再运行，我们就发现控制台报出了错误：</p>
+<blockquote>
+<p>TypeError: Cannot read property ‘num’ of undefined</p>
+</blockquote>
+<p>因此，我个人认为（因为网上找寻资料未果），我们尽量避免在任意值上操作其本来就不具有的属性和方法。因为，尽管其在TypeScript语法中不会报错，但是当其编译成js代码后可能就会出现错误。</p>
+<p>另外，我们知道TypeScript是JS语法的超集。在ts文件里写js语法是没有任何问题的。</p>
+<p>在js中，我们定义的变量可以是任何类型。因此，在ts中，如果我们在变量定义时没有指定其类型，那么它就会被视为Any（任意值）类型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str;</span><br><span class="line">str = <span class="number">1</span>;</span><br><span class="line">str = <span class="string">'str'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>等同于</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str: <span class="built_in">any</span>;</span><br><span class="line">str = <span class="number">1</span>;</span><br><span class="line">str = <span class="string">'str'</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Void"><a href="#Void" class="headerlink" title="Void"></a>Void</h4><p>我们可以用void来表示空值。在某种程度上,Void类型就像是与Any类型相反，它表示没有任何类型</p>
+<p>在c和java中，我们就经常使用void来表示一个函数没有返回值。同样，TypeScript也是如此：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">v: <span class="built_in">number</span></span>): <span class="title">void</span></span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v);</span><br><span class="line">    <span class="comment">// 没有任何返回值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(<span class="number">1</span>); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>声明一个类型为void类型的变量并没有什么实际的意义。因为，我们只能为其赋予undefined和null（undefined和null是所有类型的子类型），仅此而已。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> v: <span class="built_in">void</span> = <span class="literal">undefined</span>;</span><br></pre></td></tr></table></figure>
+
+<p>因此，我们只需要在函数没有任何返回值的时候使用void的类型即可</p>
+<h4 id="Never类型"><a href="#Never类型" class="headerlink" title="Never类型"></a>Never类型</h4><p>Never类型表示那些永远不会存在的值。与void类型表示空值不同（void表示一个函数没有返回值），never类型用来表示一个函数根本不可能会有返回值</p>
+<p>例如：</p>
+<ol>
+<li><p>函数一直无限运行下去，不会有返回值</p>
+ <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>): <span class="title">never</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数抛出错误，不会有返回值</p>
+ <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>): <span class="title">never</span></span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'error'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>另外,never类型与null和undefined类型是任何类型的子类型，因此也能赋值给任何类型。但是，没有类型是它的子类型，也就是说只有never类型只能被另一个never类型所赋予。</p>
+<h4 id="元组-Tuple"><a href="#元组-Tuple" class="headerlink" title="元组 Tuple"></a>元组 Tuple</h4><p>元组类型用来表示给定已知元素类型和数量的数组，各元素类型不必相同。</p>
+<blockquote>
+<p>使用 :[typeofmember1, typeofmember2] 能够为元组添加类型注解</p>
+</blockquote>
+<p>例如:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> t: [<span class="built_in">string</span>,<span class="built_in">number</span>];</span><br><span class="line">t = [<span class="string">'123'</span>,<span class="number">123</span>];</span><br><span class="line"><span class="built_in">console</span>.log(t); <span class="comment">// ['123',123]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> t[<span class="number">0</span>],<span class="keyword">typeof</span> t[<span class="number">1</span>]); <span class="comment">// string number</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Error</span></span><br><span class="line">t = [<span class="number">123</span>,<span class="string">'123'</span>];</span><br></pre></td></tr></table></figure>
+
+<p>我们可以使用解构来配合元组进行使用</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> t: [<span class="built_in">string</span>,<span class="built_in">number</span>];</span><br><span class="line">t = [<span class="string">'123'</span>,<span class="number">123</span>];</span><br><span class="line"><span class="keyword">let</span> [m,n] = t;</span><br><span class="line"><span class="built_in">console</span>.log(m,n); <span class="comment">// '123' 123</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> m,<span class="keyword">typeof</span> n); <span class="comment">// string number</span></span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是：</p>
+<blockquote>
+<p>当在一个元组中访问一个越界的元素时，该元素的类型会被限制为元组中每个类型的联合类型</p>
+</blockquote>
+<p>也就是说，在上述t这个元组中，当我们访问一个越界元素时，该元素的类型只能是string或者是number</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> t: [<span class="built_in">string</span>,<span class="built_in">number</span>];</span><br><span class="line">t = [<span class="string">'123'</span>,<span class="number">123</span>];</span><br><span class="line">t.push(<span class="string">'nice'</span>);</span><br><span class="line">t.push(<span class="number">5</span>);</span><br><span class="line"><span class="built_in">console</span>.log(t); <span class="comment">// ['123',123,'nice',5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Error（类型“true”的参数不能赋给类型“string | number”的参数）</span></span><br><span class="line">t.push(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="枚举-Enum"><a href="#枚举-Enum" class="headerlink" title="枚举 Enum"></a>枚举 Enum</h4><p>枚举（Enum）类型用于取值被限定在一定范围内的场景，比如一周只能有七天，颜色限定为红绿蓝等。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Week &#123;Sun,Mon,Tue,Wed,Thu,Fri,Sat&#125;</span><br><span class="line"><span class="keyword">enum</span> Colors &#123;red,green,blue&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在，让我们试着输出一下这些枚举变量</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(Colors); <span class="comment">// &#123; '0': 'red', '1': 'green', '2': 'blue', red: 0, green: 1, blue: 2 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以发现，枚举类型变量实际上是一个对象。</p>
+<p>枚举成员会被赋值为从 0 开始递增的数字，同时也会对枚举值到枚举名进行反向映射</p>
+<p>我们查看一下被编译的js文件，我们可以看到枚举类型被编译为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Colors;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">Colors</span>) </span>&#123;</span><br><span class="line">    Colors[Colors[<span class="string">"red"</span>] = <span class="number">0</span>] = <span class="string">"red"</span>;</span><br><span class="line">    Colors[Colors[<span class="string">"green"</span>] = <span class="number">1</span>] = <span class="string">"green"</span>;</span><br><span class="line">    Colors[Colors[<span class="string">"blue"</span>] = <span class="number">2</span>] = <span class="string">"blue"</span>;</span><br><span class="line">&#125;)(Colors || (Colors = &#123;&#125;));</span><br></pre></td></tr></table></figure>
+
+<p>我们来看下这段代码</p>
+<blockquote>
+<p>Colors[Colors[“red”] = 0] = “red”;</p>
+</blockquote>
+<p>很巧妙的写法，在[Colors[“red”] = 0]这里，首先将Colors对象的”red”属性赋值0。又因为赋值表达式的值为等式右边的值，因此，后面的赋值又会变为Colors[0]=”red”。这样，一个赋值表达式就可以达到两个表达式的效果。</p>
+<p>当然，除了默认从0开始为元素编号，我们也可以手动为成员指定自己的编号</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 部分指定枚举成员(未手动赋值的枚举项会接着上一个枚举项递增。)</span></span><br><span class="line"><span class="keyword">enum</span> Colors &#123;red = <span class="number">1</span>, green, blue&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(Colors); <span class="comment">// &#123; '1': 'red', '2': 'green', '3': 'blue', red: 1, green: 2, blue: 3 &#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> Colors &#123;red, green = <span class="number">2</span>, blue&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(Colors); <span class="comment">// &#123; '0': 'red', '2': 'green', '3': 'blue', red: 0, green: 2, blue: 3 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> Colors &#123;red , green = <span class="number">2</span> , blue , black = <span class="number">7</span>&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Colors); <span class="comment">// &#123; '0': 'red', '2': 'green', '3': 'blue', '7': 'black', red: 0, green: 2, blue: 3 , black: 7&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 全部指定</span></span><br><span class="line"><span class="keyword">enum</span> Colors &#123;red = <span class="number">1</span>, green = <span class="number">3</span>, blue = <span class="number">5</span>&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Colors); <span class="comment">// &#123; '1': 'red', '3': 'green', '5': 'blue', red: 1, green: 3, blue: 5 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="接口-interface"><a href="#接口-interface" class="headerlink" title="接口 interface"></a>接口 interface</h4>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/22/ts新手的vscode环境配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -361,8 +666,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/typeScript/" itemprop="url" rel="index">
-                    <span itemprop="name">typeScript</span>
+                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
                   </a>
                 </span>
 
@@ -392,7 +697,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  706
+                  731
                 </span>
               
 
@@ -451,7 +756,8 @@
 </li>
 <li><p>修改配置项</p>
 <p> 因为ts文件会被编译生成一个js文件。因此，为了文件结构的清晰。我们可以创建ts源文件夹和js输出文件夹。并在tsconfig.json文件修改配置项</p>
- <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"outDir"</span>: <span class="string">"./js/"</span>, </span><br><span class="line">    <span class="attr">"rootDir"</span>: <span class="string">"./tscript/"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 以下为我的配置项</p>
+ <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"compilerOptions"</span>: &#123;</span><br><span class="line">        <span class="attr">"target"</span>: <span class="string">"es5"</span>,         </span><br><span class="line">        <span class="attr">"module"</span>: <span class="string">"commonjs"</span>,</span><br><span class="line">        <span class="attr">"sourceMap"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"strict"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"outDir"</span>: <span class="string">"./js/"</span>, </span><br><span class="line">        <span class="attr">"rootDir"</span>: <span class="string">"./tscript/"</span>,</span><br><span class="line">        <span class="attr">"strictNullChecks"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"alwaysStrict"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"esModuleInterop"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
@@ -2774,214 +3080,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/26/super关键字/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/26/super关键字/" itemprop="url">super关键字</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-26T22:15:44+08:00">
-                2019-09-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ES6/" itemprop="url" rel="index">
-                    <span itemprop="name">ES6</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  638
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="super关键字简介"><a href="#super关键字简介" class="headerlink" title="super关键字简介"></a>super关键字简介</h2><p>super关键字用于访问和调用一个对象的父对象上的函数。</p>
-<p><strong>注意的是：</strong></p>
-<blockquote>
-<p>super关键字只能访问和调用函数，而不能访问父对象上的变量</p>
-</blockquote>
-<p>在构造函数中使用时，super关键字作为函数调用将单独出现，并且必须在使用this关键字之前使用。super关键字也可以用来调用父对象上的函数。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre><code>super([arguments]); 
-// 调用 父对象/父类 的构造函数
-
-super.functionOnParent([arguments]); 
-// 调用 父对象/父类 上的方法</code></pre><h2 id="super作为函数调用"><a href="#super作为函数调用" class="headerlink" title="super作为函数调用"></a>super作为函数调用</h2><p>super作为函数调用时，其代表着基类的构造函数。</p>
-<p>此时，它的内部的this指向为当前子类的<strong>实例对象</strong>。</p>
-<p>需要注意的是：</p>
-<ol>
-<li>我们只能在派生类的构造函数中使用super()。如果尝试在非派生类（不是用extends声明的类）或函数中使用则会导致程序错误</li>
-<li>在构造函数中访问this前一定要调用super()，它负责初始化this。也就是说，虽然super()代表着基类的构造函数，但是内部的作用域指向还是当前类的作用域。</li>
-</ol>
-<p>示例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item= item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(item,name) &#123;</span><br><span class="line">        <span class="keyword">super</span>(item);</span><br><span class="line">        <span class="keyword">this</span>.name= name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> son = <span class="keyword">new</span> Son(<span class="number">123</span>,<span class="string">'ming'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(son); <span class="comment">// Son &#123; item: 123, name: 'ming' &#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>上述代码中的super(item)其实相当于super.constructor.call(this)</p>
-<h2 id="super作为对象调用"><a href="#super作为对象调用" class="headerlink" title="super作为对象调用"></a>super作为对象调用</h2><p>super 作为对象时，在普通方法和构造函数中，指向父类的原型对象，在静态方法中指向父类。</p>
-<blockquote>
-<p>super作为对象在普通方法和构造函数中的this指向当前子类的实例对象</p>
-</blockquote>
-<blockquote>
-<p>super作为对象在静态方法中的this指向当前子类，而不是当前子类的对象</p>
-</blockquote>
-<p>接下来验证super作为对象在普通方法中被调用指向的是父类的原型对象</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item= item;</span><br><span class="line">    &#125; </span><br><span class="line">    test() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">123</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">super</span>(item);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">super</span>.test());</span><br><span class="line">    &#125;</span><br><span class="line">    test() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">super</span>.test===A.prototype.test);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = <span class="keyword">new</span> B(<span class="number">123</span>); <span class="comment">// 123</span></span><br><span class="line">b.test(); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>接下来验证super作为对象在静态方法中被调用指向的是父类，而不是父类的原型对象</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> item= <span class="string">'A'</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item= item;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> getItem() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'static'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;</span><br><span class="line">    getItem() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'not static'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> item= <span class="string">'B'</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">super</span>(item);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> getItem() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getItem();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(B.getItem()); <span class="comment">// 'static' , 'B'</span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3034,7 +3132,7 @@ super.functionOnParent([arguments]);
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">123</span>
+                  <span class="site-state-item-count">124</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3115,7 +3213,7 @@ super.functionOnParent([arguments]);
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">101.3k</span>
+    <span title="Site words total count">103.2k</span>
   
 </div>
 
@@ -3145,7 +3243,7 @@ super.functionOnParent([arguments]);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共101.3k字</span>
+  <span class="post-count">博客全站共103.2k字</span>
 </div>
         
 
