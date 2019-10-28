@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.2k
+                  2.8k
                 </span>
               
 
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  10
                 </span>
               
             </div>
@@ -467,7 +467,10 @@
 <p>其中，第1,2,3,4,6行都是同步代码，只有第5行是异步的代码</p>
 <p>以下是任务执行过程:</p>
 <p><img src="https://s2.ax1x.com/2019/09/28/ulg28I.png" alt></p>
-<h4 id="宏任务与微任务"><a href="#宏任务与微任务" class="headerlink" title="宏任务与微任务"></a>宏任务与微任务</h4><p>任务也可以更加被细分为宏任务与微任务两种，具体如下</p>
+<h4 id="宏任务与微任务"><a href="#宏任务与微任务" class="headerlink" title="宏任务与微任务"></a>宏任务与微任务</h4><blockquote>
+<p>异步任务又可以分为宏任务与微任务</p>
+</blockquote>
+<p>对于异步任务，它们也可以更加被细分为宏任务与微任务两种，具体如下</p>
 <ol>
 <li>宏任务(macrotask)：<br> script(整体代码)、setTimeout、setInterval、UI 渲染、 I/O、postMessage、 MessageChannel、setImmediate(Node.js 环境)、ajax、外部请求等</li>
 <li>微任务(microtask)：<br> Promise.then/catch、 MutaionObserver、process.nextTick(Node.js环境）</li>
@@ -497,10 +500,24 @@
 <p>最后，来一段超级复杂的代码</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'1'</span>);</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'2'</span>);</span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'3'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'4'</span>);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'5'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'6'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'7'</span>);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'8'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'9'</span>);</span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'10'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'11'</span>);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'12'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">11</span></span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="number">12</span></span><br></pre></td></tr></table></figure>
 
-<p>另一题：</p>
+<h5 id="注意setTimeout"><a href="#注意setTimeout" class="headerlink" title="注意setTimeout"></a>注意setTimeout</h5><p>我们知道setTimeout也是一个异步api。在每次事件循环中，会检查是否超过了指定事件，如果超过，就会将回调函放入宏任务队列等待被执行</p>
+<p>以下是一个很棒的关于setTimeout宏任务与promise.then微任务的一个例子</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'global'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;i ++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">  &#125;,i*<span class="number">1000</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'promise1'</span>)</span><br><span class="line">  resolve()</span><br><span class="line"> &#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'then1'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'timeout2'</span>)</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timeout2_promise'</span>)</span><br><span class="line">    resolve()</span><br><span class="line">  &#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timeout2_then'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// global 1 2 3 4 5 promise1 then1 6 timeout2 timeout2_promise timeout2_then 6 6 6 6</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><p>我们可以从两个角度去考虑事件循环，不仅仅是上文已经提到的同步与异步，还可以从微任务与宏任务来考虑事件循环</p>
+<h5 id="考虑ajax"><a href="#考虑ajax" class="headerlink" title="考虑ajax"></a>考虑ajax</h5><p>我们现在来讨论下并行ajax的执行过程</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ajax1();</span><br><span class="line">ajax2();</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>宏任务队列出队首任务（&lt;script&gt;整体代码）</li>
+<li>遇到ajax1()，它是一个异步任务，放入event table进行执行</li>
+<li>遇到ajax2()，它是一个异步任务，放入event table进行执行</li>
+<li>event table执行完毕的异步任务返回的回调函数会根据该事件的类型选择进入宏任务队列还是微任务队列（对于以上的ajax1和ajax2，先执行完毕的ajax会先进入宏任务队列）</li>
+<li>事件循环机制检查调用堆栈是否为空，然后不断地去检查事件队列（任务队列）是否为空。如果为空，则继续检查；如果不为空，则将该队列的第一个回调函数压入主线程去进行执行</li>
+</ol>
+<h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><blockquote>
+<p>在一次事件循环中，异步事件返回的结果会被放入到一个任务队列中，但是根据异步事件的类型，需要把事件放入到对应的微任务队列或宏任务队列中。</p>
+</blockquote>
+<p>我们可以从两个角度去考虑事件循环，不仅仅是上文已经提到的同步与异步，还可以从微任务与宏任务来考虑事件循环</p>
 <h3 id="从同步与异步来看事件循环"><a href="#从同步与异步来看事件循环" class="headerlink" title="从同步与异步来看事件循环"></a>从同步与异步来看事件循环</h3><p>如上文提到的所述：</p>
 <ol>
 <li>检查每一个进入主线程的任务，如果为同步任务，那么压入主线程堆栈；如果为异步，将该任务移到event table中，当该异步任务执行完毕后，将异步任务绑定的回调函数移入事件队列（任务队列）中</li>
@@ -526,6 +543,27 @@
 <p><img src="https://s2.ax1x.com/2019/09/28/ulgJUJ.jpg" alt></p>
 <p>总结：</p>
 <p>微任务总是在下一个宏任务之前被执行完毕</p>
+<h3 id="综上"><a href="#综上" class="headerlink" title="综上"></a>综上</h3><p>一次详尽的事件循环的理解：</p>
+<ol>
+<li><p>从宏任务队列中出队列并运行最早的任务（例如“脚本”（第一个任务往往都是script整体代码））</p>
+</li>
+<li><p>检查任务类型</p>
+<p> 如果是同步任务，放入主线程执行栈进行执行；</p>
+<p> 如果为异步任务时，那么就会将该任务放入event table中进行执行。当这些异步任务执行完毕后，会将异步任务的回调函数放入任务队列（event queue）中。</p>
+<blockquote>
+<p>此时，我们需要知道任务队列并不是只有一个队列，它又可以分为宏任务队列和微任务队列；</p>
+</blockquote>
+<p> 引擎可以根据该异步事件的类型，将该异步事件放入指定的宏任务队列或者是微任务队列。</p>
+</li>
+<li><p>检查微任务队列，查看是否存在 Microtask，如果存在则不停的执行，直至清空 microtask 队列</p>
+</li>
+<li><p>更新render(每一次事件循环，浏览器都可能会去更新渲染)</p>
+</li>
+<li><p>如果宏任务队列为空，请等到出现宏任务。</p>
+</li>
+<li><p>回到步骤1</p>
+</li>
+</ol>
 
           
         
@@ -2569,7 +2607,7 @@ sumRange(0, 5) -&gt; -3</code></pre><p>说明:</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">124</span>
+                  <span class="site-state-item-count">123</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2650,7 +2688,7 @@ sumRange(0, 5) -&gt; -3</code></pre><p>说明:</p>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">106.2k</span>
+    <span title="Site words total count">106.7k</span>
   
 </div>
 
@@ -2680,7 +2718,7 @@ sumRange(0, 5) -&gt; -3</code></pre><p>说明:</p>
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共106.2k字</span>
+  <span class="post-count">博客全站共106.7k字</span>
 </div>
         
 
