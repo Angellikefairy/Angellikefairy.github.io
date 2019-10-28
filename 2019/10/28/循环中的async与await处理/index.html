@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="基础语法,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -88,18 +88,17 @@
 
 
 
-<meta name="description" content="引言{}与null相等吗？看一下下面的例子： 1console.log(&amp;#123;&amp;#125;===null); //false  显然，{}与null是不相等的 关于{}与null当我们在浏览器环境下，输入以下代码会发现： 1console.log(&amp;#123;&amp;#125;); // Object &amp;#123;  &amp;#125;  作为比较，当需要输出null时会发现： 1console.log">
-<meta name="keywords" content="基础语法">
+<meta name="description" content="引言之前在做项目的时候，遇到一个场景： 给定了一个数组类似于这样： 123456789[    &amp;#123;        hallId: 1    &amp;#125;,    &amp;#123;        hallId: 2    &amp;#125;,    ...]  需求是这样的，我们需要遍历整个数组，获得每个对象中的hallId值，再通过该ID值请求某接口得到hallName，再将该hallName存入">
 <meta property="og:type" content="article">
-<meta property="og:title" content="null与{}其实不相等">
-<meta property="og:url" content="http://yoursite.com/2019/08/03/空对象/index.html">
+<meta property="og:title" content="循环中的async与await处理">
+<meta property="og:url" content="http://yoursite.com/2019/10/28/循环中的async与await处理/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="引言{}与null相等吗？看一下下面的例子： 1console.log(&amp;#123;&amp;#125;===null); //false  显然，{}与null是不相等的 关于{}与null当我们在浏览器环境下，输入以下代码会发现： 1console.log(&amp;#123;&amp;#125;); // Object &amp;#123;  &amp;#125;  作为比较，当需要输出null时会发现： 1console.log">
+<meta property="og:description" content="引言之前在做项目的时候，遇到一个场景： 给定了一个数组类似于这样： 123456789[    &amp;#123;        hallId: 1    &amp;#125;,    &amp;#123;        hallId: 2    &amp;#125;,    ...]  需求是这样的，我们需要遍历整个数组，获得每个对象中的hallId值，再通过该ID值请求某接口得到hallName，再将该hallName存入">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-04T09:01:54.574Z">
+<meta property="og:updated_time" content="2019-10-28T14:30:38.717Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="null与{}其实不相等">
-<meta name="twitter:description" content="引言{}与null相等吗？看一下下面的例子： 1console.log(&amp;#123;&amp;#125;===null); //false  显然，{}与null是不相等的 关于{}与null当我们在浏览器环境下，输入以下代码会发现： 1console.log(&amp;#123;&amp;#125;); // Object &amp;#123;  &amp;#125;  作为比较，当需要输出null时会发现： 1console.log">
+<meta name="twitter:title" content="循环中的async与await处理">
+<meta name="twitter:description" content="引言之前在做项目的时候，遇到一个场景： 给定了一个数组类似于这样： 123456789[    &amp;#123;        hallId: 1    &amp;#125;,    &amp;#123;        hallId: 2    &amp;#125;,    ...]  需求是这样的，我们需要遍历整个数组，获得每个对象中的hallId值，再通过该ID值请求某接口得到hallName，再将该hallName存入">
 
 
 
@@ -129,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/03/空对象/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/28/循环中的async与await处理/">
 
 
 
 
 
-  <title>null与{}其实不相等 | Hexo</title>
+  <title>循环中的async与await处理 | Hexo</title>
   
 
 
@@ -308,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/空对象/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/28/循环中的async与await处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -325,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">null与{}其实不相等</h1>
+          <h1 class="post-title" itemprop="name headline">循环中的async与await处理</h1>
         
 
         <div class="post-meta">
@@ -337,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T10:57:23+08:00">
-                2019-08-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-28T18:18:25+08:00">
+                2019-10-28
               </time>
             
 
@@ -360,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
-                    <span itemprop="name">javaScript基础</span>
+                  <a href="/categories/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
                   </a>
                 </span>
 
@@ -391,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  179
+                  1.2k
                 </span>
               
 
@@ -407,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  5
                 </span>
               
             </div>
@@ -428,23 +427,79 @@
       
 
       
-        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>{}与null相等吗？看一下下面的例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(&#123;&#125;===<span class="literal">null</span>); <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>之前在做项目的时候，遇到一个场景：</p>
+<p>给定了一个数组类似于这样：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
-<p>显然，{}与null是不相等的</p>
-<h2 id="关于-与null"><a href="#关于-与null" class="headerlink" title="关于{}与null"></a>关于{}与null</h2><p>当我们在浏览器环境下，输入以下代码会发现：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(&#123;&#125;); <span class="comment">// Object &#123;  &#125;</span></span><br></pre></td></tr></table></figure>
+<p>需求是这样的，我们需要遍历整个数组，获得每个对象中的hallId值，再通过该ID值请求某接口得到hallName，再将该hallName存入对象</p>
+<p>结果类似于这样</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">1</span>,</span><br><span class="line">        hallName: <span class="string">'1号'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">2</span>,</span><br><span class="line">        hallName: <span class="string">'2号'</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
-<p>作为比较，当需要输出null时会发现：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span>); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+<p>然后就遇到了循环中使用async和await遇到的一些问题，以下就是探究的过程</p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>我们首先准备要获取的数据</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ha = [</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">3</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hall = [</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">1</span>,</span><br><span class="line">        hallName: <span class="string">'1号'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">2</span>,</span><br><span class="line">        hallName: <span class="string">'2号'</span></span><br><span class="line">    &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">        hallId: <span class="number">3</span>,</span><br><span class="line">        hallName: <span class="string">'3号'</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
-<p>关于是否是空对象，我们可以采用instanceof的方法来检测</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(&#123;&#125; <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>以及使用setTimeout来模拟异步请求</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getHallName</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> v of hall) &#123;</span><br><span class="line">                <span class="keyword">if</span>(v.hallId===id) &#123;</span><br><span class="line">                    resolve(v.hallName);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="number">1000</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>那么，{}这个对象的原型链顶部会是Object，那么{}是一个不完全空的对象，只不过他没有任何属性罢了</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<h2 id="for循环中使用await"><a href="#for循环中使用await" class="headerlink" title="for循环中使用await"></a>for循环中使用await</h2><p>我们首先来看下在for循环中使用await</p>
+<p>我们可以很自然地写出以下异步函数：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> v of ha) &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 执行结果</span></span><br><span class="line"><span class="comment">// 等待1000ms</span></span><br><span class="line"><span class="comment">1号</span></span><br><span class="line"><span class="comment">// 等待1000ms</span></span><br><span class="line"><span class="comment">2号</span></span><br><span class="line"><span class="comment">// 等待1000ms</span></span><br><span class="line"><span class="comment">3号</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
-<p>而null的原型链上都找不到Object，那么null就是一个完完全全的空对象指针</p>
+<h2 id="在forEach中使用await"><a href="#在forEach中使用await" class="headerlink" title="在forEach中使用await"></a>在forEach中使用await</h2><p>一开始的写的异步函数如下</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ha.forEach(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
+
+<p>但是当我们兴致冲冲去查看运行结果的时候却傻了眼，得到的输出结果却是如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SyntaxError: await is only valid in async function</span><br></pre></td></tr></table></figure>
+
+<p>这时候，我们一拍脑袋，回想起来forEach() 方法是对数组的每个元素执行一次提供的函数。</p>
+<p>现在，我又将函数修改为以下的形式</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ha.forEach(<span class="keyword">async</span> v =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
+
+<p>现在结果总该是正确的吧，但是，令人失望的是，结果还是错的</p>
+<p>输出结果如下：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">// 等待1000ms,然后直接输出下面的三项，而不是每一项之间间隔1000ms</span></span><br><span class="line"><span class="comment">1号</span></span><br><span class="line"><span class="comment">2号</span></span><br><span class="line"><span class="comment">3号</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>查阅资料后，才得到了一个结论</p>
+<blockquote>
+<p>JavaScript 中的 forEach不支持 promise 感知，也不支持 async 和await，所以不能在 forEach 使用 await 。</p>
+</blockquote>
+<h2 id="在map中使用await"><a href="#在map中使用await" class="headerlink" title="在map中使用await"></a>在map中使用await</h2><p>既然在forEach中无法使用await，那么map()方法呢？</p>
+<p>这次我们有了forEach()的教训，</p>
+<blockquote>
+<p>map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。</p>
+</blockquote>
+<p>我们就记住了要让提供给map()方法的函数为异步函数</p>
+<p>我们写出来以下的方法来进行试验：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ha.map(<span class="keyword">async</span> v=&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">// 等待1000ms，然后直接一次性输出下列三个值</span></span><br><span class="line"><span class="comment">1号</span></span><br><span class="line"><span class="comment">2号</span></span><br><span class="line"><span class="comment">3号</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我们查看一下mdn文档对于map()方法的说明：</p>
+<blockquote>
+<p>map 方法会给原数组中的每个元素都按顺序调用一次  callback 函数。callback 每次执行后的返回值（包括 undefined）组合起来形成一个新数组。</p>
+</blockquote>
+<p>也就是说，在不考虑返回数组的情况下，map()方法就可以表示为以下的形式</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">map1</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">map2</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">map3</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">map1(ha[<span class="number">0</span>]);</span><br><span class="line">map2(ha[<span class="number">1</span>]);</span><br><span class="line">map3(ha[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>我们首先注册了三个异步函数，然后并行调用了它们。因此，输出结果也就是如上述所述，等待一段时间后，然后按照任务队列中的顺序依次输出</p>
+<p>那么，如果再考虑map()方法的特性，其可以将每次函数执行后的返回值组合起来形成一个新的数组。另外，我们又知道</p>
+<blockquote>
+<p>异步函数返回一个promise对象</p>
+</blockquote>
+<p>因此，使用map()方法就可以返回一个包含promise对象的数组</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="built_in">Promise</span> &#123; &lt;pending&gt; &#125;, <span class="built_in">Promise</span> &#123; &lt;pending&gt; &#125;, <span class="built_in">Promise</span> &#123; &lt;pending&gt; &#125; ]</span><br></pre></td></tr></table></figure>
+
+<p>因此，我们可以利用Promise.all()方法来进行后续的处理</p>
+<p>现在，我们来重写之前的方法</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> promiseArr = ha.map(<span class="keyword">async</span> v =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Promise</span>.all(promiseArr).then( <span class="function"><span class="params">v</span>=&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(v);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">// 等待1000ms</span></span><br><span class="line"><span class="comment">[ '1号', '2号', '3号' ]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>根据以上的分析，我们可以看到：<br>对于async和await来控制异步流程</p>
+<ol>
+<li>如果想要在循环中让异步任务串行（继发运行），那么使用for循环(包括for的一些列循环: for…of , for…in)</li>
+<li>如果想要在循环中让异步任务并行，那么我们除了Promise.all()方法外，还可以使用map()方法来使异步任务并行</li>
+</ol>
 
       
     </div>
@@ -459,12 +514,6 @@
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/基础语法/" rel="tag"># 基础语法</a>
-          
-        </div>
       
 
       <div>
@@ -481,8 +530,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/03/布尔操作符/" rel="next" title="布尔操作符(1&&2和1||2)">
-                <i class="fa fa-chevron-left"></i> 布尔操作符(1&&2和1||2)
+              <a href="/2019/10/28/TypeScript与koa搭建web项目的总结/" rel="next" title="TypeScript与koa搭建web项目的总结">
+                <i class="fa fa-chevron-left"></i> TypeScript与koa搭建web项目的总结
               </a>
             
           </div>
@@ -490,10 +539,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/03/循环/" rel="prev" title="循环 (for...of与for...in)">
-                循环 (for...of与for...in) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -634,7 +679,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于-与null"><span class="nav-number">2.</span> <span class="nav-text">关于{}与null</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前期准备"><span class="nav-number">2.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#for循环中使用await"><span class="nav-number">3.</span> <span class="nav-text">for循环中使用await</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在forEach中使用await"><span class="nav-number">4.</span> <span class="nav-text">在forEach中使用await</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在map中使用await"><span class="nav-number">5.</span> <span class="nav-text">在map中使用await</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a></li></ol></div>
             
 
           </div>
