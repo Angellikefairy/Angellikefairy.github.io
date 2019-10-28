@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  179
+                  328
                 </span>
               
 
@@ -448,6 +448,10 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
 
 <p>而null的原型链上都找不到Object，那么null就是一个完完全全的空对象指针</p>
+<h2 id="更深层次的探讨"><a href="#更深层次的探讨" class="headerlink" title="更深层次的探讨"></a>更深层次的探讨</h2><p>为什么typeof null === object，其实这是一个js早期的bug。</p>
+<p>在早期版本中，值以32位为单位存储，由小型标签（1-3位）和值的实际数据组成。类型标签存储在单元的低位中。 其中有五种：</p>
+<p>000: object. 数据是对象的引用。<br>1: int. 数据是31位有符号整数。<br>010: double. 数据是对双浮点数的引用。<br>100: string. 数据是对字符串的引用。<br>110: boolean. 数据是布尔值。</p>
+<p>那么，而null的类型标签正好与对象一致，因此，typeof null === object</p>
 
           
         
@@ -993,7 +997,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2k
+                  2.2k
                 </span>
               
 
@@ -1009,7 +1013,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  9
                 </span>
               
             </div>
@@ -1076,6 +1080,14 @@
 <p>简单来说，null并不是以Object为原型创建出来的</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> <span class="keyword">instanceof</span> object <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
 
+<h4 id="instanceof基本类型值"><a href="#instanceof基本类型值" class="headerlink" title="instanceof基本类型值"></a>instanceof基本类型值</h4><p>我们知道string,number和boolean基本类型值在被访问的时候可以在一行的生命周期内被转化为基本包装类型，那么使用instanceof来判断这三个可以转化为基本包装类型的基本类型值会怎么样呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span> <span class="keyword">instanceof</span> <span class="built_in">Number</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'nice'</span> <span class="keyword">instanceof</span> <span class="built_in">String</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">true</span> <span class="keyword">instanceof</span> <span class="built_in">String</span>); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">1</span>) <span class="keyword">instanceof</span> <span class="built_in">Number</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'nice'</span>) <span class="keyword">instanceof</span> <span class="built_in">String</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">true</span>) <span class="keyword">instanceof</span> <span class="built_in">Boolean</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到并没有，那么它究竟有没有被转化为基本包装类型呢？</p>
+<p>因此，我们可以得到一个结论：</p>
+<blockquote>
+<p>如果，不需要访问或操作基本类型值的属性和方法，那么它就不会在一行的生命周期里被转化为基本包装类型。</p>
+</blockquote>
 <h4 id="函数模拟instanceof"><a href="#函数模拟instanceof" class="headerlink" title="函数模拟instanceof"></a>函数模拟instanceof</h4><p>知道instaceof的原理是判断构造函数的prototype属性是否出现在对象的原型链中的任何位置时，那么就不难模拟一个函数来实现instanceof</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">instance</span>(<span class="params">obj,construct</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 利用typeof判断obj是否为基本类型值，如果是返回false</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> obj!==<span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>((<span class="keyword">typeof</span> obj!==<span class="string">'object'</span>)||obj===<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 利用Object.prototype.toString.call()来判断construct是否为构造函数，如果不是则返回false</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">Object</span>.prototype.toString.call(construct).slice(<span class="number">8</span>,<span class="number">-1</span>)!==<span class="string">'Function'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断construct的原型对象是否在obj的原型链上</span></span><br><span class="line">  <span class="keyword">let</span> proto = <span class="built_in">Object</span>.getPrototypeOf(obj);</span><br><span class="line">  <span class="keyword">while</span>(proto) &#123;</span><br><span class="line">    <span class="keyword">if</span>(proto===construct.prototype) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      proto = <span class="built_in">Object</span>.getPrototypeOf(proto);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -2560,7 +2572,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">109.5k</span>
+    <span title="Site words total count">109.9k</span>
   
 </div>
 
@@ -2590,7 +2602,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共109.5k字</span>
+  <span class="post-count">博客全站共109.9k字</span>
 </div>
         
 
