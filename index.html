@@ -307,6 +307,313 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/浏览器渲染机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/29/浏览器渲染机制/" itemprop="url">浏览器渲染机制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-29T14:58:30+08:00">
+                2019-10-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/浏览器/" itemprop="url" rel="index">
+                    <span itemprop="name">浏览器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="浏览器渲染步骤"><a href="#浏览器渲染步骤" class="headerlink" title="浏览器渲染步骤"></a>浏览器渲染步骤</h2><p>浏览器的渲染机制一般分为以下几步：</p>
+<ol>
+<li>处理HTML并构建DOM树</li>
+<li>处理CSS构建CSSOM树</li>
+<li>将DOM和CSSOM合并生成Render Tree（渲染树）</li>
+<li>根据渲染树计算节点的位置进行布局</li>
+<li>通过显卡将画面绘制到屏幕上</li>
+</ol>
+<p>一个整体的流程图<br><img src="https://s2.ax1x.com/2019/10/29/KfV1eS.jpg" alt></p>
+<h2 id="DOM树与CSSOM树的生成过程"><a href="#DOM树与CSSOM树的生成过程" class="headerlink" title="DOM树与CSSOM树的生成过程"></a>DOM树与CSSOM树的生成过程</h2><p>DOM树的生成过程（CSSOM树与之类似）：</p>
+<ol>
+<li>转换：浏览器从磁盘或网络上读取HTML的原始字节，并根据文件的指定编码（例如UTF-8）将它们转换为单个字符。</li>
+<li>标记化：浏览器将字符串转换为W3C HTML5标准指定的不同标记；例如“ <html>”，“ <body>”以及尖括号内的其他字符串。每个令牌都有特殊的含义和自己的规则集。</body></html></li>
+<li>节点生成：发出的令牌被转换为“对象”，以定义其属性和规则。</li>
+<li>DOM构造：最后，由于HTML标记定义了不同标记之间的关系（某些标记包含在其他标记中），因此创建的对象以树形数据结构链接，该树数据结构还捕获了原始标记中定义的父子关系：HTML 对象是body对象的父对象，body是段落对象的父 对象，依此类推。</li>
+</ol>
+<p>DOM树示例</p>
+<p><img src="https://s2.ax1x.com/2019/10/29/KRQVC4.png" alt></p>
+<p>CSSOM树示例</p>
+<p><img src="https://s2.ax1x.com/2019/10/29/KRQZ8J.png" alt></p>
+<h2 id="Render-Tree（渲染树）"><a href="#Render-Tree（渲染树）" class="headerlink" title="Render Tree（渲染树）"></a>Render Tree（渲染树）</h2><p>在上面，我们得到了描述页面内容的DOM树和描述页面样式的CSSOM。接下来，我们就得需要将两者进行结合生成Render Tree</p>
+<h3 id="渲染树的生成和渲染步骤"><a href="#渲染树的生成和渲染步骤" class="headerlink" title="渲染树的生成和渲染步骤"></a>渲染树的生成和渲染步骤</h3><ol>
+<li><p>将DOM和CSSOM树合并以形成渲染树</p>
+<pre><code>渲染树的生成步骤：
+1. 从DOM树的根节点开始，采取深度优先遍历的方式（也就是说当前节点的所有子节点都构建好后才会去构建当前节点的下一个兄弟节点）来遍历每一个可见节点
+&gt; 什么是不可见节点： 
+    1. 一些节点不可见（例如，脚本标记，元标记等），由于它们未反映在渲染的输出中，因此将其省略。
+    2. 一些节点通过CSS隐藏，并且在渲染树中也被省略；例如，将一个节点设置了“ display：none”属性。（但是设置visibility: hidden就会将该CSSOM节点和属性添加到渲染树中）
+2. 对于每个可见节点，找到匹配CSSOM规则并应用它们。
+3. 生成具有内容及其计算样式的可见节点。</code></pre></li>
+<li><p>布局：在生成的渲染树中，我们已经可以得知了那些节点是可见的，并且该节点的样式也是已知的。接下来我们需要计算它们在设备视口中的确切位置和大小，这就是“布局”阶段，也称为“重排”。 </p>
+</li>
+<li><p>将各个节点绘制到屏幕上</p>
+</li>
+</ol>
+<p><img src="https://s2.ax1x.com/2019/10/29/KRwEmF.png" alt></p>
+<p>需要注意的是：</p>
+<blockquote>
+<p>Render Tree与DOM树不一定是相同的。虽然，Renter Tree是按照DOM树的节点进行遍历生成的。但是，我们要记住，Render Tree中的所有节点都是可见节点（我们在前面已经提到过什么是不可见节点）。</p>
+</blockquote>
+<h2 id="阻塞渲染"><a href="#阻塞渲染" class="headerlink" title="阻塞渲染"></a>阻塞渲染</h2><p>我们知道HTML会阻塞渲染树的渲染，因为要是没有DOM，渲染树就无法渲染任何内容。那么对于css和JS呢？它们阻塞渲染吗？</p>
+<p>掘金站点的html文档耗时情况<br><img src="https://s2.ax1x.com/2019/10/29/KfZ5j0.png" alt></p>
+<p>我们可以看到阻塞了150ms</p>
+<h3 id="css阻塞渲染"><a href="#css阻塞渲染" class="headerlink" title="css阻塞渲染"></a>css阻塞渲染</h3><p>在默认的情况下，css是阻塞渲染的。</p>
+<p>我们在html文档里引入一个css文件，然后查看一下渲染过程，我们可以看到该css文件是阻塞的</p>
+<p>在构建 CSSOM 树时，会阻塞渲染，直至 CSSOM 树构建完成。并且构建 CSSOM 树是一个十分消耗性能的过程，所以应该尽量保证层级扁平，减少过度层叠，越是具体的 CSS 选择器，执行速度越慢。</p>
+<p><img src="https://s2.ax1x.com/2019/10/29/KRwkOU.png" alt></p>
+<h3 id="js文件阻塞渲染"><a href="#js文件阻塞渲染" class="headerlink" title="js文件阻塞渲染"></a>js文件阻塞渲染</h3><blockquote>
+<p>除非明确声明为异步，否则JavaScript会阻止DOM构建</p>
+</blockquote>
+<h4 id="非异步脚本"><a href="#非异步脚本" class="headerlink" title="非异步脚本"></a>非异步脚本</h4><p>无论我们使用的是&lt;script&gt;内联形式的代码块还是引入外部文件，浏览器都会暂停并执行js脚本，然后才能处理文档的其余部分。</p>
+<p>另外，在使用外部JavaScript文件的情况下，浏览器必须暂停以等待从磁盘，缓存或远程服务器中获取脚本，这可能会增加关键渲染路径的数十到数千毫秒的延迟。</p>
+<p>我们来试验一下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./a.js"</span>&gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<p><img src="https://s2.ax1x.com/2019/10/29/KRwVw4.png" alt></p>
+<h4 id="异步脚本"><a href="#异步脚本" class="headerlink" title="异步脚本"></a>异步脚本</h4><p>HTML5为script元素定义了async属性。该属性可以让js文件异步加载。</p>
+<blockquote>
+<p>async只适用于外部脚本文件</p>
+</blockquote>
+<p>指定async属性的目的是不让页面等待脚本下载和执行，从而异步加载页面其他内容。因此，异步脚本不要在加载期间修改DOM</p>
+<p>另外，异步脚本一定会在页面的load事件前执行。</p>
+<p>来看一下加上async属性，该js脚本是否回阻塞后面的执行：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./a.js"</span>&gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<p><img src="https://s2.ax1x.com/2019/10/29/KRwZTJ.png" alt></p>
+<h2 id="重绘与回流"><a href="#重绘与回流" class="headerlink" title="重绘与回流"></a>重绘与回流</h2><p>重绘与回流的基本概念</p>
+<ol>
+<li><p>当Render Tree中部分或全部元素的尺寸、结构、或某些属性发生改变时，浏览器重新渲染部分或全部文档的过程称为回流。</p>
+</li>
+<li><p>当页面中元素样式的改变并不影响它在文档流中的位置时（例如：color、background-color、visibility等），浏览器会将新样式赋予给元素并重新绘制它，这个过程称为重绘。</p>
+</li>
+</ol>
+<p>由此我们可以得出一个结论：</p>
+<blockquote>
+<p>回流必定会发生重绘，重绘不一定会引发回流。</p>
+</blockquote>
+<p>我们来看一下回流具体发生的场景：</p>
+<ol>
+<li><p>添加或者删除可见的DOM元素；</p>
+</li>
+<li><p>元素位置改变；</p>
+</li>
+<li><p>元素尺寸改变——边距、填充、边框、宽度和高度</p>
+</li>
+<li><p>内容改变——比如文本改变或者图片大小改变而引起的计算值宽度和高度改变；</p>
+</li>
+<li><p>页面渲染初始化；</p>
+</li>
+<li><p>浏览器窗口尺寸改变——resize事件发生时；</p>
+</li>
+<li><p>查询或调用一些会引起回流的属性</p>
+<pre><code>clientWidth、clientHeight、clientTop、clientLeft
+offsetWidth、offsetHeight、offsetTop、offsetLeft
+scrollWidth、scrollHeight、scrollTop、scrollLeft
+scrollIntoView()、scrollIntoViewIfNeeded()
+getComputedStyle()
+getBoundingClientRect()
+scrollTo()</code></pre></li>
+</ol>
+<h3 id="重绘与回流的开销"><a href="#重绘与回流的开销" class="headerlink" title="重绘与回流的开销"></a>重绘与回流的开销</h3><blockquote>
+<p>回流比重绘的开销要更大。</p>
+</blockquote>
+<p>另外，回流的开销也会因为操作的不同而有可能相差很大</p>
+<p>假如，我们直接操纵body，并且在body前插入一个元素，那么整个Render Tree都会被重新构建</p>
+<p>而如果只是在Render Tree的叶子节点后插入一个节点，那么前面的所有节点都不会影响。因此，开销会比上一个回流的开销小得多。</p>
+<h3 id="减少重绘与回流（性能提高）"><a href="#减少重绘与回流（性能提高）" class="headerlink" title="减少重绘与回流（性能提高）"></a>减少重绘与回流（性能提高）</h3><h4 id="对于css"><a href="#对于css" class="headerlink" title="对于css"></a>对于css</h4><ol>
+<li><p>避免使用table布局。 由于浏览器使用流式布局，对Render Tree的计算通常只需要遍历一次就可以完成，但table及其内部元素除外，他们可能需要多次计算，通常要花3倍于同等元素的时间。</p>
+</li>
+<li><p>使用 visibility：0 替换 display: none ，因为前者只会引起重绘，后者会引发回流（改变了布局–渲染树不会生成该节点）</p>
+</li>
+<li><p>CSS 选择符从右往左匹配查找，避免 DOM 深度过深</p>
+</li>
+<li><p>避免使用CSS表达式（例如：calc()）</p>
+</li>
+</ol>
+<h4 id="对于js"><a href="#对于js" class="headerlink" title="对于js"></a>对于js</h4><ol>
+<li><p>避免频繁操作样式，最好一次性重写style属性，或者将样式列表定义为class并一次性更改class属性。</p>
+</li>
+<li><p>避免频繁操作DOM，创建一个documentFragment，在它上面应用所有DOM操作，最后再把它添加到文档中。</p>
+</li>
+<li><p>避免频繁读取会引发回流/重绘的属性，如果确实需要多次使用，就用一个变量缓存起来。</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">    <span class="comment">// 获取 offsetTop 会导致回流，因为需要去获取正确的值</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">document</span>.querySelector(<span class="string">'.test'</span>).style.offsetTop)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>也可以先为元素设置display: none，操作结束后再把它显示出来。因为在display属性为none的元素上进行的DOM操作不会引发回流和重绘（因为将display属性设置为none的节点为不可见节点，不可见节点不会被添加到渲染树中）。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/28/循环中的async与await处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2898,353 +3205,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/07/跨域与解决方案/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/07/跨域与解决方案/" itemprop="url">跨域与解决方案</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-07T16:11:53+08:00">
-                2019-10-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/浏览器/" itemprop="url" rel="index">
-                    <span itemprop="name">浏览器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2.8k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  11
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h2><p>通过XHR对象来实现Ajax通信的一个主要限制，来源于跨域安全策略。在默认的情况下，XHR对象只能访问与包含它的页面位于同一个域中的资源。</p>
-<p>那么，什么样的情况算是同一个域，什么样的情况算是不同的域呢？</p>
-<h3 id="同源"><a href="#同源" class="headerlink" title="同源"></a>同源</h3><p>所谓同源（即指在同一个域）就是两个页面具有相同的协议（包括HTTP和HTTPS），主机（host）和端口号（port）</p>
-<h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p>当一个请求url的协议、域名、端口三者之间任意一个与当前页面url不同即为跨域</p>
-<h3 id="域名层次"><a href="#域名层次" class="headerlink" title="域名层次"></a>域名层次</h3><h4 id="域名语法"><a href="#域名语法" class="headerlink" title="域名语法"></a>域名语法</h4><p>域名由一或多个部分组成，这些部分通常连接在一起，并由点分隔，例如zh.wikipedia.org。最右边的一个标签是顶级域名，例如zh.wikipedia.org的顶级域名是org。一个域名的层次结构，从右侧到左侧隔一个点依次下降一层。</p>
-<h4 id="顶级域名"><a href="#顶级域名" class="headerlink" title="顶级域名"></a>顶级域名</h4><p>顶级域名是域名中最高的一级，每个域名都以顶级域名结尾。</p>
-<h4 id="子域名"><a href="#子域名" class="headerlink" title="子域名"></a>子域名</h4><p>子域名将顶级域名进一步细分。域名层次结构中，顶级域名下面是二级域名，它位于顶级域名的左侧。例如，在zh.wikipedia.org中，wikipedia是二级域名。w3.org中，w3也是二级域名，与前例中的wikipedia属于一个层面。</p>
-<p>二级域名下面是三级域名，它位于二级域名的左侧。例如，在zh.wikipedia.org中，zh是三级域名；zh-classical.wikipedia.org（文言文维基大典的域名）中，zh-classical也是三级域名，与前例中的zh属于一个层面。从右侧到左侧，隔一个点依次下降一层。</p>
-<h3 id="常见跨域场景"><a href="#常见跨域场景" class="headerlink" title="常见跨域场景"></a>常见跨域场景</h3><table>
-<thead>
-<tr>
-<th>当前页面URL</th>
-<th>请求页面URL</th>
-<th>是否跨域</th>
-<th>原因</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="http://www.example.com/a.js" target="_blank" rel="noopener">http://www.example.com/a.js</a></td>
-<td><a href="http://www.example.com/b.js" target="_blank" rel="noopener">http://www.example.com/b.js</a></td>
-<td>否</td>
-<td>协议、域名、端口号均相同</td>
-</tr>
-<tr>
-<td><a href="http://www.example.com/a.js" target="_blank" rel="noopener">http://www.example.com/a.js</a></td>
-<td><a href="https://www.example.com/b.js" target="_blank" rel="noopener">https://www.example.com/b.js</a></td>
-<td>是</td>
-<td>协议不同（http与https）</td>
-</tr>
-<tr>
-<td><a href="http://www.example.com/a.js" target="_blank" rel="noopener">http://www.example.com/a.js</a></td>
-<td><a href="http://www.test.com/b.js" target="_blank" rel="noopener">http://www.test.com/b.js</a></td>
-<td>是</td>
-<td>域名不同</td>
-</tr>
-<tr>
-<td><a href="http://www.example.com/a.js" target="_blank" rel="noopener">http://www.example.com/a.js</a></td>
-<td><a href="http://www.blog.example.com/b.js" target="_blank" rel="noopener">http://www.blog.example.com/b.js</a></td>
-<td>是</td>
-<td>主域名相同，但子域名不同</td>
-</tr>
-<tr>
-<td><a href="http://www.example.com/a.js" target="_blank" rel="noopener">http://www.example.com/a.js</a></td>
-<td><a href="http://192.168.56.1/b.js" target="_blank" rel="noopener">http://192.168.56.1/b.js</a></td>
-<td>是</td>
-<td>域名与其对应ip地址之间的请求也算跨域</td>
-</tr>
-<tr>
-<td><a href="http://www.example.com" target="_blank" rel="noopener">http://www.example.com</a></td>
-<td><a href="http://www.example.com:8888/b.js" target="_blank" rel="noopener">http://www.example.com:8888/b.js</a></td>
-<td>是</td>
-<td>端口不同</td>
-</tr>
-</tbody></table>
-<h2 id="跨域解决方案"><a href="#跨域解决方案" class="headerlink" title="跨域解决方案"></a>跨域解决方案</h2><h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><h4 id="什么是JSONP"><a href="#什么是JSONP" class="headerlink" title="什么是JSONP"></a>什么是JSONP</h4><p>JSONP是JSON with padding（填充式JSON或参数是JSON）的简写，是应用JSON的一种新方法。JSONP看起来与JSON差不多，只不过是被包含在函数调用中的JSON，例如</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">callback(&#123;<span class="string">"name"</span>:<span class="string">"Ming"</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>JSONP由两部分组成：回调函数以及传递给回调函数的参数JSON字符串</p>
-<h4 id="JSONP的原理及具体实现过程"><a href="#JSONP的原理及具体实现过程" class="headerlink" title="JSONP的原理及具体实现过程"></a>JSONP的原理及具体实现过程</h4><ol>
-<li><p>因为&lt;script&gt;元素可以不受限制地从其他域加载资源。因此<br>我们可以在web端通过动态&lt;script&gt;来实现一个JSONP请求，例如</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">script.src = <span class="string">'http://localhost:8888/getTestData?callback=handle'</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过上一步，我们就可以引入<a href="http://localhost:8888/getTestData?callback=handle该文件，同时将参数callback发送给服务器" target="_blank" rel="noopener">http://localhost:8888/getTestData?callback=handle该文件，同时将参数callback发送给服务器</a></p>
-</li>
-<li><p>因为script标签内需要可执行的javascript代码，因此我们可以知道使用JSONP是需要后端配合的，后端需要返回一个javascript类型数据才可以。我们通过express来模拟返回一下数据</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">let</span> app = express();</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/getTestData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res,next</span>) </span>&#123;</span><br><span class="line"><span class="keyword">let</span> _callback = req.query.callback;</span><br><span class="line"><span class="keyword">let</span> _data = &#123;</span><br><span class="line">    <span class="string">"code"</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">"msg"</span>: <span class="string">'hello world'</span></span><br><span class="line">&#125;;</span><br><span class="line">res.type(<span class="string">'text/javascript'</span>);</span><br><span class="line">res.send(_callback+<span class="string">'('</span>+<span class="built_in">JSON</span>.stringify(_data)+<span class="string">')'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p> 我们可以看到，服务器会接收到我们请求的参数，也就是回调函数名callback；接着，服务器生成_data数据，将其序列化后作为参数传入callback函数并返回给前端（注意的是，返回的内容类型是javascript代码）</p>
-</li>
-<li><p>收到服务器返回的javascript代码，也就是一个准备执行的已传入参数的函数。（需要注意的是，script标签内的代码会成为全局代码，也就是该函数会成为全局函数）</p>
-</li>
-<li><p>因此，如果我们在使用模块化开发的时候，模块内的代码都是局部代码，因此，我们需要注册一个全局的callback函数让服务器返回的Javascript代码可以执行。同时，我们的业务逻辑也就可以写在这个callback函数中。例如：</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.handle = <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>捕获错误：我们可以使用onerror事件处理程序来确定JSONP请求是否成功</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">script.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'error'</span>,err);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h4 id="JSONP的前后端代码示例"><a href="#JSONP的前后端代码示例" class="headerlink" title="JSONP的前后端代码示例"></a>JSONP的前后端代码示例</h4><h5 id="前端代码"><a href="#前端代码" class="headerlink" title="前端代码"></a>前端代码</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.handle = <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.console.log(res.code);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">script.src = <span class="string">'http://localhost:8888/getTestData?callback=handle'</span>;</span><br><span class="line">script.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'error'</span>,err);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(script);</span><br></pre></td></tr></table></figure>
-
-<h5 id="Node-js代码"><a href="#Node-js代码" class="headerlink" title="Node.js代码"></a>Node.js代码</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">let</span> app = express();</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/getTestData'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res,next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> _callback = req.query.callback;</span><br><span class="line">  <span class="keyword">let</span> _data = &#123;</span><br><span class="line">    code: <span class="number">0</span>,</span><br><span class="line">    msg: <span class="string">'hello world'</span></span><br><span class="line">  &#125;;</span><br><span class="line">  res.type(<span class="string">'text/javascript'</span>);</span><br><span class="line">  res.send(_callback+<span class="string">'('</span>+<span class="built_in">JSON</span>.stringify(_data)+<span class="string">')'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="JSONP的一些个人思考"><a href="#JSONP的一些个人思考" class="headerlink" title="JSONP的一些个人思考"></a>JSONP的一些个人思考</h4><ol>
-<li>为什么后端返回的javascript代码中传给函数的参数是JSON而不是javascript对象？<br>关于这个，我们要记住，JSON数据是我们的要获取的东西（json易于人阅读和编写，也易于机器解析和生成，相对网络传输速率较高，因此，进行数据交换我们一般使用JSON），而JSONP是我们获取JSON数据的手段。</li>
-<li>JSONP能够直接访问响应文本，并且支持在浏览器与服务器之间双向通信</li>
-<li>可以看到，JSONP只支持GET请求</li>
-</ol>
-<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>CORS （Cross-Origin Resource Sharing，跨域资源共享）是一个系统，它由一系列传输的HTTP头组成，这些HTTP头决定浏览器是否阻止前端 JavaScript 代码获取跨域请求的响应。</p>
-<p>同源安全策略 默认阻止“跨域”获取资源。但是 CORS 给了web服务器这样的权限，即服务器可以选择，允许跨域请求访问到它们的资源。</p>
-<h4 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h4><p>某些请求不会触发CORS预检请求，这样的请求被视为简单请求。</p>
-<p>满足以下条件之一就被视为简单请求</p>
-<ol>
-<li><p>使用下列方法之一：</p>
-<p> GET<br> HEAD<br> POST</p>
-</li>
-<li><p>Content-Type 的值仅限于下列三者之一：</p>
-<p> text/plain<br> multipart/form-data<br> application/x-www-form-urlencoded</p>
-</li>
-</ol>
-<p>目前浏览器基本都实现了XHR对象对CORS的原生支持。因此，对于简单请求，浏览器就会直接发出CORS请求，具体来说，就是会在请求的头信息中，增加一个Origin字段来表示请求源</p>
-<p>我们查看一下请求报文就可以发现，在请求报文中会多出一个字段origin来说明请求的源；在响应报文中会多出一个字段Access-Control-Allow-Origin:*来允许所有的源进行跨域；当然也可以设置这个字段只允许一个或几个域才可以跨域</p>
-<p><strong>请求报文与响应报文</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">GET /resources/public-data/ HTTP/1.1</span><br><span class="line">Host: bar.other</span><br><span class="line">User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line">Accept-Language: en-us,en;q=0.5</span><br><span class="line">Accept-Encoding: gzip,deflate</span><br><span class="line">Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Referer: http://foo.example/examples/access-control/simpleXSInvocation.html</span><br><span class="line"></span><br><span class="line">// origin</span><br><span class="line">Origin: http://foo.example</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Mon, 01 Dec 2008 00:23:53 GMT</span><br><span class="line">Server: Apache/2.0.61</span><br><span class="line"></span><br><span class="line">// Access-Control-Allow-Origin</span><br><span class="line">Access-Control-Allow-Origin: *</span><br><span class="line">Keep-Alive: timeout=2, max=100</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Content-Type: application/xml</span><br><span class="line"></span><br><span class="line">[XML Data]</span><br></pre></td></tr></table></figure>
-
-<h4 id="非简单请求（预检请求）"><a href="#非简单请求（预检请求）" class="headerlink" title="非简单请求（预检请求）"></a>非简单请求（预检请求）</h4><p>与简单请求不同，非简单请求（预检请求）会要求使用OPTIONS方法预先发送一个预检请求给服务器，以货值服务器是否允许该实际请求。预检请求的使用，可以一定程度上来避免跨域请求对服务器的用户数据产生未预期的影响</p>
-<p>当请求满足以下任一条件时，就会发送预检请求</p>
-<ol>
-<li><p>使用了下面任一HTTP方法</p>
-<ol>
-<li>PUT</li>
-<li>DELETE</li>
-<li>CONNECT</li>
-<li>OPTIONS</li>
-<li>TRACE</li>
-<li>PATCH</li>
-</ol>
-</li>
-<li><p>人为设置了对 CORS 安全的首部字段集合之外的其他首部字段。该集合为：</p>
-<p> Accept<br> Accept-Language<br> Content-Language<br> Content-Type (需要注意额外的限制)<br> DPR<br> Downlink<br> Save-Data<br> Viewport-Width<br> Width</p>
-</li>
-<li><p>Content-Type 的值不属于下列之一:</p>
-<ol>
-<li>application/ x-www-form-urlencoded</li>
-<li>multipart/form-data</li>
-<li>text/plain</li>
-</ol>
-</li>
-</ol>
-<p>非简单请求（预检请求）的示意图如下：</p>
-<p><img src="https://mdn.mozillademos.org/files/16753/preflight_correct.png" alt></p>
-<h3 id="node中间件代理"><a href="#node中间件代理" class="headerlink" title="node中间件代理"></a>node中间件代理</h3><p>node中间件实现跨域代理，是通过启一个代理服务器，实现数据的转发</p>
-<p>前端所在的域与node代理服务器处在同一个域上，所有发送给代理服务器的请求都会被该服务器代理并转发给预先设定的服务器地址</p>
-<h4 id="前端请求"><a href="#前端请求" class="headerlink" title="前端请求"></a>前端请求</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState===<span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(xhr.status&gt;=<span class="number">200</span>&amp;&amp;xhr.status&lt;<span class="number">300</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(xhr.responseText);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'error'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.open(<span class="string">'get'</span>,<span class="string">'http://localhost:3000'</span>,<span class="literal">true</span>);</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
-
-<h4 id="node代理服务器"><a href="#node代理服务器" class="headerlink" title="node代理服务器"></a>node代理服务器</h4><p>利用http-proxy-middleware该中间件实现代理服务器</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="built_in">require</span>(<span class="string">'http-proxy-middleware'</span>)</span><br><span class="line"><span class="keyword">let</span> app = express();</span><br><span class="line"></span><br><span class="line">app.use(<span class="string">'/'</span>,proxy(&#123;</span><br><span class="line">  target: <span class="string">'http://localhost:3000'</span>,</span><br><span class="line">  changeOrigin: <span class="literal">true</span></span><br><span class="line">&#125;))</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">8080</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'8080端口已打开'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="node-js后端"><a href="#node-js后端" class="headerlink" title="node.js后端"></a>node.js后端</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> app = express();</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>,(req,res)=&gt;&#123;</span><br><span class="line">    res.send(<span class="string">'hello'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'3000端口已打开'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>这样我们就可以通过代理服务器进行跨域请求</p>
-<h3 id="webpack配置跨域"><a href="#webpack配置跨域" class="headerlink" title="webpack配置跨域"></a>webpack配置跨域</h3><p>类似Vue这些框架都会用webpack进行打包。webpack中可以引入webpack-dev-server来进行服务器相关的配置。</p>
-<p>与上述node中间件使用http-proxy-middleware 包一样，该dev-server也使用了该包，因此语法也是一样的</p>
-<p>我们可以在webpack.config.js进行跨域相关的配置</p>
-<p>webpack.config.js的跨域配置</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">devServer : &#123;</span><br><span class="line">    proxy: &#123;</span><br><span class="line">        <span class="string">"/api"</span>: &#123;</span><br><span class="line">            target: <span class="string">"http://localhost:3000"</span>,</span><br><span class="line">            pathRewrite: &#123;<span class="string">"^/api"</span>: <span class="string">""</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>前端请求</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState===<span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(xhr.status&gt;=<span class="number">200</span>&amp;&amp;xhr.status&lt;<span class="number">300</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(xhr.responseText);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'error'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.open(<span class="string">'get'</span>,<span class="string">'/api/hello'</span>,<span class="literal">true</span>);</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
-
-<p>后端node接口</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> app = express();</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/hello'</span>,(req,res)=&gt;&#123;</span><br><span class="line">    res.setHeader(<span class="string">'Content-type'</span>,<span class="string">'application/json'</span>);</span><br><span class="line">    res.send(<span class="string">'hello'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'3000端口已打开'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>此时，请求”/api/hello”就会被代理到”<a href="http://localhost:3000/hello&quot;" target="_blank" rel="noopener">http://localhost:3000/hello&quot;</a></p>
-<h4 id="配置中的主要参数说明"><a href="#配置中的主要参数说明" class="headerlink" title="配置中的主要参数说明"></a>配置中的主要参数说明</h4><ol>
-<li><p>‘/api’</p>
-<p> 如果请求中有该字符串’/api’，那么就会开始匹配代理。比如，api请求’/api/hello’，就会被代理到请求’<a href="http://localhost:3000/api/hello&#39;" target="_blank" rel="noopener">http://localhost:3000/api/hello&#39;</a></p>
-</li>
-<li><p>target</p>
-<p> 代理的API地址。地址可以是域名也可以是IP地址，如果是域名就需要额外添加一个参数changeOrigin: true</p>
-</li>
-<li><p>pathRewrite</p>
-<p> 路径重写，也就是说会修改最终请求的API路径。设置pathRewrite:{‘^/api’:’’}后，最终代理访问的路径就会是’<a href="http://localhost:3000/hello&#39;" target="_blank" rel="noopener">http://localhost:3000/hello&#39;</a></p>
-</li>
-<li><p>changeOrigin</p>
-<p> 该参数可以让target参数是域名</p>
-</li>
-<li><p>secure</p>
-<p> secure: false，不检查安全问题；设置后，可以接受运行在https上，可以使用无效证书的后端服务器</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3297,7 +3257,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">125</span>
+                  <span class="site-state-item-count">126</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3378,7 +3338,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">109.9k</span>
+    <span title="Site words total count">112k</span>
   
 </div>
 
@@ -3408,7 +3368,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共109.9k字</span>
+  <span class="post-count">博客全站共112k字</span>
 </div>
         
 
