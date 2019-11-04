@@ -307,6 +307,604 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/03/node-js的事件循环机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/03/node-js的事件循环机制/" itemprop="url">node.js的事件循环机制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T15:20:19+08:00">
+                2019-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  15
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是事件循环"><a href="#什么是事件循环" class="headerlink" title="什么是事件循环"></a>什么是事件循环</h2><p>之前，我们了解了浏览器中的事件循环机制。现在，我们来看一下Node中的事件循环机制。</p>
+<p>来自于Node官网的解释：</p>
+<blockquote>
+<p>The event loop is what allows Node.js to perform non-blocking I/O operations — despite the fact that JavaScript is single-threaded — by offloading operations to the system kernel whenever possible.</p>
+</blockquote>
+<p>大致意思是，事件循环可以使Node.js通过将操作转移到系统内核中来执行非阻塞I / O操作（尽管JavaScript是单线程的）。</p>
+<p>另外，我们需要知道，Node事件循环的概念与浏览器事件循环的概念类似，都是用来处理异步任务的。虽然异步任务必须要等到主线程执行堆栈中的任务执行完毕后才能被执行，但是，事件循环在进程启动的时候就会被创建。</p>
+<h2 id="事件循环的流程"><a href="#事件循环的流程" class="headerlink" title="事件循环的流程"></a>事件循环的流程</h2><p>在进程启动时，Node便会创建一个类似于While(true)的循环，每执行一次循环体的过程我们称之为Tick。在每个Tick中，我们查看是否还有事件待处理，如果有，那么就取出该事件及其相关回调函数。如果存在关联的回调函数就执行它们。然后再进入下一个循环，如果不再有事件处理，那么就退出该循环。</p>
+<p>流程图如下：</p>
+<p><img src="https://s2.ax1x.com/2019/11/03/KXUgYR.png" alt></p>
+<h2 id="事件循环的详细步骤"><a href="#事件循环的详细步骤" class="headerlink" title="事件循环的详细步骤"></a>事件循环的详细步骤</h2><p>每一个事件循环都会包含以下6个阶段</p>
+<p><img src="https://s2.ax1x.com/2019/11/03/KXduKf.png" alt></p>
+<p>每个阶段都有一个当前阶段要执行的回调FIFO（先进先出）队列。虽然每个阶段都有其自己的特殊方式，但是通常，当事件循环进入给定阶段时，它将执行该阶段特定的任何操作，然后在该阶段的队列中执行回调，直到队列用尽或回调的最大数量为止。当队列已用完或达到回调限制时，事件循环将移至下一个阶段，依此类推。</p>
+<h3 id="阶段概述"><a href="#阶段概述" class="headerlink" title="阶段概述"></a>阶段概述</h3><ol>
+<li><p>timers阶段：该阶段执行setTimeout和setInterval设定的回调函数</p>
+</li>
+<li><p>pending callbacks阶段： 此阶段执行某些系统操作的回调，例如TCP错误的类型。例如，如果ECONNREFUSED尝试连接时收到TCP套接字，则某些* nix系统希望等待报告错误。这将排队等待在挂起的回调阶段执行。</p>
+</li>
+<li><p>idle,prepare阶段：该阶段仅在内部使用，我们不用关心</p>
+</li>
+<li><p>poll阶段：</p>
+<ol>
+<li>检索新的I / O事件；</li>
+<li>执行与I / O相关的回调（除了close回调，计时器安排的回调和setImmediate()的回调）；</li>
+<li>适当时，Node将在此处阻塞。</li>
+</ol>
+</li>
+<li><p>check阶段：执行setImmediate()设置的回调</p>
+</li>
+<li><p>close callbacks阶段： 一些监听事件结束的回调，例如socket.destroy()和socket.on(‘close’, callback)等等</p>
+</li>
+</ol>
+<h3 id="需要详细说明的几个阶段"><a href="#需要详细说明的几个阶段" class="headerlink" title="需要详细说明的几个阶段"></a>需要详细说明的几个阶段</h3><h4 id="timers阶段"><a href="#timers阶段" class="headerlink" title="timers阶段"></a>timers阶段</h4><p>我们在阶段概述的时候就提到过，该阶段用来执行setTimeout和setInterval设定的回调函数。</p>
+<p>我们也知道，Node无法保证在定时器设定的时间正好响应该回调函数。那个时间更准确地说来，应该是当Node监听到当前时间已经过了预期设定的事件，那么就将该回调函数放到主线程执行队列去等待执行。</p>
+<p>另外，我们需要知道的是，从技术上来说，计时器的执行时间是由poll阶段来控制的（具体内容我们在poll阶段来详细说明）。</p>
+<h4 id="poll阶段"><a href="#poll阶段" class="headerlink" title="poll阶段"></a>poll阶段</h4><p>poll阶段主要有2个功能：</p>
+<ol>
+<li>处理poll队列的事件的回调</li>
+<li>当有已超时的timer（定时器），那么就转去timers阶段执行定时器设定的回调函数（这一个功能是有条件的，条件是此时的poll阶段必须为空闲状态，事件循环才会去查看当前是否有已超时的定时器。否则，事件循环会同步执行poll队列里的回调函数）</li>
+</ol>
+<p>以下为详细说明：</p>
+<p>如果事件循环进入了poll阶段，并且当前代码中没有设定定时器，那么就会发生以下两种情况：</p>
+<ul>
+<li><p>如果poll队列不为空，那么事件循环将会同步执行poll队列里的回调函数直到清空队列或者执行的回调数量到达规定的上限</p>
+</li>
+<li><p>如果poll队列为空，那么事件循环就会去检查是否有设定setImmediate()</p>
+<ol>
+<li>如果设定了setImmediate()，那么事件循环将立刻结束当前的poll阶段，并转入下一个check阶段执行check阶段的队列中的回调（check阶段中的队列包含的是setImmediate()的回调）</li>
+<li>如果没有设定setImmediate()，那么事件循环则会阻塞在该阶段等待回调加入队列中（其中阻塞是有超时时间的，当阻塞的时间超过超时时间，那么还未执行的回调只能在下一轮或更后面的事件循环中被执行）</li>
+</ol>
+</li>
+</ul>
+<p>一旦poll任务队列为空，那么事件循环将会检查timers，如果有一个或多个定时器准备就绪，那么事件循环将会离开当前阶段并进入下一轮事件循环，在timers阶段去执行timers任务队列中的回调</p>
+<h4 id="check阶段"><a href="#check阶段" class="headerlink" title="check阶段"></a>check阶段</h4><p>setImmediate()的回调会被加入check队列中，然后当事件循环进入check阶段时同步执行队列中的回调</p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>事件循环的每个阶段都有对应的任务队列。当异步任务完成后，它们所对应的回调函数将会根据异步任务的类型进入相应的任务队列。例如：</p>
+<ul>
+<li>定时器任务的回调进入timers阶段的任务<br>队列</li>
+<li>异步I/O的回调进入poll阶段的任务队列</li>
+<li>setImmediate的回调进入chck阶段的任务队列</li>
+</ul>
+<p>另外，对于上述复杂的poll阶段的规则。</p>
+<p>我们可以总结得到：</p>
+<ul>
+<li>如果事件循环进入poll阶段时有任务，那么同步执行完所有的回调；</li>
+<li>如果没有，那么查看是否有setImmediate，<ol>
+<li>如果有，那么离开poll阶段进入下一个check阶段；</li>
+<li>如果没有，那么Node进入阻塞状态，同时不断检查Timers阶段任务队列是否有任务，<ul>
+<li>如果有那么离开当前阶段去到Timers阶段执行回调；</li>
+<li>如果没有，那么一直保持阻塞状态直到有异步I/O的回调加入任务队列或者设置的限制阻塞的超时时间已到</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p>简单来说: 能够退出poll阶段阻塞态的只有以下几种方式</p>
+<ol>
+<li>阻塞时间超过了设定的超时时间</li>
+<li>在阻塞状态时检查到timers队列中有任务</li>
+<li>设定了setImmediate</li>
+</ol>
+<p>说了那么多，我们来看一下一个例子，就应该较好地理解Node中的事件循环机制</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 程序开始时间</span></span><br><span class="line"><span class="keyword">let</span> startTime = <span class="built_in">Date</span>.now();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Node中读取文件的异步API</span></span><br><span class="line">fs.readFile(<span class="string">'./a.js'</span>,<span class="string">'utf-8'</span>,(err,data)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'readFileTime'</span>,<span class="built_in">Date</span>.now()-startTime);</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'error'</span>);</span><br><span class="line">    <span class="keyword">return</span> data;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定时器</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timeout'</span>,<span class="built_in">Date</span>.now()-startTime);</span><br><span class="line">&#125;,<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// setImmediate()</span></span><br><span class="line">setImmediate(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'immediate'</span>,<span class="built_in">Date</span>.now()-startTime);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>来看下输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">immediate 2</span><br><span class="line">readFileTime 10</span><br><span class="line">timeout 54</span><br></pre></td></tr></table></figure>
+
+<h2 id="setTimeout与setImmediate"><a href="#setTimeout与setImmediate" class="headerlink" title="setTimeout与setImmediate"></a>setTimeout与setImmediate</h2><p>在上面我们已经知道了setTimeout设定的回调会在timers阶段被执行，而setImmediate设定的回调会在check阶段被执行。</p>
+<p>那么，接下来我们来看一段程序：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timeout'</span>);</span><br><span class="line">&#125;,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">setImmediate(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'immediate'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>事实上，这段代码的运行结果不是唯一的。主要是两个输出语句的输出顺序是不一定的。</p>
+<p>有可能是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">timeout</span><br><span class="line">immediate</span><br></pre></td></tr></table></figure>
+
+<p>但也有可能是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">immediate</span><br><span class="line">timeout</span><br></pre></td></tr></table></figure>
+
+<p>但是，如果我们在一次I/O中在运行调用setTimeout和setImmediate，我们会发现setImmediate的回调永远比setTimeout的回调先执行</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">'./a.js'</span>,<span class="string">'utf-8'</span>,()=&gt;&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timeout'</span>);</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    setImmediate(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'immediate'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">immediate</span></span><br><span class="line"><span class="comment">timeout</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>那么，这是为什么呢?</p>
+<p>搬用cnode社区里的一个大神的回答</p>
+<pre><code>在node中，setTimeout(cb, 0) === setTimeout(cb, 1);
+而setImmediately属于uv_run_check的部分
+确实每次loop进来，都是先检查uv_run_timer的，但是由于cpu工作耗费时间，比如第一次获取的hrtime为0
+那么setTimeout(cb, 1)，超时时间就是loop-&gt;time = 1(ms，node定时器精确到1ms，但是hrtime是精确到纳秒级别的)
+所以第一次loop进来的时候就有两种情况：
+
+1.由于第一次loop前的准备耗时超过1ms，当前的loop-&gt;time &gt;=1 ，则uv_run_timer生效，timeout先执行
+2.由于第一次loop前的准备耗时小于1ms，当前的loop-&gt;time = 0，则本次loop中的第一次uv_run_timer不生效，那么io_poll后先执行uv_run_check，即immediate先执行，然后等close cb执行完后，继续执行uv_run_timer
+那么你说的为什么在回调中，一定是先immediate执行呢，其实也很容易理解
+你可以思考一下你写的场景
+由于你的timeout和immediate的事件注册是在readFile的回调执行时，触发是必然的，在readFile的回调执行前的每一次event loop进来的uv_run_timer都不会有超时事件触发
+那么当readFile执行完毕，kevent收到监听的fd事件完成后，执行了该回调，此时
+
+1.timeout事件注册
+2.immediate事件注册
+3.由于readFile的回调执行完毕，那么就会从uv_io_poll中出来，此时立即执行uv_run_check，所以immediate事件被执行掉
+4.最后的uv_run_timer检查timeout事件，执行timeout事件
+
+所以你会发现，在I/O回调中注册的两者，永远都是immediately先执行</code></pre><p><a href="https://cnodejs.org/topic/57d68794cb6f605d360105bf" target="_blank" rel="noopener">这里是大神文章的链接：</a></p>
+<h2 id="process-nextTick"><a href="#process-nextTick" class="headerlink" title="process.nextTick()"></a>process.nextTick()</h2><p>Node官方文档是这样解释process.nextTick()的：</p>
+<blockquote>
+<p>process.nextTick() 方法将 callback 添加到下一个时间点的队列。 在 JavaScript 堆栈上的当前操作运行完成之后以及允许事件循环继续之前，此队列会被完全耗尽。 如果要递归地调用 process.nextTick()，则可以创建无限的循环。</p>
+</blockquote>
+<p>这就意味着：</p>
+<ol>
+<li><p>如果，process.nextTick定义在事件循环机制开始前，而非事件循环机制中，那么，process.nextTick定义的回调函数将在主线程执行队列中的所有任务执行完毕后被调用</p>
+<p> 例如：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timeout'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">process.nextTick(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'tick'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">setImmediate(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'immediate'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">tick</span></span><br><span class="line"><span class="comment">// 注意：timeout和Immediate的输出顺序是不一定的，原因在前文已经提过</span></span><br><span class="line"><span class="comment">timeout</span></span><br><span class="line"><span class="comment">immediate</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果process.nextTick()在事件循环中被定义，那么process.nextTick定义的回调函数将会在下一个事件循环的阶段开始前被执行，也就是两个阶段切换时的中间过程</p>
+<p> 来看一个例子：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">'./a.js'</span>,<span class="string">'utf-8'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'timeout'</span>);</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">    setImmediate(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'immediate'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    process.nextTick(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'tick1'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    process.nextTick(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'tick2'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">tick1</span></span><br><span class="line"><span class="comment">tick2</span></span><br><span class="line"><span class="comment">immediate</span></span><br><span class="line"><span class="comment">timeout</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p> 当异步读取完文件后，此时位于poll阶段，执行回调函数，该回调函数设定了一个setTimeout，一个setImmediate，两个process.nextTick。加下来事件循环开始离开poll阶段，在从poll阶段切换到check阶段的中间，两个process.nextTick设定的回调函数将会被执行。接着，转换到check阶段执行setImmediate设定的回调函数。最后，在下一轮事件循环中执行setTimeout设定的回调函数。</p>
+</li>
+<li><p>如果process.nextTick()定义在某个阶段中要同步的执行当前队列的所有回调函数内部时，根据，官方文档的说明，在 JavaScript 执行堆栈上的当前操作运行完成之后以及允许事件循环继续之前，process.nextTick将会被执行</p>
+</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">setImmediate(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'immediate1'</span>);</span><br><span class="line">    process.nextTick(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'tick强势插入'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">setImmediate(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'immediate2'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">immediate1</span></span><br><span class="line"><span class="comment">tick强势插入</span></span><br><span class="line"><span class="comment">immediate2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>在事件循环机制中，此时位于check阶段，事件循环机制将按照同步的方式依次将setImmediate的回调函数放入主线程的执行堆栈中进行运行。但是第一个setImmediate的回调函数执行时又注册了process.nextTick()。因此，在事件循环机制继续运行（将下一个setImmediate回调放入主线程执行堆栈中进行执行）前，process.nextTick就优先被执行</p>
+<p>另外，需要尤其注意的是，process.nextTick的回调一旦执行，必须要直到nextTick队列被清空，才会进入到下一个事件阶段，所以如果递归调用 process.nextTick()，会导致出现I/O starving（饥饿）的问题</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">let</span> startTime = <span class="built_in">Date</span>.now();</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">'./a.js'</span>,<span class="string">'utf-8'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'File is readed'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Time wasted <span class="subst">$&#123;<span class="built_in">Date</span>.now()-startTime&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(index &gt; <span class="number">1000</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`tick <span class="subst">$&#123;index&#125;</span>`</span>);</span><br><span class="line">    index++;</span><br><span class="line">    process.nextTick(handle);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">handle();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">tick 0</span></span><br><span class="line"><span class="comment">tick 1</span></span><br><span class="line"><span class="comment">tick 2</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">tick 1000</span></span><br><span class="line"><span class="comment">File is readed</span></span><br><span class="line"><span class="comment">Time wasted 495</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我们发现，在上述程序中，只有当process.nextTick()全部执行完毕后，fs。readFile()注册的回调函数才会被执行</p>
+<h3 id="process-nextTick-与setImmediate"><a href="#process-nextTick-与setImmediate" class="headerlink" title="process.nextTick()与setImmediate()"></a>process.nextTick()与setImmediate()</h3><p>我们在前面已经分别介绍过了process.nextTick()与setImmediate()注册的回调函数的执行时机。</p>
+<p>因此，如果，process.nextTick()与setImmediate()同时被注册，那么process.nextTick的优先级要高于setImmediate</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">setImmediate(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'immediate'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">process.nextTick(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'tick'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">tick</span></span><br><span class="line"><span class="comment">immediate</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>其实，这段代码在上面的叙述中已经提过。那么，为什么还要将它们俩放在一起比较呢？</p>
+<p>其实，是因为我们提到，process.nextTick()一旦执行就会将当前所有的nextTick()注册的回调执行完后才会进入下一个事件阶段，因此，很容易造成I/O饥饿现象</p>
+<p>而setImmediate则会改变这种现象。因为，在事件循环中，每次在check阶段每个setImmedaite任务只会执行一次setImmediate的回调，如果回调里还有setImmediate任务，那么它将会在下一轮事件循环中执行</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">'./a.js'</span>,<span class="string">'utf-8'</span>,()=&gt;&#123;</span><br><span class="line">    setImmediate(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'immediate1'</span>);</span><br><span class="line">        setImmediate(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'immediate2'</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'timeout2'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">immediate1</span></span><br><span class="line"><span class="comment">timeout2</span></span><br><span class="line"><span class="comment">immediate2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到,setImmediate第一个回调执行完毕后并没有立刻执行第二个setImmediate回调，而是进入了下一轮事件循环，先在timers阶段执行了setTimeout的回调，然后再在check阶段执行第二个setImmediate的回调。</p>
+<p>因此，在解决多次调用process.nextTick所具有的的I/O饥饿问题，我们可以使用setImmediate来解决</p>
+<p>下面的程序只是将上面的程序中的process.nextTick替换成setImmediate</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">let</span> startTime = <span class="built_in">Date</span>.now();</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">'./a.js'</span>,<span class="string">'utf-8'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'File is readed'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Time wasted <span class="subst">$&#123;<span class="built_in">Date</span>.now()-startTime&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(index &gt; <span class="number">100</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`tick <span class="subst">$&#123;index&#125;</span>`</span>);</span><br><span class="line">    index++;</span><br><span class="line">    setImmediate(handle);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">handle();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">tick 0</span></span><br><span class="line"><span class="comment">tick 1</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">tick 7</span></span><br><span class="line"><span class="comment">File is readed</span></span><br><span class="line"><span class="comment">Time wasted 12</span></span><br><span class="line"><span class="comment">tick 8</span></span><br><span class="line"><span class="comment">tick 9</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">tick 100</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到,fs.readFile()的回调再setImmediate的递归中进行了输出，而不是等所有递归结束后再被执行。</p>
+<p>我们来解释一下其中的原因：</p>
+<ol>
+<li>执行fs.readFile异步任务和handle()函数，同时输出tick 0</li>
+<li>第一次事件循环，此时在poll阶段并没有得等到readFile的回调加入任务队列，而此时setImmediate函数被注册，那么立即离开poll阶段</li>
+<li>进入check阶段，执行setImmediate注册的回调函数，在该程序中也就是再执行一遍，此时输出tick 1，但是，在该回调函数中又注册了一个setTimeout，但是该setTimeout并不会立即执行，而是等到下一轮事件循环中执行</li>
+<li>…中途经过了几轮的事件循环，在这几轮中，pool阶段始终没有等到readFile的回调，因此，在check阶段一直输出到了tick 7</li>
+<li>在这轮事件循环中，在poll阶段的任务队列中终于有了readFile()的回调，那么立即执行该回调，输出<blockquote>
+<p>File is readed<br> Time wasted 12</p>
+</blockquote>
+</li>
+<li>继续多轮事件循环，一直到退出handle()递归</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/01/深入了解Node的异步I-O/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/01/深入了解Node的异步I-O/" itemprop="url">深入了解Node的异步I/O</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-01T14:35:42+08:00">
+                2019-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node/" itemprop="url" rel="index">
+                    <span itemprop="name">Node</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="I-O"><a href="#I-O" class="headerlink" title="I/O"></a>I/O</h2><h3 id="什么是I-O"><a href="#什么是I-O" class="headerlink" title="什么是I/O"></a>什么是I/O</h3><blockquote>
+<p>I/O（英语：Input/Output），即输入/输出，通常指数据在内部存储器和外部存储器或其他周边设备之间的输入和输出。</p>
+</blockquote>
+<p>另外，I/O又可以具体分为磁盘I/O和网络I/O。</p>
+<p>它们一般具有以下两个步骤：</p>
+<ol>
+<li>等待数据准备 </li>
+<li>将数据从内核拷贝到进程中</li>
+</ol>
+<p>对于一般的I/O读操作，我们可以进行以下的抽象：</p>
+<ol>
+<li>应用发起read系统调用</li>
+<li>操作系统层面接受应用的请求，如果内核缓冲区中有该数据，那么将该数据拷贝到用户缓存区</li>
+<li>如果内核缓存区中没有数据，那么内核会向io模块发送请求，让其从磁盘中读取数据。读取完毕后，将其存入内核缓存区，并拷贝到用户缓存区</li>
+</ol>
+<p><img src="https://s2.ax1x.com/2019/11/03/KOXjrq.jpg" alt></p>
+<p>总结：</p>
+<ol>
+<li><p>当应用程序调用read接口时，操作系统检查在内核的高速缓存有没有需要的数据，如果已经缓存了，那么就直接从缓存中返回，如果没有，则从磁盘中读取，然后缓存在操作系统的缓存中。</p>
+</li>
+<li><p>应用程序调用write接口时，将数据从用户地址空间复制到内核地址空间的缓存中，这时对用户程序来说，写操作已经完成，至于什么时候再写到磁盘中，由操作系统决定，除非显示调用了sync同步命令</p>
+</li>
+</ol>
+<h3 id="PIO与DMA"><a href="#PIO与DMA" class="headerlink" title="PIO与DMA"></a>PIO与DMA</h3><p>有必要提一下PIO与DMA两种I/O方式</p>
+<ol>
+<li><p>PIO<br>我们拿磁盘来说，很早以前，磁盘和内存之间的数据传输是需要CPU控制的，也就是说如果我们读取磁盘文件到内存中，数据要经过CPU存储转发，这种方式称为PIO。显然这种方式非常不合理，需要占用大量的CPU时间来读取文件，造成文件访问时系统几乎停止响应。</p>
+</li>
+<li><p>DMA<br>后来，DMA（直接内存访问，Direct Memory Access）取代了PIO，它可以不经过CPU而直接进行磁盘和内存的数据交换。在DMA模式下，CPU只需要向DMA控制器下达指令，让DMA控制器来处理数据的传送即可，DMA控制器通过系统总线来传输数据，传送完毕再通知CPU，这样就在很大程度上降低了CPU占有率，大大节省了系统资源，而它的传输速度与PIO的差异其实并不十分明显，因为这主要取决于慢速设备的速度。</p>
+</li>
+</ol>
+<p>因此，在这里我们树立一个概念，现在的I/O操作在读写的过程中是不需要经过CPU进行处理的。</p>
+<h2 id="异步与非阻塞，同步与阻塞是同一个概念吗"><a href="#异步与非阻塞，同步与阻塞是同一个概念吗" class="headerlink" title="异步与非阻塞，同步与阻塞是同一个概念吗"></a>异步与非阻塞，同步与阻塞是同一个概念吗</h2><p>在Node的文章中，我们经常可以看到异步，非阻塞；同步，阻塞这些概念。听起来，异步与非阻塞像是同一个概念，而且他们实现的效果好像是一样的。但是，实际上它们是两回事。</p>
+<p>对于阻塞与非阻塞我们可以这样理解：</p>
+<blockquote>
+<p>阻塞和非阻塞关注的是程序在等待调用结果（消息，返回值）时的状态.阻塞调用是指调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回。非阻塞调用指在不能立刻得到结果之前，该调用不会阻塞当前线程。</p>
+</blockquote>
+<p>而对于异步与同步：</p>
+<blockquote>
+<p>同步和异步关注的是消息通信机制。所谓同步，就是在发出一个调用时，在没有得到结果之前，该调用就不返回。但是一旦调用返回，就得到返回值了。换句话说，就是由调用者*动等待这个调用的结果。而异步则是相反，调用在发出之后，这个调用就直接返回了，当然不会有返回结果。换句话说，当一个异步过程调用发出后，调用者不会立刻得到结果。而是在调用发出后，被调用者通过状态、通知来通知调用者，或通过回调函数处理这个调用。</p>
+</blockquote>
+<p>总结来说：</p>
+<ol>
+<li>阻塞与非阻塞更多的考虑是对于自身的线程。阻塞即线程挂起等待结果返回；而非阻塞就是该线程继续往下执行，但是不会立即得到等待结果。我们只有通过轮询机制才能得到结果</li>
+<li>同步与异步更多的是考虑双方的状态。例如，应用层向服务端发起一个请求，如果是同步请求，那么只有服务端得到结果之后才可以返回；而如果是异步请求，那么调用就直接返回，经过一定时间后，服务端的数据已经处理完毕，然后通过回调机制来通知应用层结果已经返回</li>
+</ol>
+<h2 id="Node的异步I-O"><a href="#Node的异步I-O" class="headerlink" title="Node的异步I/O"></a>Node的异步I/O</h2><h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p>在这里可以去查看另一篇文章</p>
+<h3 id="观察者"><a href="#观察者" class="headerlink" title="观察者"></a>观察者</h3><p>在每次事件循环中，Node如何判断是否有新的事件需要处理呢？</p>
+<p>Node引入观察者来实现是否有事件需要处理的判断。每个事件循环中都会有1个或多个观察者，而判断是否有事件需要处理的过程就是向这些观察者询问是否有要处理的事件。</p>
+<p>在Node中，事件主要来源于网络请求、文件I/O等，这些事件的对应观察者即网络I/O观察者，文件I/O观察者。</p>
+<p>另外，事件循环是典型的生产者/消费者模型。异步I/O、网络请求等则是生产者，源源不断为Node提供不同类型的事件，这些事件会被传递到对应的观察者那里，然后事件循环则会从观察者那里取出事件并进行处理</p>
+<h3 id="异步I-O的整体流程"><a href="#异步I-O的整体流程" class="headerlink" title="异步I/O的整体流程"></a>异步I/O的整体流程</h3><p>我们以fs.open()方法为例来探究以下异步I/O的整体流程。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line">fs.open(path,flags,mode,callback);</span><br></pre></td></tr></table></figure>
+
+<p>fs.open()的作用是根据指定的路径和参数去打开一个文件，从而得到一个文件描述符。</p>
+<h4 id="异步调用的第一个阶段"><a href="#异步调用的第一个阶段" class="headerlink" title="异步调用的第一个阶段"></a>异步调用的第一个阶段</h4><p>当Node调用fs.open()核心模块后，该核心模块将会去调用C++内建模块。然后通过libuv这一层为不同的平台（windows和*nix）调用分别系统级底层函数。</p>
+<p><img src="https://s2.ax1x.com/2019/11/04/KvItQx.png" alt></p>
+<p>在系统级底层函数uv_fs_open()的调用过程中，会创建一个FSReqWrap的请求对象，所有传递给js核心模块fs.open()的参数和回调方法都被作为该对象的属性被其封装。例如，回调函数会被设置在这个对象的oncomplete_sym上：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">req_wrap-&gt;object_-&gt;Set(oncomplete_sym,callback);</span><br></pre></td></tr></table></figure>
+
+<p>请求对象包装完毕后，则会将该请求对象推入线程池中去等待执行。</p>
+<p>至此，Js调用立即返回，有Js层面发起的异步调用的第一阶段到这里就结束了。Js主线程可以继续去执行其余任务，当前的I/O操作则会在线程池中等待执行，不管线程池中的该I/O线程是否阻塞，都不会影响Js主线程的后续执行，因此，异步就这样实现了。</p>
+<h4 id="异步调用的第二个阶段"><a href="#异步调用的第二个阶段" class="headerlink" title="异步调用的第二个阶段"></a>异步调用的第二个阶段</h4><blockquote>
+<p>回调通知则是异步调用的第二个阶段。</p>
+</blockquote>
+<p>当线程池中的I/O线程完成工作后，会将获取的结果储存在第一阶段定义的请求对象的req-&gt;result属性上，然后会通知IOCP（windows实现的异步I/O方案），告知当前对象操作已经完成，然后将线程归还线程池。</p>
+<p>到这里，整个异步I/O的流程并没有结束。</p>
+<p>事件循环中的I/O观察者将会在每次事件循环中去检查请求是否执行完成，如果执行完毕，那么就会取出请求对象的rq-&gt;result属性作为参数，取出oncomplete_sym属性作为方法，然后进行调用执行，以此来达到调用Js中传入的回调函数的目的。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>至此，整个异步I/O的流程完全结束，流程图如下：</p>
+<p><img src="https://s2.ax1x.com/2019/11/04/KvINy6.png" alt></p>
+<p>简单来说，Node的异步I/O流程可以分为以下几步：</p>
+<p>异步调用</p>
+<ol>
+<li>应用层发起异步调用，Node会从调用核心模块到内建模块一直到调用到底层系统级函数</li>
+<li>将应用层传入的参数和回调封装给一个请求对象</li>
+<li>将请求对象放入线程池等待执行</li>
+<li>应用层发起的异步调用结束，立即返回</li>
+</ol>
+<p>线程池</p>
+<ol>
+<li>分配空闲线程来执行请求对象中的I/O操作</li>
+<li>I/O线程执行完毕，将执行完毕的结果储存在请求对象中</li>
+<li>在windows下通知IOCP已经执行完毕，然后归还该I/O线程</li>
+</ol>
+<p>事件循环</p>
+<ol>
+<li>事件循环中的I/O观察者观察到事件已完成，将该事件的回调推入任务队列中</li>
+<li>取出回调函数和请求对象中的结果进行调用执行</li>
+</ol>
+<h2 id="事件驱动"><a href="#事件驱动" class="headerlink" title="事件驱动"></a>事件驱动</h2><p>Node中的事件驱动就是通过不断地进行事件循环然后当事件来临时进行触发的机制。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/浏览器渲染机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2679,532 +3277,6 @@ scrollTo()</code></pre></li>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/15/node项目的分层思考/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/15/node项目的分层思考/" itemprop="url">node项目的分层思考</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-15T19:08:26+08:00">
-                2019-10-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  55
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="路由层（controll）"><a href="#路由层（controll）" class="headerlink" title="路由层（controll）"></a>路由层（controll）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>,<span class="keyword">async</span> (ctx,next)=&gt;&#123;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>## </p>
-<h2 id="controller层"><a href="#controller层" class="headerlink" title="controller层"></a>controller层</h2><p>业务逻辑层，处理业务</p>
-<h2 id="Model层"><a href="#Model层" class="headerlink" title="Model层"></a>Model层</h2><p>实体层，比如说movie这一实体的基本属性和基本方法</p>
-<h2 id="dao层"><a href="#dao层" class="headerlink" title="dao层"></a>dao层</h2><p>数据库相关操作</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/事件机制/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/11/事件机制/" itemprop="url">事件机制</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-11T15:15:04+08:00">
-                2019-10-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  3.3k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  13
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h2><p>事件流描述的是从页面中接收事件的顺序。IE提出的事件流是事件冒泡流，而网景提出的事件流是事件捕获流</p>
-<h3 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h3><p>事件冒泡指代的是，事件开始时是由最具体的元素接收，然后逐级向上传播到较为不具体的节点</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>当你单击了P元素，那么这个事件就会按照如下顺序传播：</p>
-<ol>
-<li>&lt;p&gt;</li>
-<li>&lt;div&gt;</li>
-<li>&lt;body&gt;</li>
-<li>&lt;html&gt;</li>
-<li>document</li>
-</ol>
-<h3 id="事件捕获"><a href="#事件捕获" class="headerlink" title="事件捕获"></a>事件捕获</h3><p>事件捕获的思想是不大具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。事件捕获的用意在于在事件到达预定目标之前捕获它</p>
-<p>那么上述例子如果采用事件捕获的话，那么传播顺序就会是这样的：</p>
-<ol>
-<li>document</li>
-<li>&lt;html&gt;</li>
-<li>&lt;body&gt;</li>
-<li>&lt;div&gt;</li>
-<li>&lt;p&gt;</li>
-</ol>
-<h3 id="DOM事件流"><a href="#DOM事件流" class="headerlink" title="DOM事件流"></a>DOM事件流</h3><p>“DOM2级事件”规定的事件流包括三个阶段：</p>
-<ol>
-<li>事件捕获阶段</li>
-<li>处于目标阶段</li>
-<li>事件冒泡阶段</li>
-</ol>
-<p>首先发生的是事件捕获，为截获事件提供了机会。然后是实际的目标接收到事件。最后一个阶段是冒泡阶段，可以在这个阶段对事件做出响应</p>
-<p>值得注意的是：</p>
-<blockquote>
-<p>捕获阶段是不包括实际的目标元素的。这也意味着对于上述的例子，再捕获阶段，事件从document -&gt; &lt;div&gt;后就停止了。然后，处于目标阶段就会响应该目标注册的事件。并在事件处理中被看做事件冒泡阶段的一部分进入事件冒泡阶段</p>
-</blockquote>
-<p>这有一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;<span class="xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div style=<span class="string">"width: 100px;height: 100px;border: 1px solid black;"</span>&gt;</span><br><span class="line">            &lt;p style=<span class="string">"width: 50px;height: 20px;border: 1px solid red;margin: 10px 20px"</span>&gt;</span><br><span class="line">                hello</span><br><span class="line">            &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;script&gt;</span><br><span class="line">            <span class="keyword">let</span> div = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>)[<span class="number">0</span>];</span><br><span class="line">            div.addEventListener(<span class="string">"click"</span>,(e)=&gt;&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'冒泡'</span>);</span><br><span class="line">            &#125;,<span class="literal">false</span>);</span><br><span class="line">            div.addEventListener(<span class="string">"click"</span>,(e)=&gt;&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'捕获'</span>);</span><br><span class="line">            &#125;,<span class="literal">true</span>);</span><br><span class="line">        &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>我们为div元素注册了两个事件，一个要求在冒泡阶段被调用，一个是要求在捕获阶段被调用</p>
-<p>根据DOM事件流的三个阶段，当我们点击&lt;p&gt;元素时，会看到先输出”捕获”再输出”冒泡”。因为，我们点击的目标元素是&lt;p&gt;元素，会经历以下三个阶段。</p>
-<ol>
-<li>在捕获阶段（document-&gt; &lt;html&gt; -&gt; &lt;body&gt; -&gt; &lt;div&gt;），我们捕获到了div注册的要在捕获阶段调用的事件，那么触发它。</li>
-<li>处于目标阶段，没有目标注册的事件</li>
-<li>冒泡阶段（&lt;div&gt; -&gt; &lt;body&gt; -&gt; &lt;html&gt; -&gt; document）响应了div注册的要在冒泡阶段调用的事件</li>
-</ol>
-<p>但是，当我们点击的&lt;div&gt;元素的时候，会看到先输出”捕获”再输出”冒泡”，根据DOM事件流的三个阶段</p>
-<ol>
-<li>在捕获阶段（document-&gt; &lt;html&gt; -&gt; &lt;body&gt;），我们没有捕获到div注册的任何事件。</li>
-<li>处于目标阶段，那么触发目标注册的事件，因为目标注册了两个事件，那么按照顺序依次触发它们，依次输出”冒泡”、”捕获”</li>
-<li>冒泡阶段（ 发生的事件 -&gt; &lt;body&gt; -&gt; &lt;html&gt; -&gt; document）没有捕获到div注册的任何事件</li>
-</ol>
-<h2 id="事件注册"><a href="#事件注册" class="headerlink" title="事件注册"></a>事件注册</h2><h3 id="DOM0级事件处理程序"><a href="#DOM0级事件处理程序" class="headerlink" title="DOM0级事件处理程序"></a>DOM0级事件处理程序</h3><p>每个元素都有自己的事件处理程序属性，这些属性通常全部<strong>小写</strong>，将这种属性的值设置为一个函数，就可以指定事件处理程序</p>
-<p>因为，使用该方法指定的事件处理程序被认为是元素的方法。因此，这时候的事件处理程序是在当前元素的作用域内运行的。也就是说，处理函数中的this指向当前元素</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> element = <span class="built_in">document</span>.getElementById(<span class="string">'ele'</span>);</span><br><span class="line">element.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.id); <span class="comment">// 'ele'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们可以将事件处理程序属性的值设为null来删除指定的事件处理程序</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.onclick = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：DOM0级处理程序默认在冒泡阶段被调用</p>
-</blockquote>
-<h3 id="DOM2级事件处理程序"><a href="#DOM2级事件处理程序" class="headerlink" title="DOM2级事件处理程序"></a>DOM2级事件处理程序</h3><p>DOM2级提供了两个方法来添加和删除事件处理程序</p>
-<ol>
-<li>addEventListener()</li>
-<li>removeEventListener()</li>
-</ol>
-<p>这两个方法都接受三个参数：</p>
-<ol>
-<li>要处理的事件名</li>
-<li>作为事件处理程序的函数</li>
-<li>布尔值（true表示在捕获阶段调用函数；false表示在冒泡阶段调用函数）</li>
-</ol>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> element = <span class="built_in">document</span>.getElementById(<span class="string">'ele'</span>);</span><br><span class="line"></span><br><span class="line">element.addEventListener(<span class="string">'click'</span>,(e)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'捕获'</span>)</span><br><span class="line">&#125;,<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">element.addEventListener(<span class="string">'click'</span>,(e)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'冒泡'</span>)</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">element.removeEventListener(<span class="string">'click'</span>,(e)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'捕获'</span>)</span><br><span class="line">&#125;,<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
-
-<p>我们可以看到，使用DOM2级注册方式的主要好处是可以添加多个事件处理程序</p>
-<p>值得注意的是：</p>
-<blockquote>
-<p>通过addEventListener()方法注册的事件处理程序只能通过removeEventListener()方法来移除。并且，移除时传入的三个参数必须与添加时的三个参数一致。因此，通过addEventListener()添加的匿名函数无法被移除（参数必须完全一致，也就是说第二个参数函数也要是同一个函数）</p>
-</blockquote>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> element = <span class="built_in">document</span>.getElementById(<span class="string">'ele'</span>);</span><br><span class="line"></span><br><span class="line">element.addEventListener(<span class="string">'click'</span>,(e)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'捕获'</span>)</span><br><span class="line">&#125;,<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">element.addEventListener(<span class="string">'click'</span>,(e)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'冒泡'</span>)</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">element.removeEventListener(<span class="string">'click'</span>,(e)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'捕获'</span>)</span><br><span class="line">&#125;,<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
-
-<p>点击<div>后的输出结果会是’捕获’与’冒泡’，也就是说事件移除方法没有生效。原因就在于事件移除方法中的第二个参数与添加时的那个函数不是同一个函数</div></p>
-<p>我们可以将函数单独提出来赋予给一个变量，从而可以达到目标</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> element = <span class="built_in">document</span>.getElementById(<span class="string">'ele'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> handle = <span class="function">(<span class="params">e</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'捕获'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">element.addEventListener(<span class="string">'click'</span>,handle,<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">element.addEventListener(<span class="string">'click'</span>,(e)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'冒泡'</span>)</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">element.removeEventListener(<span class="string">'click'</span>,handle,<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
-
-<p>此时的输出结果就会是’冒泡’，也就是说事件移除程序生效了</p>
-<p>另外，类似DOM0级方法，使用addEventListener()方法添加的事件处理程序内部的this值也指向当前绑定的元素，但要注意箭头函数的情况。因为箭头函数内部的this是由其外层代码作用域决定的</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"ele"</span>&gt;</span>hello<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>)[<span class="number">0</span>];</span><br><span class="line">div.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.id); <span class="comment">// ele</span></span><br><span class="line">&#125;)</span><br><span class="line">div.addEventListener(<span class="string">'click'</span>,(e)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.id,<span class="keyword">this</span>); <span class="comment">// undefined,window &#123;&#125;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，在非箭头函数中this指向当前事件绑定的对象；而在箭头函数中this指向了window全局对象（因为该箭头函数外层代码作用域为window全局作用域，因此this也指向了window全局对象）</p>
-<h2 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h2><p>在触发DOM上的某个事件时，会产生一个事件对象event。这个对象包含着所有与事件有关的信息。</p>
-<h3 id="事件对象的常用属性："><a href="#事件对象的常用属性：" class="headerlink" title="事件对象的常用属性："></a>事件对象的常用属性：</h3><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>target</td>
-<td>Element</td>
-<td>事件的目标，也就是当前事件发生的目标。比如说点击的那个元素</td>
-</tr>
-<tr>
-<td>currentTarget</td>
-<td>Element</td>
-<td>当前事件绑定的那个元素</td>
-</tr>
-<tr>
-<td>type</td>
-<td>String</td>
-<td>被触发的事件类型</td>
-</tr>
-<tr>
-<td>eventPhase</td>
-<td>Integer</td>
-<td>调用时间处理程序的阶段：1表示捕获阶段，2表示处于目标阶段，3表示冒泡阶段</td>
-</tr>
-</tbody></table>
-<p>值得注意的是，在事件处理程序内部（非匿名函数），对象中this的值始终等于event.currentTarget的值，而不一定等于event.target</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"height:100px;width:100px;border:1px solid red;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"height:50px;width:50px;border:1px solid black;"</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">p</span>&gt;</span>    </span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>)[<span class="number">0</span>];</span><br><span class="line">div.addEventListener(<span class="string">'click'</span>,(event)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(event.target);</span><br><span class="line">    <span class="built_in">console</span>.log(event.currentTarget);</span><br><span class="line">    <span class="built_in">console</span>.log(event.type);</span><br><span class="line">    <span class="built_in">console</span>.log(event.eventPhase);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>当我们点击div元素时，输出结果如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;...&lt;/div&gt;</span><br><span class="line">&lt;div&gt;...&lt;/div&gt;</span><br><span class="line">click</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
-
-<p>当我们点击p元素时，输出结果如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;...&lt;/p&gt;</span><br><span class="line">&lt;div&gt;...&lt;/div&gt;</span><br><span class="line">click</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-
-<p>很明显可以发现，event.target指向你点击的那个元素；而event.currentTarget指向该事件绑定的那个元素</p>
-<h3 id="事件对象的常用方法"><a href="#事件对象的常用方法" class="headerlink" title="事件对象的常用方法"></a>事件对象的常用方法</h3><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>preventDefault()</td>
-<td>Function</td>
-<td>取消事件的默认行为。如果camcelable是true，则可以使用该方法</td>
-</tr>
-<tr>
-<td>stopPropagation()</td>
-<td>Function</td>
-<td>取消事件的进一步捕获或冒泡</td>
-</tr>
-<tr>
-<td>stopImmediatePropagation()</td>
-<td>Function</td>
-<td>取消事件的进一步捕获或冒泡，同时阻止相同事件的其他侦听器被调用</td>
-</tr>
-</tbody></table>
-<h4 id="preventDefault"><a href="#preventDefault" class="headerlink" title="preventDefault()"></a>preventDefault()</h4><p>要阻止特定事件的默认行为，我们就可以使用preventDefault()方法。比如，链接的默认行为就是在被单击时会导航到其href特性指定的URL。如果想要阻止该默认行为，我们可以这样做</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'a'</span>);</span><br><span class="line">a.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    event.preventDefault();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>这样的话，我们点击链接后就不会进行跳转</p>
-<h4 id="stopPropagation"><a href="#stopPropagation" class="headerlink" title="stopPropagation()"></a>stopPropagation()</h4><p>stopPropagation()方法可以立即停止事件在DOM层次中的传播，即取消进一步的事件捕获或冒泡</p>
-<p>例如，我们在一个元素上的绑定两个事件处理程序，一个在捕获阶段执行，一个在冒泡阶段执行；并且我们在要在捕获阶段调用的函数添加event.stopPropagation()方法</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">div.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'捕获'</span>,event.eventPhase);</span><br><span class="line">    <span class="comment">// 添加event.stopPropagation()方法来阻止事件的进一步传播</span></span><br><span class="line">    event.stopPropagation();</span><br><span class="line">&#125;,<span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line">div.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'冒泡'</span>,event.eventPhase);</span><br><span class="line">&#125;,<span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
-
-<p>此时我们会看到输出结果是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&apos;捕获&apos; 2</span><br><span class="line">&apos;冒泡&apos; 2</span><br></pre></td></tr></table></figure>
-
-<p>为什么event.stopPropagation()没有阻止事件的进一步传播？</p>
-<p>我们可以看到，两个事件处理程序输出的eventPhase值都是2，也就是这两个函数在处于目标阶段被调用。回忆，前文提到的，DOM事件流的三个阶段，捕获阶段和冒泡阶段是不会包括目标元素的。</p>
-<p>因此，我们可以将事件绑定到document上</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'捕获'</span>,event.eventPhase);</span><br><span class="line">    <span class="comment">// 添加event.stopPropagation()方法来阻止事件的进一步传播</span></span><br><span class="line">    event.stopPropagation();</span><br><span class="line">&#125;,<span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'冒泡'</span>,event.eventPhase);</span><br><span class="line">&#125;,<span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这样输出结果就符合预期，输出如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;捕获&apos; 1</span><br></pre></td></tr></table></figure>
-
-<h2 id="事件委托（事件代理）"><a href="#事件委托（事件代理）" class="headerlink" title="事件委托（事件代理）"></a>事件委托（事件代理）</h2><p>事件委托是将一个或多个元素响应事件的函数委托给它们的外层元素来解决事件处理程序过多的问题。</p>
-<p>例如，有一个列表</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"li-1"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"li-2"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"li-3"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>如果我们想要在点击每一个列表项时可以输出列表项的内容</p>
-<p>传统做法会为每个li绑定事件处理程序：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.innerHTML);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'li-1'</span>).addEventListener(<span class="string">'click'</span>,handle);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'li-2'</span>).addEventListener(<span class="string">'click'</span>,handle);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'li-3'</span>).addEventListener(<span class="string">'click'</span>,handle);</span><br></pre></td></tr></table></figure>
-
-<p>使用事件委托（事件代理）,我们可以将事件处理程序绑定到li的外层元素ul上</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ul = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'ul'</span>)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">ul.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(event.target.innerHTML);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>此时，当我们点击列表项时，DOM事件流会在第三个阶段（冒泡阶段）触发事件处理程序。我们通过event.target来获得实际点击的元素来输出列表项内容。</p>
-<p>因此，与传统方法相比，如果每一个列表项需要绑定的是不同的事件处理程序。那么，我们可以想象，如果，列表足够长，那么我们需要定义的函数对象就会非常多，因此，也会非常占用内存造成性能变差。而事件委托机制则可以很好的解决这个问题</p>
-<h3 id="事件委托（事件代理）的优点"><a href="#事件委托（事件代理）的优点" class="headerlink" title="事件委托（事件代理）的优点"></a>事件委托（事件代理）的优点</h3><ol>
-<li><p>减少内存消耗，提升效率</p>
-</li>
-<li><p>可以动态地绑定事件</p>
-<p> 例如：使用传统方法，当我们动态地添加一个节点时，我们就另外需要为该节点绑定一个事件。但是，如果采用事件委托，我们就可以避免这种情况。因为事件是绑定在父层的，和目标元素的增减是没有关系的，执行到目标元素是在真正响应执行事件函数的过程中去匹配的；</p>
-</li>
-</ol>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"li-1"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"li-2"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"li-3"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>当我们需要动态添加一个节点比如说li-4，采用传统方式的话，创建完之后我们还需要额外绑定事件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> li_4 = <span class="built_in">document</span>.createElment(<span class="string">'li'</span>);</span><br><span class="line"></span><br><span class="line">li_4.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.innerHTML);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>如果，我们采用事件委托（事件代理）的话，就可以避免这个问题</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ul.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(event.target.innerHTML);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>这样的话，无论添加多少个节点或是删除多少个节点，只要在父节点内的节点都可以有相应的事件</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3257,7 +3329,7 @@ scrollTo()</code></pre></li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">126</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3338,7 +3410,7 @@ scrollTo()</code></pre></li>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">116.5k</span>
+    <span title="Site words total count">123k</span>
   
 </div>
 
@@ -3368,7 +3440,7 @@ scrollTo()</code></pre></li>
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共116.5k字</span>
+  <span class="post-count">博客全站共123k字</span>
 </div>
         
 

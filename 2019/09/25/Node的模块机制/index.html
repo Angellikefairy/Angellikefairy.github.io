@@ -97,7 +97,7 @@
 <meta property="og:description" content="模块化的必要性在应用开发中，模块化的方式可以带来诸多好处：  避免变量的全部污染，每个模块的变量之间都是相互独立的 模块可以复用，提高代码复用率 每一个来实现一部分功能，代码维护性高 便于各个功能模块之间的代码依赖性管理  CommonJS的模块规范CommonJS规范对于模块的定义主要分为以下三个部分： 模块引用CommonJS通过require()方式来对模块进行引用 1const test">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/10/31/KIBpd0.jpg">
-<meta property="og:updated_time" content="2019-10-31T12:25:02.698Z">
+<meta property="og:updated_time" content="2019-11-01T06:27:40.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node的模块机制">
 <meta name="twitter:description" content="模块化的必要性在应用开发中，模块化的方式可以带来诸多好处：  避免变量的全部污染，每个模块的变量之间都是相互独立的 模块可以复用，提高代码复用率 每一个来实现一部分功能，代码维护性高 便于各个功能模块之间的代码依赖性管理  CommonJS的模块规范CommonJS规范对于模块的定义主要分为以下三个部分： 模块引用CommonJS通过require()方式来对模块进行引用 1const test">
@@ -393,7 +393,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4.5k
+                  4.7k
                 </span>
               
 
@@ -519,7 +519,14 @@
 <p>在执行模块代码之前，Node.js会使用一个如下的函数包装器将模块内的代码进行封装，</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">exports,require,module,__filename,__dirname</span>)</span>&#123;</span><br><span class="line"> <span class="comment">// 模块的实际代码实际上是被封装在这里</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>使用这样的方式，每个模块内部的代码就会被函数作用域所相互隔离。因此，我们就保证了模块内部的所有变量都是私有的。</p>
+<p>使用这样的方式，每个模块内部的代码就会被函数作用域所相互隔离。因此，我们就保证了模块内部的所有(使用显示声明的（var,let,const）)变量都是私有的。</p>
+<p>也就是说，隐式声明的变量会成为全局变量（其他模块可以访问到该变量）。这点很容易想到，在一个函数作用域内声明一个全局变量就需要隐式声明或者直接将该变量作为全局对象的属性。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line">t = <span class="number">11</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(t); <span class="comment">// 11</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到，当a模块执行后，t就被声明为全局变量。因此，其他模块都可以访问到该变量t。</p>
 <p>之后，在模块编译的时候，node会将当前模块对象(module)的exports属性，require()方法、module(模块自身)，以及在文件定位中得到的完整文件路劲和文件目录作为参数传递给该模块封装器函数进行执行。</p>
 <p>因此，我们就知道了为什么，在模块内部我们可以直接使用exports,module等变量。</p>
 <p>另外，我们也知道了模块内部的exports变量只是一个形参，而该形参值等于传递给该模块封装器的module.exports实参罢了。在这里，我们也对前面遇到的问题做出了一个底层性的解释。</p>
@@ -750,7 +757,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">126</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -847,7 +854,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">116.5k</span>
+    <span title="Site words total count">123k</span>
   
 </div>
 
@@ -877,7 +884,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共116.5k字</span>
+  <span class="post-count">博客全站共123k字</span>
 </div>
         
 
