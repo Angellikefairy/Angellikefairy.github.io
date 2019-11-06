@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Buffer（缓冲区）在Node中，应用需要处理网络协议、操作数据库、处理图片、接收上传的文件等，在网络流和文件的操作中，还要处理大量的二进制数据，而Js自有的字符串远远无法满足这些需求，于是Buffer对象应运而生 Buffer类在全局作用域中，因此，我们无需使用require(‘buffer’).Buffer来进行使用 什么是Buffer（缓冲区）我们知道数据的移动是以流的方式进行的。当我们从">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Buffer的理解以及文件上传的应用">
+<meta property="og:url" content="http://yoursite.com/2019/11/05/Buffer的理解以及文件上传的应用/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Buffer（缓冲区）在Node中，应用需要处理网络协议、操作数据库、处理图片、接收上传的文件等，在网络流和文件的操作中，还要处理大量的二进制数据，而Js自有的字符串远远无法满足这些需求，于是Buffer对象应运而生 Buffer类在全局作用域中，因此，我们无需使用require(‘buffer’).Buffer来进行使用 什么是Buffer（缓冲区）我们知道数据的移动是以流的方式进行的。当我们从">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-06T12:59:53.569Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Buffer的理解以及文件上传的应用">
+<meta name="twitter:description" content="Buffer（缓冲区）在Node中，应用需要处理网络协议、操作数据库、处理图片、接收上传的文件等，在网络流和文件的操作中，还要处理大量的二进制数据，而Js自有的字符串远远无法满足这些需求，于是Buffer对象应运而生 Buffer类在全局作用域中，因此，我们无需使用require(‘buffer’).Buffer来进行使用 什么是Buffer（缓冲区）我们知道数据的移动是以流的方式进行的。当我们从">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/05/Buffer的理解以及文件上传的应用/">
+
+
+
+
+
+  <title>Buffer的理解以及文件上传的应用 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+  
+ 
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+         <a href="https://github.com/Angellikefairy"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149" alt="Fork me on GitHub"></a>
+    </div>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/05/Buffer的理解以及文件上传的应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Buffer的理解以及文件上传的应用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-05T15:16:53+08:00">
+                2019-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node/" itemprop="url" rel="index">
+                    <span itemprop="name">Node</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  15
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Buffer（缓冲区）"><a href="#Buffer（缓冲区）" class="headerlink" title="Buffer（缓冲区）"></a>Buffer（缓冲区）</h2><p>在Node中，应用需要处理网络协议、操作数据库、处理图片、接收上传的文件等，在网络流和文件的操作中，还要处理大量的二进制数据，而Js自有的字符串远远无法满足这些需求，于是Buffer对象应运而生</p>
+<p>Buffer类在全局作用域中，因此，我们无需使用require(‘buffer’).Buffer来进行使用</p>
+<h3 id="什么是Buffer（缓冲区）"><a href="#什么是Buffer（缓冲区）" class="headerlink" title="什么是Buffer（缓冲区）"></a>什么是Buffer（缓冲区）</h3><p>我们知道数据的移动是以流的方式进行的。当我们从文件或网络读取数据的时候，就需要一个输入流来进行数据的读取；而当我们要写入一些数据的时候，就需要开启一个输出流来进行数据的移动。</p>
+<p>但是，Node并无法控制数据流的速度以及数据到达目的地的时间。因此，如果数据到达的速度比进程消耗的速度快，那么少数早到达的数据会处于等待区等候被处理。反之，如果数据到达的速度比进程消耗的数据慢，那么早先到达的数据需要在等待区中等待一定量的数据到达之后才能被处理。</p>
+<p>这个等待区也就是我们要提的Buffer（缓冲区）</p>
+<h3 id="Buffer对象"><a href="#Buffer对象" class="headerlink" title="Buffer对象"></a>Buffer对象</h3><p>Buffer对象类似与一个数组，它的元素为16进制的两位数，即0到255的数值。</p>
+<p>我们可以这样来创建Buffer对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buf =  Buffer.from(<span class="string">'理解Buffer'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(buf); <span class="comment">// &lt;Buffer e7 90 86 e8 a7 a3 42 75 66 66 65 72&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们输出一下这个buf对象长度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(buf.length); <span class="comment">// 12</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到buf对象的长度与给定的字符串长度不一样。因此，我们可以得出不同编码的字符串占用的元素个数各不相同。上面的代码中的中文字在UTF-8的编码下占用3个元素，而字母和半角标点符号占用1个元素。</p>
+<p>另外，以下是创建Buffer对象时常用的API：</p>
+<ol>
+<li><p>Buffer.from(array) 返回一个新的 Buffer，其中包含提供的八位字节数组的副本。</p>
+</li>
+<li><p>Buffer.from(arrayBuffer[, byteOffset [, length]]) 返回一个新的 Buffer，它与给定的 ArrayBuffer 共享相同的已分配内存。</p>
+</li>
+<li><p>Buffer.from(buffer) 返回一个新的 Buffer，其中包含给定 Buffer 的内容的副本。</p>
+</li>
+<li><p>Buffer.from(string[, encoding]) 返回一个新的 Buffer，其中包含提供的字符串的副本,encoding为给定的string的编码格式。</p>
+</li>
+<li><p>Buffer.alloc(size[, fill[, encoding]]) 返回一个指定大小的新建的的已初始化的 Buffer。 此方法比 Buffer.allocUnsafe(size) 慢，但能确保新创建的 Buffer 实例永远不会包含可能敏感的旧数据。 如果 size 不是数字，则将会抛出 TypeError。</p>
+</li>
+<li><p>Buffer.allocUnsafe(size) 和 Buffer.allocUnsafeSlow(size) 分别返回一个指定大小的新建的未初始化的 Buffer。 由于 Buffer 是未初始化的，因此分配的内存片段可能包含敏感的旧数据。</p>
+</li>
+</ol>
+<p>如果 size 小于或等于 Buffer.poolSize 的一半，则 Buffer.allocUnsafe() 返回的 Buffer 实例可能是从共享的内部内存池中分配。 Buffer.allocUnsafeSlow() 返回的实例则从不使用共享的内部内存池。</p>
+<p>示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个给定Array的Buffer，其中Array的元素为10进制整数，它会被转化为16进制的二进制数</span></span><br><span class="line"><span class="keyword">let</span> buffer = Buffer.from([<span class="number">53</span>,<span class="number">198</span>,<span class="number">255</span>]);</span><br><span class="line"><span class="built_in">console</span>.log(buffer); <span class="comment">// &lt;Buffer 35 c6 ff&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 分配一个指定大小的新建的的已初始化的 Buffer，该Buffer永远不会包含旧数据</span></span><br><span class="line">buffer = Buffer.alloc(<span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(buffer); <span class="comment">// &lt;Buffer 00 00 00 00 00 00 00 00 00 00&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Buffer的内存分配"><a href="#Buffer的内存分配" class="headerlink" title="Buffer的内存分配"></a>Buffer的内存分配</h3><p>我们在V8的垃圾回收机制中了解到，一般的基本类型变量会存储在栈中，而复杂引用类型会存储在v8的堆内存中。</p>
+<p>然而，Buffer对象的内存分配不是在v8的堆内存中进行的，而是在Node的C++层面进行内存分配的。</p>
+<p>因为处理大量的字节数据不能采用需要一点内存就向系统申请内存的方式（v8的内存管理就采用这种方式，如果堆内存不够就继续申请堆内存直到超过系统限制），这样的话会造成操作系统层面的压力</p>
+<p>Node采用slab分配机制来进行Buffer对象的内存分配。</p>
+<p>slab是一块申请号的固定大小的内存区域，它的大小为8kb。Node通常也以8Kb为分界来区分小Buffe对象和大Buffer对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Buffer.poolSize = <span class="number">8</span>*<span class="number">1024</span>;</span><br></pre></td></tr></table></figure>
+
+<p>之前提过，我们可以使用Buffer.alloc(size)来分配指定大小的Buffer对象</p>
+<p>当size&lt;8*1024时，该Buffer对象为小对象，否则，则是大对象</p>
+<p>当在进行slab内存分配的时候，其符合以下的规则：</p>
+<ol>
+<li>如果要分配的Buffer内存大小小于slab内存大小，那么在slab中分配内存给Buffer</li>
+<li>如果slab剩余空闲内存小于需要分配的Buffer内存大小，那么重新会新建一个slab来分配该Buffer对象的内存</li>
+<li>如果Buffer对象为大对象，即需要分配的内存大于8kb，那么，系统将会直接分配一个SlowBuffer对象作为slab单元，这个slab单元将会被该Buffer对象独占</li>
+</ol>
+<h3 id="Buffer与字符串的相互转换"><a href="#Buffer与字符串的相互转换" class="headerlink" title="Buffer与字符串的相互转换"></a>Buffer与字符串的相互转换</h3><p>当字符串存储入一个Buffer实例或者从Buffer实例中提取时，我们可以指定一个字符编码</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以utf-8编码将字符串存储入Buffer中</span></span><br><span class="line"><span class="keyword">let</span> buf = Buffer.from(<span class="string">'理解Buffer'</span>,<span class="string">'utf-8'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(buf); <span class="comment">// &lt;Buffer e7 90 86 e8 a7 a3 42 75 66 66 65 72&gt;</span></span><br><span class="line"><span class="comment">// 以base64编码取出该字符串</span></span><br><span class="line"><span class="built_in">console</span>.log(buf.toString(<span class="string">'base64'</span>)); <span class="comment">// 55CG6KejQnVmZmVy</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 以ascii编码将字符串存入Buffer中</span></span><br><span class="line">buf = Buffer.from(<span class="string">'理解Buffer'</span>,<span class="string">'ascii'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(buf);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Buffer的拼接"><a href="#Buffer的拼接" class="headerlink" title="Buffer的拼接"></a>Buffer的拼接</h3><h4 id="直接拼接Buffer时遇到的问题"><a href="#直接拼接Buffer时遇到的问题" class="headerlink" title="直接拼接Buffer时遇到的问题"></a>直接拼接Buffer时遇到的问题</h4><p>我们知道数据的移动是以流的方式进行的。那么，使用了Buffer作为缓冲区后，我们得到一个流数据就是一段一段的进行获取</p>
+<p>现在我们来试着使用读取流来读取一个文件内容：</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 该fs.createReadStream()方法会返回一个新的fs.ReadStream对象，该对象也就是读取流</span></span><br><span class="line"><span class="keyword">let</span> rs = fs.createReadStream(<span class="string">'./a.ja'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> data = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当流将数据块传送给消费者后触发data事件</span></span><br><span class="line">rs.on(<span class="string">'data'</span>,(chunk)=&gt;&#123;</span><br><span class="line">    data+=chunk;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 'end' 事件只有在数据被完全消费掉后才会触发</span></span><br><span class="line">rs.on(<span class="string">'end'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>此时a.js文件内容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>那么，输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;hello&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>我们发现读取似乎没有什么问题。但其实，这是有问题的。上述程序中有一行语句是</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data+=chunk;</span><br></pre></td></tr></table></figure>
+
+<p>我们知道流的读取时，传递的应该是Buffer对象，我们试着输出一下这个chunk</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rs.on(<span class="string">'data'</span>,(chunk)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(chunk); <span class="comment">// &lt;Buffer 63 6f 6e 73 6f 6c 65 2e 6c 6f 67 28 27 68 65 6c 6c 6f 27 29 3b&gt;</span></span><br><span class="line">    data+=chunk;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>的确，这个chunk确实是Buffer对象，那么为什么最后输出的是正确的字符串呢？</p>
+<p>我们知道在字符串拼接的时候，如果有一方不是字符串，那么就会将其转化为字符串之后再进行拼接。因此，那行代码又可以等价为</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data+=chunk.toString();</span><br></pre></td></tr></table></figure>
+
+<p>这样似乎都可以说的通了，但是如果我们读取的内容不全是英文，而是包括有宽字节的中文呢?</p>
+<p>我们将a.js文件内容改为如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'你好呀，我很好'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>同时，我们利用highWaterMark属性将缓冲区的大小限制为5。</p>
+<p>此时，完整的程序如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将每次读取的Buffer长度限制为5</span></span><br><span class="line"><span class="keyword">let</span> rs = fs.createReadStream(<span class="string">'./a.js'</span>,&#123;<span class="attr">highWaterMark</span>:<span class="number">5</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> data = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">rs.on(<span class="string">'data'</span>,(chunk)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(chunk);</span><br><span class="line">    data+=chunk;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">rs.on(<span class="string">'end'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">&lt;Buffer 63 6f 6e 73 6f&gt;</span></span><br><span class="line"><span class="comment">&lt;Buffer 6c 65 2e 6c 6f&gt;</span></span><br><span class="line"><span class="comment">&lt;Buffer 67 28 27 e4 bd&gt;</span></span><br><span class="line"><span class="comment">&lt;Buffer a0 e5 a5 bd e5&gt;</span></span><br><span class="line"><span class="comment">&lt;Buffer 91 80 ef bc 8c&gt;</span></span><br><span class="line"><span class="comment">&lt;Buffer e6 88 91 e5 be&gt;</span></span><br><span class="line"><span class="comment">&lt;Buffer 88 e5 a5 bd 27&gt;</span></span><br><span class="line"><span class="comment">&lt;Buffer 29 3b&gt;</span></span><br><span class="line"><span class="comment">console.log('��好���，我��好');</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到，每次的读取Buffer长度的确为5。此时，我们惊奇的发现，文件内容出现了乱码。</p>
+<p>这是为什么呢？我们知道，中文字符为宽字节字符，在utf-8模式下，其占3个字节。因此，我们用每次5个字节进行读取时，就会遇到，有些中文字符会被拆分到两次读取中，因此，就会显示出乱码</p>
+<h4 id="利用setEncoding来解决"><a href="#利用setEncoding来解决" class="headerlink" title="利用setEncoding来解决"></a>利用setEncoding来解决</h4><p>readable.setEncoding() 方法为从可读流读取的数据设置字符编码。</p>
+<p>默认情况下没有设置字符编码，流数据返回的是 Buffer 对象。 如果设置了字符编码，则流数据返回指定编码的字符串。 例如，调用 readable.setEncoding(‘utf-8’) 会将数据解析为 UTF-8 数据，并返回字符串，调用 readable.setEncoding(‘hex’) 则会将数据编码成十六进制字符串。</p>
+<p>因此，我们可以这样修改上述的程序：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> rs = fs.createReadStream(<span class="string">'./a.js'</span>,&#123;<span class="attr">highWaterMark</span>:<span class="number">5</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置字符编码，将流Buffer对象转化为字符串</span></span><br><span class="line">rs.setEncoding(<span class="string">'utf-8'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> data = <span class="string">''</span>;</span><br><span class="line">rs.on(<span class="string">'data'</span>,(chunk)=&gt;&#123;</span><br><span class="line">    <span class="comment">// 此时chunk为字符串形式</span></span><br><span class="line">    <span class="built_in">console</span>.log(chunk);</span><br><span class="line">    data+=chunk;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">rs.on(<span class="string">'end'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">conso</span></span><br><span class="line"><span class="comment">le.lo</span></span><br><span class="line"><span class="comment">g('</span></span><br><span class="line"><span class="comment">你好</span></span><br><span class="line"><span class="comment">呀，</span></span><br><span class="line"><span class="comment">我</span></span><br><span class="line"><span class="comment">很好'</span></span><br><span class="line"><span class="comment">);</span></span><br><span class="line"><span class="comment">console.log('你好呀，我很好');</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>虽然使用setEncoding可以解决目前的问题，但是它目前只能处理utf-8、Base64等部分编码，因此，它并不是完美的。</p>
+<h4 id="使用Buffer-concat-来解决"><a href="#使用Buffer-concat-来解决" class="headerlink" title="使用Buffer.concat()来解决"></a>使用Buffer.concat()来解决</h4><p>相较setEncoding方法在接收时并将buffer对象进行编码转换的不同，Buffer.concat()方法的思想是先接收到所有的小Buffer对象，然后将所有的小Buffer对象进行合并成一个大对象然后再进行字符串输出</p>
+<p>Buffer.concat(list[,totalLength])方法接受一个要合并的Buffer数组和合并后list中的Buffer实例的总长度，然后返回一个合并了list中所有Buffer实例的新Buffer</p>
+<p>如果没有提供 totalLength，则计算 list 中的 Buffer 实例的总长度。 但是这会导致执行额外的循环用于计算 totalLength，因此如果已知长度，则明确提供长度会更快</p>
+<p>因此，最完美的解决方案应该如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> rs = fs.createReadStream(<span class="string">'./a.js'</span>,&#123;<span class="attr">highWaterMark</span>:<span class="number">5</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> list = [];</span><br><span class="line"><span class="keyword">let</span> length = <span class="number">0</span>;</span><br><span class="line">rs.on(<span class="string">'data'</span>,(chunk)=&gt;&#123;</span><br><span class="line">    list.push(chunk);</span><br><span class="line">    length+=chunk.length;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">rs.on(<span class="string">'end'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="keyword">let</span> newBuf = Buffer.concat(list,length);</span><br><span class="line">    <span class="built_in">console</span>.log(newBuf);</span><br><span class="line">    <span class="built_in">console</span>.log(newBuf.toString(<span class="string">'utf-8'</span>));</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">&lt;Buffer 63 6f 6e 73 6f 6c 65 2e 6c 6f 67 28 27 e4 bd a0 e5 a5 bd e5 91 80 ef bc 8c e6 88 91 e5 be 88 e5 a5 bd 27 29 3b&gt;</span></span><br><span class="line"><span class="comment">console.log('你好呀，我很好');</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到，结果是可以正确输出的。</p>
+<h3 id="BUffer与网络传输"><a href="#BUffer与网络传输" class="headerlink" title="BUffer与网络传输"></a>BUffer与网络传输</h3><p>网络传输一般使用字节流来进行传输，因此，无论我们在传输之前什么类型的值，在传输的过程中都会转化为Buffer对象来进行网络传输</p>
+<p>例如：当客户端想要通过post方式传递一些数据的时候，这些数据就会被转化为Buffer对象，一点一点地传递到服务器端</p>
+<p>注意：</p>
+<blockquote>
+<p>网络传输中，请求与响应都是流对象，req为可读流，res为可写流</p>
+</blockquote>
+<p>因此，我们可以利用以下的方式来获取post请求的携带的数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> list = [];</span><br><span class="line"><span class="keyword">let</span> length = <span class="number">0</span>;</span><br><span class="line">http.createServer(<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">    req.on(<span class="string">'data'</span>,(chunk)=&gt;&#123;</span><br><span class="line">        <span class="comment">// console.log(chunk);</span></span><br><span class="line">        list.push(chunk);</span><br><span class="line">        length+=chunk.length;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    req.on(<span class="string">'end'</span>,()=&gt;&#123;</span><br><span class="line">        <span class="keyword">let</span> buf = Buffer.concat(list,length);</span><br><span class="line">        <span class="comment">// console.log(buf);</span></span><br><span class="line">        <span class="built_in">console</span>.log(buf.toString(<span class="string">'utf-8'</span>));</span><br><span class="line"></span><br><span class="line">        res.setHeader(<span class="string">'Content-Type'</span>,<span class="string">'application/JSON'</span>);</span><br><span class="line">        res.end(buf.toString(<span class="string">'utf-8'</span>))</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>因此，如果我们直接返回Buffer类型，cpu就不需要进行类型转换工作，可以有效地减少cpu的重复使用，节省服务器资源</p>
+<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><p>首先我们要在前端选取文件，并得到文件的base64编码</p>
+<p>前端部分代码，通过FileReader对象来将获取的文件进行base64编码，通过axios来进行文件上传</p>
+<p>前端部分</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> axios = <span class="built_in">require</span>(<span class="string">'axios'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> fileSelect = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'input'</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> submit = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'input'</span>)[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">submit.addEventListener(<span class="string">'click'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="keyword">let</span> file = fileSelect.files[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> fr = <span class="keyword">new</span> FileReader(file);</span><br><span class="line">    <span class="comment">// 处理load事件。该事件在读取操作完成时触发。</span></span><br><span class="line">    fr.addEventListener(<span class="string">'load'</span>,()=&gt;&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(fr.result);</span><br><span class="line">        axios.post(<span class="string">'/api/hello'</span>,&#123;</span><br><span class="line">            params: &#123;</span><br><span class="line">                value: fr.result</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(v);</span><br><span class="line">        &#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(err);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 开始读取指定的Blob中的内容。一旦完成，result属性中将包含一个data: URL格式的Base64字符串以表示所读取文件的内容。</span></span><br><span class="line">    fr.readAsDataURL(file);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Node端处理文件上传"><a href="#Node端处理文件上传" class="headerlink" title="Node端处理文件上传"></a>Node端处理文件上传</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> queryString = <span class="built_in">require</span>(<span class="string">'queryString'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> list = [];</span><br><span class="line"><span class="keyword">let</span> length = <span class="number">0</span>;</span><br><span class="line">http.createServer(<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">    req.on(<span class="string">'data'</span>,(chunk)=&gt;&#123;</span><br><span class="line">        list.push(chunk);</span><br><span class="line">        length+=chunk.length;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    req.on(<span class="string">'end'</span>,()=&gt;&#123;</span><br><span class="line">        <span class="comment">// 获取得到的是utf-8编码的Buffer对象</span></span><br><span class="line">        <span class="keyword">let</span> buf = Buffer.concat(list,length);</span><br><span class="line">        <span class="comment">// 将该Buffer对象转化为utf-8编码的字符串，并且取出包含在该字符串中的base64编码的文件内容</span></span><br><span class="line">        <span class="keyword">let</span> data = <span class="built_in">JSON</span>.parse(buf.toString(<span class="string">'utf-8'</span>)).params.value.replace(<span class="regexp">/^data:text\/javascript;base64,/</span>,<span class="string">''</span>);</span><br><span class="line">        <span class="comment">// 接下来就需要将base64编码转化为utf-8编码，我们可以间接地通过Buffer对象来转换</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建以base64编码的Buffer对象</span></span><br><span class="line">        <span class="keyword">let</span> newBuf = Buffer.from(data,<span class="string">'base64'</span>);</span><br><span class="line">        <span class="comment">// 将该Buffer对象转化为base64编码的字符串</span></span><br><span class="line">        <span class="keyword">let</span> fileContent = newBuf.toString(<span class="string">'utf-8'</span>);</span><br><span class="line">        <span class="comment">// 将文件内容写进get.js文件</span></span><br><span class="line">        fs.writeFile(<span class="string">'get.js'</span>,fileContent,()=&gt;&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'文件已保存'</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        res.setHeader(<span class="string">'Content-Type'</span>,<span class="string">'application/JSON'</span>);</span><br><span class="line">        res.end(<span class="built_in">JSON</span>.stringify(&#123;<span class="attr">value</span>:<span class="string">'收到'</span>&#125;));</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;).listen(<span class="number">3000</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Port 3000 is listenging'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>此时，我们就可以实现一个js文件的上传。</p>
+<p>当然，为了能够上传更多格式的文件，我们修改以上的正则表达式就OK了</p>
+<h3 id="Node端处理图片上传"><a href="#Node端处理图片上传" class="headerlink" title="Node端处理图片上传"></a>Node端处理图片上传</h3><p>因为图片的编码貌似都是base64编码，因此，我们在获得图片的base64编码后不需要像文件一样转化为utf-8编码，只需直接存储即可</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> queryString = <span class="built_in">require</span>(<span class="string">'queryString'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> list = [];</span><br><span class="line"><span class="keyword">let</span> length = <span class="number">0</span>;</span><br><span class="line">http.createServer(<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">    req.on(<span class="string">'data'</span>,(chunk)=&gt;&#123;</span><br><span class="line">        list.push(chunk);</span><br><span class="line">        length+=chunk.length;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    req.on(<span class="string">'end'</span>,()=&gt;&#123;</span><br><span class="line">        <span class="comment">// 获取得到的是utf-8编码的Buffer对象</span></span><br><span class="line">        <span class="keyword">let</span> buf = Buffer.concat(list,length);</span><br><span class="line">        <span class="comment">// 将该Buffer对象转化为utf-8编码的字符串，并且取出包含在该字符串中的base64编码的文件内容</span></span><br><span class="line">        <span class="keyword">let</span> data = <span class="built_in">JSON</span>.parse(buf.toString(<span class="string">'utf-8'</span>)).params.value.replace(<span class="regexp">/^data:((text\/(javascript|plain))|(image\/(png|jpg|jpeg|gif)));base64,/</span>,<span class="string">''</span>);</span><br><span class="line">        <span class="comment">// 接下来就需要将base64编码转化为utf-8编码，我们可以间接地通过Buffer对象来转换</span></span><br><span class="line">        <span class="built_in">console</span>.log(data);</span><br><span class="line">        <span class="comment">// 创建以base64编码的Buffer对象</span></span><br><span class="line">        <span class="keyword">let</span> newBuf = Buffer.from(data,<span class="string">'base64'</span>);</span><br><span class="line">        <span class="comment">// 不需要将该Buffer对象转化为base64编码的字符串</span></span><br><span class="line">        <span class="comment">//let fileContent = newBuf.toString('utf-8');</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 生成a.jpeg</span></span><br><span class="line">        fs.writeFile(<span class="string">'a.jpeg'</span>,newBuf,()=&gt;&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'文件已保存'</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        res.setHeader(<span class="string">'Content-Type'</span>,<span class="string">'application/JSON'</span>);</span><br><span class="line">        res.end(<span class="built_in">JSON</span>.stringify(&#123;<span class="attr">value</span>:<span class="string">'收到'</span>&#125;));</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;).listen(<span class="number">3000</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Port 3000 is listenging'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+        
+      
+      </div>
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/04/V8的垃圾回收机制/" rel="next" title="V8的垃圾回收机制与内存管理">
+                <i class="fa fa-chevron-left"></i> V8的垃圾回收机制与内存管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar_1.png" alt="Angel">
+            
+              <p class="site-author-name" itemprop="name">Angel</p>
+              <p class="site-description motion-element" itemprop="description">这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">129</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Buffer（缓冲区）"><span class="nav-number">1.</span> <span class="nav-text">Buffer（缓冲区）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Buffer（缓冲区）"><span class="nav-number">1.1.</span> <span class="nav-text">什么是Buffer（缓冲区）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer对象"><span class="nav-number">1.2.</span> <span class="nav-text">Buffer对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer的内存分配"><span class="nav-number">1.3.</span> <span class="nav-text">Buffer的内存分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer与字符串的相互转换"><span class="nav-number">1.4.</span> <span class="nav-text">Buffer与字符串的相互转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer的拼接"><span class="nav-number">1.5.</span> <span class="nav-text">Buffer的拼接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接拼接Buffer时遇到的问题"><span class="nav-number">1.5.1.</span> <span class="nav-text">直接拼接Buffer时遇到的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用setEncoding来解决"><span class="nav-number">1.5.2.</span> <span class="nav-text">利用setEncoding来解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用Buffer-concat-来解决"><span class="nav-number">1.5.3.</span> <span class="nav-text">使用Buffer.concat()来解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BUffer与网络传输"><span class="nav-number">1.6.</span> <span class="nav-text">BUffer与网络传输</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件上传"><span class="nav-number">2.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node端处理文件上传"><span class="nav-number">2.1.</span> <span class="nav-text">Node端处理文件上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node端处理图片上传"><span class="nav-number">2.2.</span> <span class="nav-text">Node端处理图片上传</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angel</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">128.8k</span>
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共128.8k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script>
+</body>
+</html>
+<script type="text/javascript" src="/js/src/click.js"></script>
