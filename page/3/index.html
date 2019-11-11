@@ -307,6 +307,740 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/Node的模块机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/25/Node的模块机制/" itemprop="url">Node的模块机制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-25T10:26:54+08:00">
+                2019-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node/" itemprop="url" rel="index">
+                    <span itemprop="name">Node</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="模块化的必要性"><a href="#模块化的必要性" class="headerlink" title="模块化的必要性"></a>模块化的必要性</h2><p>在应用开发中，模块化的方式可以带来诸多好处：</p>
+<ol>
+<li>避免变量的全部污染，每个模块的变量之间都是相互独立的</li>
+<li>模块可以复用，提高代码复用率</li>
+<li>每一个来实现一部分功能，代码维护性高</li>
+<li>便于各个功能模块之间的代码依赖性管理</li>
+</ol>
+<h2 id="CommonJS的模块规范"><a href="#CommonJS的模块规范" class="headerlink" title="CommonJS的模块规范"></a>CommonJS的模块规范</h2><p>CommonJS规范对于模块的定义主要分为以下三个部分：</p>
+<h3 id="模块引用"><a href="#模块引用" class="headerlink" title="模块引用"></a>模块引用</h3><p>CommonJS通过require()方式来对模块进行引用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> test = <span class="built_in">require</span>(<span class="string">'./test.js'</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="模块导出"><a href="#模块导出" class="headerlink" title="模块导出"></a>模块导出</h3><p>CommonJS可以使用两种方式进行导出</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用exports</span></span><br><span class="line">exports.add = <span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用module.exports</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a,b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="exports与module-exports的区别与联系"><a href="#exports与module-exports的区别与联系" class="headerlink" title="exports与module.exports的区别与联系"></a>exports与module.exports的区别与联系</h4><p>我们在一个模块中运行如下代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(exports); <span class="comment">// &#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.exports); <span class="comment">// &#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(exports===<span class="built_in">module</span>.exports); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以知道exports与module.exports指向的是同一个对象，并且这个对象一开始是一个空对象</p>
+<p>先说结论吧：</p>
+<blockquote>
+<p>一个模块真正导出的内容是module.exports的值，exports只是对module.exports的引用</p>
+</blockquote>
+<p>那么我们尝试着利用两种方式去导出对象来看下会发生什么</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  为exports对象添加属性</span></span><br><span class="line">exports.add = <span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.exports); <span class="comment">// &#123; add: [Function] &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 将exports对象指向其他对象</span></span><br><span class="line">exports = &#123;</span><br><span class="line">    item: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// module.exports内容依旧没有改变</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.exports); <span class="comment">// &#123; add: [Function] &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们在另一个模块中引入该模块：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> m = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(m); <span class="comment">// &#123;add: [Function]&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到引入的模块确实是module.exports的值而不是exports的值。</p>
+<p>那么，如果我们将module.exports对象指向另一个对象，而不是模块一开始自定义的那个对象，又会怎么样呢</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a,b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.exports); <span class="comment">// [Function: add]</span></span><br></pre></td></tr></table></figure>
+
+<p>意料之内，模块导出的永远是module.exports的值，而不会关心这个module.exports属性指向什么值</p>
+<p>那么，如果我们将模块本身的module对象重新赋予另一个新对象呢？那么，该模块能否被导出呢？</p>
+<p>答案当然是不能。</p>
+<p>我们将模块赋予一个当前模块对象的一个浅拷贝</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span> = &#123;</span><br><span class="line">    id: <span class="string">'.'</span>,</span><br><span class="line">    path: <span class="string">'d:\\jsTest'</span>,</span><br><span class="line">    exports: &#123;<span class="attr">a</span>:<span class="number">1</span>&#125;,</span><br><span class="line">    parent: <span class="literal">null</span>,</span><br><span class="line">    filename: <span class="string">'d:\\jsTest\\tempCodeRunnerFile.js'</span>,</span><br><span class="line">    loaded: <span class="literal">false</span>,</span><br><span class="line">    children: [],</span><br><span class="line">    paths: [ <span class="string">'d:\\jsTest\\node_modules'</span>, <span class="string">'d:\\node_modules'</span> ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们在另一个模块中引入，就会发现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> m = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(m); <span class="comment">// &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>之前的那个模块没有导出任何东西</p>
+<h3 id="模块标识"><a href="#模块标识" class="headerlink" title="模块标识"></a>模块标识</h3><p>模块标识其实就是传递给require()方法的参数，它必须是符合小驼峰命名的字符串，或者是相对路径，或者是绝对路径。它可以没有文件名后缀。</p>
+<h2 id="node模块详解"><a href="#node模块详解" class="headerlink" title="node模块详解"></a>node模块详解</h2><h3 id="什么是模块"><a href="#什么是模块" class="headerlink" title="什么是模块"></a>什么是模块</h3><p>在Node模块系统中，每一个文件都是一个模块。在每个模块中，用变量moudule来表示对当前模块对象的引用。 </p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> b = <span class="number">2</span>;</span><br><span class="line">exports.c = a+b;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.exports); <span class="comment">// &#123;c:3&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>该js文件就是一个模块，并且该模块导出了一个变量c。</p>
+<h4 id="模块对象"><a href="#模块对象" class="headerlink" title="模块对象"></a>模块对象</h4><p>在每个模块中,module变量引用着当前模块的模块对象</p>
+<p>它的定义如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Module</span>(<span class="params">id = <span class="string">''</span>, parent</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.id = id;</span><br><span class="line">  <span class="keyword">this</span>.path = path.dirname(id); <span class="comment">// 返回该模块文件的目录名</span></span><br><span class="line">  <span class="keyword">this</span>.exports = &#123;&#125;;</span><br><span class="line">  <span class="keyword">this</span>.parent = parent;</span><br><span class="line">  updateChildren(parent, <span class="keyword">this</span>, <span class="literal">false</span>); <span class="comment">// 将该模块添加到parent模块的children模块数组中</span></span><br><span class="line">  <span class="keyword">this</span>.filename = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">this</span>.loaded = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">this</span>.children = [];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们在一个模块中试着输出一下module</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line">exports.a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我们运行一下b.js，可以得到如下的输出结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">Module &#123;</span></span><br><span class="line"><span class="comment">  id: '.', // 模块标识符，对于自己是'.'，对于引入的依赖是其完全解析后的文件名</span></span><br><span class="line"><span class="comment">  path: 'D:\\jsTest',</span></span><br><span class="line"><span class="comment">  exports: &#123;&#125;,</span></span><br><span class="line"><span class="comment">  parent: null,</span></span><br><span class="line"><span class="comment">  filename: 'D:\\jsTest\\b.js',</span></span><br><span class="line"><span class="comment">  loaded: false,</span></span><br><span class="line"><span class="comment">  children: [</span></span><br><span class="line"><span class="comment">    Module &#123;</span></span><br><span class="line"><span class="comment">      id: 'D:\\jsTest\\a.js',</span></span><br><span class="line"><span class="comment">      path: 'D:\\jsTest',</span></span><br><span class="line"><span class="comment">      exports: [Object],</span></span><br><span class="line"><span class="comment">      parent: [Circular],</span></span><br><span class="line"><span class="comment">      filename: 'D:\\jsTest\\a.js',</span></span><br><span class="line"><span class="comment">      loaded: true,</span></span><br><span class="line"><span class="comment">      children: [],</span></span><br><span class="line"><span class="comment">      paths: [Array]</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">  ],</span></span><br><span class="line"><span class="comment">  paths: [ 'D:\\jsTest\\node_modules', 'D:\\node_modules' ]</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="module-parent与module-children"><a href="#module-parent与module-children" class="headerlink" title="module.parent与module.children"></a>module.parent与module.children</h5><p>我们修改一下上面的两个模块的代码</p>
+<p>a模块</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'module.parent'</span>,<span class="built_in">module</span>.parent.filename); <span class="comment">// 'D:\\jsTest\\a.js'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'module.children'</span>,<span class="built_in">module</span>.children); <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
+
+<p>b模块</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'module.parent'</span>,<span class="built_in">module</span>.parent); <span class="comment">// null</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.children);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">[</span></span><br><span class="line"><span class="comment">  Module &#123;</span></span><br><span class="line"><span class="comment">    id: 'D:\\jsTest\\a.js',</span></span><br><span class="line"><span class="comment">    path: 'D:\\jsTest',</span></span><br><span class="line"><span class="comment">    exports: &#123;&#125;,</span></span><br><span class="line"><span class="comment">    parent: Module &#123;</span></span><br><span class="line"><span class="comment">      id: '.',</span></span><br><span class="line"><span class="comment">      path: 'D:\\jsTest',</span></span><br><span class="line"><span class="comment">      exports: &#123;&#125;,</span></span><br><span class="line"><span class="comment">      parent: null,</span></span><br><span class="line"><span class="comment">      filename: 'D:\\jsTest\\b.js',</span></span><br><span class="line"><span class="comment">      loaded: false,</span></span><br><span class="line"><span class="comment">      children: [Circular],</span></span><br><span class="line"><span class="comment">      paths: [Array]</span></span><br><span class="line"><span class="comment">    &#125;,</span></span><br><span class="line"><span class="comment">    filename: 'D:\\jsTest\\a.js',</span></span><br><span class="line"><span class="comment">    loaded: true,</span></span><br><span class="line"><span class="comment">    children: [],</span></span><br><span class="line"><span class="comment">    paths: [ 'D:\\jsTest\\node_modules', 'D:\\node_modules' ]</span></span><br><span class="line"><span class="comment">  &#125;</span></span><br><span class="line"><span class="comment">]</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我们查看一下node的官方api文档：</p>
+<p>module.parent: &lt;module&gt;（单个模块对象）</p>
+<blockquote>
+<p>最先引用该模块的模块。</p>
+</blockquote>
+<p>module.children: &lt;module[]&gt; （模块对象数组）</p>
+<blockquote>
+<p>被该模块引用的模块对象。</p>
+</blockquote>
+<p>因此，我们可以得出结论：<br>module.parent指向第一个引用该模块的模块，而module.children指被该模块引用的所有模块对象</p>
+<p>那么，疑问又来了：</p>
+<p>如果一个a模块同时被b模块和c模块引入，那么a模块的module.parent属性究竟指向谁呢？</p>
+<p>在同一个进程中，我们无法同时运行两个模块。因此，如果串行运行b模块和c模块，那么module.parent指向第一个引入该a模块的模块，而另一个模块则会从缓存中去读取该模块</p>
+<h3 id="模块的分类"><a href="#模块的分类" class="headerlink" title="模块的分类"></a>模块的分类</h3><p>在node中，模块可以被分为两类：一类是node提供的模块，成为核心模块；另一类是用户编写的模块，成为文件模块。</p>
+<p>对于，文件模块来说，我们又可以根据模块的标识符的路径再细分为以下三类：</p>
+<ol>
+<li>.或..开始的相对路径文件模块</li>
+<li>以/开始的绝对路径文件模块</li>
+<li>非路径形式的文件模块，又被称之为自定义模块（例如’koa’）。它是一种特殊的文件模块，可能是一个文件或者包的形式</li>
+</ol>
+<h3 id="模块封装器"><a href="#模块封装器" class="headerlink" title="模块封装器"></a>模块封装器</h3><p>模块内部的所有变量都是私有的，因为模块内的代码都会被封装在一个称作模块封装器的函数内。</p>
+<p>在执行模块代码之前，Node.js会使用一个如下的函数包装器将模块内的代码进行封装，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">exports,require,module,__filename,__dirname</span>)</span>&#123;</span><br><span class="line"> <span class="comment">// 模块的实际代码实际上是被封装在这里</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>使用这样的方式，每个模块内部的代码就会被函数作用域所相互隔离。因此，我们就保证了模块内部的所有(使用显示声明的（var,let,const）)变量都是私有的。</p>
+<p>也就是说，隐式声明的变量会成为全局变量（其他模块可以访问到该变量）。这点很容易想到，在一个函数作用域内声明一个全局变量就需要隐式声明或者直接将该变量作为全局对象的属性。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line">t = <span class="number">11</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(t); <span class="comment">// 11</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到，当a模块执行后，t就被声明为全局变量。因此，其他模块都可以访问到该变量t。</p>
+<p>之后，在模块编译的时候，node会将当前模块对象(module)的exports属性，require()方法、module(模块自身)，以及在文件定位中得到的完整文件路劲和文件目录作为参数传递给该模块封装器函数进行执行。</p>
+<p>因此，我们就知道了为什么，在模块内部我们可以直接使用exports,module等变量。</p>
+<p>另外，我们也知道了模块内部的exports变量只是一个形参，而该形参值等于传递给该模块封装器的module.exports实参罢了。在这里，我们也对前面遇到的问题做出了一个底层性的解释。</p>
+<h3 id="模块缓存"><a href="#模块缓存" class="headerlink" title="模块缓存"></a>模块缓存</h3><p>模块在第一次被加载后就会被缓存，以减少二次引入的开销。</p>
+<p>因此，同一个模块就算被多次引入也只会执行一次。</p>
+<p>Node的模块系统对于每一个已经成功编译的模块会将其文件路径作为索引缓存在Module._cache对象上，索引所对应的值是模块被编译和执行之后的对象。</p>
+<p>另外，对于文件索引，我们需要明白，因为模块是基于其解析的文件名进行缓存的。 由于调用模块的位置的不同，模块可能被解析成不同的文件名（比如从 node_modules 目录加载），这样就不能保证 require(‘foo’) 总能返回完全相同的对象。</p>
+<p>现在，我们来验证下，在模块第一次被引入后是否会被缓存：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line">exports.a = a;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="keyword">const</span> m = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"><span class="keyword">const</span> n = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>我们发现输出结果只有一个1，如果模块没有被缓存而是重新加载，那么输出结果应该是两个1。因此，</p>
+<blockquote>
+<p>模块在第一次被引入后会进行缓存，之后再次引入该模块便不会再执行该模块。</p>
+</blockquote>
+<h3 id="模块的循环依赖"><a href="#模块的循环依赖" class="headerlink" title="模块的循环依赖"></a>模块的循环依赖</h3><p>我们可能会遇到这样一个场景：</p>
+<p>模块a需要依赖模块b，而模块b又需要依赖模块a。那么这两个模块之间会进行无限的循环依赖吗？</p>
+<p>我们都知道无限递归有多么可怕，因此，Node也不会允许无限的循环依赖的情况发生。</p>
+<blockquote>
+<p>Node允许一个模块在未被完全执行完毕时就可以被返回。</p>
+</blockquote>
+<p>Node通过这样的方式来避免无限的循环依赖。</p>
+<p>例如：</p>
+<p>模块a</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'a开始'</span>);</span><br><span class="line"><span class="comment">// 导出done属性为false</span></span><br><span class="line">exports.done = <span class="literal">false</span>;</span><br><span class="line"><span class="comment">// 此时a模块未完全被执行</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="built_in">require</span>(<span class="string">'./b.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`在a模块中,b模块导出的done为<span class="subst">$&#123;b.done&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// 导出的done属性修改为true</span></span><br><span class="line">exports.done = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'a结束'</span>);</span><br><span class="line"><span class="comment">// a模块完全被执行</span></span><br></pre></td></tr></table></figure>
+
+<p>模块b</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'b开始'</span>);</span><br><span class="line"><span class="comment">// 导出done属性为true</span></span><br><span class="line">exports.done = <span class="literal">true</span>;</span><br><span class="line"><span class="comment">// 此时b模块未完全被执行</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`在b模块中，a模块导出的done为<span class="subst">$&#123;a.done&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// 导出的done属性修改为false</span></span><br><span class="line">exports.done = <span class="literal">false</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'b结束'</span>);</span><br><span class="line"><span class="comment">// b模块完全被执行</span></span><br></pre></td></tr></table></figure>
+
+<p>模块main</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'mian开始'</span>);</span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"><span class="keyword">const</span> b = <span class="built_in">require</span>(<span class="string">'./b.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`在main模块中，a模块导出的done为<span class="subst">$&#123;a.done&#125;</span>，b模块导出的done为<span class="subst">$&#123;b.done&#125;</span>`</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我们分别创建了a和b模块，这两个模块之间互相依赖。然后，我们在main模块将这两个模块都引入，执行main.js，最终运行结果如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">mian开始</span></span><br><span class="line"><span class="comment">a开始</span></span><br><span class="line"><span class="comment">b开始</span></span><br><span class="line"><span class="comment">在b模块中，a模块导出的done为false</span></span><br><span class="line"><span class="comment">b结束</span></span><br><span class="line"><span class="comment">在a模块中,b模块导出的done为false</span></span><br><span class="line"><span class="comment">a结束</span></span><br><span class="line"><span class="comment">在main模块中，a模块导出的done为true，b模块导出的done为false</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我们来分析一下上述的运行过程：</p>
+<ol>
+<li>输出’main开始’</li>
+<li>开始引入模块a，由于是第一次引入，那么去执行模块a<ol>
+<li>输出’a开始’</li>
+<li>将exports对象设置一个属性done为false，也就是说此时被导出的done为false</li>
+<li>开始引入b模块，由于是第一引入，那么去执行模块b<ol>
+<li>输出’b开始’</li>
+<li>将b模块的导出值done设置为true</li>
+<li>需要引入a模块，因为a模块此时不是第一次被加载，因此不需要去重新执行a模块。（之前提到过，因为node允许一个模块未被完全执行完毕时就可以有导出值）因此，我们从缓存区读取a模块的导出值，此时a模块导出的done值为false</li>
+<li>因此，输出’在b模块中，a模块导出的done为false’</li>
+<li>继续执行b模块，将b模块的导出值done修改为false</li>
+<li>输出’b’结束</li>
+</ol>
+</li>
+<li>继续执行a模块，因为b模块已经被完全执行，因此输出’在a模块中,b模块导出的done为false’</li>
+<li>将a模块的导出done值修改为true</li>
+<li>输出’a结束’</li>
+</ol>
+</li>
+<li>开始引入模块b，因为b模块此时不是第一次加载，因此不需要去重新执行b模块。我们从缓存中去读取b模块。</li>
+<li>此时，a模块和b模块都在上述过程中被完全执行。并且，a和b模块都不仅仅只被引入过一次，因此，此时我们就会去从缓存中去读取a和b模块。那么输出’在main模块中，a模块导出的done为true，b模块导出的done为false’</li>
+</ol>
+<h4 id="补充：多模块的循环依赖"><a href="#补充：多模块的循环依赖" class="headerlink" title="补充：多模块的循环依赖"></a>补充：多模块的循环依赖</h4><p>与上文提到的两个模块之间的循环依赖思路一致，只需要记住两点：</p>
+<ol>
+<li>Node允许一个模块在未被完全执行完毕时就可以被返回。</li>
+<li>模块只有第一次被引入时会加载执行，之后都是从缓存中去读取</li>
+</ol>
+<p>以下是三个模块之间的循环依赖：<br>a模块依赖b模块，b模块依赖c模块，c模块又依赖a模块</p>
+<p>a模块</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'a开始'</span>);</span><br><span class="line"><span class="comment">// 导出done属性为false</span></span><br><span class="line">exports.done = <span class="literal">false</span>;</span><br><span class="line"><span class="comment">// 此时a模块未完全被执行</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="built_in">require</span>(<span class="string">'./b.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`在a模块中,b模块导出的done为<span class="subst">$&#123;b.done&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// 导出的done属性修改为true</span></span><br><span class="line">exports.done = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'a结束'</span>);</span><br><span class="line"><span class="comment">// a模块完全被执行</span></span><br></pre></td></tr></table></figure>
+
+<p>b模块</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'b开始'</span>);</span><br><span class="line"><span class="comment">// 导出done属性为true</span></span><br><span class="line">exports.done = <span class="literal">true</span>;</span><br><span class="line"><span class="comment">// 此时b模块未完全被执行</span></span><br><span class="line"><span class="keyword">const</span> c = <span class="built_in">require</span>(<span class="string">'./c.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`在b模块中，c模块导出的done为<span class="subst">$&#123;c.done&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// 导出的done属性修改为false</span></span><br><span class="line">exports.done = <span class="literal">false</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'b结束'</span>);</span><br><span class="line"><span class="comment">// b模块完全被执行</span></span><br></pre></td></tr></table></figure>
+
+<p>c模块</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// c.js</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'c开始'</span>);</span><br><span class="line"><span class="comment">// 导出done属性为true</span></span><br><span class="line">exports.done = <span class="literal">true</span>;</span><br><span class="line"><span class="comment">// 此时c模块未完全被执行</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`在c模块中，a模块导出的done为<span class="subst">$&#123;a.done&#125;</span>`</span>);</span><br><span class="line"><span class="comment">// 导出的done属性修改为false</span></span><br><span class="line">exports.done = <span class="literal">false</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'c结束'</span>);</span><br><span class="line"><span class="comment">// c模块完全被执行</span></span><br></pre></td></tr></table></figure>
+
+<p>mian模块</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'mian开始'</span>);</span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"><span class="keyword">const</span> b = <span class="built_in">require</span>(<span class="string">'./b.js'</span>);</span><br><span class="line"><span class="keyword">const</span> c = <span class="built_in">require</span>(<span class="string">'./c.js'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`在main模块中，a模块导出的done为<span class="subst">$&#123;a.done&#125;</span>，b模块导出的done为<span class="subst">$&#123;b.done&#125;</span>,c模块导出的done为<span class="subst">$&#123;c.done&#125;</span>`</span>);</span><br></pre></td></tr></table></figure>
+
+<p>运行main.js，我们可以得到以下输出结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mian开始</span><br><span class="line">a开始</span><br><span class="line">b开始</span><br><span class="line">c开始</span><br><span class="line">在c模块中，a模块导出的done为<span class="literal">false</span></span><br><span class="line">c结束</span><br><span class="line">在b模块中，c模块导出的done为<span class="literal">false</span></span><br><span class="line">b结束</span><br><span class="line">在a模块中,b模块导出的done为<span class="literal">false</span></span><br><span class="line">a结束</span><br><span class="line">在main模块中，a模块导出的done为<span class="literal">true</span>，b模块导出的done为<span class="literal">false</span>,c模块导出的done为<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="模块的加载机制（require-方法的过程）"><a href="#模块的加载机制（require-方法的过程）" class="headerlink" title="模块的加载机制（require()方法的过程）"></a>模块的加载机制（require()方法的过程）</h3><p>模块的加载机制大致可以分为以下几步：</p>
+<ol>
+<li>解析得到模块的绝对文件路径</li>
+<li>通过得到的文件路径来判断该模块是否在缓存中，如果是，则直接取出该缓存的模块对象返回其exports属性（导出值），反之继续</li>
+<li>判断该模块是否为核心模块，如果是，那么返回该核心模块对象的导出并且将核心模块对象加入缓存</li>
+<li>到这一步，模块就是文件模块了。此时，创建文件模块的实例对象并存入缓存</li>
+<li>加载并执行该文件模块</li>
+<li>导出模块的exports属性</li>
+</ol>
+<p>流程图如下：</p>
+<p><img src="https://s2.ax1x.com/2019/10/31/KIBpd0.jpg" alt></p>
+<p>在详细说明前，我们需要知道几点：</p>
+<ol>
+<li>被缓存的模块加载时的优先级最高</li>
+<li>部分核心模块在Node进程启动时就被直接加载进内存中，因此，核心模块的引入只需要分析它的模块标识符这一过程，而不需要对其进行模块实例的创建以及模块的加载执行</li>
+<li>文件模块是在运行时动态加载，因此，它需要以上的完整步骤，因此，速度较慢。</li>
+</ol>
+<p>接下来，我们会通过查看源码的方式来深入这一过程：</p>
+<p>首先贴上require()方法中加载模块的源码：</p>
+<p>require()方法其实内部调用了Module._load方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 形参说明：request指代要加载的模块的标识符，parent指向第一个引用request模块的模块,isMain表示是否是入口调用（true/false）</span></span><br><span class="line">Module._load = <span class="function"><span class="keyword">function</span>(<span class="params">request, parent, isMain</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> relResolveCacheIdentifier;</span><br><span class="line">  <span class="comment">// 如果parent存在，也就是说有另外一个模块已经调用过该request模块（该request模块已经被处理过了）</span></span><br><span class="line">  <span class="keyword">if</span> (parent) &#123;</span><br><span class="line">    debug(<span class="string">'Module._load REQUEST %s parent: %s'</span>, request, parent.id);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">      同一目录中（延迟加载）模块的快速路径。 需要间接缓存以允许缓存无效而不更改旧的缓存键名称。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">      // 谷歌翻译 源码的解释（目前还没看懂）</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    relResolveCacheIdentifier = <span class="string">`<span class="subst">$&#123;parent.path&#125;</span>\x00<span class="subst">$&#123;request&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">const</span> filename = relativeResolveCache[relResolveCacheIdentifier];</span><br><span class="line">    <span class="keyword">if</span> (filename !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">      <span class="comment">// 从缓存中读取该模块</span></span><br><span class="line">      <span class="keyword">const</span> cachedModule = Module._cache[filename];</span><br><span class="line">      <span class="keyword">if</span> (cachedModule !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">        updateChildren(parent, cachedModule, <span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">return</span> cachedModule.exports;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">delete</span> relativeResolveCache[relResolveCacheIdentifier];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 解析得到模块的真实文件路径</span></span><br><span class="line">  <span class="keyword">const</span> filename = Module._resolveFilename(request, parent, isMain);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 判断缓存中是否有该模块</span></span><br><span class="line">  <span class="keyword">const</span> cachedModule = Module._cache[filename];</span><br><span class="line">  <span class="keyword">if</span> (cachedModule !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="comment">// 将request模块（需要引入的模块）添加到当前模块的children中</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    function updateChildren(parent, child, scan) &#123;</span></span><br><span class="line"><span class="comment">      const children = parent &amp;&amp; parent.children;</span></span><br><span class="line"><span class="comment">      if (children &amp;&amp; !(scan &amp;&amp; children.includes(child)))</span></span><br><span class="line"><span class="comment">        children.push(child);</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    updateChildren(parent, cachedModule, <span class="literal">true</span>);</span><br><span class="line">    <span class="comment">// 返回该缓存模块的导出值</span></span><br><span class="line">    <span class="keyword">return</span> cachedModule.exports;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 查看是否为核心模块，如果是，那么将该核心模块加入缓存并且返回该核心模块的导出值</span></span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    function loadNativeModule(filename, request, experimentalModules) &#123;</span></span><br><span class="line"><span class="comment">      const mod = NativeModule.map.get(filename);</span></span><br><span class="line"><span class="comment">      if (mod) &#123;</span></span><br><span class="line"><span class="comment">        debug('load native module %s', request);</span></span><br><span class="line"><span class="comment">        mod.compileForPublicLoader(experimentalModules);</span></span><br><span class="line"><span class="comment">        return mod;</span></span><br><span class="line"><span class="comment">      &#125;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="keyword">const</span> mod = loadNativeModule(filename, request, experimentalModules);</span><br><span class="line">  <span class="comment">// 如果是核心模块并且该模块可以被调用，那么返回该核心模块的导出值</span></span><br><span class="line">  <span class="keyword">if</span> (mod &amp;&amp; mod.canBeRequiredByUsers) <span class="keyword">return</span> mod.exports;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 此时，该request模块已经确定为是文件模块（不是缓存模块以及核心模块），那么以该文件模块创建一个Module实例</span></span><br><span class="line">  <span class="keyword">const</span> <span class="built_in">module</span> = <span class="keyword">new</span> Module(filename, parent);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果该request模块是入口调用，那么将该模块作为入口模块</span></span><br><span class="line">  <span class="keyword">if</span> (isMain) &#123;</span><br><span class="line">    process.mainModule = <span class="built_in">module</span>;</span><br><span class="line">    <span class="built_in">module</span>.id = <span class="string">'.'</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 将该文件模块存入缓存</span></span><br><span class="line">  Module._cache[filename] = <span class="built_in">module</span>;</span><br><span class="line">  <span class="comment">// 如果是第一次加载该模块，那么将该模块添加到relativeResolveCache对象中，表示是最近加载过的模块</span></span><br><span class="line">  <span class="keyword">if</span> (parent !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    relativeResolveCache[relResolveCacheIdentifier] = filename;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 加载该模块并且进行异常捕获</span></span><br><span class="line">  <span class="keyword">let</span> threw = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (enableSourceMaps) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 加载模块</span></span><br><span class="line">        <span class="built_in">module</span>.load(filename);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">        rekeySourceMap(Module._cache[filename], err);</span><br><span class="line">        <span class="keyword">throw</span> err; </span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">module</span>.load(filename);</span><br><span class="line">    &#125;</span><br><span class="line">    threw = <span class="literal">false</span>;</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (threw) &#123;</span><br><span class="line">      <span class="keyword">delete</span> Module._cache[filename];</span><br><span class="line">      <span class="keyword">if</span> (parent !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">        <span class="keyword">delete</span> relativeResolveCache[relResolveCacheIdentifier];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 导出模块的导出值</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">module</span>.exports;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>注：以上是个人对源码的解读，并且只解释我知道的部分。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/24/JavaScript常见错误类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/24/JavaScript常见错误类型/" itemprop="url">JavaScript常见错误类型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-24T22:24:45+08:00">
+                2019-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  214
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="JavaScript常见错误类型"><a href="#JavaScript常见错误类型" class="headerlink" title="JavaScript常见错误类型"></a>JavaScript常见错误类型</h2><p>JavaScript主要包括以下几种常见错误类型</p>
+<ol>
+<li><p>TypeError（类型错误） 对象用来表示值的类型非预期类型时发生的错误。</p>
+<pre><code>当传入函数的操作数或参数的类型并非操作符或函数所预期的类型时，将抛出一个 TypeError 类型错误。</code></pre></li>
+<li><p>SyntaxError 对象代表尝试解析语法上不合法的代码的错误</p>
+<pre><code>当Javascript语言解析代码时,Javascript引擎发现了不符合语法规范的tokens或token顺序时抛出SyntaxError.</code></pre></li>
+<li><p>ReferenceError（引用错误） 对象代表当一个不存在的变量被引用时发生的错误。</p>
+<pre><code>当你尝试引用一个未被定义的变量时，将会抛出一个 ReferenceError 。</code></pre></li>
+<li><p>RangeError对象标明一个错误，当一个值不在其所允许的范围或者集合中。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/剑指Offer-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/23/剑指Offer-01/" itemprop="url">剑指Offer-求链表中的倒数第k个节点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-23T22:28:29+08:00">
+                2019-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode题解与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  361
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="求链表中的倒数第k个节点"><a href="#求链表中的倒数第k个节点" class="headerlink" title="求链表中的倒数第k个节点"></a>求链表中的倒数第k个节点</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入：输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾结点是倒数第一个节点。例如，一个链表有6个节点，从头结点开始，它们的值一次是1、2、3、4、5、6。这个链表的倒数第三个节点是值为4的节点。</p>
+<p>链表节点定义如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*function ListNode(x)&#123;</span></span><br><span class="line"><span class="comment">    this.val = x;</span></span><br><span class="line"><span class="comment">    this.next = null;</span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h3><p>我们可以设置两个双指针，cur指向头结点，anotherCur指向第k-1个节点。然后两个节点分别往下走，当anotherCur节点指向最后一个节点时，也就意味着cur指向了该链表的倒数第k个节点</p>
+<p>但是，我们需要注意一些输入的问题以及边界情况。</p>
+<ol>
+<li>输入链表head为空时的处理</li>
+<li>k值小于等于0时的处理</li>
+<li>k值大于链表长度时的处理</li>
+</ol>
+<h3 id="coding实现"><a href="#coding实现" class="headerlink" title="coding实现"></a>coding实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*function ListNode(x)&#123;</span></span><br><span class="line"><span class="comment">    this.val = x;</span></span><br><span class="line"><span class="comment">    this.next = null;</span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindKthToTail</span>(<span class="params">head, k</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(head===<span class="literal">null</span>||k&lt;=<span class="number">0</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">let</span> cur = head;</span><br><span class="line">    <span class="keyword">let</span> anotherCur = head;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;k;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(anotherCur.next) &#123;</span><br><span class="line">            anotherCur = anotherCur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(anotherCur.next) &#123;</span><br><span class="line">        anotherCur = anotherCur.next;</span><br><span class="line">        cur = cur.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cur;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    FindKthToTail : FindKthToTail</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="时空复杂度分析"><a href="#时空复杂度分析" class="headerlink" title="时空复杂度分析"></a>时空复杂度分析</h3><ol>
+<li>时间复杂度： O(n)</li>
+<li>空间复杂度：O(1)</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/webpack打包学习之路/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -637,12 +1371,12 @@
             <h2 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h2><h3 id="Prop"><a href="#Prop" class="headerlink" title="Prop"></a>Prop</h3><p>Prop 是你可以在组件上注册的一些自定义特性。当一个值传递给一个 prop 特性的时候，它就变成了那个组件实例的一个属性。</p>
 <p>因此，在子组件的方法代码中，我们可以使用this.xxx来访问到它</p>
 <p>利用Prop单向数据流来使得父组件向子组件传值的基本格式如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件 App.vue</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;helloWorld :msg=<span class="string">"msg"</span>&gt;&lt;/helloWorld&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> helloWorld <span class="keyword">from</span> <span class="string">'@/components/HelloWorld.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="number">321</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    helloWorld</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件 App.vue</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;helloWorld :msg=<span class="string">"msg"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">helloWorld</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> helloWorld <span class="keyword">from</span> <span class="string">'@/components/HelloWorld.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="number">321</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    helloWorld</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件 HelloWorld.vue</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"hello"</span>&gt;</span><br><span class="line">    &#123;&#123;msg&#125;&#125;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props:[<span class="string">'msg'</span>]</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>在上述父组件传值的时候是通过v-bind动态赋值的，但是我们也可以传递静态prop</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;hello-world msg=<span class="string">"qwer"</span>&gt;&lt;/hello-world&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;hello-world msg=<span class="string">"qwer"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">hello-world</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>注意的是，除了传入静态字符串之外，在传入静态的数值型，布尔型，对象型数据时我们依旧要使用v-bind来进行数据传输，否则就有可能造成数据传输失败</p>
 <p>例如：</p>
@@ -652,7 +1386,7 @@
 <h3 id="单向数据流"><a href="#单向数据流" class="headerlink" title="单向数据流"></a>单向数据流</h3><p>所有的 prop 都使得其父子 prop 之间形成了一个单向下行绑定：父级 prop 的更新会向下流动到子组件中，但是反过来则不行。这样会防止从子组件意外改变父级组件的状态，从而导致你的应用的数据流向难以理解。</p>
 <p>因此，只要父组件的数据发生了更新，子组件也会获得相应的更新。无论，发生更新的原因是异步操作还是事件操作</p>
 <h3 id="vm-watch"><a href="#vm-watch" class="headerlink" title="vm.$watch"></a>vm.$watch</h3><p>当然，我们可以使用watch方法来监听父组件数据的改变</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在父组件进行异步操作，一开始初值为undefined，经过2000毫秒后变为12345</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;helloWorld :msg=<span class="string">"msg"</span>&gt;&lt;/helloWorld&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> helloWorld <span class="keyword">from</span> <span class="string">'@/components/HelloWorld.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="literal">undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    helloWorld</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.msg=<span class="number">12345</span>;</span><br><span class="line">    &#125;,<span class="number">2000</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在父组件进行异步操作，一开始初值为undefined，经过2000毫秒后变为12345</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;helloWorld :msg=<span class="string">"msg"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">helloWorld</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> helloWorld <span class="keyword">from</span> <span class="string">'@/components/HelloWorld.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="literal">undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    helloWorld</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.msg=<span class="number">12345</span>;</span><br><span class="line">    &#125;,<span class="number">2000</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在子组件中利用watch方法来进行监听父组件的prop值的变化</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"hello"</span>&gt;</span><br><span class="line">    &#123;&#123;msg&#125;&#125;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props:[<span class="string">'msg'</span>],</span><br><span class="line">  watch: &#123;</span><br><span class="line">    msg(val,oldVal)&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(val,oldVal); <span class="comment">// 12345,undefined </span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -682,14 +1416,14 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
 <p>但是，虽然事件监听与响应都可以完成，但是这两个方法必须在同一个实例上才可以进行使用。因此，如果要进行子组件将值传递给父组件，我们可以使用v-on与vm.$emit进行搭配使用</p>
 <h3 id="v-on与vm-emit"><a href="#v-on与vm-emit" class="headerlink" title="v-on与vm.$emit"></a>v-on与vm.$emit</h3><p>因为父组件可以在使用子组件的引入模板直接用 v-on 来监听子组件触发的事件。因此，我们可以使用v-on和vm.$emit来使得子组件向父组件传值</p>
 <p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">  <span class="comment">// 在子组件的引入模板中使用v-on来进行监听子组件中的test事件</span></span><br><span class="line">  <span class="comment">// 注意，@后必须是在子组件中要监听的事件名，而双引号中是父组件对于监听到事件发生后做出的处理函数。对于该例中，也就是test是要监听的事件名，getSonValue是父组件的处理函数</span></span><br><span class="line">    &lt;helloWorld :msg=<span class="string">"msg"</span> @test=<span class="string">'getSonValue'</span>&gt;&lt;/helloWorld&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> helloWorld <span class="keyword">from</span> <span class="string">'@/components/HelloWorld.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getSonValue(v) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'v'</span>,v);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">  <span class="comment">// 在子组件的引入模板中使用v-on来进行监听子组件中的test事件</span></span><br><span class="line">  <span class="comment">// 注意，@后必须是在子组件中要监听的事件名，而双引号中是父组件对于监听到事件发生后做出的处理函数。对于该例中，也就是test是要监听的事件名，getSonValue是父组件的处理函数</span></span><br><span class="line">    &lt;helloWorld :msg=<span class="string">"msg"</span> @test=<span class="string">'getSonValue'</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">helloWorld</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> helloWorld <span class="keyword">from</span> <span class="string">'@/components/HelloWorld.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getSonValue(v) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'v'</span>,v);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  change() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'emit'</span>);</span><br><span class="line">    <span class="comment">// 发布事件test，并传入参数123456789</span></span><br><span class="line">    <span class="keyword">this</span>.$emit(<span class="string">'test'</span>,<span class="number">123456789</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="同级组件通信"><a href="#同级组件通信" class="headerlink" title="同级组件通信"></a>同级组件通信</h2><p>同级组件通信，也就是意味着某个父组件下有两个不同的子组件，这两个组件之间可以通信</p>
 <h3 id="父组件作为中转站"><a href="#父组件作为中转站" class="headerlink" title="父组件作为中转站"></a>父组件作为中转站</h3><p>一种可行的办法，就是父组件接收其中一个组件传递的值并将该值传递给另外一个子组件</p>
 <p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;component1 @msg=<span class="string">"getMsg"</span>&gt;&lt;/component1&gt;</span><br><span class="line">    &lt;component2 :msg=<span class="string">"msg"</span>&gt;&lt;/component2&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> component1 <span class="keyword">from</span> <span class="string">'@/components/Component1'</span></span><br><span class="line"><span class="keyword">import</span> component2 <span class="keyword">from</span> <span class="string">'@/components/Component2'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    component1,</span><br><span class="line">    component2</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getMsg(v) &#123;</span><br><span class="line">      <span class="keyword">this</span>.msg=v;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="literal">undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;component1 @msg=<span class="string">"getMsg"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">component1</span>&gt;</span></span></span><br><span class="line">    &lt;component2 :msg=<span class="string">"msg"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">component2</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> component1 <span class="keyword">from</span> <span class="string">'@/components/Component1'</span></span><br><span class="line"><span class="keyword">import</span> component2 <span class="keyword">from</span> <span class="string">'@/components/Component2'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    component1,</span><br><span class="line">    component2</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getMsg(v) &#123;</span><br><span class="line">      <span class="keyword">this</span>.msg=v;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="literal">undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件1</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div id=<span class="string">"component1"</span>&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            子组件<span class="number">1</span>的值为：&#123;&#123;msg&#125;&#125;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button @click="sendMsg"&gt;click&lt;/</span>button&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            msg: <span class="number">123</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        sendMsg() &#123;</span><br><span class="line">            <span class="keyword">this</span>.$emit(<span class="string">'msg'</span>,<span class="keyword">this</span>.msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -1842,591 +2576,11 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/13/leetcode-303/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/13/leetcode-303/" itemprop="url">leetcode-303 区域和检索 - 数组不可变</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-13T19:49:46+08:00">
-                2019-09-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode题解与算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  409
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="区域和检索-数组不可变"><a href="#区域和检索-数组不可变" class="headerlink" title="区域和检索 - 数组不可变"></a>区域和检索 - 数组不可变</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个整数数组  nums，求出数组从索引 i 到 j  (i ≤ j) 范围内元素的总和，包含 i,  j 两点。</p>
-<p>示例：</p>
-<pre><code>给定 nums = [-2, 0, 3, -5, 2, -1]，求和函数为 sumRange()
-
-sumRange(0, 2) -&gt; 1
-sumRange(2, 5) -&gt; -1
-sumRange(0, 5) -&gt; -3</code></pre><p>说明:</p>
-<ol>
-<li>你可以假设数组不可变。</li>
-<li>会多次调用 sumRange 方法。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/09/13/leetcode-303/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ol></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/12/leetcode-290/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/12/leetcode-290/" itemprop="url">leetcode-290 单词规律</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-12T23:02:17+08:00">
-                2019-09-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode题解与算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  485
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="单词规律"><a href="#单词规律" class="headerlink" title="单词规律"></a>单词规律</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一种规律 pattern 和一个字符串 str ，判断 str 是否遵循相同的规律。</p>
-<p>这里的 遵循 指完全匹配，例如， pattern 里的每个字母和字符串 str 中的每个非空单词之间存在着双向连接的对应规律。</p>
-<p>示例1:</p>
-<blockquote>
-<p>输入: pattern = “abba”, str = “dog cat cat dog”<br>输出: true</p>
-</blockquote>
-<p>示例 2:</p>
-<blockquote>
-<p>输入:pattern = “abba”, str = “dog cat cat fish”<br>输出: false</p>
-</blockquote>
-<p>示例 3:</p>
-<blockquote>
-<p>输入: pattern = “aaaa”, str = “dog cat cat dog”<br>输出: false</p>
-</blockquote>
-<p>示例 4:</p>
-<blockquote>
-<p>输入: pattern = “abba”, str = “dog dog dog dog”<br>输出: false</p>
-</blockquote>
-<p>说明:<br>你可以假设 pattern 只包含小写字母， str 包含了由单个空格分隔的小写字母。 </p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/09/12/leetcode-290/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/11/leetcode-278/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/11/leetcode-278/" itemprop="url">leetcode-278 第一个错误的版本</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-11T21:00:50+08:00">
-                2019-09-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode题解与算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  525
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="第一个错误的版本"><a href="#第一个错误的版本" class="headerlink" title="第一个错误的版本"></a>第一个错误的版本</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。</p>
-<p>假设你有 n 个版本 [1, 2, …, n]，你想找出导致之后所有版本出错的第一个错误的版本。</p>
-<p>你可以通过调用 bool isBadVersion(version) 接口来判断版本号 version 是否在单元测试中出错。实现一个函数来查找第一个错误的版本。你应该尽量减少对调用 API 的次数。</p>
-<p>示例:</p>
-<pre><code>给定 n = 5，并且 version = 4 是第一个错误的版本。
-
-调用 isBadVersion(3) -&gt; false
-调用 isBadVersion(5) -&gt; true
-调用 isBadVersion(4) -&gt; true
-
-所以，4 是第一个错误的版本。 </code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/09/11/leetcode-278/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2474,7 +2628,7 @@ sumRange(0, 5) -&gt; -3</code></pre><p>说明:</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">129</span>
+                  <span class="site-state-item-count">132</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2555,7 +2709,7 @@ sumRange(0, 5) -&gt; -3</code></pre><p>说明:</p>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">128.8k</span>
+    <span title="Site words total count">135.6k</span>
   
 </div>
 
@@ -2585,7 +2739,7 @@ sumRange(0, 5) -&gt; -3</code></pre><p>说明:</p>
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共128.8k字</span>
+  <span class="post-count">博客全站共135.6k字</span>
 </div>
         
 

@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="事件流事件流描述的是从页面中接收事件的顺序。IE提出的事件流是事件冒泡流，而网景提出的事件流是事件捕获流 事件冒泡事件冒泡指代的是，事件开始时是由最具体的元素接收，然后逐级向上传播到较为不具体的节点 例如： 12345678&amp;lt;html&amp;gt;    &amp;lt;head&amp;gt;&amp;lt;/head&amp;gt;    &amp;lt;body&amp;gt;        &amp;lt;div&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-12T09:34:05.195Z">
+<meta property="og:updated_time" content="2019-11-11T10:18:55.741Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事件机制">
 <meta name="twitter:description" content="事件流事件流描述的是从页面中接收事件的顺序。IE提出的事件流是事件冒泡流，而网景提出的事件流是事件捕获流 事件冒泡事件冒泡指代的是，事件开始时是由最具体的元素接收，然后逐级向上传播到较为不具体的节点 例如： 12345678&amp;lt;html&amp;gt;    &amp;lt;head&amp;gt;&amp;lt;/head&amp;gt;    &amp;lt;body&amp;gt;        &amp;lt;div&amp;gt;">
@@ -436,13 +436,13 @@
 <p>首先发生的是事件捕获，为截获事件提供了机会。然后是实际的目标接收到事件。最后一个阶段是冒泡阶段，可以在这个阶段对事件做出响应</p>
 <p>值得注意的是：</p>
 <blockquote>
-<p>捕获阶段是不包括实际的目标元素的。这也意味着对于上述的例子，再捕获阶段，事件从document -&gt; &lt;div&gt;后就停止了。然后，处于目标阶段就会响应该目标注册的事件。并在事件处理中被看做事件冒泡阶段的一部分进入事件冒泡阶段</p>
+<p>捕获阶段是不包括实际的目标元素的。这也意味着对于上述的例子，在捕获阶段，事件从document -&gt; &lt;div&gt;后就停止了。然后，处于目标阶段就会响应该目标注册的事件。并在事件处理中被看做事件冒泡阶段的一部分进入事件冒泡阶段</p>
 </blockquote>
 <p>这有一个例子：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;<span class="xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div style=<span class="string">"width: 100px;height: 100px;border: 1px solid black;"</span>&gt;</span><br><span class="line">            &lt;p style=<span class="string">"width: 50px;height: 20px;border: 1px solid red;margin: 10px 20px"</span>&gt;</span><br><span class="line">                hello</span><br><span class="line">            &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;script&gt;</span><br><span class="line">            <span class="keyword">let</span> div = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>)[<span class="number">0</span>];</span><br><span class="line">            div.addEventListener(<span class="string">"click"</span>,(e)=&gt;&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'冒泡'</span>);</span><br><span class="line">            &#125;,<span class="literal">false</span>);</span><br><span class="line">            div.addEventListener(<span class="string">"click"</span>,(e)=&gt;&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'捕获'</span>);</span><br><span class="line">            &#125;,<span class="literal">true</span>);</span><br><span class="line">        &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>我们为div元素注册了两个事件，一个要求在冒泡阶段被调用，一个是要求在捕获阶段被调用</p>
-<p>根据DOM事件流的三个阶段，当我们点击&lt;p&gt;元素时，会看到先输出”捕获”再输出”冒泡”。因为，我们点击的目标元素是&lt;p&gt;元素，会经历以下三个阶段。</p>
+<p>根据DOM事件流的三个阶段，当我们点击&lt;p&gt;元素时，会看到先输”冒泡”再输出”捕获”。因为，我们点击的目标元素是&lt;p&gt;元素，会经历以下三个阶段。</p>
 <ol>
 <li>在捕获阶段（document-&gt; &lt;html&gt; -&gt; &lt;body&gt; -&gt; &lt;div&gt;），我们捕获到了div注册的要在捕获阶段调用的事件，那么触发它。</li>
 <li>处于目标阶段，没有目标注册的事件</li>
@@ -738,7 +738,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">129</span>
+                  <span class="site-state-item-count">132</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -835,7 +835,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">128.8k</span>
+    <span title="Site words total count">135.6k</span>
   
 </div>
 
@@ -865,7 +865,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共128.8k字</span>
+  <span class="post-count">博客全站共135.6k字</span>
 </div>
         
 

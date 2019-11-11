@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="v-if与v-show的区别官方文档对于这两个指令的定义：  v-show：根据表达式之真假值，切换元素的 display CSS 属性。  v-if: 根据表达式的值的真假条件渲染元素。在切换时元素及它的数据绑定 / 组件被销毁并重建。如果元素是 &amp;lt;template&amp;gt; ，将提出它的内容作为条件块。   我们通过实际的例子来区分这两个指令的区别： v-show的渲染情况123&amp;lt;d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue的一些零散知识点总结">
+<meta property="og:url" content="http://yoursite.com/2019/11/11/Vue的一些零散知识点总结/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="v-if与v-show的区别官方文档对于这两个指令的定义：  v-show：根据表达式之真假值，切换元素的 display CSS 属性。  v-if: 根据表达式的值的真假条件渲染元素。在切换时元素及它的数据绑定 / 组件被销毁并重建。如果元素是 &amp;lt;template&amp;gt; ，将提出它的内容作为条件块。   我们通过实际的例子来区分这两个指令的区别： v-show的渲染情况123&amp;lt;d">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-11T12:31:49.519Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue的一些零散知识点总结">
+<meta name="twitter:description" content="v-if与v-show的区别官方文档对于这两个指令的定义：  v-show：根据表达式之真假值，切换元素的 display CSS 属性。  v-if: 根据表达式的值的真假条件渲染元素。在切换时元素及它的数据绑定 / 组件被销毁并重建。如果元素是 &amp;lt;template&amp;gt; ，将提出它的内容作为条件块。   我们通过实际的例子来区分这两个指令的区别： v-show的渲染情况123&amp;lt;d">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/11/Vue的一些零散知识点总结/">
+
+
+
+
+
+  <title>Vue的一些零散知识点总结 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+  
+ 
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+         <a href="https://github.com/Angellikefairy"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149" alt="Fork me on GitHub"></a>
+    </div>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/11/Vue的一些零散知识点总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue的一些零散知识点总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-11T13:47:44+08:00">
+                2019-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="v-if与v-show的区别"><a href="#v-if与v-show的区别" class="headerlink" title="v-if与v-show的区别"></a>v-if与v-show的区别</h2><p>官方文档对于这两个指令的定义：</p>
+<ul>
+<li><p>v-show：根据表达式之真假值，切换元素的 display CSS 属性。</p>
+</li>
+<li><p>v-if: 根据表达式的值的真假条件渲染元素。在切换时元素及它的数据绑定 / 组件被销毁并重建。如果元素是 &lt;template&gt; ，将提出它的内容作为条件块。</p>
+</li>
+</ul>
+<p>我们通过实际的例子来区分这两个指令的区别：</p>
+<h3 id="v-show的渲染情况"><a href="#v-show的渲染情况" class="headerlink" title="v-show的渲染情况"></a>v-show的渲染情况</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-show</span>=<span class="string">"bool"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当bool值为真时，渲染情况如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>123<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当bool值为假时，渲染情况发生了如下变化：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">styel</span>=<span class="string">"display:none;"</span>&gt;</span>123<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到，当使用v-show时，该节点会被添加到DOM树中，始终会被渲染。切换v-show的值只是简单的切换元素的display元素而已</p>
+<h3 id="v-if的渲染情况"><a href="#v-if的渲染情况" class="headerlink" title="v-if的渲染情况"></a>v-if的渲染情况</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">"bool"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当bool值为真时，渲染情况如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>123<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当bool值为假时，渲染情况发生了如下变化：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!----&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到，当使用v-if时，如果v-if的值为false，那么该节点就不会被添加到DOM树中，当然也不会被渲染。只有，当v-if的值为true时，该节点才会被正常渲染</p>
+<h2 id="Vue为DOM元素设置和获取自定义属性"><a href="#Vue为DOM元素设置和获取自定义属性" class="headerlink" title="Vue为DOM元素设置和获取自定义属性"></a>Vue为DOM元素设置和获取自定义属性</h2><p>在html5中，我们使用 data-* 属性来嵌入自定义数据：</p>
+<blockquote>
+<p>data-* 属性赋予我们在所有 HTML 元素上嵌入自定义 data 属性的能力。</p>
+</blockquote>
+<p>需要注意的是：</p>
+<blockquote>
+<p>属性名不应该包含任何大写字母，并且在前缀 “data-“ 之后必须有至少一个字符</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">data-v</span>=<span class="string">'1'</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>因此，为了遵循这一规范，我们在Vue中为一个DOM元素添加自定义属性时，也应当这样写：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">:data-v</span>=<span class="string">"value"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后，我们可以通过element.getAttribute()来获取元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'a'</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a.getAttribute(<span class="string">'data-v'</span>));</span><br></pre></td></tr></table></figure>
+
+<p>但是，Vue并不推荐我们直接来操纵DOM，因此，我们可以使用Vue的ref属性来进行DOM元素的引用，引用的信息将会被注册在$refs对象上</p>
+<p>因此，我们可以做出如下的修改：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">:data-v</span>=<span class="string">"value"</span> <span class="attr">ref</span>=<span class="string">"aLink"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此时，该a标签DOM元素将会作为aLink的键值在$refs对象中被注册</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据对象</span></span><br><span class="line">data: &#123;</span><br><span class="line">    value: <span class="number">123</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在Vue组件的某个方法中</span></span><br><span class="line">getDataV() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$refs); <span class="comment">// &#123;aLink: a&#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$refs.aLink.getAttribute(<span class="string">'data-v'</span>)); <span class="comment">// 123</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="为指令设置动态参数"><a href="#为指令设置动态参数" class="headerlink" title="为指令设置动态参数"></a>为指令设置动态参数</h2><p>我们知道，Vue允许在指令后添加参数。例如，在v-bind指令后添加参数就可以将该参数作为DOM元素的属性</p>
+<p>例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">:value</span>=<span class="string">"value"</span> <span class="attr">ref</span>=<span class="string">"aLink"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们通过控制台查看该DOM元素就可以得到如下结果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">value</span>=<span class="string">"123346"</span>&gt;</span>value<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>初次之外，Vue可以支持使用类似方括号的语法（但是方括号中只能填写Vue实例中data声明的变量）来为指令设置动态参数</p>
+<p>例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">:</span>[<span class="attr">attributeName</span>]=<span class="string">"url"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后，我们在Vue实例中这样设置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        attributeName: <span class="string">'href'</span>,</span><br><span class="line">        url: <span class="string">'https://www.baidu.com'</span>,</span><br><span class="line">        value: <span class="string">'baidu'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>然后，我们在控制台进行查看，就可以得到如下的结果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span>&gt;</span>baidu<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>令人意外的是，得到的结果并不是预料中的如下的结果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://www.baidu.com"</span>&gt;</span>baidu<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后我查看官方文档才发现了原因所在：</p>
+<p>其实，Vue对于动态参数表达式是有限制的：</p>
+<ol>
+<li>空格和引号在表达式中是无效的</li>
+<li>避免使用大写字符来命名键名，因为浏览器会把 attribute 名全部强制转为小写</li>
+</ol>
+<p>因此，我们需要将之前的模板和Vue实例进行修改：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">:</span>[<span class="attr">attribute</span>]=<span class="string">"url"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        attribute: <span class="string">'href'</span>,</span><br><span class="line">        url: <span class="string">'https://www.baidu.com'</span>,</span><br><span class="line">        value: <span class="string">'baidu'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>此时，我们就可以查看到正确的DOM元素了</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://www.baidu.com"</span>&gt;</span>baidu<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Vue的常用修饰符"><a href="#Vue的常用修饰符" class="headerlink" title="Vue的常用修饰符"></a>Vue的常用修饰符</h2><p>修饰符 (modifier) 是以半角句号 . 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定。</p>
+<p>在进行详细的事件处理修饰符的说明前，我们先来了解target.addEventListener方法的详细说明，因为，下面的修饰符大多数针对该方法进行简写而已</p>
+<h3 id="addEventListener的详细说明"><a href="#addEventListener的详细说明" class="headerlink" title="addEventListener的详细说明"></a>addEventListener的详细说明</h3><p>完整的addEventListener的方法定义如下：</p>
+<blockquote>
+<p>target .addEventListener（type，listener [，options ]）;</p>
+</blockquote>
+<p>参数说明：</p>
+<ul>
+<li><p>type: 区分大小写的字符串，表示要侦听的事件类型。</p>
+</li>
+<li><p>listener: Event当指定类型的事件发生时，接收通知的对象（实现接口的对象）。这必须是实现EventListener接口的对象或JavaScript 函数</p>
+</li>
+<li><p>options: 可选，一个选项对象，可以包括以下几个选项：</p>
+<ul>
+<li>capture true表示在捕获阶段执行事件处理程序，false表示在冒泡阶段</li>
+<li>once Boolean，listener应在添加后最多调用一次。如果为true，则listener在调用时会自动将其删除。</li>
+<li>passive: Boolean 如果true表示表示所指定的函数listener将永远不会调用preventDefault()。如果被动侦听器确实进行了调用preventDefault()，则用户代理将不执行任何操作，只生成控制台警告。</li>
+</ul>
+</li>
+</ul>
+<h3 id="v-on事件处理的修饰符"><a href="#v-on事件处理的修饰符" class="headerlink" title="v-on事件处理的修饰符"></a>v-on事件处理的修饰符</h3><p>Vue的官方文档是这样叙述为什么要使用数件处理修饰符的：</p>
+<blockquote>
+<p>在事件处理程序中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。尽管我们可以在方法中轻松实现这点，但更好的方式是：方法只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。</p>
+</blockquote>
+<p>因此，Vue为v-on提供了事件处理修饰符</p>
+<h4 id="stop修饰符-相当于调用event-stopPropagation"><a href="#stop修饰符-相当于调用event-stopPropagation" class="headerlink" title=".stop修饰符 相当于调用event.stopPropagation()"></a>.stop修饰符 相当于调用event.stopPropagation()</h4><p>该.stop修饰符可以阻止事件流进一步的传递（捕获或者冒泡）</p>
+<p>以下以阻止事件进一步冒泡为例进行说明：</p>
+<h5 id="没有使用-stop修饰符"><a href="#没有使用-stop修饰符" class="headerlink" title="没有使用.stop修饰符"></a>没有使用.stop修饰符</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid black;width: 100px;height: 100px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">:</span>[<span class="attr">attribute</span>]=<span class="string">"url"</span> @<span class="attr">click</span>=<span class="string">"clickP"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们分别为div元素和p元素设置一个方法用来监听click事件:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        attribute: <span class="string">'href'</span>,</span><br><span class="line">        url: <span class="string">'https://www.baidu.com'</span>,</span><br><span class="line">        value: <span class="string">'baidu'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        <span class="comment">// p元素的事件监听程序</span></span><br><span class="line">        clickP() &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'p is clicked'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 在挂载节点完毕后的生命周期阶段添加div元素的事件监听程序</span></span><br><span class="line">    mounted() &#123;</span><br><span class="line">        <span class="keyword">this</span>.$el.addEventListener(<span class="string">'click'</span>,()=&gt;&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'app is clicked'</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>当我们单击p元素的时候可以得到以下的输出结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">p is clicked</span></span><br><span class="line"><span class="comment">app is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我们知道DOM事件流会经过以下三个阶段：</p>
+<ol>
+<li>捕获阶段</li>
+<li>处于事件目标阶段</li>
+<li>冒泡阶段</li>
+</ol>
+<p>在这里提一句，如果在v-on后没有添加.capture修饰符，那么该事件会在冒泡阶段发生（相当于addEventListener方法的第二个参数为false）</p>
+<p>因此，当我们单击p元素时，会经过以下步骤：</p>
+<ol>
+<li>在捕获阶段，没有绑定若任何处理程序，因此没有任何响应</li>
+<li>处于目标阶段，因为我们单击的是p元素，因此，响应p元素绑定的事件监听程序，输出’p is clicked’</li>
+<li>处于冒泡阶段，此时div元素绑定的click事件监听程序被响应，因此，输出’app is clicked’</li>
+</ol>
+<p>那么，如果使用.stop修饰符呢？</p>
+<h5 id="使用-stop修饰符"><a href="#使用-stop修饰符" class="headerlink" title="使用.stop修饰符"></a>使用.stop修饰符</h5><p>我们将html代码修改，js代码保持不变：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid black;width: 100px;height: 100px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">:</span>[<span class="attr">attribute</span>]=<span class="string">"url"</span> @<span class="attr">click.stop</span>=<span class="string">"clickP"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此时，当我们单击p元素的时候，就会得到以下的输出结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">p is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我们看到’app is clicked’并没有输出，这是因为修饰符.stop起到了stopPropagation的作用，阻止了事件流的进一步传递</p>
+<h4 id="prevent修饰符-相当于调用-event-preventDefault"><a href="#prevent修饰符-相当于调用-event-preventDefault" class="headerlink" title=".prevent修饰符 相当于调用 event.preventDefault()"></a>.prevent修饰符 相当于调用 event.preventDefault()</h4><p>我们知道preventDefault方法可以取消事件的默认行为。因此，.prevent修饰符也是起到同样的作用</p>
+<p>例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span> =<span class="string">"https://www.baidu.com"</span> @<span class="attr">click.prevent</span>=<span class="string">"clickA"</span>&gt;</span>clickA<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>本来，当我们点击a标签的时候，默认将会跳转到href给定的地址。但是，当我们使用.prevent修饰符后就可以取消跳转这一默认行为</p>
+<h4 id="capture修饰符-添加事件监听器时使用捕获模式"><a href="#capture修饰符-添加事件监听器时使用捕获模式" class="headerlink" title=".capture修饰符 添加事件监听器时使用捕获模式"></a>.capture修饰符 添加事件监听器时使用捕获模式</h4><p>之前就提到过这一修饰符的作用，.capture修饰符可以让事件在捕获阶段被调用，而不是默认在冒泡阶段被调用</p>
+<p>例如：</p>
+<p>注意，此时我将带修饰符的事件处理程序绑定在了div元素，而p元素的事件处理程序没有带修饰符</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> @<span class="attr">click.capture</span>=<span class="string">"clickDiv"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid black;width: 100px;height: 100px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> @<span class="attr">click</span>=<span class="string">"clickP"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: <span class="string">'click it'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        clickP() &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'p is clicked'</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        clickDiv() &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'div is clicked'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>现在，当我们点击p元素时可以得到如下输出结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">div is clicked</span></span><br><span class="line"><span class="comment">p is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>的确，div元素绑定的事件处理程序在事件流的捕获阶段被触发了。</p>
+<p>那么，如果我们不添加.capture修饰符，那么点击p元素得到的输出结果就会是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">p is clicked</span></span><br><span class="line"><span class="comment">div is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，div事件处理程序就会默认在事件流的冒泡阶段被执行</p>
+<h4 id="self修饰符-相当于事件自身触发的而不是从内部元素触发的"><a href="#self修饰符-相当于事件自身触发的而不是从内部元素触发的" class="headerlink" title=".self修饰符 相当于事件自身触发的而不是从内部元素触发的"></a>.self修饰符 相当于事件自身触发的而不是从内部元素触发的</h4><p>.self修饰符的作用是：只有当事件是自身元素触发的而不是该元素内部元素触发的才会被执行相应的事件处理程序</p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> @<span class="attr">click.self</span>=<span class="string">"clickDiv"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid black;width: 100px;height: 100px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> @<span class="attr">click</span>=<span class="string">"clickP"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: <span class="string">'click it'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        clickP() &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'p is clicked'</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        clickDiv() &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'div is clicked'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>现在，当我们点击p元素时的输出结果会得到以下的输出结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">p is cliked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我们看到div元素的事件处理程序没有被触发。因为,.self修饰符让该元素的事件处理程序只有在该元素自身触发事件才可以被执行</p>
+<p>但是，如果我们将div元素的.self修饰符去掉</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> @<span class="attr">click</span>=<span class="string">"clickDiv"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid black;width: 100px;height: 100px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> @<span class="attr">click</span>=<span class="string">"clickP"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>那么，当我们点击p元素的输出结果就会是这样的:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">p is clicked</span></span><br><span class="line"><span class="comment">div is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>此时，div的事件处理程序就会在事件流的冒泡阶段而被触发</p>
+<h4 id="once修饰符-点击事件将只会被触发一次"><a href="#once修饰符-点击事件将只会被触发一次" class="headerlink" title=".once修饰符 点击事件将只会被触发一次"></a>.once修饰符 点击事件将只会被触发一次</h4><p>.once修饰符只允许事件监听程序只会被执行一次，无论你多少次触发该事件</p>
+<p>例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> @<span class="attr">click</span>=<span class="string">"clickDiv"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid black;width: 100px;height: 100px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> @<span class="attr">click.once</span>=<span class="string">"clickP"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>事件处理程序的定义还是如下，不做任何改变</p>
+<p>那么，当我们第一次点击p元素的时候会得到如下的输出结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">p is clicked</span></span><br><span class="line"><span class="comment">div is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>那么，当我们第二次再点击该p元素，此时输出结果就变成这样了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">div is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到，p元素的事件处理程序没有再执行。这可以用来实现防抖的效果。</p>
+<h4 id="passive修饰符"><a href="#passive修饰符" class="headerlink" title=".passive修饰符"></a>.passive修饰符</h4><p>该.passive修饰符对应addEventListener中的passive选项，当我们使用该.passive修饰符时，也就是默认将addEventListener的passive选项设置为true。</p>
+<p>那么，这也意味着：</p>
+<blockquote>
+<p>所指定的函数listener将永远不会调用preventDefault()。</p>
+</blockquote>
+<p>简而言之，该.passive修饰符的作用是不要阻止事件的默认行为。那么，如果我们将.passive 和 .prevent 一起使用，那么.prevent 将会被忽略。</p>
+<h5 id="passcive修饰符对于移动端性能的提升"><a href="#passcive修饰符对于移动端性能的提升" class="headerlink" title=".passcive修饰符对于移动端性能的提升"></a>.passcive修饰符对于移动端性能的提升</h5><p>在移动端，我们经常要使用触摸滚动的事件，那么使用passive修饰符将会大幅提升移动端的性能</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:scroll.passive</span>=<span class="string">"onScroll"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>那么，这是为什么呢？</p>
+<p>MDN文档是这样做出解释的：</p>
+<blockquote>
+<p>根据规范，passive 选项的默认值始终为false。但是，这引入了处理某些触摸事件（以及其他）的事件监听器在尝试处理滚动时阻止浏览器的主线程的可能性，从而导致滚动处理期间性能可能大大降低。</p>
+</blockquote>
+<h3 id="v-model表单输入绑定的修饰符"><a href="#v-model表单输入绑定的修饰符" class="headerlink" title="v-model表单输入绑定的修饰符"></a>v-model表单输入绑定的修饰符</h3><h4 id="lazy修饰符"><a href="#lazy修饰符" class="headerlink" title=".lazy修饰符"></a>.lazy修饰符</h4><p>我们知道在默认情况下，v-model使用监听oninput事件来使得数据保持同步。此时，只要我们在输入数据时该事件就会被触发</p>
+<p>但是，当我们使用.lazy修饰符，v-model就会转而去监听onchange事件，而不是oninput事件。这意味着，只有当表单的value值发生了改变，并且该表单失去焦点时才会触发</p>
+<p>例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model.lazy</span>=<span class="string">"value"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此时，当我们输入数据时，p元素中的value值不会立即更新。只有当input输入框失去焦点后，value值才会更新</p>
+<h4 id="trim修饰符"><a href="#trim修饰符" class="headerlink" title=".trim修饰符"></a>.trim修饰符</h4><p>如果要自动过滤用户输入的首尾空白字符，可以给 v-model 添加 trim 修饰符</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model.trim</span>=<span class="string">"msg"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+        
+      
+      </div>
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/10/Vue的生命周期理解/" rel="next" title="Vue的生命周期理解">
+                <i class="fa fa-chevron-left"></i> Vue的生命周期理解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar_1.png" alt="Angel">
+            
+              <p class="site-author-name" itemprop="name">Angel</p>
+              <p class="site-description motion-element" itemprop="description">这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">132</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#v-if与v-show的区别"><span class="nav-number">1.</span> <span class="nav-text">v-if与v-show的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#v-show的渲染情况"><span class="nav-number">1.1.</span> <span class="nav-text">v-show的渲染情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-if的渲染情况"><span class="nav-number">1.2.</span> <span class="nav-text">v-if的渲染情况</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue为DOM元素设置和获取自定义属性"><span class="nav-number">2.</span> <span class="nav-text">Vue为DOM元素设置和获取自定义属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为指令设置动态参数"><span class="nav-number">3.</span> <span class="nav-text">为指令设置动态参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue的常用修饰符"><span class="nav-number">4.</span> <span class="nav-text">Vue的常用修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#addEventListener的详细说明"><span class="nav-number">4.1.</span> <span class="nav-text">addEventListener的详细说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-on事件处理的修饰符"><span class="nav-number">4.2.</span> <span class="nav-text">v-on事件处理的修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#stop修饰符-相当于调用event-stopPropagation"><span class="nav-number">4.2.1.</span> <span class="nav-text">.stop修饰符 相当于调用event.stopPropagation()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#没有使用-stop修饰符"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">没有使用.stop修饰符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用-stop修饰符"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">使用.stop修饰符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#prevent修饰符-相当于调用-event-preventDefault"><span class="nav-number">4.2.2.</span> <span class="nav-text">.prevent修饰符 相当于调用 event.preventDefault()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#capture修饰符-添加事件监听器时使用捕获模式"><span class="nav-number">4.2.3.</span> <span class="nav-text">.capture修饰符 添加事件监听器时使用捕获模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#self修饰符-相当于事件自身触发的而不是从内部元素触发的"><span class="nav-number">4.2.4.</span> <span class="nav-text">.self修饰符 相当于事件自身触发的而不是从内部元素触发的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#once修饰符-点击事件将只会被触发一次"><span class="nav-number">4.2.5.</span> <span class="nav-text">.once修饰符 点击事件将只会被触发一次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#passive修饰符"><span class="nav-number">4.2.6.</span> <span class="nav-text">.passive修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#passcive修饰符对于移动端性能的提升"><span class="nav-number">4.2.6.1.</span> <span class="nav-text">.passcive修饰符对于移动端性能的提升</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-model表单输入绑定的修饰符"><span class="nav-number">4.3.</span> <span class="nav-text">v-model表单输入绑定的修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lazy修饰符"><span class="nav-number">4.3.1.</span> <span class="nav-text">.lazy修饰符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#trim修饰符"><span class="nav-number">4.3.2.</span> <span class="nav-text">.trim修饰符</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angel</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">135.6k</span>
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共135.6k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script>
+</body>
+</html>
+<script type="text/javascript" src="/js/src/click.js"></script>
