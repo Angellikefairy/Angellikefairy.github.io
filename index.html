@@ -307,6 +307,302 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/15/相等-与全等-的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/15/相等-与全等-的区别/" itemprop="url">相等==与全等===的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-15T14:44:33+08:00">
+                2019-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>JavaScript 有两种比较方式：严格比较运算符和转换类型比较运算符。对于严格比较运算符（===）来说，仅当两个操作数的类型相同且值相等为 true，而对于被广泛使用的比较运算符（==）来说，会在进行比较之前，将两个操作数转换成相同的类型。</p>
+<h2 id="全等运算符（-）"><a href="#全等运算符（-）" class="headerlink" title="全等运算符（===）"></a>全等运算符（===）</h2><p>全等运算符（===）的规则相对简单，我们先来看全等运算符的运算规则</p>
+<ol>
+<li>如果两个操作数有不同的类型，它们不是严格相等的</li>
+<li>如果两个操作数都为 null，则它们是严格相等的</li>
+<li>如果两个操作数都为 undefined，它们是严格相等的</li>
+<li>如果一个或两个操作数都是 NaN，它们就不是严格相等的</li>
+<li>如果两个操作数都为 true 或都为 false，它们是严格相等的</li>
+<li>如果两个操作数都是 number 类型并且具有相同的值，则它们是严格相等的</li>
+<li>如果两个操作数都是 string 类型并且具有相同的值，则它们是严格相等的</li>
+<li>如果两个操作数都引用相同的对象或函数，则它们是严格相等的</li>
+<li>以上所有其他情况下操作数都不是严格相等的。</li>
+</ol>
+<p>简单概括来说，对于全等运算符来说，操作数双方必须是同一类型并且具有相同的值（引用的指向必须指向同一个引用）（除了NaN）以外。因为，NaN与任何值都不相等包括其本身。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="literal">undefined</span>===<span class="literal">undefined</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>===<span class="string">'1'</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span>===<span class="literal">null</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;===&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数值转换"><a href="#数值转换" class="headerlink" title="数值转换"></a>数值转换</h2><p>我们使用Number()转型函数来将其他类型转化为数值型</p>
+<p>具体规则如下：</p>
+<ol>
+<li>如果是布尔值，那么true转化为1，false转化为0<br>2，如果是null值，那么转化为0</li>
+<li>如果是undefined，返回NaN</li>
+<li>如果是字符串，又会分以下几种情况<ul>
+<li>如果字符串只包含数字（包括带正负号，整数或者是浮点数），那么就会返回该数值</li>
+<li>如果字符串是空的，那么返回数字0</li>
+</ul>
+<ol start="3">
+<li>其余情况返回NaN</li>
+</ol>
+</li>
+<li>如果是对象，那么调用对象的valueOf()方法，然后再依照前面的规则转换返回的值</li>
+</ol>
+<h2 id="对象转化为基本类型值"><a href="#对象转化为基本类型值" class="headerlink" title="对象转化为基本类型值"></a>对象转化为基本类型值</h2><p>在将相等运算符的规则之前，我们需要弄清楚对象转化为基本类型值会变成怎么样？因为，这会出现在相等运算符的比较规则中</p>
+<blockquote>
+<p>对象在转换基本类型时，首先会调用 valueOf 然后调用 toString</p>
+</blockquote>
+<h3 id="valueOf-NaN"><a href="#valueOf-NaN" class="headerlink" title="valueOf"></a>valueOf</h3><blockquote>
+<p>valueOf() 方法返回指定对象的原始值。</p>
+</blockquote>
+<p>具体规则如下：<br>对象|返回值<br>–|–<br>Array|返回数组本身对象<br>Boolean|布尔值<br>Date|存储的时间是从 1970 年 1 月 1 日午夜开始计的毫秒数 UTC<br>Function|函数本身<br>Number|数字值<br>Object|对象本身<br>String|字符串值</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].valueOf()); <span class="comment">// [1,2,3]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>).valueOf()); <span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>().valueOf()); <span class="comment">// 1573803246103</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;.valueOf()); <span class="comment">// function a()&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">1</span>).valueOf()); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;.valueOf()); <span class="comment">// &#123;a:1&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'nice'</span>).valueOf()); <span class="comment">// 'nice'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString"></a>toString</h3><blockquote>
+<p>toString() 方法返回一个表示该对象的字符串。</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].toString()); <span class="comment">// '1,2,3'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>).toString()); <span class="comment">//'false'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>().toString()); <span class="comment">// 'Fri Nov 15 2019 15:41:22 GMT+0800 (GMT+08:00)'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;.toString()); <span class="comment">// 'function a()&#123;&#125;'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">1</span>).toString()); <span class="comment">// '1'</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;.toString()); <span class="comment">// [object Object]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'nice'</span>).toString()); <span class="comment">// 'nice'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="相等运算符（-）"><a href="#相等运算符（-）" class="headerlink" title="相等运算符（==）"></a>相等运算符（==）</h2><p>使用相等运算符时，都会先转换操作数（通常称为强制转型）为相同的类型，然后再比较他们的相等性</p>
+<p>相等运算符遵循以下规则：</p>
+<ol>
+<li>如果操作数具有相同的类型，请使用上面的 IEA 测试它们是否严格相等。 如果它们不严格相等，则它们不相等，否则相等。</li>
+<li>如果操作数有不同的类型：<ul>
+<li>如果一个操作数为 null 而另一个 undefined，则它们相等</li>
+<li>如果一个值是数字，另一个是字符串，先将字符串转换为数字，然后使用转换后的值比较</li>
+<li>如果一个操作数是布尔值，则将 true 转换为 1，将 false 转换为 0，然后使用转换后的值比较</li>
+<li>如果一个操作数是一个对象，而另一个操作数是一个数字或字符串，则调用valueOf()将该对象转换为基本类型值，再使用转换后的值进行比较</li>
+</ul>
+</li>
+<li>在以上的其他情况下，操作数都不相等</li>
+</ol>
+<p>注意：</p>
+<blockquote>
+<p>在进行相等比较操作中,undefined和null是不能进行类型转化的。因此,undefined和null只能互相相等或者它们自身相等</p>
+</blockquote>
+<p>例如：</p>
+<h3 id="其中一个操作数为布尔值"><a href="#其中一个操作数为布尔值" class="headerlink" title="其中一个操作数为布尔值"></a>其中一个操作数为布尔值</h3><blockquote>
+<p>如果一个操作数为布尔值，那么将true转化为1，将false转化为0。然后，再利用其余规则进行比较</p>
+</blockquote>
+<h4 id="布尔值与数值比较"><a href="#布尔值与数值比较" class="headerlink" title="布尔值与数值比较"></a>布尔值与数值比较</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>==<span class="literal">true</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">3</span>==<span class="literal">false</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="布尔值与字符串比较"><a href="#布尔值与字符串比较" class="headerlink" title="布尔值与字符串比较"></a>布尔值与字符串比较</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'1'</span>==<span class="literal">true</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'123'</span>==<span class="literal">false</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="布尔值与其余基本类型值比较"><a href="#布尔值与其余基本类型值比较" class="headerlink" title="布尔值与其余基本类型值比较"></a>布尔值与其余基本类型值比较</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="literal">undefined</span>==<span class="literal">true</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span>==<span class="literal">false</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>因为，在进行相等比较操作中，undefined和null是不能进行转化的，而布尔值需要转化为数值型，因此，两者不可能相等</p>
+<h4 id="布尔值与数组比较"><a href="#布尔值与数组比较" class="headerlink" title="布尔值与数组比较"></a>布尔值与数组比较</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log([]==<span class="literal">false</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]==<span class="literal">false</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log([<span class="number">1</span>]==<span class="literal">true</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>是不是感觉很奇怪？</p>
+<p>我们在前面提过，如果其中一个操作数为对象，那么就要该对象先通过valueOf()再通过toString()转化为基本类型值（确切来说是字符串型）然后再利用其余规则进行比较</p>
+<p>又因为另一个操作数为布尔值，那么，布尔值就会被转化为数值型，true转化为1，false转化为0</p>
+<p>因此，已经转化为字符串的对象还需要将字符串转化为数值型</p>
+<p>具体过程如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">比较[]与false</span><br><span class="line">1. [].valueOf() --&gt; &apos;&apos;</span><br><span class="line">2. &apos;&apos;.toString() --&gt; &apos;&apos;</span><br><span class="line">3. Number(&apos;&apos;) --&gt; 0</span><br><span class="line"></span><br><span class="line">4. Number(false) --&gt; 0</span><br><span class="line"></span><br><span class="line">5. 0===0 --&gt;true</span><br><span class="line"></span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<p>其余几个过程类似，因此不再赘述</p>
+<h4 id="布尔值与其余对象"><a href="#布尔值与其余对象" class="headerlink" title="布尔值与其余对象"></a>布尔值与其余对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125; == <span class="literal">false</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>()=== <span class="literal">true</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;&#125; == <span class="literal">false</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="其中一个操作数为字符串"><a href="#其中一个操作数为字符串" class="headerlink" title="其中一个操作数为字符串"></a>其中一个操作数为字符串</h3><p>在进行操作数比较前，我们需要明确，只有另一个操作数为数值型的情况下（可能发生了转换变为了数值型），我们才需要将该字符串转化为数值；否则，该字符串不会进行转化</p>
+<p>例如：</p>
+<h4 id="另一个操作数为数值"><a href="#另一个操作数为数值" class="headerlink" title="另一个操作数为数值"></a>另一个操作数为数值</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'123'</span>==<span class="number">123</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="另一个操作数为布尔值"><a href="#另一个操作数为布尔值" class="headerlink" title="另一个操作数为布尔值"></a>另一个操作数为布尔值</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'1'</span>==<span class="literal">true</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'0'</span>==<span class="literal">false</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>因为布尔值在进行相等比较的前一定会转换为数值型，因此，字符串也会被通过Number转型函数变为数值型。</p>
+<h4 id="另一个操作数为其他基本类型值"><a href="#另一个操作数为其他基本类型值" class="headerlink" title="另一个操作数为其他基本类型值"></a>另一个操作数为其他基本类型值</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'0'</span>==<span class="literal">null</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'0'</span>==<span class="literal">undefined</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>在相等比较前，null和undefined不能被转换为其他类型值</p>
+<h4 id="另一个操作数为数组"><a href="#另一个操作数为数组" class="headerlink" title="另一个操作数为数组"></a>另一个操作数为数组</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'0'</span>==[]); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'1'</span>==[<span class="number">1</span>]); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'123'</span>==[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'1,2,3'</span>==[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>首先，必须明确地是，如果其中一个操作数为字符串类型，那么我们先去看另一个操作数为什么类型。</p>
+<p>在这里，另一个操作数为引用类型值，那么引用类型值会通过valueOf和toString转换为字符串型。那么，另一个字符型操作数就不需要进行转换，两个字符串类型进行比较即可。（因为，相等操作符在比较比较之前的目的就是将两个操作数的类型转换为一致，然后再进行比较）</p>
+<h4 id="另一个操作数为对象"><a href="#另一个操作数为对象" class="headerlink" title="另一个操作数为对象"></a>另一个操作数为对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;==<span class="string">'a:1'</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;&#125;==<span class="string">''</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>在这里，我们千万不要忘记自定义对象通过toString()方法转换得到的都是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;.valueOf().toString()); <span class="comment">// '[object Object]'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="其中一个操作数为数组"><a href="#其中一个操作数为数组" class="headerlink" title="其中一个操作数为数组"></a>其中一个操作数为数组</h3><p>大致的比较方法差不多在前面都提及了，这里看一个奇葩的题目：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log([]=![]); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>是不是很奇怪，但是，如果仔细进行分析就不会觉得奇怪了。</p>
+<p>具体过程：</p>
+<ol>
+<li>第一个操作数为[]，那么将其通过valueOf和toString转换为字符串得到空字符串’’</li>
+<li>第二个操作数![]，因为有逻辑非布尔操作符，因此第二个操作数实际上是布尔值false</li>
+<li>布尔值需要转换为数值型,false转换为0</li>
+<li>因为第二个操作数转换为数值型了，因此，第一个操作数也要将得到的字符串转换为数值型，空字符串’’通过Number转型函数得到的是0</li>
+<li>0===0 返回true</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/15/TypeScript零散知识点总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3001,255 +3297,6 @@ scrollTo()</code></pre></li>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/28/循环中的async与await处理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/28/循环中的async与await处理/" itemprop="url">循环中的async与await处理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-28T18:18:25+08:00">
-                2019-10-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ES6/" itemprop="url" rel="index">
-                    <span itemprop="name">ES6</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.2k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  5
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>之前在做项目的时候，遇到一个场景：</p>
-<p>给定了一个数组类似于这样：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>需求是这样的，我们需要遍历整个数组，获得每个对象中的hallId值，再通过该ID值请求某接口得到hallName，再将该hallName存入对象</p>
-<p>结果类似于这样</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">1</span>,</span><br><span class="line">        hallName: <span class="string">'1号'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">2</span>,</span><br><span class="line">        hallName: <span class="string">'2号'</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>然后就遇到了循环中使用async和await遇到的一些问题，以下就是探究的过程</p>
-<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>我们首先准备要获取的数据</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ha = [</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">3</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hall = [</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">1</span>,</span><br><span class="line">        hallName: <span class="string">'1号'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">2</span>,</span><br><span class="line">        hallName: <span class="string">'2号'</span></span><br><span class="line">    &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">        hallId: <span class="number">3</span>,</span><br><span class="line">        hallName: <span class="string">'3号'</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>以及使用setTimeout来模拟异步请求</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getHallName</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> v of hall) &#123;</span><br><span class="line">                <span class="keyword">if</span>(v.hallId===id) &#123;</span><br><span class="line">                    resolve(v.hallName);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="number">1000</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="for循环中使用await"><a href="#for循环中使用await" class="headerlink" title="for循环中使用await"></a>for循环中使用await</h2><p>我们首先来看下在for循环中使用await</p>
-<p>我们可以很自然地写出以下异步函数：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> v of ha) &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 执行结果</span></span><br><span class="line"><span class="comment">// 等待1000ms</span></span><br><span class="line"><span class="comment">1号</span></span><br><span class="line"><span class="comment">// 等待1000ms</span></span><br><span class="line"><span class="comment">2号</span></span><br><span class="line"><span class="comment">// 等待1000ms</span></span><br><span class="line"><span class="comment">3号</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="在forEach中使用await"><a href="#在forEach中使用await" class="headerlink" title="在forEach中使用await"></a>在forEach中使用await</h2><p>一开始的写的异步函数如下</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ha.forEach(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
-
-<p>但是当我们兴致冲冲去查看运行结果的时候却傻了眼，得到的输出结果却是如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SyntaxError: await is only valid in async function</span><br></pre></td></tr></table></figure>
-
-<p>这时候，我们一拍脑袋，回想起来forEach() 方法是对数组的每个元素执行一次提供的函数。</p>
-<p>现在，我又将函数修改为以下的形式</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ha.forEach(<span class="keyword">async</span> v =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
-
-<p>现在结果总该是正确的吧，但是，令人失望的是，结果还是错的</p>
-<p>输出结果如下：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">// 等待1000ms,然后直接输出下面的三项，而不是每一项之间间隔1000ms</span></span><br><span class="line"><span class="comment">1号</span></span><br><span class="line"><span class="comment">2号</span></span><br><span class="line"><span class="comment">3号</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>查阅资料后，才得到了一个结论</p>
-<blockquote>
-<p>JavaScript 中的 forEach不支持 promise 感知，也不支持 async 和await，所以不能在 forEach 使用 await 。</p>
-</blockquote>
-<h2 id="在map中使用await"><a href="#在map中使用await" class="headerlink" title="在map中使用await"></a>在map中使用await</h2><p>既然在forEach中无法使用await，那么map()方法呢？</p>
-<p>这次我们有了forEach()的教训，</p>
-<blockquote>
-<p>map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。</p>
-</blockquote>
-<p>我们就记住了要让提供给map()方法的函数为异步函数</p>
-<p>我们写出来以下的方法来进行试验：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ha.map(<span class="keyword">async</span> v=&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
-
-<p>输出结果如下：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">// 等待1000ms，然后直接一次性输出下列三个值</span></span><br><span class="line"><span class="comment">1号</span></span><br><span class="line"><span class="comment">2号</span></span><br><span class="line"><span class="comment">3号</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>我们查看一下mdn文档对于map()方法的说明：</p>
-<blockquote>
-<p>map 方法会给原数组中的每个元素都按顺序调用一次  callback 函数。callback 每次执行后的返回值（包括 undefined）组合起来形成一个新数组。</p>
-</blockquote>
-<p>也就是说，在不考虑返回数组的情况下，map()方法就可以表示为以下的形式</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">map1</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">map2</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">map3</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">map1(ha[<span class="number">0</span>]);</span><br><span class="line">map2(ha[<span class="number">1</span>]);</span><br><span class="line">map3(ha[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
-
-<p>我们首先注册了三个异步函数，然后并行调用了它们。因此，输出结果也就是如上述所述，等待一段时间后，然后按照任务队列中的顺序依次输出</p>
-<p>那么，如果再考虑map()方法的特性，其可以将每次函数执行后的返回值组合起来形成一个新的数组。另外，我们又知道</p>
-<blockquote>
-<p>异步函数返回一个promise对象</p>
-</blockquote>
-<p>因此，使用map()方法就可以返回一个包含promise对象的数组</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="built_in">Promise</span> &#123; &lt;pending&gt; &#125;, <span class="built_in">Promise</span> &#123; &lt;pending&gt; &#125;, <span class="built_in">Promise</span> &#123; &lt;pending&gt; &#125; ]</span><br></pre></td></tr></table></figure>
-
-<p>因此，我们可以利用Promise.all()方法来进行后续的处理</p>
-<p>现在，我们来重写之前的方法</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> promiseArr = ha.map(<span class="keyword">async</span> v =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Promise</span>.all(promiseArr).then( <span class="function"><span class="params">v</span>=&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(v);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">// 等待1000ms</span></span><br><span class="line"><span class="comment">[ '1号', '2号', '3号' ]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>根据以上的分析，我们可以看到：<br>对于async和await来控制异步流程</p>
-<ol>
-<li>如果想要在循环中让异步任务串行（继发运行），那么使用for循环(包括for的一些列循环: for…of , for…in)</li>
-<li>如果想要在循环中让异步任务并行，那么我们除了Promise.all()方法外，还可以使用map()方法来使异步任务并行</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3302,7 +3349,7 @@ scrollTo()</code></pre></li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">133</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3383,7 +3430,7 @@ scrollTo()</code></pre></li>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">139.9k</span>
+    <span title="Site words total count">142.1k</span>
   
 </div>
 
@@ -3413,7 +3460,7 @@ scrollTo()</code></pre></li>
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共139.9k字</span>
+  <span class="post-count">博客全站共142.1k字</span>
 </div>
         
 

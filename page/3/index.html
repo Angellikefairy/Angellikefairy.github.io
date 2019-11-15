@@ -307,6 +307,223 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/JSON的解析与序列化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/30/JSON的解析与序列化/" itemprop="url">JSON的解析与序列化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-30T14:51:09+08:00">
+                2019-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="JSON简介"><a href="#JSON简介" class="headerlink" title="JSON简介"></a>JSON简介</h2><p>JSON（JavaScript Object Notation，JavaScript对象表示法）是一种数据格式，而不是一种编程语言。</p>
+<p>我们可以使用JSON来通过网络进行数据交互和处理。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>JSON的语法可以表示一下三种类型的值：</p>
+<ol>
+<li>简单值：可以在JSON中表示字符串、数值、布尔值和null。但JSON不支持undefined</li>
+<li>对象： 对象作为一种复杂数据类型，表示的是一组无序的键值对儿</li>
+<li>数组</li>
+</ol>
+<p>值得注意的是：<br>除了undefined，JSON也不支持变量、函数或对象实例</p>
+<p>另外，JSON字符串必须使用双引号（单引号会导致语法错误）</p>
+<p>例如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"Ming"</span>,</span><br><span class="line">    <span class="attr">"age"</span>: <span class="number">18</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解析与序列化"><a href="#解析与序列化" class="headerlink" title="解析与序列化"></a>解析与序列化</h2><h3 id="JavaScript对象序列化为JSON字符串"><a href="#JavaScript对象序列化为JSON字符串" class="headerlink" title="JavaScript对象序列化为JSON字符串"></a>JavaScript对象序列化为JSON字符串</h3><p>JSON.stringify() 方法是将一个JavaScript值(对象或者数组)转换为一个 JSON字符串，如果指定了replacer是一个函数，则可以选择性的替换值，或者如果指定了replacer是一个数组，可选择性的仅包含数组指定的属性。</p>
+<p>语法</p>
+<p>JSON.stringify(value[, replacer [, space]])</p>
+<p>参数</p>
+<p>value<br>    将要序列化成 一个JSON 字符串的值。</p>
+<p>replacer 可选<br>    如果该参数是一个函数（传入的函数接受连个参数，属性名和属性值），则在序列化过程中，被序列化的值的每个属性都会经过该函数的转换和处理（值得注意的是，如果过滤器函数没有返回值或者显示返回undefined，那么相应的属性就会被忽略；因为JSON语法默认不支持undefined）；如果该参数是一个数组，则只有包含在这个数组中的属性名才会被序列化到最终的 JSON 字符串中；如果该参数为null或者未提供，则对象所有的属性都会被序列化；</p>
+<p>space 可选<br>    指定缩进用的空白字符串，用于美化输出（pretty-print）；如果参数是个数字，它代表有多少的空格；上限为10。该值若小于1，则意味着没有空格；如果该参数为字符串(字符串的前十个字母)，该字符串将被作为空格；如果该参数没有提供（或者为null）将没有空格。</p>
+<p>返回值 </p>
+<p>一个表示给定值的JSON字符串。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test = &#123;</span><br><span class="line">    name: <span class="string">'Ming'</span>,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 未传入过滤数组或过滤函数</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(test,<span class="literal">null</span>,<span class="number">4</span>));</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    "name": "Ming",</span></span><br><span class="line"><span class="comment">    "age": 18</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 传入过滤数组</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(test,[<span class="string">"name"</span>],<span class="number">4</span>));</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    "name": "Ming"</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 传入过滤函数</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(test,<span class="function"><span class="keyword">function</span> (<span class="params">key,value</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(key===<span class="string">"name"</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"My name is"</span>+value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> value;</span><br><span class="line">&#125;,<span class="number">4</span>))</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    "name": "My name isMing",</span></span><br><span class="line"><span class="comment">    "age": 18</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 值得注意的是，如果过滤器函数没有返回值或者显示返回undefined，那么相应的属性就会被忽略</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(test,<span class="function"><span class="keyword">function</span>(<span class="params">key,value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(key===<span class="string">"name"</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">&#125;,<span class="number">4</span>))</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    "age": 18</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="JSON字符串解析成原生JavaScript值"><a href="#JSON字符串解析成原生JavaScript值" class="headerlink" title="JSON字符串解析成原生JavaScript值"></a>JSON字符串解析成原生JavaScript值</h3><p>JSON.parse() 方法用来解析JSON字符串，构造由字符串描述的JavaScript值或对象。提供可选的reviver函数用以在返回之前对所得到的对象执行变换(操作)。</p>
+<p>语法</p>
+<p>JSON.parse(text[, reviver])</p>
+<p>参数</p>
+<p>text<br>    要被解析成JavaScript值的字符串，关于JSON的语法格式。</p>
+<p>reviver 可选<br>    转换器, 如果传入该参数(函数)，可以用来修改解析生成的原始值。如果还原函数返回undefined，则表示要从结果中删除相应的键。（因为JSON语法默认不支持undefined）</p>
+<p>返回值</p>
+<p>Object类型, 对应给定JSON文本的对象/值。</p>
+<p>异常</p>
+<p>若传入的字符串不符合 JSON 规范，则会抛出 SyntaxError 异常。</p>
+<h4 id="不传入还原函数"><a href="#不传入还原函数" class="headerlink" title="不传入还原函数"></a>不传入还原函数</h4><p>我们将JSON.parse()的第二个函数参数称之为还原参数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> text = &#123;</span><br><span class="line">  name: <span class="string">'Ming'</span>,</span><br><span class="line">  age: <span class="number">18</span>,</span><br><span class="line">  friends: [</span><br><span class="line">      &#123;</span><br><span class="line">          name: <span class="string">'Lin'</span>,</span><br><span class="line">          age: <span class="number">19</span></span><br><span class="line">      &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> jsonText = <span class="built_in">JSON</span>.stringify(text,<span class="literal">null</span>,<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> textCopy = <span class="built_in">JSON</span>.parse(jsonText);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(textCopy); <span class="comment">// &#123; name: 'Ming', age: 18, friends: [ &#123; name: 'Lin', age: 19 &#125; ] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(textCopy <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(textCopy===text); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(textCopy.friends[<span class="number">0</span>]===text.friends[<span class="number">0</span>]); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>因此，我们经常使用JSON.parse(JSON.stringify(example))来深拷贝一个对象（注意：JSON语法不支持undefined与函数…）</p>
+<h4 id="传入还原函数"><a href="#传入还原函数" class="headerlink" title="传入还原函数"></a>传入还原函数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> text = &#123;</span><br><span class="line">    name: <span class="string">'Ming'</span>,</span><br><span class="line">    age: <span class="number">18</span>,</span><br><span class="line">    friends: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: <span class="string">'Lin'</span>,</span><br><span class="line">            age: <span class="number">19</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> jsonText = <span class="built_in">JSON</span>.stringify(text,<span class="literal">null</span>,<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> textCopy = <span class="built_in">JSON</span>.parse(jsonText,<span class="function"><span class="keyword">function</span>(<span class="params">key,value</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(key===<span class="string">"name"</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"My name is"</span>+value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(textCopy);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">  name: 'My name isMing',</span></span><br><span class="line"><span class="comment">  age: 18,</span></span><br><span class="line"><span class="comment">  friends: [ &#123; name: 'My name isLin', age: 19 &#125; ]</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/26/super关键字/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2257,224 +2474,6 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/16/模块化/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/16/模块化/" itemprop="url">模块化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-16T16:28:58+08:00">
-                2019-09-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ES6/" itemprop="url" rel="index">
-                    <span itemprop="name">ES6</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.4k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  5
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="模块与脚本的区别"><a href="#模块与脚本的区别" class="headerlink" title="模块与脚本的区别"></a>模块与脚本的区别</h2><p>模块不会将它的顶级变量、函数和类作为全局作用域的全局变量，并且模块顶级作用域的this值为undefined</p>
-<h2 id="为什么要模块化"><a href="#为什么要模块化" class="headerlink" title="为什么要模块化"></a>为什么要模块化</h2><p>模块化可以将一个复杂的功能拆分为几个小功能，并且功能模块之间不会互相影响。这样就可以使得代码低耦合</p>
-<p>另外，因为每个模块声明的变量并不会影响全局作用域，因此就不会有全局变量污染以及命名冲突的问题</p>
-<p>每个模块都是独立的，因此模块具有良好的可复用性</p>
-<h2 id="CommonJs模块化"><a href="#CommonJs模块化" class="headerlink" title="CommonJs模块化"></a>CommonJs模块化</h2><p>Node.js是commonJS规范的主要实践者，它有四个重要的环境变量为模块化的实现提供支持：module、exports、require、global。实际使用时，用module.exports定义当前模块对外输出的接口（不推荐直接用exports），用require加载模块。</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义模块module.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a=<span class="number">1</span>;</span><br><span class="line"><span class="built_in">module</span>.exports.test=<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义test模块并引入module模块</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> m=<span class="built_in">require</span>(<span class="string">'./test'</span>)</span><br><span class="line"></span><br><span class="line">m.test(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Es6模块化"><a href="#Es6模块化" class="headerlink" title="Es6模块化"></a>Es6模块化</h2><h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><h4 id="导出的几种形式"><a href="#导出的几种形式" class="headerlink" title="导出的几种形式"></a>导出的几种形式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义的同时，导出单个变量、对象、函数或类</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> a=<span class="number">1</span>；</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> b=&#123;<span class="attr">item</span>:<span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> c=<span class="function"><span class="params">()</span>=&gt;</span><span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">C</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">    getItem()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在定义之后导出单个变量</span></span><br><span class="line"><span class="keyword">const</span> a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> a;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在定义之后导出多个变量</span></span><br><span class="line"><span class="keyword">const</span> a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> b=<span class="number">2</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;a,b&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出时重命名，使用as关键字来指定变量等在模块外应该被称为什么名称,同时需要使用大括号</span></span><br><span class="line"><span class="keyword">const</span> a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;a <span class="keyword">as</span> itemA&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重命名多个变量</span></span><br><span class="line"><span class="keyword">const</span> a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> b=<span class="number">2</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;a <span class="keyword">as</span> itemA,b <span class="keyword">as</span> itemB&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出模块的默认值，模块的默认值通过default关键字来指定。一个模块只能导出一个默认值（单个变量，函数，类，对象等）</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    item:<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重新导出一个引入的绑定</span></span><br><span class="line"><span class="keyword">import</span> &#123;a&#125; <span class="keyword">from</span> <span class="string">'./m.js'</span></span><br><span class="line"><span class="keyword">export</span> &#123;a&#125;; <span class="comment">// 导出非默认值绑定</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;a&#125; <span class="keyword">from</span> <span class="string">'./m.js'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> a; <span class="comment">// 导出默认值绑定</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="导入的几种形式"><a href="#导入的几种形式" class="headerlink" title="导入的几种形式"></a>导入的几种形式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 仅为副作用而导入一个模块,整个模块仅为副作用（中性词，无贬义含义）而导入，而不导入模块中的任何内容（接口）。 这将运行模块中的全局代码, 但实际上不导入任何值。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">from</span> <span class="string">'./test.js'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//导入非默认值单个变量</span></span><br><span class="line"><span class="keyword">import</span> &#123;a&#125; <span class="keyword">from</span> <span class="string">'./test.js'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入非默认值多个变量</span></span><br><span class="line"><span class="keyword">import</span> &#123;a,b&#125; <span class="keyword">from</span> <span class="string">'./test.js'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入整个模块</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">from</span> <span class="string">'./test.js'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入默认值时不需要大括号语法</span></span><br><span class="line"><span class="keyword">import</span> a <span class="keyword">from</span> <span class="string">'./test.js'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入默认值和非默认值，注意默认值必须排在非默认值前</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> b=<span class="number">2</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> b;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> b,&#123;a&#125; <span class="keyword">from</span> <span class="string">'./test.js'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入非默认值时重命名，导入默认值则无法重命名，因为默认值的导入变量命名本来就是自己定义的</span></span><br><span class="line"><span class="keyword">import</span> &#123;a <span class="keyword">as</span> itemA&#125; <span class="keyword">from</span> <span class="string">'./test.js'</span></span><br></pre></td></tr></table></figure>
-
-<p>注意：导入非默认值绑定看起来像是解构对象，但事实上它不是</p>
-<h2 id="模块化的一些注意点"><a href="#模块化的一些注意点" class="headerlink" title="模块化的一些注意点"></a>模块化的一些注意点</h2><p>以下是我们需要注意的地方</p>
-<ol>
-<li><p>当从另一个模块中导入一个绑定，该绑定就好像是使用const定义的一样。我们无法对它进行修改和重命名。</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> b,&#123;a <span class="keyword">as</span> itemA&#125; <span class="keyword">from</span> <span class="string">'./test.js'</span></span><br><span class="line">b=<span class="number">1</span>; <span class="comment">// 报错："b" is read-only.</span></span><br><span class="line"><span class="built_in">console</span>.log(b,itemA);</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> b,&#123;a <span class="keyword">as</span> itemA&#125; <span class="keyword">from</span> <span class="string">'./test.js'</span></span><br><span class="line"><span class="keyword">let</span> b=<span class="number">1</span>; <span class="comment">// 报错： Identifier 'b' has already been declared</span></span><br><span class="line"><span class="built_in">console</span>.log(b,itemA);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用import语法时要引入的模块文件必须要加上文件后缀，例如’./test.js’；而node.js则遵循基于文件系统前缀来区分文件和包的惯例。例如，example是一个包，而example.js是一个本地文件</p>
-</li>
-<li><p>为了最好地兼容多个浏览器和Node.js环境，一定要在模块文件名前包含/、./或../来表示要导入的文件</p>
-</li>
-<li><p>模块只会执行一次，无论你多少次导入同一模块。当导入模块的代码执行后，实例化过的模块就会被保存在内存中，只要另一个import语句引用它就可以重复使用</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;a&#125; <span class="keyword">from</span> <span class="string">'./test.js'</span>;  <span class="comment">// 该模块只会执行这一次</span></span><br><span class="line"><span class="keyword">import</span> &#123;b&#125; <span class="keyword">from</span> <span class="string">'./test.js'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;c&#125; <span class="keyword">from</span> <span class="string">'./test.js'</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>模块语法只能在当前模块顶部(也就是该模块的最外层执行环境)使用</p>
-</li>
-<li><p>导入模块的标识符只是本地的一个变量名称，并不等于被引入的模块中的同名变量</p>
-</li>
-<li><p>模块只能设置一个默认的导出值</p>
-</li>
-</ol>
-<h2 id="CommonJs模块化与ES6模块化的区别"><a href="#CommonJs模块化与ES6模块化的区别" class="headerlink" title="CommonJs模块化与ES6模块化的区别"></a>CommonJs模块化与ES6模块化的区别</h2><ol>
-<li>调用时间<ol>
-<li>require是运行时调用，也就是只有代码运行到require命令时，才会运行和导入其他模块。所以,require可以放在代码的任何地方</li>
-<li>import是编译时调用，因此，进入有import命令的模块时，被导入模块会第一时间被运行和导入，然后才会运行其他代码</li>
-</ol>
-</li>
-</ol>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// module1.js</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'module1.js'</span>);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    item: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// module2.js</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'module2.js'</span>);</span><br><span class="line"><span class="keyword">import</span> m <span class="keyword">from</span> <span class="string">'./module1.js'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(m);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行module2.js结果如下：</span></span><br><span class="line"><span class="string">'module1.js'</span>,</span><br><span class="line"><span class="string">'module2.js'</span>,</span><br><span class="line">&#123;<span class="attr">item</span>:<span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2527,7 +2526,7 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">133</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2608,7 +2607,7 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">139.9k</span>
+    <span title="Site words total count">142.1k</span>
   
 </div>
 
@@ -2638,7 +2637,7 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共139.9k字</span>
+  <span class="post-count">博客全站共142.1k字</span>
 </div>
         
 
