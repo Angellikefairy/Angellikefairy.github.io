@@ -307,6 +307,387 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/16/flex布局一把梭/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/16/flex布局一把梭/" itemprop="url">flex布局一把梭</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-16T20:09:06+08:00">
+                2019-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="flex布局的基本语法知识"><a href="#flex布局的基本语法知识" class="headerlink" title="flex布局的基本语法知识"></a>flex布局的基本语法知识</h2><h3 id="如何设置flex布局"><a href="#如何设置flex布局" class="headerlink" title="如何设置flex布局"></a>如何设置flex布局</h3><p>我们可以通过</p>
+<ol>
+<li>将块级元素设置为display: flex</li>
+<li>将内联元素设置为display: inline-flex</li>
+</ol>
+<p>来为元素创建flex布局</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>引用阮老师的一张图：</p>
+<p><img src="https://s2.ax1x.com/2019/11/16/MBFu9K.png" alt></p>
+<p>我们将设置为flex布局的那个元素称之为flex容器，而在该容器内部的其他元素称之为flex子项</p>
+<p>我们可以看到，如果不设置flex-direction的属性，那么容器的主轴默认为横向，与主轴垂直的轴称之为交叉轴</p>
+<p>当然，如果我们将flex-direction属性值设置为</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#app</span> &#123;</span><br><span class="line"><span class="attribute">display</span>: flex;</span><br><span class="line"><span class="attribute">flex-direction</span>: column;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么，项目的主轴就会变成竖向，而项目的交叉轴就会变为横向</p>
+<h3 id="flex容器可以设置的属性"><a href="#flex容器可以设置的属性" class="headerlink" title="flex容器可以设置的属性"></a>flex容器可以设置的属性</h3><p>flex容器内包含了多个子项，因此，flex容器的属性就是为了控制多个子项的分布</p>
+<p>其主要具有以下几个属性（只提及常用属性和对应属性值）：</p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>属性值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flex-direction</td>
+<td>row,column</td>
+<td>设置flex容器主轴为横向或者为竖向</td>
+</tr>
+<tr>
+<td>flex-wrap</td>
+<td>wrap,nowrap</td>
+<td>是否换行</td>
+</tr>
+<tr>
+<td>justify-content</td>
+<td>flex-start,flex-end,center,space-between,space-around,space-evenly</td>
+<td>稍后详解</td>
+</tr>
+<tr>
+<td>align-items</td>
+<td>stretch, flex-start,flex-end, center,baseline</td>
+<td>稍后详解</td>
+</tr>
+<tr>
+<td>align-content</td>
+<td>stretch, flex-start,flex-end, center,space-between,space-around,space-evenly</td>
+<td>稍后详解</td>
+</tr>
+</tbody></table>
+<h4 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h4><p>justify-content属性用来设置子项在主轴上的排列方式</p>
+<p>语法如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><p>flex-start<br>  默认值，主轴的起点对齐</p>
+</li>
+<li><p>flex-end<br>  主轴的终点对齐</p>
+</li>
+<li><p>center<br>  主轴方向上居中</p>
+</li>
+<li><p>space-between<br>  两端对齐，中间各项目之间的间隔相同</p>
+<p>  <img src="https://s2.ax1x.com/2019/11/16/MBZuOU.png" alt></p>
+</li>
+<li><p>space-around<br>  每个flex子项两侧都环绕互不干扰的等宽的空白间距，最终视觉上边缘两侧的空白只有中间空白宽度一半。</p>
+<p>  <img src="https://s2.ax1x.com/2019/11/16/MBZMmF.png" alt></p>
+</li>
+<li><p>space-evenly<br>  每个子项之间的间隔与子项与容器边界的间隔完全相同（视觉上看起来所有子项平分了空白区域）</p>
+<p>  <img src="https://s2.ax1x.com/2019/11/16/MBZnyT.png" alt></p>
+</li>
+</ul>
+<h4 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h4><p>align-items用来设置容器交叉轴上的子项排列方式</p>
+<p>其语法如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">align-items: align-items: stretch | flex-start | flex-end | center | baseline;</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><p>stretch<br>  （默认值）如果子项没有设置高度或者设置为auto，那么子项高度就为容器高度</p>
+</li>
+<li><p>flex-start<br>  交叉轴的起点对齐</p>
+</li>
+<li><p>flex-end<br>  交叉轴的终点对齐</p>
+</li>
+<li><p>center<br>  交叉轴方向上居中</p>
+</li>
+<li><p>baseline<br>  所有flex子项都相对于flex容器的基线对齐</p>
+<p>  <img src="https://s2.ax1x.com/2019/11/16/MBmQi9.png" alt></p>
+</li>
+</ul>
+<h4 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h4><p>align-content则是指明垂直方向每一行flex元素的对齐和分布方式。如果所有flex子项只有一行，则align-content属性是没有任何效果的。</p>
+<p>也就是说，使用align-content属性是将flex容器中的所有主轴上的所有项目合起来看做是一个flex子项，然后各个主轴上的整体子项可以使用justify-content上的属性值进行排列</p>
+<p>其语法如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">align-content: stretch | flex-start | flex-end | center | space-between | space-around | space-evenly;</span><br></pre></td></tr></table></figure>
+
+<p>具体含义不再赘述，与justify-content属性值并无二异。只是前者作用于交叉轴上，而后者作用在主轴上</p>
+<p>举个align-content:space-between属性值的例子即可</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>A<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>B<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>C<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>D<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>E<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>F<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#app</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: row;</span><br><span class="line">    <span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">    <span class="attribute">justify-content</span>: space-evenly;</span><br><span class="line">    <span class="attribute">align-content</span>: space-between;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: pink;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后得到的效果如下：</p>
+<p><img src="https://s2.ax1x.com/2019/11/16/MBKsQ1.png" alt></p>
+<h3 id="flex子项可以设置的属性"><a href="#flex子项可以设置的属性" class="headerlink" title="flex子项可以设置的属性"></a>flex子项可以设置的属性</h3><p>在flex子项上设置的属性用于作用在子项自身身上，并不会对整个容器的所有子项产生影响。</p>
+<p>其主要有以下几个属性：</p>
+<ul>
+<li>order</li>
+<li>flex-grow</li>
+<li>flex-shrink</li>
+<li>flex-basis</li>
+<li>flex</li>
+<li>align-self</li>
+</ul>
+<h4 id="order"><a href="#order" class="headerlink" title="order"></a>order</h4><p>order属性可以设置子项的排列顺序，数值越小，排列越靠前。所有子项的默认order属性值为0</p>
+<p>例如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#A</span> &#123;</span><br><span class="line">    <span class="attribute">order</span>: -<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#B</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#C</span> &#123;</span><br><span class="line">    <span class="attribute">order</span>: -<span class="number">4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到各个子项的order由小到大排序应该是C，A，B（默认order为0）</p>
+<p>渲染结果为：</p>
+<p><img src="https://s2.ax1x.com/2019/11/16/MBQO2j.png" alt></p>
+<h4 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h4><p>flex-grow中的grow就是扩展的意思。这个属性的目的就是在自身子项已有的宽度上来根据属性值来决定利用剩余的空白部分来扩展自身的宽度</p>
+<p>语法为：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">flex-grow</span>: &lt;<span class="selector-tag">number</span>&gt; <span class="comment">/* 数值，可以是小数，但不支持负数，默认值是 0 */</span></span><br></pre></td></tr></table></figure>
+
+<p>首先，我们需要明确的是，所有剩余空白空间在数值上表示为1</p>
+<p>那么具体的分配规则如下：</p>
+<ol>
+<li>如果只有一个子项设置了flex-grow属性，那么就只对该子项进行空间扩展。其中可以分为两种情况：<ul>
+<li>如果flex-grow的属性值小于1，那么扩展的空间就相当于总剩余空间和这个比例的乘积值。</li>
+<li>如果属性值大于等于1，那么扩展的空间就是剩余所有空间</li>
+</ul>
+</li>
+<li>如果有多个子项设置了flex-grow属性，那么具体可以分为以下情况：<ul>
+<li>如果所有已设置flex-grow属性的属性值的和小于1，那么每个已设置该属性的子项的扩展空间相当于总剩余空间和各个子项设置的属性值的乘积值</li>
+<li>如果flex-grow值总和大于或等于1，则所有剩余空间被利用，分配比例就是flex-grow属性值的比例。例如所有的flex子项都设置flex-grow:1，则表示剩余空白间隙大家等分，如果设置的flex-grow比例是1:2:1，则中间的flex子项占据一半的空白间隙，剩下的前后两个元素等分。</li>
+</ul>
+</li>
+</ol>
+<p>来看下具体例子：</p>
+<h5 id="只有一个子项设置flex-grow属性"><a href="#只有一个子项设置flex-grow属性" class="headerlink" title="只有一个子项设置flex-grow属性"></a>只有一个子项设置flex-grow属性</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#app</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: row;</span><br><span class="line">    <span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">    <span class="attribute">justify-content</span>: space-evenly;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#A</span> &#123;</span><br><span class="line">    <span class="attribute">flex-grow</span>: <span class="number">0.5</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#B</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: pink;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#C</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: pink;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>渲染结果为：</p>
+<p><img src="https://s2.ax1x.com/2019/11/16/MB8geI.png" alt></p>
+<p>我们可以看到容器的总宽度为500px。每个子项最初本来只占100px，也就是说本来会剩余200px宽度的空白空间。</p>
+<p>然后，我们在A子项设置了flex-grow:0.5。因此，A子项所获得的扩展空间也就为200px*0.5=100px宽度的空白空间</p>
+<h5 id="多个子项设置flex-grow属性"><a href="#多个子项设置flex-grow属性" class="headerlink" title="多个子项设置flex-grow属性"></a>多个子项设置flex-grow属性</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#app</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: row;</span><br><span class="line">    <span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">    <span class="attribute">justify-content</span>: space-evenly;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#A</span> &#123;</span><br><span class="line">    <span class="attribute">flex-grow</span>: <span class="number">0.5</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#B</span> &#123;</span><br><span class="line">    <span class="attribute">flex-grow</span>: <span class="number">0.5</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: pink;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#C</span> &#123;</span><br><span class="line">    <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: pink;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>渲染结果为：</p>
+<p><img src="https://s2.ax1x.com/2019/11/16/MBJ5rj.png" alt></p>
+<p>我们可以看到，因为A子项设置flex-grow为0.5，B子项为0.5，C子项为1.因此，这三者的和超过了1。那么，这三个子项的扩展空间将占领全部的剩余空白空间，并且每个子项在扩展空间的分配比例相当于它们属性值的比例。因此：</p>
+<ul>
+<li>A子项获得200px*(0.5/(0.5+0.5+1))=50px的宽度的扩展空间</li>
+<li>B子项获得200px*(0.5/(0.5+0.5+1))=50px的宽度的扩展空间</li>
+<li>C子项获得200px*(0.5/(0.5+0.5+1))=100px的宽度的扩展空间</li>
+</ul>
+<h4 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h4><p>shrink是收缩的意思。因此，该属性用来处理当剩余空间不足的情况下，各个子项该如何收缩。</p>
+<p>什么叫剩余空间不够呢？假如说，当flex容器的宽度为500px，每个子项的宽度为200px，并且我们设置不允许换行（flex-wrap:nowrap）。那么，如果每个子项不收缩的话，那么就会有一个子项溢出，如下所示：</p>
+<p><img src="https://s2.ax1x.com/2019/11/16/MBUAzT.png" alt></p>
+<p>因此，该flex-shrink属性就是用来当剩余空间不足的情况下来处理各个子项的收缩情况</p>
+<p>语法如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">flex-shrink</span>: &lt;<span class="selector-tag">number</span>&gt;; <span class="comment">/* 数值，不支持负值，所有子项默认值是 1，也就是都进行同等比例的收缩，以保证元素不会溢出 */</span></span><br></pre></td></tr></table></figure>
+
+<p>默认渲染情况如下：</p>
+<p><img src="https://s2.ax1x.com/2019/11/16/MBUT6U.png" alt></p>
+<p>具体收缩规则如下：</p>
+<ol>
+<li><p>如果只有一个子项设置了flex-shrink，那么只有该子项会进行收缩</p>
+<ul>
+<li>如果flex-shrink属性值小于1，那么收缩尺寸不完全，仍然会有一部分内容会溢出</li>
+<li>如果flex-shrink属性值大于或等于1，那么收缩尺寸完全，不会有任何溢出</li>
+</ul>
+</li>
+<li><p>如果有多个子项设置了flex-shrink，那么设置该属性的子项会进行收缩</p>
+<ul>
+<li>如果所有设置该属性的属性值的和小于1，那么收缩会不完全，每个元素收缩尺寸为“完全收缩的尺寸”与每个子项上的该属性值的乘积</li>
+<li>flex-shrink值的总和大于1，则收缩完全，每个元素收缩尺寸的比例和flex-shrink值的比例一样</li>
+</ul>
+</li>
+</ol>
+<h4 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h4><p>align-self用于单独设置该子项在交叉轴上的对齐方式。</p>
+<p>其语法如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">align-self: auto | flex-start | flex-end | center | baseline | stretch;</span><br></pre></td></tr></table></figure>
+
+<p>属性值都已介绍过，这里不再赘述</p>
+<p>我们以align-self:center为示例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#app</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: row;</span><br><span class="line">	<span class="attribute">justify-content</span>: space-evenly;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#A</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#B</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: pink;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">	<span class="attribute">align-self</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#C</span> &#123;</span><br><span class="line">	<span class="attribute">background-color</span>: gainsboro;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">150px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>渲染结果为：</p>
+<p><img src="https://s2.ax1x.com/2019/11/16/MBdvQK.png" alt></p>
+<h2 id="flex布局的应用场景"><a href="#flex布局的应用场景" class="headerlink" title="flex布局的应用场景"></a>flex布局的应用场景</h2><h3 id="三栏布局"><a href="#三栏布局" class="headerlink" title="三栏布局"></a>三栏布局</h3><p>三栏布局就是整体高度已知，左栏和右栏宽度确定然后中间栏宽度自适应</p>
+<p>我们假设整体高度为200px。左右两栏的宽度为20px，高度为100%</p>
+<p>那么，我们可以利用flex布局来实现，同时使用flex-grow来是实现中间栏自适应宽度</p>
+<p>首先设置三个flex子项</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"A"</span> <span class="attr">class</span>=<span class="string">"flex"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>A<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"B"</span> <span class="attr">class</span>=<span class="string">"flex"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>B<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"C"</span> <span class="attr">class</span>=<span class="string">"flex"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>C<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后设置css属性</p>
+<p>这里假设整体宽度为500px</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#app</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: row;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#A</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#B</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: pink;</span><br><span class="line">	<span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#C</span> &#123;</span><br><span class="line">	<span class="attribute">background-color</span>: gainsboro;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.flex</span> &#123;</span><br><span class="line">	<span class="attribute">display</span>: flex;</span><br><span class="line">	<span class="attribute">justify-content</span>: center;</span><br><span class="line">	<span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么，渲染结果为：</p>
+<p><img src="https://s2.ax1x.com/2019/11/16/MBDz9A.png" alt></p>
+<p>当我们将整体宽度设置为200px，</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#app</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: row;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么渲染结果为：<br><img src="https://s2.ax1x.com/2019/11/16/MBDvhd.png" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/15/相等-与全等-的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2990,313 +3371,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/浏览器渲染机制/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/29/浏览器渲染机制/" itemprop="url">浏览器渲染机制</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-29T14:58:30+08:00">
-                2019-10-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/浏览器/" itemprop="url" rel="index">
-                    <span itemprop="name">浏览器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  7
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="浏览器渲染步骤"><a href="#浏览器渲染步骤" class="headerlink" title="浏览器渲染步骤"></a>浏览器渲染步骤</h2><p>浏览器的渲染机制一般分为以下几步：</p>
-<ol>
-<li>处理HTML并构建DOM树</li>
-<li>处理CSS构建CSSOM树</li>
-<li>将DOM和CSSOM合并生成Render Tree（渲染树）</li>
-<li>根据渲染树计算节点的位置进行布局</li>
-<li>通过显卡将画面绘制到屏幕上</li>
-</ol>
-<p>一个整体的流程图<br><img src="https://s2.ax1x.com/2019/10/29/KfV1eS.jpg" alt></p>
-<h2 id="DOM树与CSSOM树的生成过程"><a href="#DOM树与CSSOM树的生成过程" class="headerlink" title="DOM树与CSSOM树的生成过程"></a>DOM树与CSSOM树的生成过程</h2><p>DOM树的生成过程（CSSOM树与之类似）：</p>
-<ol>
-<li>转换：浏览器从磁盘或网络上读取HTML的原始字节，并根据文件的指定编码（例如UTF-8）将它们转换为单个字符。</li>
-<li>标记化：浏览器将字符串转换为W3C HTML5标准指定的不同标记；例如“ <html>”，“ <body>”以及尖括号内的其他字符串。每个令牌都有特殊的含义和自己的规则集。</body></html></li>
-<li>节点生成：发出的令牌被转换为“对象”，以定义其属性和规则。</li>
-<li>DOM构造：最后，由于HTML标记定义了不同标记之间的关系（某些标记包含在其他标记中），因此创建的对象以树形数据结构链接，该树数据结构还捕获了原始标记中定义的父子关系：HTML 对象是body对象的父对象，body是段落对象的父 对象，依此类推。</li>
-</ol>
-<p>DOM树示例</p>
-<p><img src="https://s2.ax1x.com/2019/10/29/KRQVC4.png" alt></p>
-<p>CSSOM树示例</p>
-<p><img src="https://s2.ax1x.com/2019/10/29/KRQZ8J.png" alt></p>
-<h2 id="Render-Tree（渲染树）"><a href="#Render-Tree（渲染树）" class="headerlink" title="Render Tree（渲染树）"></a>Render Tree（渲染树）</h2><p>在上面，我们得到了描述页面内容的DOM树和描述页面样式的CSSOM。接下来，我们就得需要将两者进行结合生成Render Tree</p>
-<h3 id="渲染树的生成和渲染步骤"><a href="#渲染树的生成和渲染步骤" class="headerlink" title="渲染树的生成和渲染步骤"></a>渲染树的生成和渲染步骤</h3><ol>
-<li><p>将DOM和CSSOM树合并以形成渲染树</p>
-<pre><code>渲染树的生成步骤：
-1. 从DOM树的根节点开始，采取深度优先遍历的方式（也就是说当前节点的所有子节点都构建好后才会去构建当前节点的下一个兄弟节点）来遍历每一个可见节点
-&gt; 什么是不可见节点： 
-    1. 一些节点不可见（例如，脚本标记，元标记等），由于它们未反映在渲染的输出中，因此将其省略。
-    2. 一些节点通过CSS隐藏，并且在渲染树中也被省略；例如，将一个节点设置了“ display：none”属性。（但是设置visibility: hidden就会将该CSSOM节点和属性添加到渲染树中）
-2. 对于每个可见节点，找到匹配CSSOM规则并应用它们。
-3. 生成具有内容及其计算样式的可见节点。</code></pre></li>
-<li><p>布局：在生成的渲染树中，我们已经可以得知了那些节点是可见的，并且该节点的样式也是已知的。接下来我们需要计算它们在设备视口中的确切位置和大小，这就是“布局”阶段，也称为“重排”。 </p>
-</li>
-<li><p>将各个节点绘制到屏幕上</p>
-</li>
-</ol>
-<p><img src="https://s2.ax1x.com/2019/10/29/KRwEmF.png" alt></p>
-<p>需要注意的是：</p>
-<blockquote>
-<p>Render Tree与DOM树不一定是相同的。虽然，Renter Tree是按照DOM树的节点进行遍历生成的。但是，我们要记住，Render Tree中的所有节点都是可见节点（我们在前面已经提到过什么是不可见节点）。</p>
-</blockquote>
-<h2 id="阻塞渲染"><a href="#阻塞渲染" class="headerlink" title="阻塞渲染"></a>阻塞渲染</h2><p>我们知道HTML会阻塞渲染树的渲染，因为要是没有DOM，渲染树就无法渲染任何内容。那么对于css和JS呢？它们阻塞渲染吗？</p>
-<p>掘金站点的html文档耗时情况<br><img src="https://s2.ax1x.com/2019/10/29/KfZ5j0.png" alt></p>
-<p>我们可以看到阻塞了150ms</p>
-<h3 id="css阻塞渲染"><a href="#css阻塞渲染" class="headerlink" title="css阻塞渲染"></a>css阻塞渲染</h3><p>在默认的情况下，css是阻塞渲染的。</p>
-<p>我们在html文档里引入一个css文件，然后查看一下渲染过程，我们可以看到该css文件是阻塞的</p>
-<p>在构建 CSSOM 树时，会阻塞渲染，直至 CSSOM 树构建完成。并且构建 CSSOM 树是一个十分消耗性能的过程，所以应该尽量保证层级扁平，减少过度层叠，越是具体的 CSS 选择器，执行速度越慢。</p>
-<p><img src="https://s2.ax1x.com/2019/10/29/KRwkOU.png" alt></p>
-<h3 id="js文件阻塞渲染"><a href="#js文件阻塞渲染" class="headerlink" title="js文件阻塞渲染"></a>js文件阻塞渲染</h3><blockquote>
-<p>除非明确声明为异步，否则JavaScript会阻止DOM构建</p>
-</blockquote>
-<h4 id="非异步脚本"><a href="#非异步脚本" class="headerlink" title="非异步脚本"></a>非异步脚本</h4><p>无论我们使用的是&lt;script&gt;内联形式的代码块还是引入外部文件，浏览器都会暂停并执行js脚本，然后才能处理文档的其余部分。</p>
-<p>另外，在使用外部JavaScript文件的情况下，浏览器必须暂停以等待从磁盘，缓存或远程服务器中获取脚本，这可能会增加关键渲染路径的数十到数千毫秒的延迟。</p>
-<p>我们来试验一下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./a.js"</span>&gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>结果</p>
-<p><img src="https://s2.ax1x.com/2019/10/29/KRwVw4.png" alt></p>
-<h4 id="异步脚本"><a href="#异步脚本" class="headerlink" title="异步脚本"></a>异步脚本</h4><p>HTML5为script元素定义了async属性。该属性可以让js文件异步加载。</p>
-<blockquote>
-<p>async只适用于外部脚本文件</p>
-</blockquote>
-<p>指定async属性的目的是不让页面等待脚本下载和执行，从而异步加载页面其他内容。因此，异步脚本不要在加载期间修改DOM</p>
-<p>另外，异步脚本一定会在页面的load事件前执行。</p>
-<p>来看一下加上async属性，该js脚本是否回阻塞后面的执行：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./a.js"</span>&gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>结果</p>
-<p><img src="https://s2.ax1x.com/2019/10/29/KRwZTJ.png" alt></p>
-<h2 id="重绘与回流"><a href="#重绘与回流" class="headerlink" title="重绘与回流"></a>重绘与回流</h2><p>重绘与回流的基本概念</p>
-<ol>
-<li><p>当Render Tree中部分或全部元素的尺寸、结构、或某些属性发生改变时，浏览器重新渲染部分或全部文档的过程称为回流。</p>
-</li>
-<li><p>当页面中元素样式的改变并不影响它在文档流中的位置时（例如：color、background-color、visibility等），浏览器会将新样式赋予给元素并重新绘制它，这个过程称为重绘。</p>
-</li>
-</ol>
-<p>由此我们可以得出一个结论：</p>
-<blockquote>
-<p>回流必定会发生重绘，重绘不一定会引发回流。</p>
-</blockquote>
-<p>我们来看一下回流具体发生的场景：</p>
-<ol>
-<li><p>添加或者删除可见的DOM元素；</p>
-</li>
-<li><p>元素位置改变；</p>
-</li>
-<li><p>元素尺寸改变——边距、填充、边框、宽度和高度</p>
-</li>
-<li><p>内容改变——比如文本改变或者图片大小改变而引起的计算值宽度和高度改变；</p>
-</li>
-<li><p>页面渲染初始化；</p>
-</li>
-<li><p>浏览器窗口尺寸改变——resize事件发生时；</p>
-</li>
-<li><p>查询或调用一些会引起回流的属性</p>
-<pre><code>clientWidth、clientHeight、clientTop、clientLeft
-offsetWidth、offsetHeight、offsetTop、offsetLeft
-scrollWidth、scrollHeight、scrollTop、scrollLeft
-scrollIntoView()、scrollIntoViewIfNeeded()
-getComputedStyle()
-getBoundingClientRect()
-scrollTo()</code></pre></li>
-</ol>
-<h3 id="重绘与回流的开销"><a href="#重绘与回流的开销" class="headerlink" title="重绘与回流的开销"></a>重绘与回流的开销</h3><blockquote>
-<p>回流比重绘的开销要更大。</p>
-</blockquote>
-<p>另外，回流的开销也会因为操作的不同而有可能相差很大</p>
-<p>假如，我们直接操纵body，并且在body前插入一个元素，那么整个Render Tree都会被重新构建</p>
-<p>而如果只是在Render Tree的叶子节点后插入一个节点，那么前面的所有节点都不会影响。因此，开销会比上一个回流的开销小得多。</p>
-<h3 id="减少重绘与回流（性能提高）"><a href="#减少重绘与回流（性能提高）" class="headerlink" title="减少重绘与回流（性能提高）"></a>减少重绘与回流（性能提高）</h3><h4 id="对于css"><a href="#对于css" class="headerlink" title="对于css"></a>对于css</h4><ol>
-<li><p>避免使用table布局。 由于浏览器使用流式布局，对Render Tree的计算通常只需要遍历一次就可以完成，但table及其内部元素除外，他们可能需要多次计算，通常要花3倍于同等元素的时间。</p>
-</li>
-<li><p>使用 visibility：0 替换 display: none ，因为前者只会引起重绘，后者会引发回流（改变了布局–渲染树不会生成该节点）</p>
-</li>
-<li><p>CSS 选择符从右往左匹配查找，避免 DOM 深度过深</p>
-</li>
-<li><p>避免使用CSS表达式（例如：calc()）</p>
-</li>
-</ol>
-<h4 id="对于js"><a href="#对于js" class="headerlink" title="对于js"></a>对于js</h4><ol>
-<li><p>避免频繁操作样式，最好一次性重写style属性，或者将样式列表定义为class并一次性更改class属性。</p>
-</li>
-<li><p>避免频繁操作DOM，创建一个documentFragment，在它上面应用所有DOM操作，最后再把它添加到文档中。</p>
-</li>
-<li><p>避免频繁读取会引发回流/重绘的属性，如果确实需要多次使用，就用一个变量缓存起来。</p>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">    <span class="comment">// 获取 offsetTop 会导致回流，因为需要去获取正确的值</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">document</span>.querySelector(<span class="string">'.test'</span>).style.offsetTop)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>也可以先为元素设置display: none，操作结束后再把它显示出来。因为在display属性为none的元素上进行的DOM操作不会引发回流和重绘（因为将display属性设置为none的节点为不可见节点，不可见节点不会被添加到渲染树中）。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3349,7 +3423,7 @@ scrollTo()</code></pre></li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">134</span>
+                  <span class="site-state-item-count">135</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3360,7 +3434,7 @@ scrollTo()</code></pre></li>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -3430,7 +3504,7 @@ scrollTo()</code></pre></li>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">142.1k</span>
+    <span title="Site words total count">144.9k</span>
   
 </div>
 
@@ -3460,7 +3534,7 @@ scrollTo()</code></pre></li>
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共142.1k字</span>
+  <span class="post-count">博客全站共144.9k字</span>
 </div>
         
 
