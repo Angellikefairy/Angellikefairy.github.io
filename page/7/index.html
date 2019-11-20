@@ -307,6 +307,420 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/30/模板字面量/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/30/模板字面量/" itemprop="url">模板字面量</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-30T16:10:03+08:00">
+                2019-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是模板字面量"><a href="#什么是模板字面量" class="headerlink" title="什么是模板字面量"></a>什么是模板字面量</h2><p>模板字面量 是允许嵌入表达式的字符串字面量。你可以使用多行字符串和字符串插值功能。它们在ES2015规范的先前版本中被称为“模板字符串”。</p>
+<h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`string text`</span>  <span class="comment">// 相当于普通字符串</span></span><br><span class="line"></span><br><span class="line"><span class="string">`string text line 1</span></span><br><span class="line"><span class="string"> string text line 2`</span> <span class="comment">// 多行字符串  </span></span><br><span class="line"></span><br><span class="line"><span class="string">`string text <span class="subst">$&#123;expression&#125;</span> string text`</span>  <span class="comment">// 带有占位符</span></span><br><span class="line"></span><br><span class="line">tag <span class="string">`string text <span class="subst">$&#123;expression&#125;</span> string text`</span></span><br></pre></td></tr></table></figure>
+
+<p>模板字符串使用反引号 (<code></code>) 来代替普通字符串中的用双引号和单引号。模板字符串可以包含特定语法（${expression}）的占位符。占位符中的表达式和周围的文本会一起传递给一个默认函数，该函数负责将所有的部分连接起来，如果一个模板字符串由表达式开头，则该字符串被称为带标签的模板字符串，该表达式通常是一个函数，它会在模板字符串处理后被调用，在输出最终结果前，你都可以通过该函数来对模板字符串进行操作处理。在模版字符串内使用反引号（`）时，需要在它前面加转义符（\）。</p>
+<p>在模板字符串中，不需要转义单双引号</p>
+<h2 id="多行字符串"><a href="#多行字符串" class="headerlink" title="多行字符串"></a>多行字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">`abc  </span></span><br><span class="line"><span class="string">def`</span>);            </span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果：</span></span><br><span class="line">abc</span><br><span class="line">def</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<p>在两个反引号之间的所有空白字符串都是有效的，都属于字符串的一部分。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">`abc</span></span><br><span class="line"><span class="string">             def`</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line">abc</span><br><span class="line">             def</span><br></pre></td></tr></table></figure>
+
+<p>因此我们可以考虑使用第一行留白的方法来对齐缩进文本</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">`</span></span><br><span class="line"><span class="string">    abc</span></span><br><span class="line"><span class="string">    def</span></span><br><span class="line"><span class="string">`</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line">    abc</span><br><span class="line">    def</span><br></pre></td></tr></table></figure>
+
+<p>当然我们也可以使用\n在模板字符串中显示换行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">`abc\ndef`</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line">abc</span><br><span class="line">def</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串占位符"><a href="#字符串占位符" class="headerlink" title="字符串占位符"></a>字符串占位符</h2><p>在一个模板字面量中，你可以任何合法的JavaScript表达式嵌入到占位符中并将其作为字符串中的一部分输出到结果中去</p>
+<p>占位符由${}组成，中间可以包含任意的表达式</p>
+<p>例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name=<span class="string">'ming'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`My name is <span class="subst">$&#123;name&#125;</span>`</span>); <span class="comment">// My name is ming</span></span><br></pre></td></tr></table></figure>
+
+<p>除了变量，占位符还可以嵌入其他表达式，包括运算式、函数调用等等</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`ming`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`My name is <span class="subst">$&#123;getName()&#125;</span>`</span>); <span class="comment">// My name is ming</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`My name is <span class="subst">$&#123;<span class="string">'xiao'</span>+<span class="string">'ming'</span>&#125;</span>`</span>); <span class="comment">// My name is xiaoming</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="嵌套模板"><a href="#嵌套模板" class="headerlink" title="嵌套模板"></a>嵌套模板</h2><p>模板字面量本身也是Js表达式，所以你可以在任意一个模板字面量里嵌入另外一个模板字面量</p>
+<p>注意：</p>
+<p>是另外一个模板字面量而不是占位符，即：<br>应该是</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`<span class="subst">$&#123;<span class="string">`<span class="subst">$&#123;&#125;</span>`</span>&#125;</span>`</span></span><br></pre></td></tr></table></figure>
+
+<p>而不是</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`&amp;&#123;&amp;&#123;&#125;&#125;`</span> <span class="comment">// 会报错</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="number">2</span>&gt;<span class="number">1</span>?<span class="string">`<span class="subst">$&#123;<span class="number">2</span>&gt;<span class="number">1</span>?<span class="string">'yes'</span>:<span class="string">'no'</span>&#125;</span>`</span>:<span class="string">'no'</span><span class="string">`) // 'yes'</span></span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="标签模板"><a href="#标签模板" class="headerlink" title="标签模板"></a>标签模板</h2><p>更高级的形式的模板字符串是带标签的模板字符串。标签使您可以用函数解析模板字符串。标签函数的第一个参数包含一个字符串值的数组。其余的参数与表达式相关。最后，你的函数可以返回处理好的的字符串（或者它可以返回完全不同的东西，）。用于该标签的函数的名称可以被命名为任何名字。</p>
+<h3 id="定义标签"><a href="#定义标签" class="headerlink" title="定义标签"></a>定义标签</h3><p>标签可以是一个函数，其函数名可以任意（符合变量命名规则）</p>
+<p>标签函数语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tag</span>(<span class="params">literals,...substitutions</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 返回一个字符串</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参数解释</p>
+<p><strong>literals</strong>: <br>该参数是一个字符串数组，其包括模板字面量中占位符之前，之后，以及之间的字符串</p>
+<p>例如，对于模板字符串<br><code>${girlName},my name is ${boyName}</code><br>则，其数组为[‘’,’,my name is ‘,’’]</p>
+<p><strong>substitutions</strong>:<br>该参数是模板字符串中所有占位符结果的值，例如以上模板字符串，则数组应该为${girlName}的值和${boyName}的值</p>
+<p>注意</p>
+<blockquote>
+<p>不难发现,literals数组的长度永远比substitutions数组长度多1</p>
+</blockquote>
+<h3 id="标签模板例子"><a href="#标签模板例子" class="headerlink" title="标签模板例子"></a>标签模板例子</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tag</span>(<span class="params">literals,...sub</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(literals,sub);</span><br><span class="line">    <span class="keyword">let</span> ans=<span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> sub) &#123;</span><br><span class="line">        ans+=literals[i];</span><br><span class="line">        ans+=sub[i];</span><br><span class="line">    &#125; </span><br><span class="line">    ans+=literals[literals.length<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> name=<span class="string">'ming'</span>;</span><br><span class="line"><span class="keyword">let</span> mes=tag<span class="string">`my name is <span class="subst">$&#123;name&#125;</span>`</span>;</span><br><span class="line"><span class="built_in">console</span>.log(mes);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line">[ <span class="string">'my name is '</span>, <span class="string">''</span> ] [ <span class="string">'ming'</span> ]</span><br><span class="line">my name is ming</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/30/leetcode-226/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/30/leetcode-226/" itemprop="url">leetcode-226 翻转二叉树</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-30T10:58:46+08:00">
+                2019-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode题解与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  295
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="翻转二叉树"><a href="#翻转二叉树" class="headerlink" title="翻转二叉树"></a>翻转二叉树</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>翻转一棵二叉树。</p>
+<p>示例：</p>
+<p>输入：</p>
+<p><img src="https://s2.ax1x.com/2019/08/30/mOqPHO.png" alt></p>
+<p>输出：</p>
+<p><img src="https://s2.ax1x.com/2019/08/30/mOqFED.png" alt></p>
+<p>备注:<br>这个问题是受到 Max Howell 的 原问题 启发的 ：</p>
+<p>谷歌：我们90％的工程师使用您编写的软件(Homebrew)，但是您却无法在面试时在白板上写出翻转二叉树这道题，这太糟糕了。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/30/leetcode-226/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/数组扁平化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2038,401 +2452,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/25/leetcode-160/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/25/leetcode-160/" itemprop="url">leetcode-160 相交链表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-25T16:07:06+08:00">
-                2019-08-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode题解与算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  943
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="相交链表"><a href="#相交链表" class="headerlink" title="相交链表"></a>相交链表</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>编写一个程序，找到两个单链表相交的起始节点。</p>
-<p>如下面的两个链表：</p>
-<p><img src="https://s2.ax1x.com/2019/08/25/mgImSU.png" alt></p>
-<p>在节点 c1 开始相交。</p>
-<p>示例 1：</p>
-<p><img src="https://s2.ax1x.com/2019/08/25/mgIVYV.png" alt></p>
-<blockquote>
-<p>输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3<br>输出：Reference of the node with value = 8<br>输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</p>
-</blockquote>
-<p>示例 2：</p>
-<p><img src="https://s2.ax1x.com/2019/08/25/mgIZWT.png" alt></p>
-<blockquote>
-<p>输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1<br>输出：Reference of the node with value = 2<br>输入解释：相交节点的值为 2 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</p>
-</blockquote>
-<p>示例 3：</p>
-<p><img src="https://s2.ax1x.com/2019/08/25/mgIEF0.png" alt></p>
-<blockquote>
-<p>输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2<br>输出：null<br>输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。<br>解释：这两个链表不相交，因此返回 null。</p>
-</blockquote>
-<p>注意：</p>
-<ol>
-<li>如果两个链表没有交点，返回 null.</li>
-<li>在返回结果后，两个链表仍须保持原有的结构。</li>
-<li>可假定整个链表结构中没有循环。</li>
-<li>程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/08/25/leetcode-160/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ol></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/24/leetcode-268/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/24/leetcode-268/" itemprop="url">leetcode-268 缺失数字</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-24T21:52:00+08:00">
-                2019-08-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode题解与算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  468
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="缺失数字"><a href="#缺失数字" class="headerlink" title="缺失数字"></a>缺失数字</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个包含 0, 1, 2, …, n 中 n 个数的序列，找出 0 .. n 中没有出现在序列中的那个数。</p>
-<p>示例 1:</p>
-<blockquote>
-<p>输入: [3,0,1]<br>输出: 2</p>
-</blockquote>
-<p>示例 2:</p>
-<blockquote>
-<p>输入: [9,6,4,2,3,5,7,0,1]<br>输出: 8</p>
-</blockquote>
-<p>说明:<br>你的算法应具有线性时间复杂度。你能否仅使用额外常数空间来实现?</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/08/24/leetcode-268/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2485,7 +2504,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">135</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2566,7 +2585,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">144.9k</span>
+    <span title="Site words total count">150.7k</span>
   
 </div>
 
@@ -2596,7 +2615,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共144.9k字</span>
+  <span class="post-count">博客全站共150.7k字</span>
 </div>
         
 

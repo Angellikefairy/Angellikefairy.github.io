@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="什么是泛型我们在写JS的时候可以不用去管输入输出的类型，但是当我们在使用TS的时候就要注意类型的约束 例如： 我们有一个方法要返回传入的number类型的值： 123function getValue(arg: number): number &amp;#123;    return arg;&amp;#125;  而另一个方法要返回传入的string类型的值： 123function getValue(arg:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript中的泛型理解">
+<meta property="og:url" content="http://yoursite.com/2019/11/19/TypeScript中的泛型理解/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="什么是泛型我们在写JS的时候可以不用去管输入输出的类型，但是当我们在使用TS的时候就要注意类型的约束 例如： 我们有一个方法要返回传入的number类型的值： 123function getValue(arg: number): number &amp;#123;    return arg;&amp;#125;  而另一个方法要返回传入的string类型的值： 123function getValue(arg:">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-20T07:15:40.261Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TypeScript中的泛型理解">
+<meta name="twitter:description" content="什么是泛型我们在写JS的时候可以不用去管输入输出的类型，但是当我们在使用TS的时候就要注意类型的约束 例如： 我们有一个方法要返回传入的number类型的值： 123function getValue(arg: number): number &amp;#123;    return arg;&amp;#125;  而另一个方法要返回传入的string类型的值： 123function getValue(arg:">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/19/TypeScript中的泛型理解/">
+
+
+
+
+
+  <title>TypeScript中的泛型理解 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+  
+ 
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+         <a href="https://github.com/Angellikefairy"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149" alt="Fork me on GitHub"></a>
+    </div>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/19/TypeScript中的泛型理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TypeScript中的泛型理解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-19T14:25:42+08:00">
+                2019-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是泛型"><a href="#什么是泛型" class="headerlink" title="什么是泛型"></a>什么是泛型</h2><p>我们在写JS的时候可以不用去管输入输出的类型，但是当我们在使用TS的时候就要注意类型的约束</p>
+<p>例如：</p>
+<p>我们有一个方法要返回传入的number类型的值：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>(<span class="params">arg: <span class="built_in">number</span></span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而另一个方法要返回传入的string类型的值：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>(<span class="params">arg: <span class="built_in">string</span></span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了类型的约束与安全，我们经常会这么写。但是，仔细一看除了类型约束的差别外，这两个方法并没有本质的区别</p>
+<p>因此，我们肯定想要减少重复代码的书写。这时候，肯定有人会想到用any数据类型来解决通用性问题，事实上这的确可以：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>(<span class="params">arg: <span class="built_in">any</span></span>): <span class="title">any</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样一来，我们输入各种类型参数就都没有任何问题了：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getValue(<span class="number">123</span>);</span><br><span class="line">getValue(<span class="string">'123'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>但是，沉下心来仔细思考，这样子做会有什么问题呢？</p>
+<p>我们的确可以传入任何类型，但是有一点是需要注意的，当参数类型和函数输出值类型为any时，TS无法判断输入的是什么类型，输出的是什么类型。那么，这样子就会破坏了类型安全（这样子就与js无异了，没有输入输出的类型检测）</p>
+<p>因此，ts引入了泛型的概念，用来保证类型的安全同时又能使代码具有可复用性</p>
+<blockquote>
+<p>泛型（Generics）是指在定义函数、接口或类的时候，不预先指定具体的类型，而在使用的时候再指定类型的一种特性。</p>
+</blockquote>
+<h2 id="了解泛型的初步概念"><a href="#了解泛型的初步概念" class="headerlink" title="了解泛型的初步概念"></a>了解泛型的初步概念</h2><p>那么，我们现在尝试使用泛型来解决上述的问题。</p>
+<blockquote>
+<p>在泛型中，我们使用Type参数来表示传递给类，接口和函数的参数的数据类型。Type参数通常被定义为T</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>&lt;<span class="title">T</span>&gt;(<span class="params">arg: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，函数名getValue后跟的<t>中的T就用来指代输入的类型。当该T类型被确认后，在后面的参数arg和函数返回值都会被当做该指定类型</t></p>
+<p>例如，当你将T指代为string类型后，上述函数的效果就相当于我们之前写过的传入为字符串类型的函数：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>(<span class="params">arg: <span class="built_in">string</span></span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么，我们该如何为T来指定输入的类型呢？</p>
+<ol>
+<li><p>第一种方法：显式传入类型参数（也就是显式为T赋值），例如：</p>
+ <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getValue&lt;<span class="built_in">string</span>&gt;(<span class="string">'123'</span>);</span><br></pre></td></tr></table></figure>
+
+<p> 这样，我们就明确为T指定为string类型，那么，传递给函数的参数和输出值的类型现在就只能为string类型</p>
+</li>
+<li><p>第二种方法： （这种方法更为普遍）利用ts的类型推论 – 即编译器会根据传入的参数自动地帮助我们确定T的类型，那么，我们只要像正常一样调用即可</p>
+ <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getValue(<span class="string">'123'</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="多个类型参数"><a href="#多个类型参数" class="headerlink" title="多个类型参数"></a>多个类型参数</h3><p>如果我们要传入多个参数呢？没关系，在定义泛型的时候，我们也可以定义多个类型参数</p>
+<p>事实上我们可以用任何可用标识符来表示这个类型参数，例如a,A,mmm,$等等等</p>
+<p>但一般情况下，我们常用T,U,V来表示类型参数</p>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>&lt;<span class="title">T</span>,<span class="title">U</span>,<span class="title">V</span>&gt;(<span class="params">arg1: T,arg2: U,arg3: V</span>): [<span class="title">T</span>,<span class="title">U</span>,<span class="title">V</span>] </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [arg1,arg2,arg3]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getValue&lt;<span class="built_in">string</span>,<span class="built_in">number</span>,<span class="built_in">boolean</span>&gt;(<span class="string">'hello'</span>,<span class="number">123</span>,<span class="literal">true</span>); <span class="comment">// [ 'hello', 123, true ]</span></span><br><span class="line"></span><br><span class="line">getValue(<span class="literal">undefined</span>,<span class="literal">null</span>,&#123;a:<span class="number">1</span>&#125;); <span class="comment">// [ undefined, null, &#123; a: 1 &#125; ]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型的约束"><a href="#泛型的约束" class="headerlink" title="泛型的约束"></a>泛型的约束</h3><blockquote>
+<p>我们需要一直记住一点，ts不同于js，它是具有静态类型系统的。</p>
+</blockquote>
+<h4 id="js是运行时检查类型"><a href="#js是运行时检查类型" class="headerlink" title="js是运行时检查类型"></a>js是运行时检查类型</h4><p>js的类型检查会是在运行期间进行的（也就是说运行到某个地方需要检查类型才会去检查）。例如，定义一个函数输出传入参数的length属性值：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getLength</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg.length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当我们传入一个数组或者是具有length属性的对象，这完全没有任何问题。但是，当我们传入undefined的时候，当代码运行到arg.length的时候，就会去检查arg的类型，然后发现其是undefined类型，它不会有length属性，因此报出错误</p>
+<p>这便是在运行时检查类型</p>
+<h4 id="ts是编译时检查类型"><a href="#ts是编译时检查类型" class="headerlink" title="ts是编译时检查类型"></a>ts是编译时检查类型</h4><p>相比于js，ts使用了静态类型系统，这也意味着ts是在编译时（运行前）就检查类型的</p>
+<p>那么，在函数内部使用泛型变量的时候，由于我们事先并不知道它是那种类型，因此，我们不能再函数内随意操作它的属性或方法</p>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>&lt;<span class="title">T</span>&gt;(<span class="params">arg: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg.length;</span><br><span class="line">    <span class="comment">// 报错：类型“T”上不存在属性“length”</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样子就会产生报错。</p>
+<p>那么，在函数内使用类型断言可以吗？我们之前学到过可以将较为不具体的类型推断为更加具体的类型，比如将any断言为string。</p>
+<p>事实上，这是不允许的。因为类型变量T在函数声明的时候是不确定，因此，我们不能为它进行断言为更具体的类型（除了any类型）。</p>
+<p>那么，为什么any类型可以呢？因为，我们知道any类型可以访问任何属性和方法（即使不存在），这在编译的时候是不会有任何错误的，只是可能在运行阶段报错</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>&lt;<span class="title">T</span>&gt;(<span class="params">arg: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (arg <span class="keyword">as</span> <span class="built_in">any</span>).length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getValue(&#123;length:<span class="number">2</span>&#125;)); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="通用性约束"><a href="#通用性约束" class="headerlink" title="通用性约束"></a>通用性约束</h4><p>既然我们想要在泛型中操作某个属性与方法，那么为了类型安全，我们可以对泛型进行更加通用性的约束，只允许这个函数传入具有某个属性与方法的变量</p>
+<p>我们之前使用接口来描述一个对象或函数的形状，那么在泛型约束中我们就可以使用接口和extends来实现约束</p>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Value &#123;</span><br><span class="line">    length: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>&lt;<span class="title">T</span> <span class="title">extends</span> <span class="title">Value</span>&gt;(<span class="params">arg: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arg.length); <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getValue(&#123;length: <span class="number">1</span>,m: <span class="number">2</span>&#125;)); <span class="comment">// &#123; length: 1, m: 2 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们定义了一个接口，这个接口内有一个length属性，然后类型变量T继承了该接口，使得传入函数的参数必须包含该length属性</p>
+<p>我们知道，我们可以使用接口来对对象或者函数来做形状上的约束。</p>
+<p>事实上，上述代码在调用函数的时候传递给泛型的类型参数是通过类型推断进行传递，那么如果我们显示传递类型给类型变量T呢？</p>
+<p>以上代码相当于：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Value &#123;</span><br><span class="line">    length: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>&lt;<span class="title">T</span>&gt;(<span class="params">arg: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arg.length); <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个需要显示传递给泛型的类型参数T的接口M</span></span><br><span class="line"><span class="keyword">interface</span> M &#123;</span><br><span class="line">    length: <span class="built_in">any</span>;</span><br><span class="line">    m: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getValue&lt;M&gt;(&#123;length: <span class="number">1</span>,m: <span class="number">2</span>&#125;)); <span class="comment">// &#123;length: 1,m:2&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h3><p>在上述中，我们将泛型运用在了函数中，事实上，我们还可以将泛型运用在接口中</p>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 我们将泛型的类型变量T当做整个接口的参数</span></span><br><span class="line"><span class="keyword">interface</span> Person&lt;T&gt; &#123;</span><br><span class="line">    name: T;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示传递string类型给接口中的参数类型变量T</span></span><br><span class="line"><span class="keyword">let</span> ming: Person&lt;<span class="built_in">string</span>&gt; = &#123;</span><br><span class="line">    name: <span class="string">'ming'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接口除了可以约束对象之外，还可以去约束函数的形状：</p>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Func &#123;</span><br><span class="line">    (m: <span class="built_in">string</span>,n: <span class="built_in">number</span>): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test: Func = <span class="function"><span class="keyword">function</span>(<span class="params">m: <span class="built_in">string</span>,n: <span class="built_in">number</span></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(m,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但如果我们想约束一个使用了泛型的函数呢？</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Func &#123;</span><br><span class="line">    &lt;T&gt;(m: T,n: <span class="built_in">number</span>): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test: Func = <span class="function"><span class="keyword">function</span>&lt;<span class="title">T</span>&gt;(<span class="params">m: T,n: <span class="built_in">number</span></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(m,n); <span class="comment">// 'hello' 123</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test&lt;<span class="built_in">string</span>&gt;(<span class="string">'hello'</span>,<span class="number">123</span>);</span><br></pre></td></tr></table></figure>
+
+<p>另外，我们也可以将类型变量T作为接口的参数：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Func&lt;T&gt; &#123;</span><br><span class="line">    (m: T,n: <span class="built_in">number</span>): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要注意的是，此时我们需要定义好泛型的类型，因为此时我们必须将某个类型传递给类型参数T，而不能T传递给T</span></span><br><span class="line"><span class="keyword">let</span> test: Func&lt;<span class="built_in">string</span>&gt; = <span class="function"><span class="keyword">function</span>&lt;<span class="title">T</span>&gt;(<span class="params">m: T,n: <span class="built_in">number</span></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(m,n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(<span class="string">'hello'</span>,<span class="number">123</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h3><p>泛型也能作用于类上。</p>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Item&lt;T&gt; &#123;</span><br><span class="line">    property: T;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> Item&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line"><span class="keyword">let</span> b = <span class="keyword">new</span> Item&lt;<span class="built_in">number</span>&gt;();</span><br><span class="line"></span><br><span class="line">a.property = <span class="string">'hello'</span>;</span><br><span class="line">b.property = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a,b);</span><br><span class="line"><span class="comment">// Item &#123; property: 'hello' &#125; Item &#123; property: 123 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="类型参数作为类型的一部分"><a href="#类型参数作为类型的一部分" class="headerlink" title="类型参数作为类型的一部分"></a>类型参数作为类型的一部分</h3><p>在之前，我们一直将泛型的类型参数T作为整个类型来使用。但事实上，泛型的类型参数T还可以作为整个类型的一部分来使用</p>
+<p>例如，我们考虑传入的参数是一个数组，然后利用泛型来限定该数组元素的类型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getLength</span>&lt;<span class="title">T</span>&gt;(<span class="params">arg: T[]</span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg.length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getLength&lt;<span class="built_in">number</span>&gt;([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>])); <span class="comment">// 9</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="TS定义好的常用泛型"><a href="#TS定义好的常用泛型" class="headerlink" title="TS定义好的常用泛型"></a>TS定义好的常用泛型</h3><p>TS为我们定义好了一些极其常用的泛型，包括：</p>
+<ol>
+<li>Array&lt;T&gt;</li>
+<li>Promise&lt;T&gt;</li>
+<li>Set&lt;T&gt;</li>
+<li>Map&lt;K,V&gt;</li>
+</ol>
+<p>我们分别为以上四个泛型举一些例子：</p>
+<h4 id="Array-lt-T-gt"><a href="#Array-lt-T-gt" class="headerlink" title="Array&lt;T&gt;"></a>Array&lt;T&gt;</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArr</span>&lt;<span class="title">T</span>&gt;(<span class="params">arg: <span class="built_in">Array</span>&lt;T&gt;</span>): <span class="title">Array</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getArr&lt;<span class="built_in">string</span>&gt;([<span class="string">'hello'</span>,<span class="string">'world'</span>])); <span class="comment">// [ 'hello', 'world' ]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Promise-lt-T-gt"><a href="#Promise-lt-T-gt" class="headerlink" title="Promise&lt;T&gt;"></a>Promise&lt;T&gt;</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getPromise</span>&lt;<span class="title">T</span>&gt;(<span class="params">arg: T</span>): <span class="title">Promise</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>&lt;T&gt;<span class="function">(<span class="params">(<span class="params">resolve,reject</span>)=&gt;&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">        setTimeout(<span class="params">(<span class="params"></span>)=&gt;&#123;</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">            resolve(<span class="params">arg</span>);</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">        &#125;,1000</span>)</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;</span>)</span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="params">getPromise</span>&lt;<span class="params">string</span>&gt;(<span class="params">'hello'</span>).<span class="params">then</span>(<span class="params">v=&gt;&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="built_in">console</span>.log(<span class="params">v</span>); <span class="comment">// 'hello'</span></span></span></span><br><span class="line"><span class="function"><span class="params">&#125;</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="params">getPromise</span>&lt;<span class="params">number</span>&gt;(<span class="params">123</span>).<span class="params">then</span>(<span class="params">v=&gt;&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="built_in">console</span>.log(<span class="params">v</span>); <span class="comment">// 123</span></span></span></span><br><span class="line"><span class="function"><span class="params">&#125;</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>Promise&lt;T&gt;表示传递给Promise对象的参数的类型必须为T</p>
+<h4 id="Set-lt-T-gt"><a href="#Set-lt-T-gt" class="headerlink" title="Set&lt;T&gt;"></a>Set&lt;T&gt;</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSet</span>&lt;<span class="title">T</span>&gt;(<span class="params">args: <span class="built_in">Array</span>&lt;T&gt;</span>): <span class="title">Set</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Set(args);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getSet&lt;<span class="built_in">number</span>&gt;([<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>])); <span class="comment">// Set &#123; 1, 2, 3, 5 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Map-lt-K-V-gt"><a href="#Map-lt-K-V-gt" class="headerlink" title="Map&lt;K,V&gt;"></a>Map&lt;K,V&gt;</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;(<span class="params">args: <span class="built_in">Array</span>&lt;[K,V]&gt;</span>): <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Map(args);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getMap&lt;<span class="built_in">string</span>,<span class="built_in">string</span>&gt;([[<span class="string">'key1'</span>,<span class="string">'value1'</span>],[<span class="string">'key2'</span>,<span class="string">'value2'</span>],[<span class="string">'key3'</span>,<span class="string">'value3'</span>]])); <span class="comment">// Map &#123; 'key1' =&gt; 'value1', 'key2' =&gt; 'value2', 'key3' =&gt; 'value3' &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型接口实现TS自带的一些泛型"><a href="#泛型接口实现TS自带的一些泛型" class="headerlink" title="泛型接口实现TS自带的一些泛型"></a>泛型接口实现TS自带的一些泛型</h3><p>下面，我们将使用泛型接口来自定义实现TS自带的一些泛型</p>
+<p>首先，我们需要知道，我们可以使用接口来表示可索引的类型比如数组、类数组等：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> numArray &#123;</span><br><span class="line">    [index: <span class="built_in">number</span>]: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> numArray = [<span class="number">1</span>,<span class="string">'hello'</span>,<span class="literal">true</span>];</span><br></pre></td></tr></table></figure>
+
+<p>现在我们开始来自定义一下数组泛型，我们需要为该接口设置可索引，具有length属性，并且由一些常用的数组方法：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> numArray&lt;T&gt; &#123;</span><br><span class="line">    length: <span class="built_in">number</span>;</span><br><span class="line">    [index: <span class="built_in">number</span>]: <span class="built_in">any</span>;</span><br><span class="line"></span><br><span class="line">    reverse(): <span class="built_in">Array</span>&lt;T&gt;;</span><br><span class="line">    shift(): T;</span><br><span class="line">    push(...items: <span class="built_in">Array</span>&lt;T&gt;): <span class="built_in">number</span>;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之后我们创建数组类来实现这些接口中定义的方法和属性即可。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+        
+      
+      </div>
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/17/TypeScript的类与接口/" rel="next" title="TypeScript的类与接口">
+                <i class="fa fa-chevron-left"></i> TypeScript的类与接口
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar_1.png" alt="Angel">
+            
+              <p class="site-author-name" itemprop="name">Angel</p>
+              <p class="site-description motion-element" itemprop="description">这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是泛型"><span class="nav-number">1.</span> <span class="nav-text">什么是泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#了解泛型的初步概念"><span class="nav-number">2.</span> <span class="nav-text">了解泛型的初步概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多个类型参数"><span class="nav-number">2.1.</span> <span class="nav-text">多个类型参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型的约束"><span class="nav-number">2.2.</span> <span class="nav-text">泛型的约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#js是运行时检查类型"><span class="nav-number">2.2.1.</span> <span class="nav-text">js是运行时检查类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ts是编译时检查类型"><span class="nav-number">2.2.2.</span> <span class="nav-text">ts是编译时检查类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通用性约束"><span class="nav-number">2.2.3.</span> <span class="nav-text">通用性约束</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型接口"><span class="nav-number">2.3.</span> <span class="nav-text">泛型接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型类"><span class="nav-number">2.4.</span> <span class="nav-text">泛型类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型参数作为类型的一部分"><span class="nav-number">2.5.</span> <span class="nav-text">类型参数作为类型的一部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TS定义好的常用泛型"><span class="nav-number">2.6.</span> <span class="nav-text">TS定义好的常用泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Array-lt-T-gt"><span class="nav-number">2.6.1.</span> <span class="nav-text">Array&lt;T&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise-lt-T-gt"><span class="nav-number">2.6.2.</span> <span class="nav-text">Promise&lt;T&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set-lt-T-gt"><span class="nav-number">2.6.3.</span> <span class="nav-text">Set&lt;T&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Map-lt-K-V-gt"><span class="nav-number">2.6.4.</span> <span class="nav-text">Map&lt;K,V&gt;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型接口实现TS自带的一些泛型"><span class="nav-number">2.7.</span> <span class="nav-text">泛型接口实现TS自带的一些泛型</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angel</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">150.7k</span>
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共150.7k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script>
+</body>
+</html>
+<script type="text/javascript" src="/js/src/click.js"></script>
