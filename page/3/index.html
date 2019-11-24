@@ -307,6 +307,299 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/16/异步的终极解决方案async-await/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/16/异步的终极解决方案async-await/" itemprop="url">Generator与async+await</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-16T15:19:34+08:00">
+                2019-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="异步操作的发展"><a href="#异步操作的发展" class="headerlink" title="异步操作的发展"></a>异步操作的发展</h2><p>有一个场景，要先读取a文件，当a文件成功读取完毕后再去读取b文件，我们看一下各种异步操作是如何进行的？</p>
+<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 采用回调函数方式，很容易造成回调地狱</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readFile</span>(<span class="params">err,data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">'./a.js'</span>,<span class="string">'utf-8'</span>,(err,data)=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    fs.readFile(<span class="string">'./b.js'</span>,<span class="string">'utf-8'</span>,(err,data)=&gt;&#123;</span><br><span class="line">        <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;</span><br><span class="line">        <span class="built_in">console</span>.log(data);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 采用promise方式，但问题是容易造成代码冗余，并且一堆then导致代码不够清晰</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getPromise</span>(<span class="params">file</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        fs.readFile(file,<span class="string">'utf-8'</span>,(err,data)=&gt;&#123;</span><br><span class="line">            <span class="keyword">if</span>(err) reject(err);</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                resolve(data);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getPromise(<span class="string">'./a.js'</span>).then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v);</span><br><span class="line">    <span class="keyword">return</span> getPromise(<span class="string">'./b.js'</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Generator生成器模式，利用每当执行完一条yield语句后函数会自动停止执行的特性，从而通过调用next()方法来使异步操作看起来同步化</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">read</span>(<span class="params">file</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        fs.readFile(file,<span class="string">'utf-8'</span>,(err,data)=&gt;&#123;</span><br><span class="line">            <span class="keyword">if</span>(err) reject(err);</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                resolve(data);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">readFile</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> read(<span class="string">'./a.js'</span>);</span><br><span class="line">    <span class="keyword">yield</span> read(<span class="string">'./b.js'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> file = readFile();</span><br><span class="line"><span class="keyword">let</span> value,done;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>((&#123;value,done&#125; = file.next())&amp;&amp;!done) &#123;</span><br><span class="line">    value.then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(v);</span><br><span class="line">    &#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="async-await"><a href="#async-await" class="headerlink" title="async+await"></a>async+await</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// async+await</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">read</span>(<span class="params">fileName</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        fs.readFile(fileName,<span class="string">'utf-8'</span>,(err,data)=&gt;&#123;</span><br><span class="line">            <span class="keyword">if</span>(err) &#123;</span><br><span class="line">                reject(err);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                resolve(data);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">readFile</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> fileA = <span class="keyword">await</span> read(<span class="string">'./a.js'</span>);</span><br><span class="line">    <span class="keyword">let</span> fileB = <span class="keyword">await</span> read(<span class="string">'./b.js'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(fileA);</span><br><span class="line">    <span class="built_in">console</span>.log(fileB); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">readFile();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Generator函数"><a href="#Generator函数" class="headerlink" title="Generator函数"></a>Generator函数</h2><h3 id="简单任务执行器"><a href="#简单任务执行器" class="headerlink" title="简单任务执行器"></a>简单任务执行器</h3><p>由于执行yield语句会暂停当前函数的执行过程并等待下一次调用next()方法，那么我们能否做到设置一个简单任务执行器自动执行所有的任务呢？</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置三个简单任务</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">tasks</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 简单任务执行器函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> task = tasks();</span><br><span class="line">    <span class="keyword">let</span> result = task.next();</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 通过递归的方式，不断检测迭代器的done属性判断迭代器是否迭代完全</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">step</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!result.done) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(result.value);</span><br><span class="line">            result = task.next();</span><br><span class="line">            step();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    step();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">run();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="向任务执行器传递函数"><a href="#向任务执行器传递函数" class="headerlink" title="向任务执行器传递函数"></a>向任务执行器传递函数</h3><p>我们再深入一点：如果，那些任务之间是有关联的呢？比如说后执行的任务需要先执行的任务的返回值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">tasks</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">    value = <span class="keyword">yield</span> value + <span class="number">1</span>;</span><br><span class="line">    value = <span class="keyword">yield</span> value + <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么，我们就可以利用可以向next()方法传递参数的特性。因为这个参数的值就会代替生成器内部上一条yield语句的返回值。</p>
+<p>对于上述生成器函数tasks，如果，没有向next()方法中传入参数，那么yield就不会有返回值（或者默认返回undefined）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> task = tasks();</span><br><span class="line">    <span class="keyword">let</span> result = task.next();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">step</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!result.done) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(result.value);</span><br><span class="line">            result = task.next(result.value);</span><br><span class="line">            step();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    step();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">run();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="异步任务执行器"><a href="#异步任务执行器" class="headerlink" title="异步任务执行器"></a>异步任务执行器</h3><h4 id="Thunk函数"><a href="#Thunk函数" class="headerlink" title="Thunk函数"></a>Thunk函数</h4><p>任何函数，只要参数有回调函数，就能写成 Thunk 函数的形式</p>
+<p>thunk函数的作用就是将一个函数的执行参数（除回调函数外，一般是回调函数之前定义的参数）和回调函数分成两个函数。</p>
+<p>比如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fn(args,callback) = &gt; thunk(fn)(args)(callback)</span><br></pre></td></tr></table></figure>
+
+<p>thunk函数转化器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Thunk = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">callback</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> fn.call(<span class="keyword">this</span>, ...args, callback);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Thunk函数与Generator"><a href="#Thunk函数与Generator" class="headerlink" title="Thunk函数与Generator"></a>Thunk函数与Generator</h4><p>因为thunk函数可以将回调函数与执行函数分开，因此，我们就可以在一个地方执行执行函数，而在另一个地方来执行回调函数。</p>
+<p>我们再去思考一些常用的异步操作，例如文件读取、例如Ajax。我们都是从回调函数中获取数据</p>
+<p>因此，我们就可以得到下列的异步处理流程：</p>
+<blockquote>
+<p>执行函数执行 –&gt;等待回调函数传回数据 –&gt; 操作获取的数据</p>
+</blockquote>
+<p>这样，我们就可以将异步代码变得同步化。就像这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let v = fs.readFile(&apos;./a.js&apos;); // 异步操作读取文件</span><br><span class="line">console.log(v); // 操作数据</span><br><span class="line"></span><br><span class="line">readFileThunk(callback); // 在另一个地方执行回调，得到数据并传回数据</span><br></pre></td></tr></table></figure>
+
+<p>那么，怎么传回数据呢？在前文提到过，我们可以在迭代器中的next()方法中传入参数，来使得该参数成为Generator函数中上一条yield语句的返回值</p>
+<h4 id="以fs-readFile-为例"><a href="#以fs-readFile-为例" class="headerlink" title="以fs.readFile()为例"></a>以fs.readFile()为例</h4><p>假如我们要读取a文件和b文件，那么结合Generator和Thunk函数，我们可以这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Thunk函数转化器</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">thunkify</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">            fn.call(<span class="keyword">this</span>,...args,callback);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> readFile = thunkify(fs.readFile);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">read</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 执行函数以及操作数据</span></span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">yield</span> readFile(<span class="string">'./a.js'</span>,<span class="string">'utf-8'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">    value = <span class="keyword">yield</span> readFile(<span class="string">'./b.js'</span>,<span class="string">'utf-8'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params">generator</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> iterator = generator();</span><br><span class="line">    <span class="keyword">let</span> file = iterator.next();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 回调函数执行，以及将获取的数据回传</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">step</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!file.done) &#123;</span><br><span class="line">            file.value(<span class="function">(<span class="params">err,data</span>)=&gt;</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(err) <span class="keyword">return</span> err;</span><br><span class="line">                file = iterator.next(data);</span><br><span class="line">                step();</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    step();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">run(read);</span><br></pre></td></tr></table></figure>
+
+<h2 id="async函数"><a href="#async函数" class="headerlink" title="async函数"></a>async函数</h2><p>async的引入可以说是异步操作的终极解决方案。</p>
+<p>那么,async函数是什么呢？</p>
+<blockquote>
+<p>async function 用来定义一个返回 AsyncFunction 对象的异步函数。异步函数是指通过事件循环异步执行的函数，它会通过一个隐式的 Promise 返回其结果。如果你在代码中使用了异步函数，就会发现它的语法和结构会更像是标准的同步函数。</p>
+</blockquote>
+<p>事实上,async函数其实就是Generator函数的语法糖。使用async来表示这是一个异步函数，函数内部使用await来表示一个异步操作</p>
+<p>例如，读取两个文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readFile</span>(<span class="params">fileName,encode</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        fs.readFile(fileName,encode,(err,data)=&gt;&#123;</span><br><span class="line">            <span class="keyword">if</span>(err) &#123;</span><br><span class="line">                reject(err);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> resolve(data);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">read</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">await</span> readFile(<span class="string">'./a.js'</span>,<span class="string">'utf-8'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">    value = <span class="keyword">await</span> readFile(<span class="string">'./b.js'</span>,<span class="string">'utf-8'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">read();</span><br></pre></td></tr></table></figure>
+
+<p>但是，相比于Generator函数，async函数主要有以下的改进</p>
+<ol>
+<li><p>内置执行器</p>
+<p> 在前文提到过，Generator函数会返回一个迭代器。但若想要迭代器自动执行，我们就需要设置一个执行器函数来帮助操作。但是，async函数只需要直接调用就可以自动执行</p>
+</li>
+<li><p>更好的语义化</p>
+<p> async和await，比起星号和yield，语义更清楚了。async表示函数里有异步操作，await表示紧跟在后面的表达式需要等待结果。</p>
+</li>
+<li><p>更广的实用性</p>
+<p> co模块约定，yield命令后面只能是 Thunk 函数或 Promise 对象，而async函数的await命令后面，可以是 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时会自动转成立即 resolved 的 Promise 对象）。</p>
+</li>
+<li><p>返回值是Promise</p>
+<p> async函数的返回值是 Promise 对象，这比 Generator 函数的返回值是 Iterator 对象方便多了。你可以用then方法指定下一步的操作。</p>
+</li>
+</ol>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>因为async是用来定义一个异步函数的。因此，函数的所有写法都可以在前面加上async定义</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数声明</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数表达式</span></span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 作为对象的方法</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="keyword">async</span> test() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  作为类的方法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">T</span></span>&#123;</span><br><span class="line">    <span class="keyword">async</span> test() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 箭头函数</span></span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">async</span> ()=&gt;&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="async函数的返回值"><a href="#async函数的返回值" class="headerlink" title="async函数的返回值"></a>async函数的返回值</h3><p>async会返回一个Promise对象，其会运行执行(resolve)异步函数的返回结果，或者运行拒绝(reject)——如果异步函数抛出异常的话。</p>
+<p>async函数内部的返回值会成为返回的promise对象的回调函数的参数</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test().then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v); <span class="comment">// 1</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>当然，如果async函数内部抛出了错误，就会导致返回的Promsie对象变为reject状态。并且出错的原因会作为promise对象的拒绝处理程序的参数</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'err'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test().then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err); <span class="comment">// Error: 'err'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="async函数对于多个异步操作的简化"><a href="#async函数对于多个异步操作的简化" class="headerlink" title="async函数对于多个异步操作的简化"></a>async函数对于多个异步操作的简化</h3><p>async/await的目的是简化使用多个 promise 时的同步行为，并对一组 Promises执行某些操作。</p>
+<p>async函数返回的Promise对象必须要等到内部所有的await命令后面的Promise全部执行完，才会将自身的状态从pending（运行态）转化为resolved（fulfilled已完成）或rejected（已拒绝）</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> v1 = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(v1); <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">let</span> v2 = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(v2); <span class="comment">// 2</span></span><br><span class="line">    <span class="keyword">return</span> v1+v2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test().then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v); <span class="comment">// 3</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是，如果await命令后面的Promise对象如果变为reject状态，那么整个async函数就会中断运行，并且，async函数返回的promise就会变为拒绝态，并且出错的原因会作为promise对象的拒绝处理程序的参数</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> v1 = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(v1); <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">let</span> v2 = <span class="keyword">await</span> <span class="built_in">Promise</span>.reject(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// async在这里停止运行</span></span><br><span class="line">    <span class="built_in">console</span>.log(v2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test().then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err); <span class="comment">// 2</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p>我们在前面提到过，只要await命令后的一个promise是rejected态的，那么整个async函数就会停止运行。那么，为了防止某个promise错误影响后面的promise执行，我们需要有错误处理机制。</p>
+<p>我们可以使用try…catch…来处理</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> v1 = <span class="keyword">await</span> <span class="built_in">Promise</span>.reject(<span class="string">'err'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(e)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(e); <span class="comment">// 'err'</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> v2 = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(v2); <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">return</span> v2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test().then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v); <span class="comment">// 1</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果有多个await命令，我们可以统一放在try…catch结构里</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> v1 = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(v1); <span class="comment">// 1</span></span><br><span class="line">        <span class="keyword">let</span> v2 = <span class="keyword">await</span> <span class="built_in">Promise</span>.reject(<span class="string">'err'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 抛出错误，try后续部分不再执行</span></span><br><span class="line">        <span class="built_in">console</span>.log(v2);</span><br><span class="line">        <span class="keyword">let</span> v3 = <span class="built_in">Promise</span>.resolve(<span class="number">3</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">3</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">        <span class="comment">// 捕获错误</span></span><br><span class="line">        <span class="built_in">console</span>.log(e); <span class="comment">// 'err'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
+
+<h3 id="继发与并发"><a href="#继发与并发" class="headerlink" title="继发与并发"></a>继发与并发</h3><p>继发是执行完一个异步操作之后才会去执行下一个异步操作</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">await</span> <span class="built_in">Promise</span>.reject(<span class="string">'err'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
+
+<p>如果，函数内部的异步操作没有继发关系。也就是每个异步操作是相互独立的，那么让所有的异步操作同时触发会节省程序的执行时间</p>
+<p>我们可以通过Promsie.all()来实现</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> [v1,v2] = <span class="keyword">await</span> <span class="built_in">Promise</span>.all([<span class="built_in">Promise</span>.resolve(<span class="number">1</span>),<span class="built_in">Promise</span>.resolve(<span class="number">2</span>)]);</span><br><span class="line">    <span class="keyword">return</span> [v1,v2];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test().then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v); <span class="comment">// [1,2]</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>是的，我们很容易可以想到。如果并发的多个异步操作中有些抛出错误了怎么办？</p>
+<p>我们可以使用try…catch来处理。因此，在使用async函数时请尽量要确保有错误处理机制。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> [v1,v2] = <span class="keyword">await</span> <span class="built_in">Promise</span>.all([<span class="built_in">Promise</span>.resolve(<span class="number">1</span>),<span class="built_in">Promise</span>.reject(<span class="number">2</span>)]);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 停止运行</span></span><br><span class="line">        <span class="keyword">return</span> [v1,v2];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'err'</span>,e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="async函数可以保留运行堆栈"><a href="#async函数可以保留运行堆栈" class="headerlink" title="async函数可以保留运行堆栈"></a>async函数可以保留运行堆栈</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a() &#123;</span><br><span class="line">    b().then(<span class="function"><span class="params">()</span>=&gt;</span>c())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，函数a内部运行了一个异步任务b()。当b运行的时候，函数a()不会中断，而是会继续执行，也就是说，当异步操作b()结束后，可能a()早已经结束了。那么，b()所在的上下文环境就会消失</p>
+<p>但是，对于async异步函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">await</span> b();</span><br><span class="line">    c();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>b()异步操作在运行的时候,a函数是暂停运行的。因此，对于b()函数，其上下文环境都仍旧保存着。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/事件机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2673,262 +2966,6 @@ super.functionOnParent([arguments]);
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/22/Vue父子组件传值详解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/22/Vue父子组件传值详解/" itemprop="url">Vue父子组件传值详解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-22T14:24:07+08:00">
-                2019-09-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  9
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h2><h3 id="Prop"><a href="#Prop" class="headerlink" title="Prop"></a>Prop</h3><p>Prop 是你可以在组件上注册的一些自定义特性。当一个值传递给一个 prop 特性的时候，它就变成了那个组件实例的一个属性。</p>
-<p>因此，在子组件的方法代码中，我们可以使用this.xxx来访问到它</p>
-<p>利用Prop单向数据流来使得父组件向子组件传值的基本格式如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件 App.vue</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;helloWorld :msg=<span class="string">"msg"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">helloWorld</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> helloWorld <span class="keyword">from</span> <span class="string">'@/components/HelloWorld.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="number">321</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    helloWorld</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件 HelloWorld.vue</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"hello"</span>&gt;</span><br><span class="line">    &#123;&#123;msg&#125;&#125;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props:[<span class="string">'msg'</span>]</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>在上述父组件传值的时候是通过v-bind动态赋值的，但是我们也可以传递静态prop</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;hello-world msg=<span class="string">"qwer"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">hello-world</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>注意的是，除了传入静态字符串之外，在传入静态的数值型，布尔型，对象型数据时我们依旧要使用v-bind来进行数据传输，否则就有可能造成数据传输失败</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:msg=<span class="string">'11111'</span> <span class="comment">//number</span></span><br><span class="line">:msg=<span class="string">'true'</span> <span class="comment">//bootlean</span></span><br><span class="line">:msg=<span class="string">'()=&gt;&#123;console.log(1)&#125; //function </span></span><br><span class="line"><span class="string">:msg='</span>&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;<span class="string">' //object</span></span><br></pre></td></tr></table></figure>
-
-<p>因此，我们大可以使用v-bind动态传入，因为使用v-bind我们可以将字符串内的内容视为一个表达式进行计算</p>
-<h3 id="单向数据流"><a href="#单向数据流" class="headerlink" title="单向数据流"></a>单向数据流</h3><p>所有的 prop 都使得其父子 prop 之间形成了一个单向下行绑定：父级 prop 的更新会向下流动到子组件中，但是反过来则不行。这样会防止从子组件意外改变父级组件的状态，从而导致你的应用的数据流向难以理解。</p>
-<p>因此，只要父组件的数据发生了更新，子组件也会获得相应的更新。无论，发生更新的原因是异步操作还是事件操作</p>
-<h3 id="vm-watch"><a href="#vm-watch" class="headerlink" title="vm.$watch"></a>vm.$watch</h3><p>当然，我们可以使用watch方法来监听父组件数据的改变</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在父组件进行异步操作，一开始初值为undefined，经过2000毫秒后变为12345</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;helloWorld :msg=<span class="string">"msg"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">helloWorld</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> helloWorld <span class="keyword">from</span> <span class="string">'@/components/HelloWorld.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="literal">undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    helloWorld</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.msg=<span class="number">12345</span>;</span><br><span class="line">    &#125;,<span class="number">2000</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在子组件中利用watch方法来进行监听父组件的prop值的变化</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"hello"</span>&gt;</span><br><span class="line">    &#123;&#123;msg&#125;&#125;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props:[<span class="string">'msg'</span>],</span><br><span class="line">  watch: &#123;</span><br><span class="line">    msg(val,oldVal)&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(val,oldVal); <span class="comment">// 12345,undefined </span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="拦截数据，过滤处理"><a href="#拦截数据，过滤处理" class="headerlink" title="拦截数据，过滤处理"></a>拦截数据，过滤处理</h2><p>有时候，我们相对从父组件传过来的数据进行一些额外操作之后再进行渲染，此时我们可以利用计算属性来实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  anotherMsg() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.msg+<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="子组件向父组件传值"><a href="#子组件向父组件传值" class="headerlink" title="子组件向父组件传值"></a>子组件向父组件传值</h2><h3 id="vm-on与vm-emit"><a href="#vm-on与vm-emit" class="headerlink" title="vm.$on与vm.$emit"></a>vm.$on与vm.$emit</h3><p>vm.$on要与vm.$emit搭配来进行使用</p>
-<p>vue的api文档是这么描述这两个api的</p>
-<h4 id="vm-on-event-callback"><a href="#vm-on-event-callback" class="headerlink" title="vm.$on( event, callback )"></a>vm.$on( event, callback )</h4><p>参数：</p>
-<ol>
-<li>{string | Array<string>} event (数组只在 2.2.0+ 中支持)</string></li>
-<li>{Function} callback<br>用法：</li>
-</ol>
-<p>监听当前实例上的自定义事件。事件可以由vm.$emit触发。回调函数会接收所有传入事件触发函数的额外参数。</p>
-<p>示例：</p>
-<pre><code>vm.$on(&apos;test&apos;, function (msg) {
-console.log(msg)
-})
-vm.$emit(&apos;test&apos;, &apos;hi&apos;)
-// =&gt; &quot;hi&quot;</code></pre><h4 id="vm-emit-eventName-…args"><a href="#vm-emit-eventName-…args" class="headerlink" title="vm.$emit( eventName, […args] )"></a>vm.$emit( eventName, […args] )</h4><p>参数：</p>
-<p>{string} eventName<br>[…args]</p>
-<p>触发当前实例上的事件。附加参数都会传给监听器回调。</p>
-<p>因此，我们可以在同一个实例上注册on监听事件函数以及emit响应事件函数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  created() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.msg);</span><br><span class="line">    <span class="keyword">this</span>.$on(<span class="string">'test'</span>,(v)=&gt;&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(v);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    change() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'emit'</span>);</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'test'</span>,<span class="number">123456789</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>我们在created生命周期时注册了一个监听test事件的on函数，在事件change()发生时，我们让test事件通过emit方法也进行发生。从而，监听函数会监听到该事件的发生并进行相应的输出</p>
-<p>但是，虽然事件监听与响应都可以完成，但是这两个方法必须在同一个实例上才可以进行使用。因此，如果要进行子组件将值传递给父组件，我们可以使用v-on与vm.$emit进行搭配使用</p>
-<h3 id="v-on与vm-emit"><a href="#v-on与vm-emit" class="headerlink" title="v-on与vm.$emit"></a>v-on与vm.$emit</h3><p>因为父组件可以在使用子组件的引入模板直接用 v-on 来监听子组件触发的事件。因此，我们可以使用v-on和vm.$emit来使得子组件向父组件传值</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">  <span class="comment">// 在子组件的引入模板中使用v-on来进行监听子组件中的test事件</span></span><br><span class="line">  <span class="comment">// 注意，@后必须是在子组件中要监听的事件名，而双引号中是父组件对于监听到事件发生后做出的处理函数。对于该例中，也就是test是要监听的事件名，getSonValue是父组件的处理函数</span></span><br><span class="line">    &lt;helloWorld :msg=<span class="string">"msg"</span> @test=<span class="string">'getSonValue'</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">helloWorld</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> helloWorld <span class="keyword">from</span> <span class="string">'@/components/HelloWorld.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getSonValue(v) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'v'</span>,v);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  change() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'emit'</span>);</span><br><span class="line">    <span class="comment">// 发布事件test，并传入参数123456789</span></span><br><span class="line">    <span class="keyword">this</span>.$emit(<span class="string">'test'</span>,<span class="number">123456789</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="同级组件通信"><a href="#同级组件通信" class="headerlink" title="同级组件通信"></a>同级组件通信</h2><p>同级组件通信，也就是意味着某个父组件下有两个不同的子组件，这两个组件之间可以通信</p>
-<h3 id="父组件作为中转站"><a href="#父组件作为中转站" class="headerlink" title="父组件作为中转站"></a>父组件作为中转站</h3><p>一种可行的办法，就是父组件接收其中一个组件传递的值并将该值传递给另外一个子组件</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;component1 @msg=<span class="string">"getMsg"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">component1</span>&gt;</span></span></span><br><span class="line">    &lt;component2 :msg=<span class="string">"msg"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">component2</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> component1 <span class="keyword">from</span> <span class="string">'@/components/Component1'</span></span><br><span class="line"><span class="keyword">import</span> component2 <span class="keyword">from</span> <span class="string">'@/components/Component2'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    component1,</span><br><span class="line">    component2</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getMsg(v) &#123;</span><br><span class="line">      <span class="keyword">this</span>.msg=v;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="literal">undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件1</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div id=<span class="string">"component1"</span>&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            子组件<span class="number">1</span>的值为：&#123;&#123;msg&#125;&#125;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button @click="sendMsg"&gt;click&lt;/</span>button&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            msg: <span class="number">123</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        sendMsg() &#123;</span><br><span class="line">            <span class="keyword">this</span>.$emit(<span class="string">'msg'</span>,<span class="keyword">this</span>.msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div id=<span class="string">"component2"</span>&gt;</span><br><span class="line">        子组件<span class="number">2</span>的值为：&#123;&#123;msg&#125;&#125;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    props: [<span class="string">'msg'</span>]</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>当子组件1点击按钮后，子组件2就可以获得组件1传过来的msg值</p>
-<h3 id="额外实例作为中央事件总线"><a href="#额外实例作为中央事件总线" class="headerlink" title="额外实例作为中央事件总线"></a>额外实例作为中央事件总线</h3><p>因为ES6的模块机制有一个特性</p>
-<blockquote>
-<p>当模块内部发生变化的时候，引入模块的部分同样会发生变化</p>
-</blockquote>
-<p>因此，我们可以创建一个额外的实例,并且在两个子组件中分别绑定vm.$emit方法进行事件发放和vm.$on方法进行事件监听</p>
-<ol>
-<li><p>创建额外实例</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// eventBus.js</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vue();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在子组件1中引入该实例，并为其绑定分发事件vm.$emit方法</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div id=<span class="string">"component1"</span>&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            子组件<span class="number">1</span>的值为：&#123;&#123;msg&#125;&#125;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button @click="sendMsg"&gt;click&lt;/</span>button&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> eventBus <span class="keyword">from</span> <span class="string">'@/components/eventBus.js'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            msg: <span class="number">123</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        sendMsg() &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(eventBus);</span><br><span class="line">            eventBus.$emit(<span class="string">'msg'</span>,<span class="keyword">this</span>.msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在子组件2中引入额外实例并为其绑定监听事件vm.$on方法</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div id=<span class="string">"component2"</span>&gt;</span><br><span class="line">        子组件<span class="number">2</span>的值为：&#123;&#123;msg&#125;&#125;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> eventBus <span class="keyword">from</span> <span class="string">'@/components/eventBus.js'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    created() &#123;</span><br><span class="line">        eventBus.$on(<span class="string">'msg'</span>,(v)=&gt;&#123;</span><br><span class="line">            <span class="keyword">this</span>.msg=v;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            msg: <span class="literal">undefined</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>经过上述三步后，子组件2在created生命周期时就已经在额外实例上创建了事件监听方法。因此，当子组件1点击按钮之后就会向额外实例分发了一个事件msg;那么，额外实例就会监听到该事件的发生并作出处理函数，这样也就完成了两个同级组件之间的传值</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2981,7 +3018,7 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">138</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3062,7 +3099,7 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">150.7k</span>
+    <span title="Site words total count">152.7k</span>
   
 </div>
 
@@ -3092,7 +3129,7 @@ vm.$emit(&apos;test&apos;, &apos;hi&apos;)
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共150.7k字</span>
+  <span class="post-count">博客全站共152.7k字</span>
 </div>
         
 
