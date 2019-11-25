@@ -307,6 +307,209 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/webpack打包学习之路/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/23/webpack打包学习之路/" itemprop="url">webpack打包学习（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-23T21:44:00+08:00">
+                2019-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/webpack/" itemprop="url" rel="index">
+                    <span itemprop="name">webpack</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  528
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="项目的基本搭建"><a href="#项目的基本搭建" class="headerlink" title="项目的基本搭建"></a>项目的基本搭建</h2><ol>
+<li>新建一个项目并npm init为npm项目</li>
+<li>安装webpck的相关模块，如下<ol>
+<li>webpack </li>
+<li>webpack-cli(webpack的命令行工具)</li>
+<li>style-loader(通过向 DOM 中注入 &lt;style&gt; 标签实现css效果)</li>
+<li>css-loader(解析引入的css文件)</li>
+<li>file-loader(处理文件包括图片文件和字体文件)</li>
+<li>webpack-dev-server(提供一个简单的web服务器)</li>
+</ol>
+</li>
+<li>新建源代码文件夹src目录</li>
+<li>新建输出文件夹dist目录，并将index.html放入改文件夹中</li>
+<li>新建webpack.config.js配置文件</li>
+</ol>
+<h2 id="在src文件夹中"><a href="#在src文件夹中" class="headerlink" title="在src文件夹中"></a>在src文件夹中</h2><p>引入css文件方式如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'./main.css'</span></span><br></pre></td></tr></table></figure>
+
+<p>模块css-loader会处理引入的css代码，而style-loader则负责将该css代码注入到Dom中</p>
+<p>引入图片和字体文件方式如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> img <span class="keyword">from</span> <span class="string">'./image.png'</span></span><br></pre></td></tr></table></figure>
+
+<p>模块file-loader会处理这些图片和字体文件并进行打包</p>
+<h2 id="编写webpack-config-js"><a href="#编写webpack-config-js" class="headerlink" title="编写webpack.config.js"></a>编写webpack.config.js</h2><p>webpack的打包都会按照这个文件的配置进行相应的打包</p>
+<p>以上基本的打包实现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Node.js的原生模块，用于将相对路径转化为绝对路径</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 利用Common.js模块的导出语法，导出基本的配置</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">// 打包的入口</span></span><br><span class="line">    entry: &#123;</span><br><span class="line">        main: <span class="string">'./src/main.js'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 打包的出口</span></span><br><span class="line">    output: &#123;</span><br><span class="line">        filename: <span class="string">'bundle.js'</span>, <span class="comment">// 打包的出口文件名</span></span><br><span class="line">        path: path.resolve(__dirname,<span class="string">'dist'</span>)<span class="comment">// __dirname是指当前的根目录，然后利用resolve函数就可以将__dirname于dist目录进行拼接然后转化为绝对路径，作为bundle.js文件的生成目录</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 用来追踪错误和警告</span></span><br><span class="line">    devtool: <span class="string">"inline-source-map"</span>,</span><br><span class="line">    <span class="comment">// 服务器配置</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">        <span class="comment">// 告诉服务器，将 dist 目录下的文件，作为可访问文件。</span></span><br><span class="line">        contentBase: <span class="string">'./dist'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;\</span><br><span class="line">    <span class="comment">// 创建模块时，匹配请求的规则数组。这些规则能够修改模块的创建方式。这些规则能够对模块(module)应用 loader，或者修改解析器(parser)。</span></span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 正则表达式匹配rule条件</span></span><br><span class="line">                test: <span class="regexp">/.css$/</span>,</span><br><span class="line">                <span class="comment">//在规则条件匹配时使用的loader</span></span><br><span class="line">                use: [<span class="string">"style-loader"</span>,<span class="string">"css-loader"</span>]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/.(jpg|png|jpeg|gif)$/</span>,</span><br><span class="line">                use: [<span class="string">"file-loader"</span>]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/22/Vue父子组件传值详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2219,165 +2422,6 @@ sumRange(0, 5) -&gt; -3</code></pre><p>说明:</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/11/mpvue踩坑记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/11/mpvue踩坑记/" itemprop="url">mpvue踩坑记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-11T16:15:57+08:00">
-                2019-09-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  65
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="页面跳转"><a href="#页面跳转" class="headerlink" title="页面跳转"></a>页面跳转</h2><ol>
-<li>微信官方接口</li>
-<li>mpvue接口</li>
-</ol>
-<h2 id="组件传值"><a href="#组件传值" class="headerlink" title="组件传值"></a>组件传值</h2><p>当将其他子组件引入到某个父组件中的时候，那么就需要组件之间进行传值，否则父组件无法获得子组件定义的值</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2430,7 +2474,7 @@ sumRange(0, 5) -&gt; -3</code></pre><p>说明:</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">138</span>
+                  <span class="site-state-item-count">139</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2511,7 +2555,7 @@ sumRange(0, 5) -&gt; -3</code></pre><p>说明:</p>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">152.7k</span>
+    <span title="Site words total count">153.3k</span>
   
 </div>
 
@@ -2541,7 +2585,7 @@ sumRange(0, 5) -&gt; -3</code></pre><p>说明:</p>
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共152.7k字</span>
+  <span class="post-count">博客全站共153.3k字</span>
 </div>
         
 

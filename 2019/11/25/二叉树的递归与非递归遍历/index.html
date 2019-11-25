@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="数组,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -88,18 +88,17 @@
 
 
 
-<meta name="description" content="转置矩阵题目描述给定一个矩阵 A， 返回 A 的转置矩阵。 矩阵的转置是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。 示例 1：  输入：[[1,2,3],[4,5,6],[7,8,9]]输出：[[1,4,7],[2,5,8],[3,6,9]]  示例 2：  输入：[[1,2,3],[4,5,6]]输出：[[1,4],[2,5],[3,6]]  提示：  1&amp;lt;= A.length &amp;">
-<meta name="keywords" content="数组">
+<meta name="description" content="二叉树的遍历首先，我们做好树建立的准备工作 12345678910111213141516171819202122232425262728293031interface Node&amp;lt;T&amp;gt; &amp;#123;    val: T;    left: Node&amp;lt;T&amp;gt;;    right: Node&amp;lt;T&amp;gt;;&amp;#125;class TreeNode&amp;lt;T&amp;gt; imple">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-867 转置矩阵">
-<meta property="og:url" content="http://yoursite.com/2019/08/13/leetcode-867/index.html">
+<meta property="og:title" content="二叉树的递归与非递归遍历">
+<meta property="og:url" content="http://yoursite.com/2019/11/25/二叉树的递归与非递归遍历/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="转置矩阵题目描述给定一个矩阵 A， 返回 A 的转置矩阵。 矩阵的转置是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。 示例 1：  输入：[[1,2,3],[4,5,6],[7,8,9]]输出：[[1,4,7],[2,5,8],[3,6,9]]  示例 2：  输入：[[1,2,3],[4,5,6]]输出：[[1,4],[2,5],[3,6]]  提示：  1&amp;lt;= A.length &amp;">
+<meta property="og:description" content="二叉树的遍历首先，我们做好树建立的准备工作 12345678910111213141516171819202122232425262728293031interface Node&amp;lt;T&amp;gt; &amp;#123;    val: T;    left: Node&amp;lt;T&amp;gt;;    right: Node&amp;lt;T&amp;gt;;&amp;#125;class TreeNode&amp;lt;T&amp;gt; imple">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-13T06:02:20.873Z">
+<meta property="og:updated_time" content="2019-11-25T13:05:03.464Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-867 转置矩阵">
-<meta name="twitter:description" content="转置矩阵题目描述给定一个矩阵 A， 返回 A 的转置矩阵。 矩阵的转置是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。 示例 1：  输入：[[1,2,3],[4,5,6],[7,8,9]]输出：[[1,4,7],[2,5,8],[3,6,9]]  示例 2：  输入：[[1,2,3],[4,5,6]]输出：[[1,4],[2,5],[3,6]]  提示：  1&amp;lt;= A.length &amp;">
+<meta name="twitter:title" content="二叉树的递归与非递归遍历">
+<meta name="twitter:description" content="二叉树的遍历首先，我们做好树建立的准备工作 12345678910111213141516171819202122232425262728293031interface Node&amp;lt;T&amp;gt; &amp;#123;    val: T;    left: Node&amp;lt;T&amp;gt;;    right: Node&amp;lt;T&amp;gt;;&amp;#125;class TreeNode&amp;lt;T&amp;gt; imple">
 
 
 
@@ -129,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/13/leetcode-867/">
+  <link rel="canonical" href="http://yoursite.com/2019/11/25/二叉树的递归与非递归遍历/">
 
 
 
 
 
-  <title>leetcode-867 转置矩阵 | Hexo</title>
+  <title>二叉树的递归与非递归遍历 | Hexo</title>
   
 
 
@@ -308,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/leetcode-867/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/25/二叉树的递归与非递归遍历/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -325,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode-867 转置矩阵</h1>
+          <h1 class="post-title" itemprop="name headline">二叉树的递归与非递归遍历</h1>
         
 
         <div class="post-meta">
@@ -337,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-13T13:58:25+08:00">
-                2019-08-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-25T19:13:54+08:00">
+                2019-11-25
               </time>
             
 
@@ -360,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode题解与算法</span>
+                  <a href="/categories/算法笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">算法笔记</span>
                   </a>
                 </span>
 
@@ -391,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  281
+                  580
                 </span>
               
 
@@ -407,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
@@ -428,28 +427,24 @@
       
 
       
-        <h1 id="转置矩阵"><a href="#转置矩阵" class="headerlink" title="转置矩阵"></a>转置矩阵</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个矩阵 A， 返回 A 的转置矩阵。</p>
-<p>矩阵的转置是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
-<p>示例 1：</p>
-<blockquote>
-<p>输入：[[1,2,3],[4,5,6],[7,8,9]]<br>输出：[[1,4,7],[2,5,8],[3,6,9]]</p>
-</blockquote>
-<p>示例 2：</p>
-<blockquote>
-<p>输入：[[1,2,3],[4,5,6]]<br>输出：[[1,4],[2,5],[3,6]]</p>
-</blockquote>
-<p>提示：</p>
-<ol>
-<li>1&lt;= A.length &lt;= 1000</li>
-<li>1&lt;= A[0].length &lt;= 1000<a id="more"></a>
-来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/transpose-matrix" target="_blank" rel="noopener">https://leetcode-cn.com/problems/transpose-matrix</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</li>
-</ol>
-<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>对于转置矩阵的特点，我们很容易得到，对于原数组A，ans[k][i]=A[i][k]</p>
-<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
-<li>根据矩阵列数来创建ans二维数组的行数</li>
-<li>由ans[k][i]=A[i][k]循环得到ans数组并返回</li>
-</ol>
-<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[][]&#125; A</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> transpose = <span class="function"><span class="keyword">function</span>(<span class="params">A</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ans=[];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;A[<span class="number">0</span>].length;i++)&#123;</span><br><span class="line">        ans[i]=[];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;A.length;k++)&#123;</span><br><span class="line">            ans[i][k]=A[k][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        <h2 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h2><p>首先，我们做好树建立的准备工作</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Node&lt;T&gt; &#123;</span><br><span class="line">    val: T;</span><br><span class="line">    left: Node&lt;T&gt;;</span><br><span class="line">    right: Node&lt;T&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> TreeNode&lt;T&gt; <span class="keyword">implements</span> Node&lt;T&gt; &#123;</span><br><span class="line">    val: T;</span><br><span class="line">    left = <span class="literal">null</span>;</span><br><span class="line">    right = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">val: T</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.val = val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> TreeNode(<span class="string">'a'</span>);</span><br><span class="line"><span class="keyword">let</span> b = <span class="keyword">new</span> TreeNode(<span class="string">'b'</span>);</span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> TreeNode(<span class="string">'c'</span>);</span><br><span class="line"><span class="keyword">let</span> d = <span class="keyword">new</span> TreeNode(<span class="string">'d'</span>);</span><br><span class="line"><span class="keyword">let</span> e = <span class="keyword">new</span> TreeNode(<span class="string">'e'</span>);</span><br><span class="line"><span class="keyword">let</span> f = <span class="keyword">new</span> TreeNode(<span class="string">'f'</span>);</span><br><span class="line"><span class="keyword">let</span> g = <span class="keyword">new</span> TreeNode(<span class="string">'g'</span>);</span><br><span class="line"><span class="keyword">let</span> h = <span class="keyword">new</span> TreeNode(<span class="string">'h'</span>);</span><br><span class="line"></span><br><span class="line">a.left = b;</span><br><span class="line">a.right = c;</span><br><span class="line">b.left = d;</span><br><span class="line">b.right = e;</span><br><span class="line">d.right = f;</span><br><span class="line">e.left = g;</span><br><span class="line">f.right = h;</span><br></pre></td></tr></table></figure>
+
+<h3 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h3><h4 id="递归实现"><a href="#递归实现" class="headerlink" title="递归实现"></a>递归实现</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">preOrder</span>&lt;<span class="title">T</span>&gt;(<span class="params">root: TreeNode&lt;T&gt;</span>): <span class="title">Array</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root === <span class="literal">null</span>) <span class="keyword">return</span> [];</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Array</span>.of(root.val).concat(preOrder&lt;T&gt;(root.left)).concat(preOrder&lt;T&gt;(root.right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="非递归实现"><a href="#非递归实现" class="headerlink" title="非递归实现"></a>非递归实现</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">preOrder</span>&lt;<span class="title">T</span>&gt;(<span class="params">root: TreeNode&lt;T&gt;</span>): <span class="title">Array</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result: <span class="built_in">Array</span>&lt;T&gt; = [];</span><br><span class="line">    <span class="keyword">let</span> stack: <span class="built_in">Array</span>&lt;TreeNode&lt;T&gt;&gt; = [];</span><br><span class="line">    <span class="keyword">while</span>(root||stack.length&gt;<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(root) &#123;</span><br><span class="line">            stack.push(root);</span><br><span class="line">            result.push(root.val);</span><br><span class="line">            root = root.left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> node = stack.pop();</span><br><span class="line">            root = node.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h3><h4 id="递归实现-1"><a href="#递归实现-1" class="headerlink" title="递归实现"></a>递归实现</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inOrder</span>&lt;<span class="title">T</span>&gt;(<span class="params">root: TreeNode&lt;T&gt;</span>): <span class="title">Array</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root === <span class="literal">null</span>) <span class="keyword">return</span> [];</span><br><span class="line">    <span class="keyword">return</span> inOrder&lt;T&gt;(root.left).concat(<span class="built_in">Array</span>.of(root.val)).concat(inOrder&lt;T&gt;(root.right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="非递归实现-1"><a href="#非递归实现-1" class="headerlink" title="非递归实现"></a>非递归实现</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inOrder</span>&lt;<span class="title">T</span>&gt;(<span class="params">root: TreeNode&lt;T&gt;</span>): <span class="title">Array</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result: <span class="built_in">Array</span>&lt;T&gt; = [];</span><br><span class="line">    <span class="keyword">let</span> stack: <span class="built_in">Array</span>&lt;TreeNode&lt;T&gt;&gt; = [];</span><br><span class="line">    <span class="keyword">while</span>(root||stack.length&gt;<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(root) &#123;</span><br><span class="line">            stack.push(root);</span><br><span class="line">            root = root.left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> node = stack.pop();</span><br><span class="line">            result.push(node.val);</span><br><span class="line">            root = node.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h3><h4 id="递归实现-2"><a href="#递归实现-2" class="headerlink" title="递归实现"></a>递归实现</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">postOrder</span>&lt;<span class="title">T</span>&gt;(<span class="params">root: TreeNode&lt;T&gt;</span>): <span class="title">Array</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root === <span class="literal">null</span>) <span class="keyword">return</span> [];</span><br><span class="line">    <span class="keyword">return</span> postOrder&lt;T&gt;(root.left).concat(postOrder&lt;T&gt;(root.right)).concat(<span class="built_in">Array</span>.of(root.val));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="非递归遍历"><a href="#非递归遍历" class="headerlink" title="非递归遍历"></a>非递归遍历</h4><p>使用两个栈的方式来进行后序遍历。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">postOrder</span>&lt;<span class="title">T</span>&gt;(<span class="params">root: TreeNode&lt;T&gt;</span>): <span class="title">Array</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root === <span class="literal">null</span>) <span class="keyword">return</span> [];</span><br><span class="line">    <span class="keyword">let</span> stack1: <span class="built_in">Array</span>&lt;TreeNode&lt;T&gt;&gt; = [root];</span><br><span class="line">    <span class="keyword">let</span> stack2: <span class="built_in">Array</span>&lt;T&gt; = [];</span><br><span class="line">    <span class="keyword">while</span>(stack1.length&gt;<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> node = stack1.pop();</span><br><span class="line">        stack2.push(node.val);</span><br><span class="line">        <span class="keyword">if</span>(node.left) &#123;</span><br><span class="line">            stack1.push(node.left);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(node.right) &#123;</span><br><span class="line">            stack1.push(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> stack2.reverse();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="层次遍历"><a href="#层次遍历" class="headerlink" title="层次遍历"></a>层次遍历</h3><h4 id="非递归实现-2"><a href="#非递归实现-2" class="headerlink" title="非递归实现"></a>非递归实现</h4><p>使用队列</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">levelOrder</span>&lt;<span class="title">T</span>&gt;(<span class="params">root: TreeNode&lt;T&gt;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root === <span class="literal">null</span>) <span class="keyword">return</span> [];</span><br><span class="line">    <span class="keyword">let</span> queue: <span class="built_in">Array</span>&lt;TreeNode&lt;T&gt;&gt; = [root];</span><br><span class="line">    <span class="keyword">let</span> node: TreeNode&lt;T&gt;;</span><br><span class="line">    <span class="keyword">let</span> result: <span class="built_in">Array</span>&lt;T&gt; = [];</span><br><span class="line">    <span class="keyword">while</span>(node = queue.shift()) &#123;</span><br><span class="line">        result.push(node.val);</span><br><span class="line">        <span class="keyword">if</span>(node.left) &#123;</span><br><span class="line">            queue.push(node.left);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(node.right) &#123;</span><br><span class="line">            queue.push(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -466,12 +461,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/数组/" rel="tag"># 数组</a>
-          
-        </div>
-      
 
       <div>
       
@@ -487,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/12/对象的属性类型与特性/" rel="next" title="对象的属性类型与特性">
-                <i class="fa fa-chevron-left"></i> 对象的属性类型与特性
+              <a href="/2019/11/23/TypeScript装饰器理解/" rel="next" title="TypeScript装饰器理解">
+                <i class="fa fa-chevron-left"></i> TypeScript装饰器理解
               </a>
             
           </div>
@@ -496,10 +485,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/13/Js中的this到底指向哪/" rel="prev" title="Js中的this到底指向哪">
-                Js中的this到底指向哪 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -640,7 +625,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#转置矩阵"><span class="nav-number">1.</span> <span class="nav-text">转置矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树的遍历"><span class="nav-number">1.</span> <span class="nav-text">二叉树的遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先序遍历"><span class="nav-number">1.1.</span> <span class="nav-text">先序遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#递归实现"><span class="nav-number">1.1.1.</span> <span class="nav-text">递归实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非递归实现"><span class="nav-number">1.1.2.</span> <span class="nav-text">非递归实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中序遍历"><span class="nav-number">1.2.</span> <span class="nav-text">中序遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#递归实现-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">递归实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非递归实现-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">非递归实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后序遍历"><span class="nav-number">1.3.</span> <span class="nav-text">后序遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#递归实现-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">递归实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非递归遍历"><span class="nav-number">1.3.2.</span> <span class="nav-text">非递归遍历</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#层次遍历"><span class="nav-number">1.4.</span> <span class="nav-text">层次遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#非递归实现-2"><span class="nav-number">1.4.1.</span> <span class="nav-text">非递归实现</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
