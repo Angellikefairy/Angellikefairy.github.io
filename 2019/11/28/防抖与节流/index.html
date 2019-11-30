@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="阶乘后的零题目描述给定一个整数 n，返回 n! 结果尾数中零的数量。 示例 1:  输入: 3输出: 0解释: 3! = 6, 尾数中没有零。  示例 2:  输入: 5输出: 1解释: 5! = 120, 尾数中有 1 个零.  说明: 你算法的时间复杂度应为 O(log n) 。">
+<meta name="description" content="为什么需要防抖与节流试着去想象一个场景，当我们在输入框输入内容的时候。如果有一个函数是根据输入框当前输入的内容来进行接口调用。那么，当你在不断输入的时候这个函数就会一直被调用，那么就很容易加重浏览器的负担导致性能降低。 除此之外，包括当我们点击一个按钮时，如果我们没有立即得到反馈，我们可能就会一直去频繁点击它，导致时间绑定程序不断地被调用；另外，还有scroll事件,resize事件等等 因此，采">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-172 阶乘后的零">
-<meta property="og:url" content="http://yoursite.com/2019/07/14/leetcode-172/index.html">
+<meta property="og:title" content="防抖与节流">
+<meta property="og:url" content="http://yoursite.com/2019/11/28/防抖与节流/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="阶乘后的零题目描述给定一个整数 n，返回 n! 结果尾数中零的数量。 示例 1:  输入: 3输出: 0解释: 3! = 6, 尾数中没有零。  示例 2:  输入: 5输出: 1解释: 5! = 120, 尾数中有 1 个零.  说明: 你算法的时间复杂度应为 O(log n) 。">
+<meta property="og:description" content="为什么需要防抖与节流试着去想象一个场景，当我们在输入框输入内容的时候。如果有一个函数是根据输入框当前输入的内容来进行接口调用。那么，当你在不断输入的时候这个函数就会一直被调用，那么就很容易加重浏览器的负担导致性能降低。 除此之外，包括当我们点击一个按钮时，如果我们没有立即得到反馈，我们可能就会一直去频繁点击它，导致时间绑定程序不断地被调用；另外，还有scroll事件,resize事件等等 因此，采">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-14T07:05:37.511Z">
+<meta property="og:updated_time" content="2019-11-30T08:51:31.128Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-172 阶乘后的零">
-<meta name="twitter:description" content="阶乘后的零题目描述给定一个整数 n，返回 n! 结果尾数中零的数量。 示例 1:  输入: 3输出: 0解释: 3! = 6, 尾数中没有零。  示例 2:  输入: 5输出: 1解释: 5! = 120, 尾数中有 1 个零.  说明: 你算法的时间复杂度应为 O(log n) 。">
+<meta name="twitter:title" content="防抖与节流">
+<meta name="twitter:description" content="为什么需要防抖与节流试着去想象一个场景，当我们在输入框输入内容的时候。如果有一个函数是根据输入框当前输入的内容来进行接口调用。那么，当你在不断输入的时候这个函数就会一直被调用，那么就很容易加重浏览器的负担导致性能降低。 除此之外，包括当我们点击一个按钮时，如果我们没有立即得到反馈，我们可能就会一直去频繁点击它，导致时间绑定程序不断地被调用；另外，还有scroll事件,resize事件等等 因此，采">
 
 
 
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/14/leetcode-172/">
+  <link rel="canonical" href="http://yoursite.com/2019/11/28/防抖与节流/">
 
 
 
 
 
-  <title>leetcode-172 阶乘后的零 | Hexo</title>
+  <title>防抖与节流 | Hexo</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/leetcode-172/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/28/防抖与节流/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angel">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode-172 阶乘后的零</h1>
+          <h1 class="post-title" itemprop="name headline">防抖与节流</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-14T14:38:57+08:00">
-                2019-07-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-28T13:57:52+08:00">
+                2019-11-28
               </time>
             
 
@@ -359,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode题解与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode题解与算法</span>
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
                   </a>
                 </span>
 
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  446
+                  1.5k
                 </span>
               
 
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  5
                 </span>
               
             </div>
@@ -427,72 +427,48 @@
       
 
       
-        <h1 id="阶乘后的零"><a href="#阶乘后的零" class="headerlink" title="阶乘后的零"></a>阶乘后的零</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个整数 n，返回 n! 结果尾数中零的数量。</p>
-<p>示例 1:</p>
-<blockquote>
-<p>输入: 3<br>输出: 0<br>解释: 3! = 6, 尾数中没有零。</p>
-</blockquote>
-<p>示例 2:</p>
-<blockquote>
-<p>输入: 5<br>输出: 1<br>解释: 5! = 120, 尾数中有 1 个零.</p>
-</blockquote>
-<p>说明: 你算法的时间复杂度应为 O(log n) 。</p>
-<a id="more"></a>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/factorial-trailing-zeroes" target="_blank" rel="noopener">https://leetcode-cn.com/problems/factorial-trailing-zeroes</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>一开始看到题目时的第一反应就是求解出n!的值，再遍历得到0的个数。然后提交之后，报错提示：超出最大堆栈大小（RangeError: Maximum call stack size exceeded）。因此，看题解之后得到提示，开始寻找规律。</p>
-<p>若要某个数中有某位为0,那么他必定是10的倍数。而10=2 * 5；因此，该阶乘中有几对2 * 5，则该数就有几个0；又因为该阶乘为递减，则5的个数必定小于2的个数，则题目即可转化为求出5的个数即可。</p>
-<h3 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h3><ol>
-<li><p>归纳得：</p>
-<table>
-<thead>
-<tr>
-<th>n</th>
-<th>式子</th>
-<th>5的个数</th>
-<th>5的总个数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>5</td>
-<td>1*5</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>10</td>
-<td>2*5</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>15</td>
-<td>3*5</td>
-<td>1</td>
-<td>3</td>
-</tr>
-<tr>
-<td>20</td>
-<td>4*5</td>
-<td>1</td>
-<td>4</td>
-</tr>
-<tr>
-<td>25</td>
-<td>5*5</td>
-<td>2</td>
-<td>6</td>
-</tr>
-</tbody></table>
-</li>
-<li><p>因此，可以通过</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while (n &gt;= 5) &#123;</span><br><span class="line">    n = Math.floor(n / 5);</span><br><span class="line">    total += n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 得到5的个数</p>
-</li>
+        <h2 id="为什么需要防抖与节流"><a href="#为什么需要防抖与节流" class="headerlink" title="为什么需要防抖与节流"></a>为什么需要防抖与节流</h2><p>试着去想象一个场景，当我们在输入框输入内容的时候。如果有一个函数是根据输入框当前输入的内容来进行接口调用。那么，当你在不断输入的时候这个函数就会一直被调用，那么就很容易加重浏览器的负担导致性能降低。</p>
+<p>除此之外，包括当我们点击一个按钮时，如果我们没有立即得到反馈，我们可能就会一直去频繁点击它，导致时间绑定程序不断地被调用；另外，还有scroll事件,resize事件等等</p>
+<p>因此，采用防抖与节流的方式可以让我们降低调用函数的频率，又可以保证功能的正常执行</p>
+<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><h3 id="什么是函数防抖"><a href="#什么是函数防抖" class="headerlink" title="什么是函数防抖"></a>什么是函数防抖</h3><p>一般来说，我们会为需要进行防抖操作的函数设置一个超时时间，这个函数在这段时间内仅仅只会被触发一次。</p>
+<p>更加通俗的来说，防抖对于要被执行的方法</p>
+<p>当然，我们可以选择让这个仅仅只会被触发一次的函数是立即执行还是延迟执行。其中：</p>
+<ol>
+<li>立即执行指第一次触发后函数会立刻执行，之后只有再经过超时时间间隔后才可以被执行</li>
+<li>延迟执行指的是在时间间隔内连续触发的函数只有最后一次会被延时执行</li>
 </ol>
-<h2 id="Coding实现"><a href="#Coding实现" class="headerlink" title="Coding实现"></a>Coding实现</h2><h3 id="一开始使用递归报错的coding"><a href="#一开始使用递归报错的coding" class="headerlink" title="一开始使用递归报错的coding"></a>一开始使用递归报错的coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> trailingZeroes = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> sum=(<span class="function"><span class="keyword">function</span> <span class="title">circle</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n!=<span class="number">1</span>)&#123;</span><br><span class="line">     <span class="keyword">return</span> circle(n<span class="number">-1</span>)*n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;)(n)</span><br><span class="line">  <span class="built_in">console</span>.log(sum);</span><br><span class="line">    sum=sum.toString().split(<span class="string">''</span>);</span><br><span class="line">    <span class="keyword">let</span> count=<span class="number">0</span>;</span><br><span class="line">    sum.forEach(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(value==<span class="number">0</span>)&#123;</span><br><span class="line">        count++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="延迟执行的函数防抖"><a href="#延迟执行的函数防抖" class="headerlink" title="延迟执行的函数防抖"></a>延迟执行的函数防抖</h3><p>延迟执行的函数防抖主要适用于那些需要最后才响应频繁操作的函数。例如，在往输入框不断输入内容的时候希望当内容全部输入完毕后才进行接口的调用</p>
+<h4 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h4><p>延迟执行的基本思路是：</p>
+<ol>
+<li>创建一个定时器timer用来保存每一次定时操作返回的定时器ID</li>
+<li>如果我们在超时时间内又一次触发了该函数，那么清空之前设定的定时器，并且将timer绑定新的定时器ID</li>
+<li>这样，只要你在超时时间间隔内无论多少次频繁的触发函数，之前触发的函数都不会响应</li>
+</ol>
+<h4 id="coding实现"><a href="#coding实现" class="headerlink" title="coding实现"></a>coding实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn,wait</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 利用闭包的特性，返回函数中访问到的timer都会访问到这个timer</span></span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 若没有到超时时间，函数被触发的话，如果已经有timer，则说明之前已经触发过，那么取消之前的定时器</span></span><br><span class="line">        <span class="keyword">if</span>(timer) clearTimeout(timer);</span><br><span class="line">        <span class="comment">// 这个fn函数永远会在最后一次触发后延时wait秒被执行</span></span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>,args);</span><br><span class="line">        &#125;,wait);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> button = <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> wait = <span class="number">1000</span>;</span><br><span class="line">button.addEventListener(<span class="string">'click'</span>,debounce(alert,wait));</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">alert</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'alert'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="优化过的coding"><a href="#优化过的coding" class="headerlink" title="优化过的coding"></a>优化过的coding</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> trailingZeroes = <span class="function"><span class="params">n</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> total = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (n &gt;= <span class="number">5</span>) &#123;</span><br><span class="line">    n = <span class="built_in">Math</span>.floor(n / <span class="number">5</span>);</span><br><span class="line">    total += n;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> total;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="立即执行的函数防抖"><a href="#立即执行的函数防抖" class="headerlink" title="立即执行的函数防抖"></a>立即执行的函数防抖</h3><p>立即执行的函数防抖要求当函数第一次被触发后就会被执行，但是下一次函数执行与前一次函数执行的时间间隔必须大于超时时间。</p>
+<p>也就是说，当你第一次触发该函数后，该函数会立即被执行。之后，如果你每次触发该函数的时间间隔小于超时时间，那么函数都不会被触发。只有，在你最后一次触发该函数（无论是有效触发（调用成功）还是无效触发（不允许调用））经过超时时间后才可以被再次成功调用</p>
+<p>例如用户给interviewMap点star的时候，我们希望用户点第一下的时候就去调用接口，并且成功之后改变star按钮的样子，用户就可以立马得到反馈是否star成功了，这个情况适用立即执行的防抖函数，它总是在第一次调用，并且下一次调用必须与前一次调用的时间间隔大于wait才会触发。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn,wait</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 还是利用闭包的特性来创建定时器</span></span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 如果定时器为空，那么说明该函数是第一次被触发，那么立即执行它</span></span><br><span class="line">        <span class="keyword">if</span>(!timer) &#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>,args);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 否则清空前一个定时器</span></span><br><span class="line">        <span class="keyword">else</span> clearTimeout(timer);</span><br><span class="line">        <span class="comment">// 设定定时器，当时间间隔超过wait后才将timer重新赋予null</span></span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            timer = <span class="literal">null</span>;</span><br><span class="line">        &#125;,wait);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="两种方式结合的版本"><a href="#两种方式结合的版本" class="headerlink" title="两种方式结合的版本"></a>两种方式结合的版本</h3><p>我们总希望封装的可以更加彻底一点，因此，我们可以利用传入的immediate参数来决定是立即执行防抖还是延迟防抖</p>
+<p>以下是实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">func,wait,immediate</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(immediate) &#123;</span><br><span class="line">            <span class="keyword">if</span>(timer) clearTimeout(timer);</span><br><span class="line">            <span class="keyword">else</span> func.apply(<span class="keyword">this</span>,args);</span><br><span class="line">            timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">                timer = <span class="literal">null</span>;</span><br><span class="line">            &#125;,wait); </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(timer) clearTimeout(timer);</span><br><span class="line">            timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">                func.apply(<span class="keyword">this</span>,args);</span><br><span class="line">            &#125;,wait) </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><h3 id="什么是函数节流"><a href="#什么是函数节流" class="headerlink" title="什么是函数节流"></a>什么是函数节流</h3><p>与防抖不同，防抖是用来将一个多次在超时时间内执行的函数只让其执行一次，无论是立即执行还是延迟执行。</p>
+<p>而节流是将多次执行变成每隔一段时间进行执行。比如，你在10s中按了n次按钮（每次按钮的时间间隔小于给定的超时时间），那么对于节流来说，这n次按钮绑定的事件处理程序不是都执行也不是像防抖一样只执行一次，而是每隔一段给定时间就执行其中一次事件</p>
+<p>简而言之：</p>
+<blockquote>
+<p>当持续触发事件时，保证一定时间段内只调用一次事件处理函数</p>
+</blockquote>
+<p>实现函数节流的方式也有两种：</p>
+<ol>
+<li>时间戳实现函数节流</li>
+<li>定时器实现函数节流</li>
+</ol>
+<h3 id="时间戳实现函数节流"><a href="#时间戳实现函数节流" class="headerlink" title="时间戳实现函数节流"></a>时间戳实现函数节流</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">func,wait</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> start = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> now = <span class="built_in">Date</span>.now();</span><br><span class="line">        <span class="keyword">if</span>(now-start&gt;=wait) &#123;</span><br><span class="line">            func.apply(<span class="keyword">this</span>,args);</span><br><span class="line">            start = now;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="定时器实现函数节流"><a href="#定时器实现函数节流" class="headerlink" title="定时器实现函数节流"></a>定时器实现函数节流</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">func,wait</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!timer) &#123;</span><br><span class="line">            timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">                func.apply(<span class="keyword">this</span>,args);</span><br><span class="line">                timer = <span class="literal">null</span>;</span><br><span class="line">            &#125;,wait)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -524,8 +500,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/13/leetcode-171/" rel="next" title="leetcode-171 Excel表列序号">
-                <i class="fa fa-chevron-left"></i> leetcode-171 Excel表列序号
+              <a href="/2019/11/25/二叉树的递归与非递归遍历/" rel="next" title="二叉树的递归与非递归遍历">
+                <i class="fa fa-chevron-left"></i> 二叉树的递归与非递归遍历
               </a>
             
           </div>
@@ -533,10 +509,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/15/var、let与const/" rel="prev" title="var、let与const的比较以及作用域">
-                var、let与const的比较以及作用域 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -677,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#阶乘后的零"><span class="nav-number">1.</span> <span class="nav-text">阶乘后的零</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思路"><span class="nav-number">1.2.</span> <span class="nav-text">核心思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤"><span class="nav-number">1.2.2.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding实现"><span class="nav-number">1.3.</span> <span class="nav-text">Coding实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一开始使用递归报错的coding"><span class="nav-number">1.3.1.</span> <span class="nav-text">一开始使用递归报错的coding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化过的coding"><span class="nav-number">1.3.2.</span> <span class="nav-text">优化过的coding</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么需要防抖与节流"><span class="nav-number">1.</span> <span class="nav-text">为什么需要防抖与节流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防抖"><span class="nav-number">2.</span> <span class="nav-text">防抖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是函数防抖"><span class="nav-number">2.1.</span> <span class="nav-text">什么是函数防抖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#延迟执行的函数防抖"><span class="nav-number">2.2.</span> <span class="nav-text">延迟执行的函数防抖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本思路"><span class="nav-number">2.2.1.</span> <span class="nav-text">基本思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#coding实现"><span class="nav-number">2.2.2.</span> <span class="nav-text">coding实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#立即执行的函数防抖"><span class="nav-number">2.3.</span> <span class="nav-text">立即执行的函数防抖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两种方式结合的版本"><span class="nav-number">2.4.</span> <span class="nav-text">两种方式结合的版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#节流"><span class="nav-number">3.</span> <span class="nav-text">节流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是函数节流"><span class="nav-number">3.1.</span> <span class="nav-text">什么是函数节流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间戳实现函数节流"><span class="nav-number">3.2.</span> <span class="nav-text">时间戳实现函数节流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定时器实现函数节流"><span class="nav-number">3.3.</span> <span class="nav-text">定时器实现函数节流</span></a></li></ol></li></ol></div>
             
 
           </div>

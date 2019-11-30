@@ -307,6 +307,225 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/28/防抖与节流/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/28/防抖与节流/" itemprop="url">防抖与节流</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-28T13:57:52+08:00">
+                2019-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="为什么需要防抖与节流"><a href="#为什么需要防抖与节流" class="headerlink" title="为什么需要防抖与节流"></a>为什么需要防抖与节流</h2><p>试着去想象一个场景，当我们在输入框输入内容的时候。如果有一个函数是根据输入框当前输入的内容来进行接口调用。那么，当你在不断输入的时候这个函数就会一直被调用，那么就很容易加重浏览器的负担导致性能降低。</p>
+<p>除此之外，包括当我们点击一个按钮时，如果我们没有立即得到反馈，我们可能就会一直去频繁点击它，导致时间绑定程序不断地被调用；另外，还有scroll事件,resize事件等等</p>
+<p>因此，采用防抖与节流的方式可以让我们降低调用函数的频率，又可以保证功能的正常执行</p>
+<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><h3 id="什么是函数防抖"><a href="#什么是函数防抖" class="headerlink" title="什么是函数防抖"></a>什么是函数防抖</h3><p>一般来说，我们会为需要进行防抖操作的函数设置一个超时时间，这个函数在这段时间内仅仅只会被触发一次。</p>
+<p>更加通俗的来说，防抖对于要被执行的方法</p>
+<p>当然，我们可以选择让这个仅仅只会被触发一次的函数是立即执行还是延迟执行。其中：</p>
+<ol>
+<li>立即执行指第一次触发后函数会立刻执行，之后只有再经过超时时间间隔后才可以被执行</li>
+<li>延迟执行指的是在时间间隔内连续触发的函数只有最后一次会被延时执行</li>
+</ol>
+<h3 id="延迟执行的函数防抖"><a href="#延迟执行的函数防抖" class="headerlink" title="延迟执行的函数防抖"></a>延迟执行的函数防抖</h3><p>延迟执行的函数防抖主要适用于那些需要最后才响应频繁操作的函数。例如，在往输入框不断输入内容的时候希望当内容全部输入完毕后才进行接口的调用</p>
+<h4 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h4><p>延迟执行的基本思路是：</p>
+<ol>
+<li>创建一个定时器timer用来保存每一次定时操作返回的定时器ID</li>
+<li>如果我们在超时时间内又一次触发了该函数，那么清空之前设定的定时器，并且将timer绑定新的定时器ID</li>
+<li>这样，只要你在超时时间间隔内无论多少次频繁的触发函数，之前触发的函数都不会响应</li>
+</ol>
+<h4 id="coding实现"><a href="#coding实现" class="headerlink" title="coding实现"></a>coding实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn,wait</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 利用闭包的特性，返回函数中访问到的timer都会访问到这个timer</span></span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 若没有到超时时间，函数被触发的话，如果已经有timer，则说明之前已经触发过，那么取消之前的定时器</span></span><br><span class="line">        <span class="keyword">if</span>(timer) clearTimeout(timer);</span><br><span class="line">        <span class="comment">// 这个fn函数永远会在最后一次触发后延时wait秒被执行</span></span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>,args);</span><br><span class="line">        &#125;,wait);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> button = <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> wait = <span class="number">1000</span>;</span><br><span class="line">button.addEventListener(<span class="string">'click'</span>,debounce(alert,wait));</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">alert</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'alert'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="立即执行的函数防抖"><a href="#立即执行的函数防抖" class="headerlink" title="立即执行的函数防抖"></a>立即执行的函数防抖</h3><p>立即执行的函数防抖要求当函数第一次被触发后就会被执行，但是下一次函数执行与前一次函数执行的时间间隔必须大于超时时间。</p>
+<p>也就是说，当你第一次触发该函数后，该函数会立即被执行。之后，如果你每次触发该函数的时间间隔小于超时时间，那么函数都不会被触发。只有，在你最后一次触发该函数（无论是有效触发（调用成功）还是无效触发（不允许调用））经过超时时间后才可以被再次成功调用</p>
+<p>例如用户给interviewMap点star的时候，我们希望用户点第一下的时候就去调用接口，并且成功之后改变star按钮的样子，用户就可以立马得到反馈是否star成功了，这个情况适用立即执行的防抖函数，它总是在第一次调用，并且下一次调用必须与前一次调用的时间间隔大于wait才会触发。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn,wait</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 还是利用闭包的特性来创建定时器</span></span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 如果定时器为空，那么说明该函数是第一次被触发，那么立即执行它</span></span><br><span class="line">        <span class="keyword">if</span>(!timer) &#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>,args);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 否则清空前一个定时器</span></span><br><span class="line">        <span class="keyword">else</span> clearTimeout(timer);</span><br><span class="line">        <span class="comment">// 设定定时器，当时间间隔超过wait后才将timer重新赋予null</span></span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            timer = <span class="literal">null</span>;</span><br><span class="line">        &#125;,wait);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="两种方式结合的版本"><a href="#两种方式结合的版本" class="headerlink" title="两种方式结合的版本"></a>两种方式结合的版本</h3><p>我们总希望封装的可以更加彻底一点，因此，我们可以利用传入的immediate参数来决定是立即执行防抖还是延迟防抖</p>
+<p>以下是实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">func,wait,immediate</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(immediate) &#123;</span><br><span class="line">            <span class="keyword">if</span>(timer) clearTimeout(timer);</span><br><span class="line">            <span class="keyword">else</span> func.apply(<span class="keyword">this</span>,args);</span><br><span class="line">            timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">                timer = <span class="literal">null</span>;</span><br><span class="line">            &#125;,wait); </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(timer) clearTimeout(timer);</span><br><span class="line">            timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">                func.apply(<span class="keyword">this</span>,args);</span><br><span class="line">            &#125;,wait) </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><h3 id="什么是函数节流"><a href="#什么是函数节流" class="headerlink" title="什么是函数节流"></a>什么是函数节流</h3><p>与防抖不同，防抖是用来将一个多次在超时时间内执行的函数只让其执行一次，无论是立即执行还是延迟执行。</p>
+<p>而节流是将多次执行变成每隔一段时间进行执行。比如，你在10s中按了n次按钮（每次按钮的时间间隔小于给定的超时时间），那么对于节流来说，这n次按钮绑定的事件处理程序不是都执行也不是像防抖一样只执行一次，而是每隔一段给定时间就执行其中一次事件</p>
+<p>简而言之：</p>
+<blockquote>
+<p>当持续触发事件时，保证一定时间段内只调用一次事件处理函数</p>
+</blockquote>
+<p>实现函数节流的方式也有两种：</p>
+<ol>
+<li>时间戳实现函数节流</li>
+<li>定时器实现函数节流</li>
+</ol>
+<h3 id="时间戳实现函数节流"><a href="#时间戳实现函数节流" class="headerlink" title="时间戳实现函数节流"></a>时间戳实现函数节流</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">func,wait</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> start = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> now = <span class="built_in">Date</span>.now();</span><br><span class="line">        <span class="keyword">if</span>(now-start&gt;=wait) &#123;</span><br><span class="line">            func.apply(<span class="keyword">this</span>,args);</span><br><span class="line">            start = now;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="定时器实现函数节流"><a href="#定时器实现函数节流" class="headerlink" title="定时器实现函数节流"></a>定时器实现函数节流</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">func,wait</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!timer) &#123;</span><br><span class="line">            timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">                func.apply(<span class="keyword">this</span>,args);</span><br><span class="line">                timer = <span class="literal">null</span>;</span><br><span class="line">            &#125;,wait)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/25/二叉树的递归与非递归遍历/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3025,240 +3244,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/09/MVVM模式的理解以及双向数据绑定/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/09/MVVM模式的理解以及双向数据绑定/" itemprop="url">MVVM模式的理解以及双向数据绑定</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-09T14:38:05+08:00">
-                2019-11-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.8k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  7
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><h3 id="什么是MVVM"><a href="#什么是MVVM" class="headerlink" title="什么是MVVM"></a>什么是MVVM</h3><p>MVVM是一种软件架构设计模式，其由以下三个方面组成：</p>
-<ul>
-<li>Model: 对应MVVM中的第一个M，表示数据模型层，包括自定义数据以及后端给定的api接口数据</li>
-<li>View: 对应MVVM中的第一个V，表示视图层，也就是我们常说的用户界面，这一层使用html+css来进行构建</li>
-<li>ViewModel: 对应MVVM中的VM，表示视图数据层。这一层也是MVVM设计模式的核心。该层作为桥梁用来沟通View视图层和Model数据模型层。我们在该层对Model层给的数据进行数据上和业务上的处理，然后通过双向数据绑定，使得View视图层实时更新视图</li>
-</ul>
-<p><img src="https://s2.ax1x.com/2019/11/09/MmEkRJ.png" alt></p>
-<h2 id="双向数据绑定"><a href="#双向数据绑定" class="headerlink" title="双向数据绑定"></a>双向数据绑定</h2><h3 id="什么数据双向绑定"><a href="#什么数据双向绑定" class="headerlink" title="什么数据双向绑定"></a>什么数据双向绑定</h3><p>对于MVVM设计模式来说，数据绑定是指当数据变化时试图会进行更新，当视图变化时数据会进行相应更新</p>
-<p><img src="https://s2.ax1x.com/2019/11/09/MmmSl4.png" alt></p>
-<h3 id="双向数据绑定的原理"><a href="#双向数据绑定的原理" class="headerlink" title="双向数据绑定的原理"></a>双向数据绑定的原理</h3><p>对于View视图层变化更新数据，一般可以通过事件监听的方式</p>
-<p>例如：<br>vue中的指令v-model就可以监听表单的输入事件来更新相应的数据</p>
-<p>先看下vue中实现的例子：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"value"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var app = new Vue(&#123;</span><br><span class="line">    el: &apos;#app&apos;,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: &apos;&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>当我们在input表单中输入数据的时候，value值也会进行相应的更新</p>
-<p>实现效果如下：</p>
-<p><img src="https://s2.ax1x.com/2019/11/09/Mmnd2D.png" alt></p>
-<h4 id="利用事件监听机制来实现视图变动来更新数据"><a href="#利用事件监听机制来实现视图变动来更新数据" class="headerlink" title="利用事件监听机制来实现视图变动来更新数据"></a>利用事件监听机制来实现视图变动来更新数据</h4><p>对于v-model指令在表单中输入数据可以进行相应数据的更新，我们可以利用事件监听机制来进行实现</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    /*绑定一个changeData事件，用于当进行表单输入操作时进行数据的更新*/</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">value</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">"input"</span> @<span class="attr">click</span>=<span class="string">"changeData"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>input输入框有一个oninput方法可以用来监听输入框中的value值是否有变化</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: <span class="string">''</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        changeData() &#123;</span><br><span class="line">            <span class="keyword">let</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'input'</span>);</span><br><span class="line">            <span class="comment">// 如果value值发生了变化，那么就将该value赋值给vue实例data中的value属性</span></span><br><span class="line">            input.addEventListener(<span class="string">'input'</span>,(e)=&gt;&#123;</span><br><span class="line">                <span class="comment">// e.target指向事件绑定的元素，也就是input元素，然后再获取到该元素的value值</span></span><br><span class="line">                <span class="keyword">this</span>.value = e.target.value;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="发布订阅模式来解决数据的更新引起视图的更新"><a href="#发布订阅模式来解决数据的更新引起视图的更新" class="headerlink" title="发布订阅模式来解决数据的更新引起视图的更新"></a>发布订阅模式来解决数据的更新引起视图的更新</h4><p>以下是一张来自vue官方的数据双向绑定的原理图</p>
-<p><img src="https://s2.ax1x.com/2019/11/09/MmM8bj.png" alt></p>
-<p>对于Vue中的数据双向绑定的实现，主要通过以下四个步骤来实现</p>
-<ul>
-<li><p>实现一个监听器 Observer：对数据对象进行遍历，包括子属性对象的属性，利用 Object.defineProperty() 对属性都加上访问器属性 setter 和 getter。这样的话，监听器就可以对数据进行劫持，当我们给这个对象的某个值赋值，就会触发 setter，从而监听到数据的变化。</p>
-</li>
-<li><p>实现一个解析器 Compile：解析 Vue 模板指令，将模板中的变量都替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，调用更新函数进行数据更新。</p>
-</li>
-<li><p>实现一个订阅者 Watcher：Watcher 订阅者是 Observer 和 Compile 之间通信的桥梁 ，主要的任务是订阅 Observer 中的属性值变化的消息，当收到属性值变化的消息时，触发解析器 Compile 中对应的更新函数。</p>
-</li>
-<li><p>实现一个订阅器 Dep：订阅器采用 发布-订阅 设计模式，用来收集订阅者 Watcher，对监听器 Observer 和 订阅者 Watcher 进行统一管理。</p>
-</li>
-</ul>
-<p>大致流程图如下：</p>
-<p><img src="https://s2.ax1x.com/2019/11/09/Mmlp6O.png" alt></p>
-<p>接下来我们会一一实现这些步骤</p>
-<h5 id="Observer监听器进行事件劫持"><a href="#Observer监听器进行事件劫持" class="headerlink" title="Observer监听器进行事件劫持"></a>Observer监听器进行事件劫持</h5><p>此过程主要是通过Object.defineProperty将data对象中的所有属性（包括属性是对象类型所有的子属性）具有访问器属性getter和setter</p>
-<p>具体实现如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 要劫持的数据</span></span><br><span class="line"><span class="keyword">let</span> data = &#123;</span><br><span class="line">    item: <span class="number">1</span>,</span><br><span class="line">    k: &#123;</span><br><span class="line">        m: &#123;</span><br><span class="line">            g: <span class="number">2</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">observe(data)</span><br><span class="line"><span class="built_in">console</span>.log(data.item,data.k,data.k.m);</span><br><span class="line">data.item = &#123;<span class="attr">i</span>:<span class="number">1</span>&#125;;</span><br><span class="line">data.k = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(data.item,data.k,data.k.m);</span><br><span class="line"></span><br><span class="line"><span class="comment">// observer监听器函数，遍历data对象中的所有属性包括子属性然后调用自定义数据劫持函数setProperty进行数据劫持</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">observe</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> keys = <span class="built_in">Object</span>.keys(obj);</span><br><span class="line">    keys.forEach(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="comment">// 如果该属性值是对象，那么进行递归</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> obj[v] === <span class="string">'object'</span> &amp;&amp; v!==<span class="literal">null</span>) &#123;</span><br><span class="line">            observe(obj[v]);</span><br><span class="line">        &#125;</span><br><span class="line">        setProperty(data,v,obj[v]);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据劫持函数，使用Object.defineProperty进行劫持</span></span><br><span class="line"><span class="comment">// 传入对象，键名，以及键值，并将它们作为对象的私有变量，之后对属性值修改与访问都是在操作该私有变量val</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setProperty</span>(<span class="params">obj, key, val</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(obj, key, &#123;</span><br><span class="line">    enumerable: <span class="literal">true</span>,</span><br><span class="line">    configurable: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// 访问器属性get，访问属性时将会调用该函数</span></span><br><span class="line">    <span class="keyword">get</span>: function() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'get value'</span>)</span><br><span class="line">      <span class="keyword">return</span> val</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 访问器属性set，设置属性值时将会调用该函数</span></span><br><span class="line">    <span class="keyword">set</span>: function(newVal) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'change value'</span>)</span><br><span class="line">      val = newVal</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>现在我们已经实现了，当数据变化后我们可以获得通知。接下来我们要去实现订阅器，来更加方便地管理这些变动</p>
-<h5 id="Dep订阅器的实现"><a href="#Dep订阅器的实现" class="headerlink" title="Dep订阅器的实现"></a>Dep订阅器的实现</h5><p>订阅器的主要功能就是收集订阅者的订阅，然后当发布者发布事件后将订阅者的回调进行执行</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dep</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.subs = []</span><br><span class="line">  &#125;</span><br><span class="line">  addSub(sub) &#123;</span><br><span class="line">    <span class="comment">// sub 是 Watcher 实例</span></span><br><span class="line">    <span class="keyword">this</span>.subs.push(sub)</span><br><span class="line">  &#125;</span><br><span class="line">  notify() &#123;</span><br><span class="line">    <span class="keyword">this</span>.subs.forEach(<span class="function"><span class="params">sub</span> =&gt;</span> &#123;</span><br><span class="line">      sub.update()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 全局属性，通过该属性配置 Watcher</span></span><br><span class="line">Dep.target = <span class="literal">null</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="Watcher订阅者的实现"><a href="#Watcher订阅者的实现" class="headerlink" title="Watcher订阅者的实现"></a>Watcher订阅者的实现</h5><p>Watcher订阅者的功能就是等待发布者发布之后，订阅器就会统一执行所有订阅者的回调</p>
-<p>事实上，data对象中并不是所有的数据都与视图层有关系，因此，当在模板解析的时候，解析到该值时模板语法，那么就会将该属性作为订阅者添加到订阅器中</p>
-<p>具体实现如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(obj, key, cb) &#123;</span><br><span class="line">    <span class="comment">// 将 Dep.target 指向自己</span></span><br><span class="line">    <span class="comment">// 然后触发属性的 getter 添加监听</span></span><br><span class="line">    <span class="comment">// 最后将 Dep.target 置空</span></span><br><span class="line">    Dep.target = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">this</span>.cb = cb</span><br><span class="line">    <span class="keyword">this</span>.obj = obj</span><br><span class="line">    <span class="keyword">this</span>.key = key</span><br><span class="line">    <span class="keyword">this</span>.value = obj[key]</span><br><span class="line">    Dep.target = <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">  update() &#123;</span><br><span class="line">    <span class="comment">// 获得新值</span></span><br><span class="line">    <span class="keyword">this</span>.value = <span class="keyword">this</span>.obj[<span class="keyword">this</span>.key]</span><br><span class="line">    <span class="comment">// 调用 update 方法更新 Dom</span></span><br><span class="line">    <span class="keyword">this</span>.cb(<span class="keyword">this</span>.value)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">'div'</span>).innerText = value</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后，我们还需要修改之前的setProperty函数，在属性访问的时候将其作为订阅者添加到订阅器中，将属性值被修改时，将该事件发布，并执行订阅者相应的回调函数</p>
-<p>具体实现如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setProperty</span>(<span class="params">obj, key, val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> dp = <span class="keyword">new</span> Dep()</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(obj, key, &#123;</span><br><span class="line">    enumerable: <span class="literal">true</span>,</span><br><span class="line">    configurable: <span class="literal">true</span>,</span><br><span class="line">    <span class="keyword">get</span>: function reactiveGetter() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'get value'</span>)</span><br><span class="line">      <span class="comment">// 将 Watcher 添加到订阅</span></span><br><span class="line">      <span class="keyword">if</span> (Dep.target) &#123;</span><br><span class="line">        dp.addSub(Dep.target)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> val</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>: function reactiveSetter(newVal) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'change value'</span>)</span><br><span class="line">      val = newVal</span><br><span class="line">      <span class="comment">// 执行 watcher 的 update 方法</span></span><br><span class="line">      dp.notify()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3311,7 +3296,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-count">140</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3392,7 +3377,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">153.3k</span>
+    <span title="Site words total count">154.8k</span>
   
 </div>
 
@@ -3422,7 +3407,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共153.3k字</span>
+  <span class="post-count">博客全站共154.8k字</span>
 </div>
         
 

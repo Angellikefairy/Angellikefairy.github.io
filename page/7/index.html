@@ -307,6 +307,214 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/31/getter与setter函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/31/getter与setter函数/" itemprop="url">getter与setter函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-31T20:20:59+08:00">
+                2019-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  719
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h2><p>对象属性分为数据属性与访问器属性。访问器属性不包含数据值，它们包含一对getter与setter函数。在读取访问器属性时，会调用getter函数，这个函数负责返回有效的值；在写入访问器属性时，会调用setter函数并传入新值</p>
+<h2 id="什么是getter-setter"><a href="#什么是getter-setter" class="headerlink" title="什么是getter/setter"></a>什么是getter/setter</h2><ol>
+<li>getter是获得属性值的方法，setter是设置属性值的方法</li>
+<li>get与set并不是对象的属性，可以说是伪属性，特性只有内部才用，一般利用Object.getOwnPropertyDescriptor()方法来查询属性的特性；利用Object.defineProperty来定义和修改属性的特性</li>
+</ol>
+<h2 id="怎么定义getter与setter"><a href="#怎么定义getter与setter" class="headerlink" title="怎么定义getter与setter"></a>怎么定义getter与setter</h2><h3 id="get与set语法"><a href="#get与set语法" class="headerlink" title="get与set语法"></a>get与set语法</h3><p>get/set语法会将对象属性绑定到查询/调用的函数</p>
+<p>例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    item:<span class="number">1</span>,</span><br><span class="line">    <span class="keyword">get</span> getItem() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> setItem(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// &#123; item: 1, getItem: [Getter], setItem: [Setter] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(a.getItem); <span class="comment">// 1</span></span><br><span class="line">a.setItem=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a.getItem); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>get与set绑定的函数名可以是一样的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    item:<span class="number">1</span>,</span><br><span class="line">    <span class="keyword">get</span> _item() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> _item(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// &#123; item: 1, _item: [Getter/Setter] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 1</span></span><br><span class="line">a._item=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>当然,get与set也可以绑定多个函数名</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    item:<span class="number">1</span>,</span><br><span class="line">    name:<span class="string">'ming'</span>,</span><br><span class="line">    <span class="keyword">get</span> _item() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> _item(item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">get</span> _name() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> _name(name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name=name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// &#123;item: 1,name: 'ming',_item: [Getter/Setter],_name: [Getter/Setter]&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 1</span></span><br><span class="line">a._item=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(a._name); <span class="comment">// ming</span></span><br><span class="line">a._name=<span class="string">'xiao ming'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a._name); <span class="comment">// xioa ming</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="defineProperty-方法"><a href="#defineProperty-方法" class="headerlink" title="defineProperty()方法"></a>defineProperty()方法</h3><p>Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。</p>
+<p>语法：</p>
+<blockquote>
+<p>Object.defineProperty(obj, prop, descriptor)</p>
+</blockquote>
+<p>参数</p>
+<p>obj<br>    要在其上定义属性的对象。</p>
+<p>prop<br>    要定义或修改的属性的名称。</p>
+<p>descriptor<br>    将被定义或修改的属性描述符</p>
+<p>例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;<span class="attr">item</span>:<span class="number">1</span>&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(a,<span class="string">'_item'</span>,&#123;</span><br><span class="line">    <span class="keyword">get</span>: function () &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>: function (item) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 1</span></span><br><span class="line">a._item=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="getter与setter的作用"><a href="#getter与setter的作用" class="headerlink" title="getter与setter的作用"></a>getter与setter的作用</h2><p>getter与setter的作用我觉得是可以在对赋值和取值之前做一层封装，拦截这些操作，定义一些其他操作（在赋值与取值之前进行一些额外的操作）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;<span class="attr">item</span>:<span class="number">1</span>&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(a,<span class="string">'_item'</span>,&#123;</span><br><span class="line">    <span class="keyword">get</span>: function () &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>: function (item) &#123;</span><br><span class="line">        <span class="keyword">let</span> date=<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`a.item的值在<span class="subst">$&#123;date.toLocaleString()&#125;</span>被修改`</span>);</span><br><span class="line">        <span class="keyword">this</span>.item=item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a._item); <span class="comment">// 1</span></span><br><span class="line">a._item=<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a._item);</span><br><span class="line"><span class="comment">// a.item的值在2019-8-31 20:50:59被修改</span></span><br><span class="line"><span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中,我在setter函数赋值后，输出属性值被修改的时间。从而可以监测到值何时被修改。</p>
+<p>这就是拦截了赋值操作,先进行了额外定义的检测值被修改的方法</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/31/Es6一些新的函数参数知识/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2297,212 +2505,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/Js中的字符与Unicode编码操作/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/27/Js中的字符与Unicode编码操作/" itemprop="url">Js中的字符与Unicode编码操作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-27T13:48:20+08:00">
-                2019-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
-                    <span itemprop="name">javaScript基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  444
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="字符转化为Unicode编码"><a href="#字符转化为Unicode编码" class="headerlink" title="字符转化为Unicode编码"></a>字符转化为Unicode编码</h2><h3 id="charAt"><a href="#charAt" class="headerlink" title="charAt()"></a>charAt()</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>charAt() 方法从一个字符串中返回指定的字符。</p>
-<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><blockquote>
-<p>str.charAt(index)</p>
-</blockquote>
-<p>参数：</p>
-<p>index: <br>一个介于0和字符转长度减1之间的整数。即0~str.length-1。如果没有提供索引值，那么index默认为0，即第一位</p>
-<p>返回值：</p>
-<p>返回值是一个根据给定索引的指定字符；如果，给定值超过了上述的要求范围（0~str.length-1），那么该方法返回一个空字符串</p>
-<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str=<span class="string">'abc'</span></span><br><span class="line"><span class="built_in">console</span>.log(str.charAt()); <span class="comment">// 'a'</span></span><br><span class="line"><span class="built_in">console</span>.log(str.charAt(<span class="number">1</span>)); <span class="comment">// 'b'</span></span><br><span class="line"><span class="built_in">console</span>.log(str.charAt(<span class="number">2</span>)); <span class="comment">// 'c'</span></span><br><span class="line"><span class="built_in">console</span>.log(str.charAt(<span class="number">7</span>)); <span class="comment">// ''</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="charCodeAt"><a href="#charCodeAt" class="headerlink" title="charCodeAt()"></a>charCodeAt()</h3><h4 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h4><p>charCodeAt()方法 返回给定索引处（String中index索引处）字符的 UTF-16 代码单元值的数字</p>
-<h4 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h4><blockquote>
-<p>str.charCodeAt(index)</p>
-</blockquote>
-<p>参数</p>
-<p>index:<br>一个大于等于0，小于字符串长度的整数。如果不是一个数值，则默认为0</p>
-<p>返回值</p>
-<p>返回值是一表示给定索引处（String中index索引处）字符的 UTF-16 代码单元值的数字；如果索引超出范围，则返回 NaN。</p>
-<h4 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str1=<span class="string">'a'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str1.charCodeAt()); <span class="comment">// 97</span></span><br><span class="line"><span class="keyword">let</span> str2=<span class="string">'abc'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str2.charCodeAt(<span class="number">0</span>)); <span class="comment">// 97</span></span><br><span class="line"><span class="built_in">console</span>.log(str2.charCodeAt(<span class="number">1</span>)); <span class="comment">// 98</span></span><br><span class="line"><span class="built_in">console</span>.log(str2.charCodeAt(<span class="number">7</span>)); <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Unicode编码转化为字符"><a href="#Unicode编码转化为字符" class="headerlink" title="Unicode编码转化为字符"></a>Unicode编码转化为字符</h2><h3 id="String-fromCharCode"><a href="#String-fromCharCode" class="headerlink" title="String.fromCharCode()"></a>String.fromCharCode()</h3><h4 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h4><p>静态 String.fromCharCode() 方法返回由指定的UTF-16代码单元序列创建的字符串。</p>
-<h4 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h4><blockquote>
-<p>String.fromCharCode(num1, …, numN)</p>
-</blockquote>
-<p>参数</p>
-<p>num1, …, numN<br>一系列UTF-16代码单元的数字。 范围介于0到65535（0xFFFF）之间。 大于0xFFFF的数字将被截断。 不进行有效性检查。 </p>
-<p>返回值</p>
-<p>一个长度为N的字符串，由N个指定的UTF-16代码单元组成；如果不给定参数，那么则返回空字符串</p>
-<h4 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.fromCharCode(<span class="number">97</span>)); <span class="string">'a'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.fromCharCode(<span class="number">97</span>,<span class="number">98</span>,<span class="number">99</span>)) <span class="comment">// 'abc'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.fromCharCode()); <span class="comment">// ''</span></span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2555,7 +2557,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-count">140</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2636,7 +2638,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">153.3k</span>
+    <span title="Site words total count">154.8k</span>
   
 </div>
 
@@ -2666,7 +2668,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共153.3k字</span>
+  <span class="post-count">博客全站共154.8k字</span>
 </div>
         
 
