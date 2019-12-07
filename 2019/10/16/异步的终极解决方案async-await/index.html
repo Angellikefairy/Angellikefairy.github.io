@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="异步操作的发展有一个场景，要先读取a文件，当a文件成功读取完毕后再去读取b文件，我们看一下各种异步操作是如何进行的？ 回调函数12345678910111213141516const fs = require(&apos;fs&apos;);// 采用回调函数方式，很容易造成回调地狱function readFile(err,data) &amp;#123;    if(err) throw err;    console.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-17T14:34:19.629Z">
+<meta property="og:updated_time" content="2019-12-07T11:51:09.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Generator与async+await">
 <meta name="twitter:description" content="异步操作的发展有一个场景，要先读取a文件，当a文件成功读取完毕后再去读取b文件，我们看一下各种异步操作是如何进行的？ 回调函数12345678910111213141516const fs = require(&apos;fs&apos;);// 采用回调函数方式，很容易造成回调地狱function readFile(err,data) &amp;#123;    if(err) throw err;    console.">
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3k
+                  3.2k
                 </span>
               
 
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  12
+                  13
                 </span>
               
             </div>
@@ -544,6 +544,15 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">await</span> b();</span><br><span class="line">    c();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>b()异步操作在运行的时候,a函数是暂停运行的。因此，对于b()函数，其上下文环境都仍旧保存着。</p>
+<h3 id="async-await与同步代码"><a href="#async-await与同步代码" class="headerlink" title="async/await与同步代码"></a>async/await与同步代码</h3><p>值得注意的是：</p>
+<blockquote>
+<p>异步函数可以包含await指令，该指令会暂停异步函数的执行，并等待Promise执行，然后继续执行异步函数，并返回结果。</p>
+</blockquote>
+<p>也就是说，当我们在异步函数中遇到await指令后，整个异步函数会暂停运行，执行栈会去执行下一个任务。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">    resolve(<span class="number">1</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">await</span> promise;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">get</span>();</span><br><span class="line">console.log(3);</span><br><span class="line"></span><br><span class="line">/* 输出结果</span><br><span class="line">1</span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<p>执行get()后，会立即输出1，然后遇到了await命令，那么异步函数get会暂停运行，接着console.log(3)同步代码会进入执行栈并且并执行输出3，然后promise执行完毕后再重新启动异步函数get，输出2</p>
 
       
     </div>
@@ -665,7 +674,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">140</span>
+                  <span class="site-state-item-count">139</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -727,7 +736,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#异步操作的发展"><span class="nav-number">1.</span> <span class="nav-text">异步操作的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回调函数"><span class="nav-number">1.1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise"><span class="nav-number">1.2.</span> <span class="nav-text">Promise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator"><span class="nav-number">1.3.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async-await"><span class="nav-number">1.4.</span> <span class="nav-text">async+await</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generator函数"><span class="nav-number">2.</span> <span class="nav-text">Generator函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单任务执行器"><span class="nav-number">2.1.</span> <span class="nav-text">简单任务执行器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向任务执行器传递函数"><span class="nav-number">2.2.</span> <span class="nav-text">向任务执行器传递函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步任务执行器"><span class="nav-number">2.3.</span> <span class="nav-text">异步任务执行器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thunk函数"><span class="nav-number">2.3.1.</span> <span class="nav-text">Thunk函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Thunk函数与Generator"><span class="nav-number">2.3.2.</span> <span class="nav-text">Thunk函数与Generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以fs-readFile-为例"><span class="nav-number">2.3.3.</span> <span class="nav-text">以fs.readFile()为例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#async函数"><span class="nav-number">3.</span> <span class="nav-text">async函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本用法"><span class="nav-number">3.1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async函数的返回值"><span class="nav-number">3.2.</span> <span class="nav-text">async函数的返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async函数对于多个异步操作的简化"><span class="nav-number">3.3.</span> <span class="nav-text">async函数对于多个异步操作的简化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误处理"><span class="nav-number">3.4.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继发与并发"><span class="nav-number">3.5.</span> <span class="nav-text">继发与并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async函数可以保留运行堆栈"><span class="nav-number">3.6.</span> <span class="nav-text">async函数可以保留运行堆栈</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#异步操作的发展"><span class="nav-number">1.</span> <span class="nav-text">异步操作的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回调函数"><span class="nav-number">1.1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise"><span class="nav-number">1.2.</span> <span class="nav-text">Promise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator"><span class="nav-number">1.3.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async-await"><span class="nav-number">1.4.</span> <span class="nav-text">async+await</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generator函数"><span class="nav-number">2.</span> <span class="nav-text">Generator函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单任务执行器"><span class="nav-number">2.1.</span> <span class="nav-text">简单任务执行器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向任务执行器传递函数"><span class="nav-number">2.2.</span> <span class="nav-text">向任务执行器传递函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步任务执行器"><span class="nav-number">2.3.</span> <span class="nav-text">异步任务执行器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thunk函数"><span class="nav-number">2.3.1.</span> <span class="nav-text">Thunk函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Thunk函数与Generator"><span class="nav-number">2.3.2.</span> <span class="nav-text">Thunk函数与Generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以fs-readFile-为例"><span class="nav-number">2.3.3.</span> <span class="nav-text">以fs.readFile()为例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#async函数"><span class="nav-number">3.</span> <span class="nav-text">async函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本用法"><span class="nav-number">3.1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async函数的返回值"><span class="nav-number">3.2.</span> <span class="nav-text">async函数的返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async函数对于多个异步操作的简化"><span class="nav-number">3.3.</span> <span class="nav-text">async函数对于多个异步操作的简化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误处理"><span class="nav-number">3.4.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继发与并发"><span class="nav-number">3.5.</span> <span class="nav-text">继发与并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async函数可以保留运行堆栈"><span class="nav-number">3.6.</span> <span class="nav-text">async函数可以保留运行堆栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async-await与同步代码"><span class="nav-number">3.7.</span> <span class="nav-text">async/await与同步代码</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -762,7 +771,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">154.8k</span>
+    <span title="Site words total count">155k</span>
   
 </div>
 
@@ -792,7 +801,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共154.8k字</span>
+  <span class="post-count">博客全站共155k字</span>
 </div>
         
 

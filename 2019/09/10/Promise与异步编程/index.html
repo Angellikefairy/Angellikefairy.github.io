@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="什么是异步编程异步编程是什么？为什么需要异步编程；这都要从同步说起 因为JavaScript语言是一门单线程语言。我们只能在一个线程上运行任务，该线程被称之为主线程。就像下面的例子一样，代码是按照顺序执行的 12345(function getA()&amp;#123;    a=1;&amp;#125;)()console.log(a); // 1  显然的是，以上会先执行getA函数并设置全局变量a=1，然后">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-28T07:31:26.533Z">
+<meta property="og:updated_time" content="2019-12-07T11:51:11.073Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Promise与异步编程">
 <meta name="twitter:description" content="什么是异步编程异步编程是什么？为什么需要异步编程；这都要从同步说起 因为JavaScript语言是一门单线程语言。我们只能在一个线程上运行任务，该线程被称之为主线程。就像下面的例子一样，代码是按照顺序执行的 12345(function getA()&amp;#123;    a=1;&amp;#125;)()console.log(a); // 1  显然的是，以上会先执行getA函数并设置全局变量a=1，然后">
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.5k
+                  5.6k
                 </span>
               
 
@@ -599,6 +599,13 @@
 </ol>
 <p>例如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        resolve(<span class="number">1</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f().then(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v); <span class="comment">// 1</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>需要铭记的是：</p>
+<blockquote>
+<p>异步函数可以包含await指令，该指令会暂停异步函数的执行，并等待Promise执行，然后继续执行异步函数，并返回结果。</p>
+</blockquote>
+<p>也就是说，当在异步函数中遇到await指令后，这个异步函数会暂停运行，直到await结束。在暂停期间，</p>
+
       
     </div>
     
@@ -638,8 +645,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/11/mpvue踩坑记/" rel="prev" title="mpvue踩坑记">
-                mpvue踩坑记 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/11/leetcode-278/" rel="prev" title="leetcode-278 第一个错误的版本">
+                leetcode-278 第一个错误的版本 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -719,7 +726,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">140</span>
+                  <span class="site-state-item-count">139</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -816,7 +823,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">154.8k</span>
+    <span title="Site words total count">155k</span>
   
 </div>
 
@@ -846,7 +853,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共154.8k字</span>
+  <span class="post-count">博客全站共155k字</span>
 </div>
         
 
