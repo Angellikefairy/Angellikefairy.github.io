@@ -307,6 +307,296 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/09/代理proxy和反射Reflection的基本使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/09/代理proxy和反射Reflection的基本使用/" itemprop="url">代理proxy和反射Reflection的基本使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-09T13:53:12+08:00">
+                2019-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="ES5的Object-defineProperty"><a href="#ES5的Object-defineProperty" class="headerlink" title="ES5的Object.defineProperty()"></a>ES5的Object.defineProperty()</h2><p>在ES5的时候，我们可以使用Object.defineProperty来对属性的特性做出定义或者修改。例如，我们经常使用到的访问器属性：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    _item: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj,<span class="string">'item'</span>,&#123;</span><br><span class="line">    <span class="keyword">get</span>() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'这是访问器方法get'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._item;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>(item) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'这是访问器方法set'</span>);</span><br><span class="line">        <span class="keyword">this</span>._item = item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj); <span class="comment">// &#123;_item: 1&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.item); <span class="comment">// 这是访问器方法get 1</span></span><br><span class="line">obj.item = <span class="number">2</span>; <span class="comment">// 这是访问器方法set</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.item); <span class="comment">// 这是访问器方法get 2</span></span><br></pre></td></tr></table></figure>
+
+<p>因此，我们可以使用Object.defineProperty来为属性的赋值与访问操作进行拦截从而加入一些自定义的操作。</p>
+<p>到了ES6，语言为我们添加了一些内建对象来允许我们更多地访问JavaScript引擎的能力。</p>
+<p>其中，代理（Proxy）是一种可以拦截并改变底层JavaScript引擎操作的包装器。</p>
+<h2 id="代理和反射"><a href="#代理和反射" class="headerlink" title="代理和反射"></a>代理和反射</h2><h3 id="什么是代理"><a href="#什么是代理" class="headerlink" title="什么是代理"></a>什么是代理</h3><p>那么什么是代理呢？MDN是这样定义的</p>
+<blockquote>
+<p>Proxy 对象用于定义基本操作的自定义行为（如属性查找，赋值，枚举，函数调用等）。</p>
+</blockquote>
+<p>这么看起来，好像Proxy这个内建对象允许我们可以自定义一些JavaScript引擎已有的一些基本操作。但是，代理这个词体现在哪里呢？</p>
+<p>事实上，我们需要调用new Proxy(target,handler)来创建一个target对象的代理。我们将一些自定义的行为会放在handler对象内作为其属性</p>
+<p>之后，我们在代理上做的所有操作都会通过handler中定义的陷阱来执行</p>
+<p>现在，我们来创建一个代理并且进行简单的应用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    _item: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> handler = &#123;</span><br><span class="line">    <span class="keyword">get</span>(trapTarget,key,receiver) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'这是get代理陷阱'</span>);</span><br><span class="line">        <span class="keyword">return</span> trapTarget[key];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> objProxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(obj,handler);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(objProxy._item); </span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">这是get代理陷阱</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>乍一看，是不是特别像之前提到过的ES5中的Object.defineProperty()为对象属性设置了访问器特性从而进行了拦截。</p>
+<p>的确，我们确实为属性读取操作进行了一层拦截，但是使用的方法却有大的不同。</p>
+<h3 id="什么是反射"><a href="#什么是反射" class="headerlink" title="什么是反射"></a>什么是反射</h3><p>代理用来拦截内建特性的基本操作，而反射则是在代理中提供这些基本操作。</p>
+<p>也就是说，如果我们在代理中仍旧需要内建特性，那么我们就必须得使用反射API</p>
+<h3 id="常用的代理陷阱与相应的反射API"><a href="#常用的代理陷阱与相应的反射API" class="headerlink" title="常用的代理陷阱与相应的反射API"></a>常用的代理陷阱与相应的反射API</h3><p>我们将代理要执行的一些操作称为代理陷阱。同时，每个代理陷阱都会对应一个命名和参数都相同的反射(Reflect)方法</p>
+<p>以下，是一些常用的代理陷阱及其相应的反射API</p>
+<table>
+<thead>
+<tr>
+<th>代理陷阱</th>
+<th>覆写的特性</th>
+<th>默认特性（反射API）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>get</td>
+<td>读取一个属性值</td>
+<td>Reflect.get()</td>
+</tr>
+<tr>
+<td>set</td>
+<td>写入一个属性</td>
+<td>Reflect.set()</td>
+</tr>
+<tr>
+<td>has</td>
+<td>判断对象中是否有某属性，相当于in操作符</td>
+<td>Reflect.has()</td>
+</tr>
+<tr>
+<td>deleteProperty</td>
+<td>删除某属性，相当于delete操作符</td>
+<td>Reflect.deleteProperty()</td>
+</tr>
+<tr>
+<td>getPrototypeOf</td>
+<td>返回给定对象的原型，Object.getPrototypeOf()</td>
+<td>Reflect.getPrototypeOf()</td>
+</tr>
+<tr>
+<td>setPrototypeOf</td>
+<td>设置某对象为目标对象的原型</td>
+<td>Reflect.setPrototypeOf()</td>
+</tr>
+<tr>
+<td>getOwnPropertyDescriptor</td>
+<td>获取属性描述符，Object.getOwnPropertyDescriptor()</td>
+<td>Reflect.getOwnPropertyDescriptor()</td>
+</tr>
+<tr>
+<td>defineProperty</td>
+<td>定义或修改属性的特性，Object.defineProperty()</td>
+<td>Reflect.defineProperty()</td>
+</tr>
+<tr>
+<td>apply</td>
+<td>调用一个函数</td>
+<td>Reflect.apply()</td>
+</tr>
+<tr>
+<td>construct</td>
+<td>用new调用一个函数</td>
+<td>Reflect.construct()</td>
+</tr>
+</tbody></table>
+<h2 id="一些常用陷阱及其反射的使用"><a href="#一些常用陷阱及其反射的使用" class="headerlink" title="一些常用陷阱及其反射的使用"></a>一些常用陷阱及其反射的使用</h2><h3 id="get陷阱"><a href="#get陷阱" class="headerlink" title="get陷阱"></a>get陷阱</h3><p>我们使用get陷阱来定义对象属性读取的自定义操作。</p>
+<p>get陷阱接受三个参数：</p>
+<ol>
+<li>trapTarget 代理的目标（被代理的对象），也就是源对象</li>
+<li>key 要读取的属性值</li>
+<li>receiver 代理对象</li>
+</ol>
+<p>需要记住的是，所有与陷阱相对应的反射API都接受对应陷阱接受的参数。在这里也就是说，get陷阱对应的反射API Reflect.get()也同样接受trapTarget,key,receiver这三个参数</p>
+<p>现在，我们来使用get陷阱来写个例子。我们知道，get陷阱覆写的特性是属性的读取，那么我们可以利用get陷阱来对读取操作进行重新的定义</p>
+<p>一般来说，如果某个对象中没有指定要读取的属性则会返回undefined</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    _item: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj.item); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>现在，我希望当我读取某个不存在的属性时可以通知我这个属性不存在而不是返回undefined。因为，有些存在的属性但是赋予了undefined值访问后也是返回undefined。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    _item: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj._item); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>因此，我们无法通过undefined来确定某个属性是否存在。但我们可以使用in操作符</p>
+<p>因此，我们可以这样来使用get陷阱来达到我们想要的目的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    _item: <span class="number">1</span>,</span><br><span class="line">    item: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">    <span class="keyword">get</span>(trapTarget,key,receiver) &#123;</span><br><span class="line">        <span class="comment">// 使用in操作符来判断属性是否存在</span></span><br><span class="line">        <span class="keyword">if</span>(!(key <span class="keyword">in</span> trapTarget)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'该属性不存在'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果属性存在则使用默认行为</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(trapTarget,key,receiver);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(obj,handler);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(proxy._item); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(proxy.item); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(proxy.itemA); <span class="comment">// Error: '该属性不存在'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="set陷阱"><a href="#set陷阱" class="headerlink" title="set陷阱"></a>set陷阱</h3><p>set陷阱接受以下四个参数：</p>
+<ol>
+<li>trapTarget 被代理的对象 </li>
+<li>key 要设置的属性名</li>
+<li>value 属性名对应的属性值</li>
+<li>receiver 代理</li>
+</ol>
+<p>通常，我们会在设置对象的属性时使用到set陷阱。那么，我们可以在写入的时候为写入的属性值做出限制，比如写入的属性值必须为number类型；当然，对于那些已经存在的属性，当我们要对那些属性值做出修改的时候，属性值也必须为number类型</p>
+<p>那么，我们可以这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    item: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> handler = &#123;</span><br><span class="line">    <span class="keyword">set</span>(trapTarget,key,value,receiver) &#123;</span><br><span class="line">        <span class="comment">// 判断要修改或要写入的值是否为非数值</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">isNaN</span>(value)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'写入的属性值必须为number类型'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">Reflect</span>.set(trapTarget,key,value,receiver);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> objProxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(obj,handler);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写入一个新属性</span></span><br><span class="line">objProxy._item = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj);  <span class="comment">// &#123; item: 1, _item: 2 &#125;</span></span><br><span class="line"><span class="comment">// 修改已有属性</span></span><br><span class="line">objProxy.item = <span class="string">'nice'</span>; <span class="comment">// Error: 写入的属性值必须为number类型</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="为什么Proxy远比Object-defineProperty强大"><a href="#为什么Proxy远比Object-defineProperty强大" class="headerlink" title="为什么Proxy远比Object.defineProperty强大"></a>为什么Proxy远比Object.defineProperty强大</h2><h3 id="Proxy可以监听对象属性的增加和删除"><a href="#Proxy可以监听对象属性的增加和删除" class="headerlink" title="Proxy可以监听对象属性的增加和删除"></a>Proxy可以监听对象属性的增加和删除</h3><p>我们知道在Vue2.x的版本中，数据绑定的实现中是无法监听到属性的增加和删除的。因为，在2.x版本中，通过深层次（递归）遍历每个属性（包括属性值为对象中的属性）然后使用Object.defineProperty来进行数据劫持的，因此，它只能监听属性值的变化。</p>
+<p>但是Proxy通过set陷阱就可以很方便地做到这一点</p>
+<h3 id="Proxy可以监听数组变化（使用push-pop-shift-slice等操作）"><a href="#Proxy可以监听数组变化（使用push-pop-shift-slice等操作）" class="headerlink" title="Proxy可以监听数组变化（使用push,pop,shift,slice等操作）"></a>Proxy可以监听数组变化（使用push,pop,shift,slice等操作）</h3><p>同样的，这些事情也是Object,defineProperty无法做到的，而是用proxy则可以很方便地实现。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/28/防抖与节流/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3010,240 +3300,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/10/Vue的生命周期理解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/10/Vue的生命周期理解/" itemprop="url">Vue的生命周期理解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-10T12:50:15+08:00">
-                2019-11-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.4k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  5
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Vue的生命周期"><a href="#Vue的生命周期" class="headerlink" title="Vue的生命周期"></a>Vue的生命周期</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>每个Vue实例的生命周期大致如下：创建实例，初始化数据，模板编译，挂载DOM，，更新数据然后视图重新渲染，实例销毁等一系列过程</p>
-<h3 id="各个生命周期的具体作用"><a href="#各个生命周期的具体作用" class="headerlink" title="各个生命周期的具体作用"></a>各个生命周期的具体作用</h3><p>在Vue实例的生命周期中，Vue提供了一系列相关的生命周期钩子的函数用来帮助开发者在Vue的不同生命周期阶段来添加适当的代码</p>
-<p>以下是一张Vue官方文档中的生命周期示意图</p>
-<p><img src="https://s2.ax1x.com/2019/11/10/MuEtdx.png" alt></p>
-<p>我们来详细理解以下这张生命周期示意图</p>
-<ol>
-<li><p>new Vue()阶段 创建Vue实例，这一步也就是调用Vue构造函数</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>初始化了一个空的Vue实例，此时该Vue实例对象上只有默认的一些生命周期函数和默认事件。</p>
-</li>
-<li><p>在这里有一个beforeCreate()生命周期钩子，但是在该钩子函数里我们还无法访问到data以及methods里的方法，当然更无法访问el</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">beforeCreate() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$data,<span class="keyword">this</span>.$el); <span class="comment">// undefined undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数据初始化完毕，此时data和methods可以被访问了</p>
-</li>
-<li><p>在该阶段有一个created()的钩子可以供我们调用，此时在该钩子函数中我们可以访问到data和methods内的属性了，但是此时仍然无法访问到el。因此，我们也可以看到该钩子函数是我们在所有钩子函数中最早能够访问到data和methods的阶段</p>
-</li>
-<li><p>Vue开始进行模板编译</p>
-</li>
-<li><p>当模板编译完毕后，Vue在这里提供了一个beforeMount()的生命周期钩子函数，此时render函数将开始被调用，在这个钩子里，我们已经可以访问到el属性了</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">beforeMount() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$el);</span><br><span class="line">&#125; <span class="comment">// &lt;div id="app"&gt;...&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p> 但是，在此阶段模板仅仅只是被编译好，而没有真正地替换到页面中去，我们点击上面的this.$el的输出结果可以发现：</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;input v-model=<span class="string">"value"</span> /&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123;value&#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 我们可以看到此时的输出的要挂载的节点内容并没有被真实地替换掉，模板语法仍旧存在</p>
-</li>
-<li><p>将编译好的模板真实地替换到页面中去，此时我们在mounted()钩子中就可以看到真实被渲染完毕的el</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mounted() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$el);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">&lt;div&gt;</span></span><br><span class="line"><span class="comment">    &lt;input /&gt;</span></span><br><span class="line"><span class="comment">    &lt;p&gt;123&lt;/p&gt;</span></span><br><span class="line"><span class="comment">&lt;/div&gt;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p> 此时，Vue实例已经被初始化完毕了，之后就是实例的运行阶段。</p>
-</li>
-<li><p>此时，在Vue组件运行阶段我们可能会要更新数据，当更新数据的时候，beforeUpdate钩子就会被调用，此时，data中的数据是最新的，但是还没有更新到视图中</p>
-</li>
-<li><p>虚拟DOM树重新渲染，然后更新到视图中</p>
-</li>
-<li><p>更行完毕后,updated钩子会被调用，此时数据与视图已经是同步的了</p>
-</li>
-<li><p>当vm.$destroy()实例销毁函数显式被调用时，便会触发触发 beforeDestroy 和 destroyed 的钩子。</p>
-</li>
-<li><p>在实例销毁之前我们可以调用beforeDestroy钩子，此时实例并没有被销毁，该组件所有的功能都还是可用的</p>
-</li>
-<li><p>destroyed()调用时，此时实例已经被销毁完毕了，该组件的所有功能都不再可用</p>
-</li>
-</ol>
-<h2 id="各个生命周期适合开发者适合做的操作"><a href="#各个生命周期适合开发者适合做的操作" class="headerlink" title="各个生命周期适合开发者适合做的操作"></a>各个生命周期适合开发者适合做的操作</h2><h3 id="异步操作应该在哪个生命周期阶段进行"><a href="#异步操作应该在哪个生命周期阶段进行" class="headerlink" title="异步操作应该在哪个生命周期阶段进行"></a>异步操作应该在哪个生命周期阶段进行</h3><p>首先我们需要确认异步操作会不会阻塞Vue的整个生命周期的进行</p>
-<p>我们可以使用宏任务setTimeout并且不设置过时时间来模拟异步操作的进行并修改data中的数据，具体实现如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 确定脚本开始运行的时间</span></span><br><span class="line"><span class="keyword">let</span> start = <span class="built_in">Date</span>.now();</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: <span class="number">123</span></span><br><span class="line">    &#125;,</span><br><span class="line">    created() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`created time <span class="subst">$&#123;<span class="built_in">Date</span>.now()-start&#125;</span>s`</span>);</span><br><span class="line">        <span class="comment">// 没有设置宏任务setTimeout的过时时间</span></span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">Date</span>.now()-start&#125;</span>s change the value to 321`</span>);</span><br><span class="line">            <span class="keyword">this</span>.value = <span class="number">321</span>;</span><br><span class="line">        &#125;)        </span><br><span class="line">    &#125;,</span><br><span class="line">    mounted() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`mounted time <span class="subst">$&#123;<span class="built_in">Date</span>.now()-start&#125;</span>s`</span>);        </span><br><span class="line">    &#125;,</span><br><span class="line">    updated() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">Date</span>.now()-start&#125;</span>s updated the value to <span class="subst">$&#123;<span class="keyword">this</span>.value&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">created time 2s</span></span><br><span class="line"><span class="comment">mounted time 29s</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">140s change the value to 321</span></span><br><span class="line"><span class="comment">141s start updating the value to 321</span></span><br><span class="line"><span class="comment">143s updated the value to 321</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>我们可以看到宏任务setTimeout在Vue实例完全初始化后，也就是mounted阶段后才会开始运行。因此，对于异步请求数据操作也只会在Vue实例初始化完毕后（mounted阶段后）才会进行，之后的数据修改或赋值就会直接触发beforeUpdate以及后续进行的updated钩子</p>
-<p>通过以上的输出结果，我们可以得出一个结论：</p>
-<blockquote>
-<p>异步操作并不会阻塞Vue初始化生命周期的进行。</p>
-</blockquote>
-<p>因此，我们将异步操作放在created，beforeMount，mounted这三个钩子里都是OK的。因为这三个阶段data数据都已经被初始化好了，我们可以在异步操作的回调中对data中的数据进行修改或赋值了</p>
-<p>但是，为了减少用户的等待时间，我们最好在created阶段进行异步操作。因为异步任务都会被放入event table中进行，越早声明也就代表着被运行的时间越早，因此也就越有可能会在异步回调中的任务队列优先被执行回调</p>
-<h3 id="DOM访问操作应该在哪个生命周期阶段进行"><a href="#DOM访问操作应该在哪个生命周期阶段进行" class="headerlink" title="DOM访问操作应该在哪个生命周期阶段进行"></a>DOM访问操作应该在哪个生命周期阶段进行</h3><p>只有在Vue实例挂在到DOM节点时，我们才可以去访问和操作DOM，因此，DOM访问操作应该在mounted阶段进行</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3296,7 +3352,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-count">140</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3377,7 +3433,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">155k</span>
+    <span title="Site words total count">156.7k</span>
   
 </div>
 
@@ -3407,7 +3463,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共155k字</span>
+  <span class="post-count">博客全站共156.7k字</span>
 </div>
         
 

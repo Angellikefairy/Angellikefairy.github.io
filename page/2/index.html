@@ -307,6 +307,240 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/10/Vue的生命周期理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/10/Vue的生命周期理解/" itemprop="url">Vue的生命周期理解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-10T12:50:15+08:00">
+                2019-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Vue的生命周期"><a href="#Vue的生命周期" class="headerlink" title="Vue的生命周期"></a>Vue的生命周期</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>每个Vue实例的生命周期大致如下：创建实例，初始化数据，模板编译，挂载DOM，，更新数据然后视图重新渲染，实例销毁等一系列过程</p>
+<h3 id="各个生命周期的具体作用"><a href="#各个生命周期的具体作用" class="headerlink" title="各个生命周期的具体作用"></a>各个生命周期的具体作用</h3><p>在Vue实例的生命周期中，Vue提供了一系列相关的生命周期钩子的函数用来帮助开发者在Vue的不同生命周期阶段来添加适当的代码</p>
+<p>以下是一张Vue官方文档中的生命周期示意图</p>
+<p><img src="https://s2.ax1x.com/2019/11/10/MuEtdx.png" alt></p>
+<p>我们来详细理解以下这张生命周期示意图</p>
+<ol>
+<li><p>new Vue()阶段 创建Vue实例，这一步也就是调用Vue构造函数</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化了一个空的Vue实例，此时该Vue实例对象上只有默认的一些生命周期函数和默认事件。</p>
+</li>
+<li><p>在这里有一个beforeCreate()生命周期钩子，但是在该钩子函数里我们还无法访问到data以及methods里的方法，当然更无法访问el</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">beforeCreate() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$data,<span class="keyword">this</span>.$el); <span class="comment">// undefined undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数据初始化完毕，此时data和methods可以被访问了</p>
+</li>
+<li><p>在该阶段有一个created()的钩子可以供我们调用，此时在该钩子函数中我们可以访问到data和methods内的属性了，但是此时仍然无法访问到el。因此，我们也可以看到该钩子函数是我们在所有钩子函数中最早能够访问到data和methods的阶段</p>
+</li>
+<li><p>Vue开始进行模板编译</p>
+</li>
+<li><p>当模板编译完毕后，Vue在这里提供了一个beforeMount()的生命周期钩子函数，此时render函数将开始被调用，在这个钩子里，我们已经可以访问到el属性了</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">beforeMount() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$el);</span><br><span class="line">&#125; <span class="comment">// &lt;div id="app"&gt;...&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> 但是，在此阶段模板仅仅只是被编译好，而没有真正地替换到页面中去，我们点击上面的this.$el的输出结果可以发现：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;input v-model=<span class="string">"value"</span> /&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123;value&#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 我们可以看到此时的输出的要挂载的节点内容并没有被真实地替换掉，模板语法仍旧存在</p>
+</li>
+<li><p>将编译好的模板真实地替换到页面中去，此时我们在mounted()钩子中就可以看到真实被渲染完毕的el</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mounted() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$el);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">&lt;div&gt;</span></span><br><span class="line"><span class="comment">    &lt;input /&gt;</span></span><br><span class="line"><span class="comment">    &lt;p&gt;123&lt;/p&gt;</span></span><br><span class="line"><span class="comment">&lt;/div&gt;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p> 此时，Vue实例已经被初始化完毕了，之后就是实例的运行阶段。</p>
+</li>
+<li><p>此时，在Vue组件运行阶段我们可能会要更新数据，当更新数据的时候，beforeUpdate钩子就会被调用，此时，data中的数据是最新的，但是还没有更新到视图中</p>
+</li>
+<li><p>虚拟DOM树重新渲染，然后更新到视图中</p>
+</li>
+<li><p>更行完毕后,updated钩子会被调用，此时数据与视图已经是同步的了</p>
+</li>
+<li><p>当vm.$destroy()实例销毁函数显式被调用时，便会触发触发 beforeDestroy 和 destroyed 的钩子。</p>
+</li>
+<li><p>在实例销毁之前我们可以调用beforeDestroy钩子，此时实例并没有被销毁，该组件所有的功能都还是可用的</p>
+</li>
+<li><p>destroyed()调用时，此时实例已经被销毁完毕了，该组件的所有功能都不再可用</p>
+</li>
+</ol>
+<h2 id="各个生命周期适合开发者适合做的操作"><a href="#各个生命周期适合开发者适合做的操作" class="headerlink" title="各个生命周期适合开发者适合做的操作"></a>各个生命周期适合开发者适合做的操作</h2><h3 id="异步操作应该在哪个生命周期阶段进行"><a href="#异步操作应该在哪个生命周期阶段进行" class="headerlink" title="异步操作应该在哪个生命周期阶段进行"></a>异步操作应该在哪个生命周期阶段进行</h3><p>首先我们需要确认异步操作会不会阻塞Vue的整个生命周期的进行</p>
+<p>我们可以使用宏任务setTimeout并且不设置过时时间来模拟异步操作的进行并修改data中的数据，具体实现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 确定脚本开始运行的时间</span></span><br><span class="line"><span class="keyword">let</span> start = <span class="built_in">Date</span>.now();</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: <span class="number">123</span></span><br><span class="line">    &#125;,</span><br><span class="line">    created() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`created time <span class="subst">$&#123;<span class="built_in">Date</span>.now()-start&#125;</span>s`</span>);</span><br><span class="line">        <span class="comment">// 没有设置宏任务setTimeout的过时时间</span></span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">Date</span>.now()-start&#125;</span>s change the value to 321`</span>);</span><br><span class="line">            <span class="keyword">this</span>.value = <span class="number">321</span>;</span><br><span class="line">        &#125;)        </span><br><span class="line">    &#125;,</span><br><span class="line">    mounted() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`mounted time <span class="subst">$&#123;<span class="built_in">Date</span>.now()-start&#125;</span>s`</span>);        </span><br><span class="line">    &#125;,</span><br><span class="line">    updated() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">Date</span>.now()-start&#125;</span>s updated the value to <span class="subst">$&#123;<span class="keyword">this</span>.value&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">created time 2s</span></span><br><span class="line"><span class="comment">mounted time 29s</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">140s change the value to 321</span></span><br><span class="line"><span class="comment">141s start updating the value to 321</span></span><br><span class="line"><span class="comment">143s updated the value to 321</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到宏任务setTimeout在Vue实例完全初始化后，也就是mounted阶段后才会开始运行。因此，对于异步请求数据操作也只会在Vue实例初始化完毕后（mounted阶段后）才会进行，之后的数据修改或赋值就会直接触发beforeUpdate以及后续进行的updated钩子</p>
+<p>通过以上的输出结果，我们可以得出一个结论：</p>
+<blockquote>
+<p>异步操作并不会阻塞Vue初始化生命周期的进行。</p>
+</blockquote>
+<p>因此，我们将异步操作放在created，beforeMount，mounted这三个钩子里都是OK的。因为这三个阶段data数据都已经被初始化好了，我们可以在异步操作的回调中对data中的数据进行修改或赋值了</p>
+<p>但是，为了减少用户的等待时间，我们最好在created阶段进行异步操作。因为异步任务都会被放入event table中进行，越早声明也就代表着被运行的时间越早，因此也就越有可能会在异步回调中的任务队列优先被执行回调</p>
+<h3 id="DOM访问操作应该在哪个生命周期阶段进行"><a href="#DOM访问操作应该在哪个生命周期阶段进行" class="headerlink" title="DOM访问操作应该在哪个生命周期阶段进行"></a>DOM访问操作应该在哪个生命周期阶段进行</h3><p>只有在Vue实例挂在到DOM节点时，我们才可以去访问和操作DOM，因此，DOM访问操作应该在mounted阶段进行</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/09/MVVM模式的理解以及双向数据绑定/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2962,255 +3196,6 @@ scrollTo()</code></pre></li>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/22/ts新手的vscode环境配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/22/ts新手的vscode环境配置/" itemprop="url">ts新手的vscode环境配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-22T20:25:15+08:00">
-                2019-10-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
-                    <span itemprop="name">TypeScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  805
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="安装TypeScript"><a href="#安装TypeScript" class="headerlink" title="安装TypeScript"></a>安装TypeScript</h2><p>通过npm/cnpm来安装TypeScript的命令行工具</p>
-<blockquote>
-<p>cnpm i -g typescript</p>
-</blockquote>
-<h2 id="创建TypeSscript项目配置文件"><a href="#创建TypeSscript项目配置文件" class="headerlink" title="创建TypeSscript项目配置文件"></a>创建TypeSscript项目配置文件</h2><h3 id="tsconfig-json概述"><a href="#tsconfig-json概述" class="headerlink" title="tsconfig.json概述"></a>tsconfig.json概述</h3><p>如果一个目录下存在一个tsconfig.json文件，那么它意味着这个目录是TypeScript项目的根目录。 tsconfig.json文件中指定了用来编译这个项目的根文件和编译选项。 </p>
-<p>一个项目可以通过以下方式之一来编译：</p>
-<ol>
-<li><p>使用tsconfig.json<br>不带任何输入文件的情况下调用tsc，编译器会从当前目录开始去查找tsconfig.json文件，逐级向上搜索父目录。</p>
-</li>
-<li><p>不带任何输入文件的情况下调用tsc，且使用命令行参数–project（或-p）指定一个包含tsconfig.json文件的目录。<br>当命令行上指定了输入文件时，tsconfig.json文件会被忽略。</p>
-</li>
-</ol>
-<h3 id="创建与配置"><a href="#创建与配置" class="headerlink" title="创建与配置"></a>创建与配置</h3><ol>
-<li><p>创建tsconfig.json文件</p>
-<blockquote>
-<p>tsc –init</p>
-</blockquote>
-</li>
-<li><p>修改配置项</p>
-<p> 因为ts文件会被编译生成一个js文件。因此，为了文件结构的清晰。我们可以创建ts源文件夹和js输出文件夹。并在tsconfig.json文件修改配置项</p>
-<p> 以下为我的配置项</p>
- <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"compilerOptions"</span>: &#123;</span><br><span class="line">        <span class="attr">"target"</span>: <span class="string">"es5"</span>,         </span><br><span class="line">        <span class="attr">"module"</span>: <span class="string">"commonjs"</span>,</span><br><span class="line">        <span class="attr">"sourceMap"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"strict"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"outDir"</span>: <span class="string">"./js"</span>, </span><br><span class="line">        <span class="attr">"rootDir"</span>: <span class="string">"./ts"</span>,</span><br><span class="line">        <span class="attr">"noImplicitAny"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"strictNullChecks"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"alwaysStrict"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"esModuleInterop"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>更多配置项信息请查看<a href="https://www.tslang.cn/docs/handbook/tsconfig-json.html" target="_blank" rel="noopener">TypeScript官方文档</a></p>
-<h2 id="创建ts文件，并编写ts程序"><a href="#创建ts文件，并编写ts程序" class="headerlink" title="创建ts文件，并编写ts程序"></a>创建ts文件，并编写ts程序</h2><p>我们在ts文件夹中新建一个hello.ts，并键入如下ts程序</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str: <span class="built_in">string</span> = <span class="string">'123'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br></pre></td></tr></table></figure>
-
-<h2 id="自动编译"><a href="#自动编译" class="headerlink" title="自动编译"></a>自动编译</h2><p>我们可以采取两种方式来进行自动编译</p>
-<ol>
-<li><p>命令行</p>
-<blockquote>
-<p>tsc –watch  /  tsc -w</p>
-</blockquote>
-<p> 在监视模式下运行编译器。会监视输出文件，在它们改变时重新编译。</p>
-</li>
-<li><p>菜单栏</p>
-<p> 我们可以在vscode菜单栏中点击</p>
-<blockquote>
-<p>终端 -&gt; 运行任务</p>
-</blockquote>
-<p> 可以看到两个可选项</p>
-<ol>
-<li>tsc:build （进行一次编译）</li>
-<li>tsc:watch （监测ts文件的改动进行实时编译）</li>
-</ol>
-</li>
-</ol>
-<p>这样，我们既可以在js文件夹中找到同名的编译好的js文件</p>
-<h2 id="执行ts文件"><a href="#执行ts文件" class="headerlink" title="执行ts文件"></a>执行ts文件</h2><p>我们可以利用ts-node这个npm包来帮助我们执行ts文件，而不用预先编译ts文件为js文件</p>
-<p>我们可以这样来执行</p>
-<blockquote>
-<p>npx ts-node ./ts/hello.ts</p>
-</blockquote>
-<h2 id="热加载ts文件执行"><a href="#热加载ts文件执行" class="headerlink" title="热加载ts文件执行"></a>热加载ts文件执行</h2><h3 id="nodemon监听生成的Js文件"><a href="#nodemon监听生成的Js文件" class="headerlink" title="nodemon监听生成的Js文件"></a>nodemon监听生成的Js文件</h3><p>我们不希望每次在修改ts文件之后都要重新进行ts-node来执行。因此，我想到了利用tsc -w来监视ts文件的变动，然后用nodemon来监视ts生成的js文件的变动。</p>
-<p>因此，我们可以借助concurrently这个npm包来帮助我们同时运行多个命令</p>
-<p>安装nodemon</p>
-<blockquote>
-<p>cnpm i nodemon -D</p>
-</blockquote>
-<p>在package.json添加启动命令</p>
-<blockquote>
-<p>“start”: “concurrently &quot; tsc -w&quot; &quot;nodemon js/hello.js&quot; “</p>
-</blockquote>
-<p>因为我们要在双引号中还要使用双引号，所以要使用转义符</p>
-<p>之后我们在执行npm start的时候，修改ts文件的时候就可以看到执行结果的热更新了</p>
-<h3 id="监听ts源文件"><a href="#监听ts源文件" class="headerlink" title="监听ts源文件"></a>监听ts源文件</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"watch-server"</span>:<span class="string">"nodemon --watch ./ts/app.ts -e ts,tsx --exec ts-node ./ts/app.ts"</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="编写node程序"><a href="#编写node程序" class="headerlink" title="编写node程序"></a>编写node程序</h2><p>Node.js 不是内置对象的一部分，如果想用 TypeScript 写 Node.js，则需要引入第三方声明文件：</p>
-<blockquote>
-<p>cnpm i @types/node -D</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3263,7 +3248,7 @@ scrollTo()</code></pre></li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-count">140</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3344,7 +3329,7 @@ scrollTo()</code></pre></li>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">155k</span>
+    <span title="Site words total count">156.7k</span>
   
 </div>
 
@@ -3374,7 +3359,7 @@ scrollTo()</code></pre></li>
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共155k字</span>
+  <span class="post-count">博客全站共156.7k字</span>
 </div>
         
 
