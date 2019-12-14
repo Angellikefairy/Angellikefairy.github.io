@@ -307,6 +307,226 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://angellike_fairy.gitee.io/angellikefairy/2019/12/14/在TS中使用混合/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/14/在TS中使用混合/" itemprop="url">在TS中使用混合</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-14T13:33:17+08:00">
+                2019-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="为什么需要混合"><a href="#为什么需要混合" class="headerlink" title="为什么需要混合"></a>为什么需要混合</h2><p>在TS中，类语法遵循严格的单继承，我们无法通过extends语法来实现多继承</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Bat <span class="keyword">extends</span> Mammal , WingedAnimal &#123; <span class="comment">// Error: 类只能扩展一个类</span></span><br><span class="line">   <span class="comment">// ...  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是有时候我们又会遇到一种需求：从可重用组件中创建一个新类。也就是说，我们希望新创建的类可以同时拥有可重用组件中的方法。然而，多继承已经在语法上就予以否决了。因此，我们需要混合的方式来解决这个问题</p>
+<h2 id="什么是混合"><a href="#什么是混合" class="headerlink" title="什么是混合"></a>什么是混合</h2><p>首先，我们需要明确的是：我们无法使用extends语法，因此，我们使用了implements语法来做替代。在这里，我们把基类当做了接口而不是类，因此，在继承的时候，我们只使用了它们的类型定义而非实现。那么，我们需要考虑的就是如何在想要被扩展的类中实现那些接口。</p>
+<p>混合可以帮助我们解决这个问题。</p>
+<p>混合是一个函数。它需要两个参数：</p>
+<ol>
+<li>构造函数（需要扩展的类）</li>
+<li>可重用组件（想要被继承的类）</li>
+</ol>
+<p>之后，混合函数会遍历基类（类实质上是一个构造函数）的原型对象中的所有属性，并复制到我们所需要扩展的类上</p>
+<h2 id="混合的实例"><a href="#混合的实例" class="headerlink" title="混合的实例"></a>混合的实例</h2><p>我们现在来使用混合的方式来实现多继承的替代（事实上这并不是多继承）</p>
+<h3 id="实例1（初级版本：类直接继承多个接口）"><a href="#实例1（初级版本：类直接继承多个接口）" class="headerlink" title="实例1（初级版本：类直接继承多个接口）"></a>实例1（初级版本：类直接继承多个接口）</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明并定义基类A,B</span></span><br><span class="line"><span class="keyword">class</span> A &#123;</span><br><span class="line">    basicA() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'基类A'</span>);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> B &#123;</span><br><span class="line">    basicB() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'基类B'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明想要被扩展的类C implements A,B</span></span><br><span class="line"><span class="keyword">class</span> C <span class="keyword">implements</span> A,B &#123;</span><br><span class="line">    <span class="comment">// 我们需要预先为继承过来的属性做好类型定义，否则如果后续有调用这些属性的话编译阶段则无法通过</span></span><br><span class="line">    basicA: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">    basicB: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现混合函数applyMixins</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">applyMixins</span>(<span class="params">derivedCtor: <span class="built_in">any</span>, baseCtors: <span class="built_in">Array</span>&lt;<span class="built_in">any</span>&gt;</span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">    baseCtors.forEach(<span class="function"><span class="params">baseCtor</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">Object</span>.getOwnPropertyNames(baseCtor.prototype).forEach(<span class="function"><span class="params">name</span> =&gt;</span> &#123;</span><br><span class="line">            derivedCtor.prototype[name] = baseCtor.prototype[name];</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 应用混合函数</span></span><br><span class="line">applyMixins(C,[A,B]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> C();</span><br><span class="line">c.basicA();</span><br><span class="line">c.basicB();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">基类A</span></span><br><span class="line"><span class="comment">基类B</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是：</p>
+<blockquote>
+<p>我们需要为将要mixin进来的属性方法创建出占位属性。这告诉编译器这些成员在运行时是可用的。否则如果后续有调用这些属性的话编译阶段则无法通过</p>
+</blockquote>
+<h3 id="实例2（改进版本：接口继承多个接口，然后类继承该接口）"><a href="#实例2（改进版本：接口继承多个接口，然后类继承该接口）" class="headerlink" title="实例2（改进版本：接口继承多个接口，然后类继承该接口）"></a>实例2（改进版本：接口继承多个接口，然后类继承该接口）</h3><p>在实例1中，我们需要在想要被扩展的类中预先创立一些站位属性。那么，我们可以避免这个行为吗？</p>
+<p>当然可以。我们可以让这个类继承某个接口，而这个接口会继承那些基类。我们知道，当接口继承某个类的时候，它会继承类的成员但不包括其实现。这就好像接口声明了所有类中存在的成员，但并没有提供具体实现一样。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> A &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> B &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> C implements A,B &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，这个接口就会具有所有基类的成员但不包括它们的实现。接着，我们只需要定义与接口相同名的类，利用声明合并的特性，那么我们就不需要预先创建占位属性。</p>
+<p>完整实现如下：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> A &#123;</span><br><span class="line">    staticA() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'基类A'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> B &#123;</span><br><span class="line">    staticB() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'基类B'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接口C多继承类A，B（只继承成员而不继承实现）</span></span><br><span class="line"><span class="keyword">interface</span> C <span class="keyword">extends</span> A,B &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 类C与接口C同名，由于声明合并的特性，因此，该类C会与接口C合并，从而我们不需要显式继承该接口</span></span><br><span class="line"><span class="keyword">class</span> C &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">applyMixins</span>(<span class="params">derivedCtor: <span class="built_in">any</span>, baseCtors: <span class="built_in">Array</span>&lt;<span class="built_in">any</span>&gt;</span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">    baseCtors.forEach(<span class="function"><span class="params">baseCtor</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">Object</span>.getOwnPropertyNames(baseCtor.prototype).forEach(<span class="function"><span class="params">name</span> =&gt;</span> &#123;</span><br><span class="line">            derivedCtor.prototype[name] = baseCtor.prototype[name];</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">applyMixins(C,[A,B]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> C();</span><br><span class="line">c.staticA();</span><br><span class="line">c.staticB();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">基类A</span></span><br><span class="line"><span class="comment">基类B</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="应用装饰器进行混合"><a href="#应用装饰器进行混合" class="headerlink" title="应用装饰器进行混合"></a>应用装饰器进行混合</h2><p>因为混合函数就是用来修改类的成员，因此，我们很容易可以想到是否可以将以上混合函数applyMixins的调用改为类装饰器</p>
+<p>事实上当然是可行的：</p>
+<p>定义一个装饰器工厂函数用来返回一个装饰器</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mixins</span>(<span class="params">baseCtors: <span class="built_in">Array</span>&lt;<span class="built_in">any</span>&gt;</span>): <span class="title">Function</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">applyMixins</span>(<span class="params">constructor: <span class="built_in">Function</span></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">        baseCtors.forEach(<span class="function"><span class="params">baseCtor</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">Object</span>.getOwnPropertyNames(baseCtor.prototype).forEach(<span class="function"><span class="params">name</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">constructor</span>.prototype[name] = baseCtor.prototype[name];</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>应用装饰器</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> C <span class="keyword">extends</span> A,B &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@mixins</span>([A,B])</span><br><span class="line"><span class="keyword">class</span> C &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> C();</span><br><span class="line">c.staticA();</span><br><span class="line">c.staticB();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">基类A</span></span><br><span class="line"><span class="comment">基类B</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="混合的限制"><a href="#混合的限制" class="headerlink" title="混合的限制"></a>混合的限制</h2><p>我们之前说混合是一种可以替代多继承的一种可行的方式。但我们知道多继承只能是一个类继承多个接口，因此，我们在继承多个类的时候使用的是implements关键字，从而将类视作是接口，然后，我们使用混合函数的方式来将这些接口实现。</p>
+<p>但如果我们去看混合函数就会发现，我们通过遍历基类上的成员来进行复制。那么如果两个类中有成员是重名的，那么被扩展的类只能继承在给定数组中较后位置的成员值</p>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> A &#123;</span><br><span class="line">    staticA() &#123;&#125;</span><br><span class="line">    <span class="keyword">get</span>() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'基类A中的get方法'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> B &#123;</span><br><span class="line">    <span class="keyword">static</span> B() &#123;&#125;</span><br><span class="line">    <span class="keyword">get</span>() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'基类B中的get方法'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要利用声明合并的特性，因此，我们需要定义两个与类型相同的接口</span></span><br><span class="line"><span class="keyword">interface</span> C <span class="keyword">extends</span> A,B &#123;&#125;</span><br><span class="line"><span class="keyword">interface</span> D <span class="keyword">extends</span> A,B &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@mixins</span>([A,B])</span><br><span class="line"><span class="keyword">class</span> C &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@mixins</span>([B,A])</span><br><span class="line"><span class="keyword">class</span> D &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = <span class="keyword">new</span> C();</span><br><span class="line"><span class="keyword">let</span> d = <span class="keyword">new</span> D();</span><br><span class="line"></span><br><span class="line">c.get();</span><br><span class="line">d.get();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">基类B中的get方法</span></span><br><span class="line"><span class="comment">基类A中的get方法</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<blockquote>
+<p>如果不使用声明合并的特性，那么一个类继承某个接口则必须要实现这个接口</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://angellike_fairy.gitee.io/angellikefairy/2019/12/09/代理proxy和反射Reflection的基本使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2705,606 +2925,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/11/Vue的一些零散知识点总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/11/Vue的一些零散知识点总结/" itemprop="url">Vue的一些零散知识点总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-11T13:47:44+08:00">
-                2019-11-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  7.7k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  32
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="v-if与v-show的区别"><a href="#v-if与v-show的区别" class="headerlink" title="v-if与v-show的区别"></a>v-if与v-show的区别</h2><p>官方文档对于这两个指令的定义：</p>
-<ul>
-<li><p>v-show：根据表达式之真假值，切换元素的 display CSS属性。</p>
-</li>
-<li><p>v-if: 根据表达式的值的真假条件渲染元素。在切换时元素及它的数据绑定 / 组件被销毁并重建。如果元素是 &lt;template&gt; ，将提出它的内容作为条件块。</p>
-</li>
-</ul>
-<p>我们通过实际的例子来区分这两个指令的区别：</p>
-<h3 id="v-show的渲染情况"><a href="#v-show的渲染情况" class="headerlink" title="v-show的渲染情况"></a>v-show的渲染情况</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-show</span>=<span class="string">"bool"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>当bool值为真时，渲染情况如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>123<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>当bool值为假时，渲染情况发生了如下变化：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">styel</span>=<span class="string">"display:none;"</span>&gt;</span>123<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>我们可以看到，当使用v-show时，该节点会被添加到DOM树中，始终会被渲染。切换v-show的值只是简单的切换元素的display元素而已</p>
-<h4 id="display与opacity与visibility的区别"><a href="#display与opacity与visibility的区别" class="headerlink" title="display与opacity与visibility的区别"></a>display与opacity与visibility的区别</h4><p>当v-show为false时，vue会将该元素的style属性的display属性设置为none。</p>
-<p>那么，对于其他两种也可以将元素隐藏的css方式，这三种有什么区别呢？</p>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>属性值</th>
-<th>是否可见</th>
-<th>是否占用布局</th>
-<th>是否可以被点击</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>display</td>
-<td>none</td>
-<td>不可见</td>
-<td>不占用</td>
-<td>不能</td>
-</tr>
-<tr>
-<td>opacity</td>
-<td>0</td>
-<td>不可见</td>
-<td>占用</td>
-<td>能</td>
-</tr>
-<tr>
-<td>visibility</td>
-<td>hidden</td>
-<td>不可见</td>
-<td>占用</td>
-<td>不能</td>
-</tr>
-</tbody></table>
-<h3 id="v-if的渲染情况"><a href="#v-if的渲染情况" class="headerlink" title="v-if的渲染情况"></a>v-if的渲染情况</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">"bool"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>当bool值为真时，渲染情况如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>123<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>当bool值为假时，渲染情况发生了如下变化：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!----&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>我们可以看到，当使用v-if时，如果v-if的值为false，那么该节点就不会被添加到DOM树中，当然也不会被渲染。只有，当v-if的值为true时，该节点才会被正常渲染</p>
-<p>另外，我们也可以使用v-else与v-if进行配合</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">"bool"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">v-else</span>&gt;</span>&#123;&#123;anotherValue&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="多元素条件渲染（v-if支持-v-show不支持）"><a href="#多元素条件渲染（v-if支持-v-show不支持）" class="headerlink" title="多元素条件渲染（v-if支持,v-show不支持）"></a>多元素条件渲染（v-if支持,v-show不支持）</h3><p>以上我们使用v-if和v-show都是对单个元素进行条件渲染，那么如果想对多个元素一起进行条件渲染呢？</p>
-<p>vue允许我们在&lt;template&gt;元素上使用v-if来对多个元素进行一起条件渲染。</p>
-<p>此时vue会把 &lt;template&gt; 元素当做不可见的包裹元素，并在上面使用 v-if。最终的渲染结果将不包含 &lt;template&gt; 元素。</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-if</span>=<span class="string">"bool"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;value1&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;value2&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;value3&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-else</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;anotherValue&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"changeIf"</span>&gt;</span>change<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>那么v-show呢？它支持多元素条件渲染吗？遗憾的是，它并不支持。</p>
-<blockquote>
-<p>注意，v-show 不支持 &lt;template&gt; 元素，也不支持 v-else</p>
-</blockquote>
-<h3 id="v-if与v-show区别总结"><a href="#v-if与v-show区别总结" class="headerlink" title="v-if与v-show区别总结"></a>v-if与v-show区别总结</h3><p>由以上的示例我们可以看到：</p>
-<ol>
-<li>v-if是真正的条件渲染，它会根据条件的真值来决定是否将该DOM元素加入或移除DOM树</li>
-<li>v-show会一直渲染该DOM元素，也就是该DOM元素一直在DOM树上。只是，简单地切换该元素的style属性中的display而已</li>
-</ol>
-<p>因此，v-if有更高的切换开销，而v-show有更高的初始渲染开销。如果，元素需要频繁的切换的话，那么使用v-show更好，反之，使用v-if较好</p>
-<h2 id="除了数组，我们还可以给v-for传递什么参数"><a href="#除了数组，我们还可以给v-for传递什么参数" class="headerlink" title="除了数组，我们还可以给v-for传递什么参数"></a>除了数组，我们还可以给v-for传递什么参数</h2><p>通常来说，我们一般会传递v-for一个数组来让vue进行列表渲染</p>
-<p>但事实上，除了数组，我们还可以传递给v-for更多类型的参数。官方文档并没有太多的提及传递的参数类型限制。但是，我们可以从源码中找到答案：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; isObject, isDef, hasSymbol &#125; <span class="keyword">from</span> <span class="string">'core/util/index'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Runtime helper for rendering v-for lists.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">renderList</span> (<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  val: <span class="built_in">any</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  render: (</span></span></span><br><span class="line"><span class="function"><span class="params">    val: <span class="built_in">any</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    keyOrIndex: <span class="built_in">string</span> | <span class="built_in">number</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    index?: <span class="built_in">number</span></span></span></span><br><span class="line"><span class="function"><span class="params">  ) =&gt; VNode</span></span></span><br><span class="line"><span class="function"><span class="params"></span>): ?<span class="title">Array</span>&lt;<span class="title">VNode</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> ret: ?<span class="built_in">Array</span>&lt;VNode&gt;, i, l, keys, key</span><br><span class="line">  <span class="comment">// 如果传递的参数是数组或者是字符串，那么生成的新数组的元素为数组元素或是字符串中的每个字符</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(val) || <span class="keyword">typeof</span> val === <span class="string">'string'</span>) &#123;</span><br><span class="line">    ret = <span class="keyword">new</span> <span class="built_in">Array</span>(val.length)</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>, l = val.length; i &lt; l; i++) &#123;</span><br><span class="line">      ret[i] = render(val[i], i)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> val === <span class="string">'number'</span>) &#123;</span><br><span class="line">    <span class="comment">// 如果传递的参数是number，那么生成一个数组，数组元素为1到该number的值</span></span><br><span class="line">    ret = <span class="keyword">new</span> <span class="built_in">Array</span>(val)</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; val; i++) &#123;</span><br><span class="line">      ret[i] = render(i + <span class="number">1</span>, i)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isObject(val)) &#123; <span class="comment">// 传递的参数为对象类型，需要进行进一步的判断</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果传递的对象可迭代，即具有Symbol.iterator生成器方法</span></span><br><span class="line">    <span class="keyword">if</span> (hasSymbol &amp;&amp; val[Symbol.iterator]) &#123;</span><br><span class="line">      ret = []</span><br><span class="line">      <span class="keyword">const</span> iterator: Iterator&lt;<span class="built_in">any</span>&gt; = val[Symbol.iterator]()</span><br><span class="line">      <span class="keyword">let</span> result = iterator.next()</span><br><span class="line">      <span class="keyword">while</span> (!result.done) &#123;</span><br><span class="line">        ret.push(render(result.value, ret.length))</span><br><span class="line">        result = iterator.next()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 该对象为不可迭代对象，一般为用户自定义对象，那么使用object.keys遍历它（因此，如果对象中有不可枚举属性，则该属性值无法得到）</span></span><br><span class="line">      keys = <span class="built_in">Object</span>.keys(val)</span><br><span class="line">      ret = <span class="keyword">new</span> <span class="built_in">Array</span>(keys.length)</span><br><span class="line">      <span class="keyword">for</span> (i = <span class="number">0</span>, l = keys.length; i &lt; l; i++) &#123;</span><br><span class="line">        key = keys[i]</span><br><span class="line">        ret[i] = render(val[key], key, i)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (!isDef(ret)) &#123;</span><br><span class="line">    ret = []</span><br><span class="line">  &#125;</span><br><span class="line">  (ret: <span class="built_in">any</span>)._isVList = <span class="literal">true</span></span><br><span class="line">  <span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>读完上面这段源码后，可以做个总结：<br>无论我们传递什么类型的数据给v-if，vue层面会将该数据进行转化得到一个数组再进行列表渲染。</p>
-<p>分类来说：</p>
-<ol>
-<li>如果为string，那么会得到一个字符数组</li>
-<li>如果为number，那么数组将会是[1,2,3…,number];</li>
-<li>如果为数组，那么以该数组建立新数组</li>
-<li>如果为对象，又要分两类<ol>
-<li>如果为可迭代对象（集合对象：数组，Map，Set，字符等其他有Symbol.iterator生成器方法的对象）那么将迭代的值存入新数组</li>
-<li>如果为不可迭代对象，那么使用Object.keys()方法将得到的属性值存入新数组；因此，不会包括不可枚举属性的属性值</li>
-</ol>
-</li>
-</ol>
-<h2 id="数组和对象更新时需要注意的地方"><a href="#数组和对象更新时需要注意的地方" class="headerlink" title="数组和对象更新时需要注意的地方"></a>数组和对象更新时需要注意的地方</h2><p>我们知道，在进行数据双向绑定的时候。vue会将data中的每个属性和子属性使用Object.defineProperty变为访问器属性。当我们修改这些属性的属性值时，就会触发setter函数，从而引起视图变化。</p>
-<p>但是，这个Object.defineProperty方法只能对具有属性的对象使用，那么vue是怎么做到对数组的监听呢？</p>
-<p>这里只给出总体代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Observe a list of Array items.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">observeArray (items: <span class="built_in">Array</span>&lt;any&gt;) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, l = items.length; i &lt; l; i++) &#123;</span><br><span class="line">    observe(items[i])  <span class="comment">// observe 功能为监测数据的变化</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>具体的，之后再深入的过程中会做出更加详细的解释s</p>
-<p>然而，我们要注意，这个数据双向绑定的过程是发生在vue生命周期的挂载节点之后的。也就是说，当vue实例完全初始化完毕进入运行状态后，我们进行以下的操作将不会使数据进行响应：</p>
-<p>对于数组：</p>
-<ol>
-<li>当你利用索引直接设置一个数组项时，例如：vm.items[indexOfItem] = newValue</li>
-<li>当你修改数组的长度时，例如：vm.items.length = newLength</li>
-</ol>
-<p>对于对象：</p>
-<ol>
-<li>添加对象属性</li>
-<li>删除对象属性</li>
-</ol>
-<p>对于以上的情况，我们都可以使用vm.$set来解决</p>
-<h2 id="Vue为DOM元素设置和获取自定义属性"><a href="#Vue为DOM元素设置和获取自定义属性" class="headerlink" title="Vue为DOM元素设置和获取自定义属性"></a>Vue为DOM元素设置和获取自定义属性</h2><p>在html5中，我们使用 data-* 属性来嵌入自定义数据：</p>
-<blockquote>
-<p>data-* 属性赋予我们在所有 HTML 元素上嵌入自定义 data 属性的能力。</p>
-</blockquote>
-<p>需要注意的是：</p>
-<blockquote>
-<p>属性名不应该包含任何大写字母，并且在前缀 “data-“ 之后必须有至少一个字符</p>
-</blockquote>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">data-v</span>=<span class="string">'1'</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>因此，为了遵循这一规范，我们在Vue中为一个DOM元素添加自定义属性时，也应当这样写：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">:data-v</span>=<span class="string">"value"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后，我们可以通过element.getAttribute()来获取元素</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'a'</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a.getAttribute(<span class="string">'data-v'</span>));</span><br></pre></td></tr></table></figure>
-
-<p>但是，Vue并不推荐我们直接来操纵DOM，因此，我们可以使用Vue的ref属性来进行DOM元素的引用，引用的信息将会被注册在$refs对象上</p>
-<p>因此，我们可以做出如下的修改：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">:data-v</span>=<span class="string">"value"</span> <span class="attr">ref</span>=<span class="string">"aLink"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>此时，该a标签DOM元素将会作为aLink的键值在$refs对象中被注册</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据对象</span></span><br><span class="line">data: &#123;</span><br><span class="line">    value: <span class="number">123</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在Vue组件的某个方法中</span></span><br><span class="line">getDataV() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$refs); <span class="comment">// &#123;aLink: a&#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$refs.aLink.getAttribute(<span class="string">'data-v'</span>)); <span class="comment">// 123</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="为指令设置动态参数"><a href="#为指令设置动态参数" class="headerlink" title="为指令设置动态参数"></a>为指令设置动态参数</h2><p>我们知道，Vue允许在指令后添加参数。例如，在v-bind指令后添加参数就可以将该参数作为DOM元素的属性</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">:value</span>=<span class="string">"value"</span> <span class="attr">ref</span>=<span class="string">"aLink"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>我们通过控制台查看该DOM元素就可以得到如下结果：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">value</span>=<span class="string">"123346"</span>&gt;</span>value<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>初次之外，Vue可以支持使用类似方括号的语法（但是方括号中只能填写Vue实例中data声明的变量）来为指令设置动态参数</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">:</span>[<span class="attr">attributeName</span>]=<span class="string">"url"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后，我们在Vue实例中这样设置：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        attributeName: <span class="string">'href'</span>,</span><br><span class="line">        url: <span class="string">'https://www.baidu.com'</span>,</span><br><span class="line">        value: <span class="string">'baidu'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>然后，我们在控制台进行查看，就可以得到如下的结果：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span>&gt;</span>baidu<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>令人意外的是，得到的结果并不是预料中的如下的结果：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://www.baidu.com"</span>&gt;</span>baidu<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后我查看官方文档才发现了原因所在：</p>
-<p>其实，Vue对于动态参数表达式是有限制的：</p>
-<ol>
-<li>空格和引号在表达式中是无效的</li>
-<li>避免使用大写字符来命名键名，因为浏览器会把 attribute（属性） 名全部强制转为小写</li>
-</ol>
-<p>因此，我们需要将之前的模板和Vue实例进行修改：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">:</span>[<span class="attr">attribute</span>]=<span class="string">"url"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        attribute: <span class="string">'href'</span>,</span><br><span class="line">        url: <span class="string">'https://www.baidu.com'</span>,</span><br><span class="line">        value: <span class="string">'baidu'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>此时，我们就可以查看到正确的DOM元素了</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://www.baidu.com"</span>&gt;</span>baidu<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Vue的常用修饰符"><a href="#Vue的常用修饰符" class="headerlink" title="Vue的常用修饰符"></a>Vue的常用修饰符</h2><p>修饰符 (modifier) 是以半角句号 . 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定。</p>
-<p>在进行详细的事件处理修饰符的说明前，我们先来了解target.addEventListener方法的详细说明，因为，下面的修饰符大多数针对该方法进行简写而已</p>
-<h3 id="addEventListener的详细说明"><a href="#addEventListener的详细说明" class="headerlink" title="addEventListener的详细说明"></a>addEventListener的详细说明</h3><p>完整的addEventListener的方法定义如下：</p>
-<blockquote>
-<p>target .addEventListener（type，listener [，options ]）;</p>
-</blockquote>
-<p>参数说明：</p>
-<ul>
-<li><p>type: 区分大小写的字符串，表示要侦听的事件类型。</p>
-</li>
-<li><p>listener: Event当指定类型的事件发生时，接收通知的对象（实现接口的对象）。这必须是实现EventListener接口的对象或JavaScript 函数</p>
-</li>
-<li><p>options: 可选，一个选项对象，可以包括以下几个选项：</p>
-<ul>
-<li>capture true表示在捕获阶段执行事件处理程序，false表示在冒泡阶段</li>
-<li>once Boolean，listener应在添加后最多调用一次。如果为true，则listener在调用时会自动将其删除。</li>
-<li>passive: Boolean 如果true表示表示所指定的函数listener将永远不会调用preventDefault()。如果被动侦听器确实进行了调用preventDefault()，则用户代理将不执行任何操作，只生成控制台警告。</li>
-</ul>
-</li>
-</ul>
-<h3 id="v-on事件处理的修饰符"><a href="#v-on事件处理的修饰符" class="headerlink" title="v-on事件处理的修饰符"></a>v-on事件处理的修饰符</h3><p>Vue的官方文档是这样叙述为什么要使用数件处理修饰符的：</p>
-<blockquote>
-<p>在事件处理程序中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。尽管我们可以在方法中轻松实现这点，但更好的方式是：方法只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。</p>
-</blockquote>
-<p>因此，Vue为v-on提供了事件处理修饰符</p>
-<h4 id="stop修饰符-相当于调用event-stopPropagation"><a href="#stop修饰符-相当于调用event-stopPropagation" class="headerlink" title=".stop修饰符 相当于调用event.stopPropagation()"></a>.stop修饰符 相当于调用event.stopPropagation()</h4><p>该.stop修饰符可以阻止事件流进一步的传递（捕获或者冒泡）</p>
-<p>以下以阻止事件进一步冒泡为例进行说明：</p>
-<h5 id="没有使用-stop修饰符"><a href="#没有使用-stop修饰符" class="headerlink" title="没有使用.stop修饰符"></a>没有使用.stop修饰符</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid black;width: 100px;height: 100px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">:</span>[<span class="attr">attribute</span>]=<span class="string">"url"</span> @<span class="attr">click</span>=<span class="string">"clickP"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>我们分别为div元素和p元素设置一个方法用来监听click事件:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        attribute: <span class="string">'href'</span>,</span><br><span class="line">        url: <span class="string">'https://www.baidu.com'</span>,</span><br><span class="line">        value: <span class="string">'baidu'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        <span class="comment">// p元素的事件监听程序</span></span><br><span class="line">        clickP() &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'p is clicked'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 在挂载节点完毕后的生命周期阶段添加div元素的事件监听程序</span></span><br><span class="line">    mounted() &#123;</span><br><span class="line">        <span class="keyword">this</span>.$el.addEventListener(<span class="string">'click'</span>,()=&gt;&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'app is clicked'</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>当我们单击p元素的时候可以得到以下的输出结果：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">p is clicked</span></span><br><span class="line"><span class="comment">app is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>我们知道DOM事件流会经过以下三个阶段：</p>
-<ol>
-<li>捕获阶段</li>
-<li>处于事件目标阶段</li>
-<li>冒泡阶段</li>
-</ol>
-<p>在这里提一句，如果在v-on后没有添加.capture修饰符，那么该事件会在冒泡阶段发生（相当于addEventListener方法的第二个参数为false）</p>
-<p>因此，当我们单击p元素时，会经过以下步骤：</p>
-<ol>
-<li>在捕获阶段，没有绑定若任何处理程序，因此没有任何响应</li>
-<li>处于目标阶段，因为我们单击的是p元素，因此，响应p元素绑定的事件监听程序，输出’p is clicked’</li>
-<li>处于冒泡阶段，此时div元素绑定的click事件监听程序被响应，因此，输出’app is clicked’</li>
-</ol>
-<p>那么，如果使用.stop修饰符呢？</p>
-<h5 id="使用-stop修饰符"><a href="#使用-stop修饰符" class="headerlink" title="使用.stop修饰符"></a>使用.stop修饰符</h5><p>我们将html代码修改，js代码保持不变：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid black;width: 100px;height: 100px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">:</span>[<span class="attr">attribute</span>]=<span class="string">"url"</span> @<span class="attr">click.stop</span>=<span class="string">"clickP"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>此时，当我们单击p元素的时候，就会得到以下的输出结果：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">p is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>我们看到’app is clicked’并没有输出，这是因为修饰符.stop起到了stopPropagation的作用，阻止了事件流的进一步传递</p>
-<h4 id="prevent修饰符-相当于调用-event-preventDefault"><a href="#prevent修饰符-相当于调用-event-preventDefault" class="headerlink" title=".prevent修饰符 相当于调用 event.preventDefault()"></a>.prevent修饰符 相当于调用 event.preventDefault()</h4><p>我们知道preventDefault方法可以取消事件的默认行为。因此，.prevent修饰符也是起到同样的作用</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span> =<span class="string">"https://www.baidu.com"</span> @<span class="attr">click.prevent</span>=<span class="string">"clickA"</span>&gt;</span>clickA<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>本来，当我们点击a标签的时候，默认将会跳转到href给定的地址。但是，当我们使用.prevent修饰符后就可以取消跳转这一默认行为</p>
-<h4 id="capture修饰符-添加事件监听器时使用捕获模式"><a href="#capture修饰符-添加事件监听器时使用捕获模式" class="headerlink" title=".capture修饰符 添加事件监听器时使用捕获模式"></a>.capture修饰符 添加事件监听器时使用捕获模式</h4><p>之前就提到过这一修饰符的作用，.capture修饰符可以让事件在捕获阶段被调用，而不是默认在冒泡阶段被调用</p>
-<p>例如：</p>
-<p>注意，此时我将带修饰符的事件处理程序绑定在了div元素，而p元素的事件处理程序没有带修饰符</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> @<span class="attr">click.capture</span>=<span class="string">"clickDiv"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid black;width: 100px;height: 100px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> @<span class="attr">click</span>=<span class="string">"clickP"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: <span class="string">'click it'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        clickP() &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'p is clicked'</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        clickDiv() &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'div is clicked'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>现在，当我们点击p元素时可以得到如下输出结果：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">div is clicked</span></span><br><span class="line"><span class="comment">p is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>的确，div元素绑定的事件处理程序在事件流的捕获阶段被触发了。</p>
-<p>那么，如果我们不添加.capture修饰符，那么点击p元素得到的输出结果就会是：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">p is clicked</span></span><br><span class="line"><span class="comment">div is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>这样，div事件处理程序就会默认在事件流的冒泡阶段被执行</p>
-<h4 id="self修饰符-相当于事件自身触发的而不是从内部元素触发的"><a href="#self修饰符-相当于事件自身触发的而不是从内部元素触发的" class="headerlink" title=".self修饰符 相当于事件自身触发的而不是从内部元素触发的"></a>.self修饰符 相当于事件自身触发的而不是从内部元素触发的</h4><p>.self修饰符的作用是：只有当事件是自身元素触发的而不是该元素内部元素触发的才会被执行相应的事件处理程序</p>
-<p>示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> @<span class="attr">click.self</span>=<span class="string">"clickDiv"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid black;width: 100px;height: 100px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> @<span class="attr">click</span>=<span class="string">"clickP"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: <span class="string">'click it'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        clickP() &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'p is clicked'</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        clickDiv() &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'div is clicked'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>现在，当我们点击p元素时的输出结果会得到以下的输出结果：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">p is cliked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>我们看到div元素的事件处理程序没有被触发。因为,.self修饰符让该元素的事件处理程序只有在该元素自身触发事件才可以被执行</p>
-<p>但是，如果我们将div元素的.self修饰符去掉</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> @<span class="attr">click</span>=<span class="string">"clickDiv"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid black;width: 100px;height: 100px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> @<span class="attr">click</span>=<span class="string">"clickP"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>那么，当我们点击p元素的输出结果就会是这样的:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">p is clicked</span></span><br><span class="line"><span class="comment">div is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>此时，div的事件处理程序就会在事件流的冒泡阶段而被触发</p>
-<h4 id="once修饰符-点击事件将只会被触发一次"><a href="#once修饰符-点击事件将只会被触发一次" class="headerlink" title=".once修饰符 点击事件将只会被触发一次"></a>.once修饰符 点击事件将只会被触发一次</h4><p>.once修饰符只允许事件监听程序只会被执行一次，无论你多少次触发该事件</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> @<span class="attr">click</span>=<span class="string">"clickDiv"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid black;width: 100px;height: 100px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> @<span class="attr">click.once</span>=<span class="string">"clickP"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>事件处理程序的定义还是如下，不做任何改变</p>
-<p>那么，当我们第一次点击p元素的时候会得到如下的输出结果：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">p is clicked</span></span><br><span class="line"><span class="comment">div is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>那么，当我们第二次再点击该p元素，此时输出结果就变成这样了：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">div is clicked</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>我们可以看到，p元素的事件处理程序没有再执行。这可以用来实现防抖的效果。</p>
-<h4 id="passive修饰符"><a href="#passive修饰符" class="headerlink" title=".passive修饰符"></a>.passive修饰符</h4><p>该.passive修饰符对应addEventListener中的passive选项，当我们使用该.passive修饰符时，也就是默认将addEventListener的passive选项设置为true。</p>
-<p>那么，这也意味着：</p>
-<blockquote>
-<p>所指定的函数listener将永远不会调用preventDefault()。</p>
-</blockquote>
-<p>简而言之，该.passive修饰符的作用是不要阻止事件的默认行为。那么，如果我们将.passive 和 .prevent 一起使用，那么.prevent 将会被忽略。</p>
-<h5 id="passcive修饰符对于移动端性能的提升"><a href="#passcive修饰符对于移动端性能的提升" class="headerlink" title=".passcive修饰符对于移动端性能的提升"></a>.passcive修饰符对于移动端性能的提升</h5><p>在移动端，我们经常要使用触摸滚动的事件，那么使用passive修饰符将会大幅提升移动端的性能</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:scroll.passive</span>=<span class="string">"onScroll"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>那么，这是为什么呢？</p>
-<p>MDN文档是这样做出解释的：</p>
-<blockquote>
-<p>根据规范，passive 选项的默认值始终为false。但是，这引入了处理某些触摸事件（以及其他）的事件监听器在尝试处理滚动时阻止浏览器的主线程的可能性，从而导致滚动处理期间性能可能大大降低。</p>
-</blockquote>
-<h3 id="v-model表单输入绑定的修饰符"><a href="#v-model表单输入绑定的修饰符" class="headerlink" title="v-model表单输入绑定的修饰符"></a>v-model表单输入绑定的修饰符</h3><h4 id="lazy修饰符"><a href="#lazy修饰符" class="headerlink" title=".lazy修饰符"></a>.lazy修饰符</h4><p>我们知道在默认情况下，v-model使用监听oninput事件来使得数据保持同步。此时，只要我们在输入数据时该事件就会被触发</p>
-<p>但是，当我们使用.lazy修饰符，v-model就会转而去监听onchange事件，而不是oninput事件。这意味着，只有当表单的value值发生了改变，并且该表单失去焦点时才会触发</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model.lazy</span>=<span class="string">"value"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>此时，当我们输入数据时，p元素中的value值不会立即更新。只有当input输入框失去焦点后，value值才会更新</p>
-<h4 id="trim修饰符"><a href="#trim修饰符" class="headerlink" title=".trim修饰符"></a>.trim修饰符</h4><p>如果要自动过滤用户输入的首尾空白字符，可以给 v-model 添加 trim 修饰符</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model.trim</span>=<span class="string">"msg"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="计算属性和侦听器"><a href="#计算属性和侦听器" class="headerlink" title="计算属性和侦听器"></a>计算属性和侦听器</h2><h3 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h3><h4 id="什么是计算属性"><a href="#什么是计算属性" class="headerlink" title="什么是计算属性"></a>什么是计算属性</h4><p>我们知道，可以在模板语法中写入表达式：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span>&gt;</span>&#123;&#123;value.split('').reverse().join('')&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>但是，为了模板的可读性，Vue提供了可计算属性来代替这种在模板中插入复杂的表达式计算</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    reverseValue: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.value.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果，我们试着在某个阶段输出一下Vue实例，我们可以看到computed对象中的计算属性的值是直接被添加到vue实例的属性中的</p>
-<p><img src="https://s2.ax1x.com/2019/11/12/M1cfld.png" alt></p>
-<p>因此，它可以直接被作为模板语法直接进行插入</p>
-<h4 id="计算属性的getter和setter"><a href="#计算属性的getter和setter" class="headerlink" title="计算属性的getter和setter"></a>计算属性的getter和setter</h4><p>其实，计算属性就是一个访问器属性。虽然，在computed对象中，我们声明的计算属性目前只是一个函数（此时计算属性默认只有getter），但其实，我们也可以为计算属性添加setter函数</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    reverseValue: &#123;</span><br><span class="line">        <span class="keyword">get</span>: function () &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.value.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>: function (value) &#123;</span><br><span class="line">            <span class="keyword">this</span>.value = value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当我学习到这部分的时候，我就产生了疑问。明明这个计算属性应该是访问器属性才对，但是为什么计算属性使用了包含get和set属性的对象写法？还有，之前的默认是getter函数的为什么只需要采用函数写法？</p>
-<p>这一切疑问我们可以从源码中找到答案</p>
-<p>这是初始化计算属性的函数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initComputed</span> (<span class="params">vm: Component, computed: Object</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// $flow-disable-line</span></span><br><span class="line">  <span class="keyword">const</span> watchers = vm._computedWatchers = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  <span class="comment">// computed properties are just getters during SSR</span></span><br><span class="line">  <span class="keyword">const</span> isSSR = isServerRendering()</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 遍历所有computed对象中声明的计算属性</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> computed) &#123;</span><br><span class="line">    <span class="keyword">const</span> userDef = computed[key]</span><br><span class="line">    <span class="comment">// 如果属性值为函数，那么将该函数赋值给getter；如果属性值为对象，那么将对象的get属性值赋值给getter</span></span><br><span class="line">    <span class="keyword">const</span> getter = <span class="keyword">typeof</span> userDef === <span class="string">'function'</span> ? userDef : userDef.get</span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp; getter == <span class="literal">null</span>) &#123;</span><br><span class="line">      warn(</span><br><span class="line">        <span class="string">`Getter is missing for computed property "<span class="subst">$&#123;key&#125;</span>".`</span>,</span><br><span class="line">        vm</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!isSSR) &#123;</span><br><span class="line">      <span class="comment">// create internal watcher for the computed property.</span></span><br><span class="line">      watchers[key] = <span class="keyword">new</span> Watcher(</span><br><span class="line">        vm,</span><br><span class="line">        getter || noop,</span><br><span class="line">        noop,</span><br><span class="line">        computedWatcherOptions</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// component-defined computed properties are already defined on the</span></span><br><span class="line">    <span class="comment">// component prototype. We only need to define computed properties defined</span></span><br><span class="line">    <span class="comment">// at instantiation here.</span></span><br><span class="line">    <span class="keyword">if</span> (!(key <span class="keyword">in</span> vm)) &#123;</span><br><span class="line">        <span class="comment">// 将该计算属性添加到vm实例上</span></span><br><span class="line">      defineComputed(vm, key, userDef)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (key <span class="keyword">in</span> vm.$data) &#123;</span><br><span class="line">        warn(<span class="string">`The computed property "<span class="subst">$&#123;key&#125;</span>" is already defined in data.`</span>, vm)</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (vm.$options.props &amp;&amp; key <span class="keyword">in</span> vm.$options.props) &#123;</span><br><span class="line">        warn(<span class="string">`The computed property "<span class="subst">$&#123;key&#125;</span>" is already defined as a prop.`</span>, vm)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们找到对应的defineComputed方法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineComputed</span> (<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  target: any,</span></span></span><br><span class="line"><span class="function"><span class="params">  key: string,</span></span></span><br><span class="line"><span class="function"><span class="params">  userDef: Object | Function</span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> shouldCache = !isServerRendering()</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> userDef === <span class="string">'function'</span>) &#123;</span><br><span class="line">    sharedPropertyDefinition.get = shouldCache</span><br><span class="line">      ? createComputedGetter(key)</span><br><span class="line">      : createGetterInvoker(userDef)</span><br><span class="line">    sharedPropertyDefinition.set = noop</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    sharedPropertyDefinition.get = userDef.get</span><br><span class="line">      ? shouldCache &amp;&amp; userDef.cache !== <span class="literal">false</span></span><br><span class="line">        ? createComputedGetter(key)</span><br><span class="line">        : createGetterInvoker(userDef.get)</span><br><span class="line">      : noop</span><br><span class="line">    sharedPropertyDefinition.set = userDef.set || noop</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp;</span><br><span class="line">      sharedPropertyDefinition.set === noop) &#123;</span><br><span class="line">    sharedPropertyDefinition.set = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      warn(</span><br><span class="line">        <span class="string">`Computed property "<span class="subst">$&#123;key&#125;</span>" was assigned to but it has no setter.`</span>,</span><br><span class="line">        <span class="keyword">this</span></span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 在这里将计算属性添加到vm实例上，并且该属性正式成为了访问器属性</span></span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(target, key, sharedPropertyDefinition)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看完了这两段源码，之前的困惑就应该消除了。</p>
-<p>如果，我们将计算属性写成函数的形式，那么就将该函数作为该属性的getter方法；</p>
-<p>如果，我们将计算属性写成对象的形式，那么就将对象中的get属性值和set属性值作为计算属性的getter方法和setter方法</p>
-<h4 id="计算属性缓存和方法"><a href="#计算属性缓存和方法" class="headerlink" title="计算属性缓存和方法"></a>计算属性缓存和方法</h4><p>以下是源码中的初始化方法的函数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initMethods</span> (<span class="params">vm: Component, methods: Object</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> props = vm.$options.props</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> methods) &#123;</span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> methods[key] !== <span class="string">'function'</span>) &#123;</span><br><span class="line">        warn(</span><br><span class="line">          <span class="string">`Method "<span class="subst">$&#123;key&#125;</span>" has type "<span class="subst">$&#123;<span class="keyword">typeof</span> methods[key]&#125;</span>" in the component definition. `</span> +</span><br><span class="line">          <span class="string">`Did you reference the function correctly?`</span>,</span><br><span class="line">          vm</span><br><span class="line">        )</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (props &amp;&amp; hasOwn(props, key)) &#123;</span><br><span class="line">        warn(</span><br><span class="line">          <span class="string">`Method "<span class="subst">$&#123;key&#125;</span>" has already been defined as a prop.`</span>,</span><br><span class="line">          vm</span><br><span class="line">        )</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> ((key <span class="keyword">in</span> vm) &amp;&amp; isReserved(key)) &#123;</span><br><span class="line">        warn(</span><br><span class="line">          <span class="string">`Method "<span class="subst">$&#123;key&#125;</span>" conflicts with an existing Vue instance method. `</span> +</span><br><span class="line">          <span class="string">`Avoid defining component methods that start with _ or $.`</span></span><br><span class="line">        )</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    vm[key] = <span class="keyword">typeof</span> methods[key] !== <span class="string">'function'</span> ? noop : bind(methods[key], vm)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>粗略看一眼我们就可以看到，vm实例中的methods对象中的属性都是直接添加到vm实例的属性上的。</p>
-<p>这也就意味着，我们在模板语法中也可以直接使用methods中的方法</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"change"</span>&gt;</span>&#123;&#123;getValue()&#125;&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>那么，对于之前的计算属性的写法，我们又可以直接将逻辑写在methods的方法中了</p>
-<p>原来的复杂逻辑直接作为表达式插入模板中</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span>&gt;</span>&#123;&#123;value.split('').reverse().join('')&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>使用计算属性</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span>&gt;</span>&#123;&#123;reverseValue&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>现在，我们使用方法：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span>&gt;</span>&#123;&#123;reverseValue()&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">    reverseValue() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.value.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>对了，计算属性的属性名不能与方法中的方法名同名，不然，计算属性就会无效。原因在于，计算属性和方法都会作为属性被添加到vm实例中去，那么总不能同名吧。具体，看上面的两个初始化函数。</p>
-<p>来看个总体的例子：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;reverseValue&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;reverse()&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: <span class="string">'abc'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        reverse() &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.value.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">        reverseValue() &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.value.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);     </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>渲染结果：</p>
-<p><img src="https://s2.ax1x.com/2019/11/12/M1T2QK.png" alt></p>
-<h5 id="计算属性与方法的区别"><a href="#计算属性与方法的区别" class="headerlink" title="计算属性与方法的区别"></a>计算属性与方法的区别</h5><p>那么，这两种写法有什么区别呢？</p>
-<p>官方文档是这样解释的：</p>
-<blockquote>
-<p>计算属性是基于它们的响应式依赖进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值</p>
-</blockquote>
-<p>也就是说，如果计算属性的getter函数中所依赖的值是响应式数据（上文中的value），那么只有当value值更新时，该计算属性才会更新。</p>
-<p>但是，对于方法呢？只要DOM树重新渲染，这个方法就会被重新执行。我们知道，在vue的生命周期中，只要响应式数据发生了update，那么虚拟DOM就会被重建，挂载的那一部分就会被重新渲染</p>
-<p>我们可以用一个例子来说明以上的结论</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;dateNow&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;getDateNow()&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"changeValue"</span>&gt;</span>change value<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: <span class="number">123</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        getDateNow() &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Date</span>.now();</span><br><span class="line">        &#125;,</span><br><span class="line">        changeValue() &#123;</span><br><span class="line">            <span class="keyword">this</span>.value = <span class="number">321</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">        dateNow() &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Date</span>.now();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>此时，渲染结果会如下gif<br><img src="https://i.imgur.com/r8wsMQ1.gif" alt></p>
-<p>我们可以看到，当我们改变value值的时候，计算属性的值并没有改变，而方法所得到的的值发生了改变。</p>
-<p>因为，计算属性的值依赖于响应式数据的变化，但是，上述代码中的计算属性的getter函数中并没有响应式数据，因此，就算该组件因为数据变化而重新渲染，计算属性的值也没有发生变化</p>
-<p>但是，模板中的方法只要组件被重新渲染，就会被重新执行，因此，得到的值也就发生了变化</p>
-<h3 id="侦听器"><a href="#侦听器" class="headerlink" title="侦听器"></a>侦听器</h3><p>Vue提供了侦听器用来响应数据的变化。</p>
-<p>在vm实例中，我们可以用watch选项来侦听数据的变化，并作出响应</p>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: <span class="number">123</span></span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">        value: <span class="function"><span class="keyword">function</span>(<span class="params">newVal,oldVal</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(newVal,oldVal);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="class与style绑定"><a href="#class与style绑定" class="headerlink" title="class与style绑定"></a>class与style绑定</h2><h3 id="class绑定"><a href="#class绑定" class="headerlink" title="class绑定"></a>class绑定</h3><p>因为，class属性属于元素上的一个特性，那么，我们可以使用v-bind语法进行绑定</p>
-<h4 id="表达式结果为字符串的绑定"><a href="#表达式结果为字符串的绑定" class="headerlink" title="表达式结果为字符串的绑定"></a>表达式结果为字符串的绑定</h4><p>因为，v-bind中需要的是一个表达式，因此，我们只需要计算出表达式的字符串结果即可</p>
-<h5 id="单变量绑定"><a href="#单变量绑定" class="headerlink" title="单变量绑定"></a>单变量绑定</h5><p>假如v-bind表达式中只有一个变量，那么，我们可以这样写：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">.red &#123;</span><br><span class="line">    color: red</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">:class</span>=<span class="string">"className"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">"#app"</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: &#123;</span><br><span class="line">            value: <span class="number">123</span>,</span><br><span class="line">            className: <span class="string">'red'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h5 id="变量与字符串进行拼接"><a href="#变量与字符串进行拼接" class="headerlink" title="变量与字符串进行拼接"></a>变量与字符串进行拼接</h5><p>因为表达式的值必须为字符串，那么当拼接的时候就要求必须至少有一方为字符串类型</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">.red-item &#123;</span><br><span class="line">    color: red</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">:class</span>=<span class="string">"className+'-item'"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">"#app"</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: &#123;</span><br><span class="line">            value: <span class="number">123</span>,</span><br><span class="line">            className: <span class="string">'red'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="表达式结果为对象的绑定"><a href="#表达式结果为对象的绑定" class="headerlink" title="表达式结果为对象的绑定"></a>表达式结果为对象的绑定</h4><p>我们可以为v-bind传入一个对象来作为表达式的结果以动态切换class的值</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">:class</span>=<span class="string">"&#123;['red-item']:true&#125;"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>另外，为了更加清晰的模板效果，我们可以将对象放在实例的data中</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">:class</span>=<span class="string">"classObj"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: <span class="number">123</span>,</span><br><span class="line">        classObj: &#123;</span><br><span class="line">            [<span class="string">'red-item'</span>]: <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>当然，作为计算属性也可：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        value: <span class="number">123</span></span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">        classObj() &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                [<span class="string">'red-item'</span>]: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="表达式结果为数组的绑定"><a href="#表达式结果为数组的绑定" class="headerlink" title="表达式结果为数组的绑定"></a>表达式结果为数组的绑定</h4><p>Vue还允许我们使用数组来对class进行绑定，数组的结果就是class列表</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">:class</span>=<span class="string">"['red-item']"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>当然，我们可以在数组项中加入对象</p>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">:class</span>=<span class="string">"[classObj]"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>此时classObj对象作为vm实例的data属性和计算属性都可以</p>
-<h3 id="style绑定"><a href="#style绑定" class="headerlink" title="style绑定"></a>style绑定</h3><p>当然，对于style我们也可以进行如上以数组和对象的表达式结果的绑定</p>
-<h4 id="对象绑定"><a href="#对象绑定" class="headerlink" title="对象绑定"></a>对象绑定</h4><p>对于对象绑定，我们可以这样写</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">:style</span>=<span class="string">"&#123;color: 'red',['font-size']: 15+'px'&#125;"</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>因为，在Js中变量不能包含’-‘连字符，因此，我们需要使用方括号语法进行转换[‘font-size’]</p>
-<h4 id="数组绑定"><a href="#数组绑定" class="headerlink" title="数组绑定"></a>数组绑定</h4><p>v-bind:style 的数组语法可以将多个<strong>样式对象</strong>应用到同一个元素上</p>
-<blockquote>
-<p>如果对:style进行数组语法的绑定，那么数组元素必须为对象</p>
-</blockquote>
-<p>例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:style="[&#123;color: 'red'&#125;,&#123;['font-size']: 20+'px',['font-weight']: 'bolder'&#125;]"</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -3352,7 +2977,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">140</span>
+                  <span class="site-state-item-count">141</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3433,7 +3058,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">156.7k</span>
+    <span title="Site words total count">158.3k</span>
   
 </div>
 
@@ -3463,7 +3088,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共156.7k字</span>
+  <span class="post-count">博客全站共158.3k字</span>
 </div>
         
 
