@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="什么是泛型我们在写JS的时候可以不用去管输入输出的类型，但是当我们在使用TS的时候就要注意类型的约束 例如： 我们有一个方法要返回传入的number类型的值： 123function getValue(arg: number): number &amp;#123;    return arg;&amp;#125;  而另一个方法要返回传入的string类型的值： 123function getValue(arg:">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-20T07:15:40.261Z">
+<meta property="og:updated_time" content="2019-12-15T07:02:42.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TypeScript中的泛型理解">
 <meta name="twitter:description" content="什么是泛型我们在写JS的时候可以不用去管输入输出的类型，但是当我们在使用TS的时候就要注意类型的约束 例如： 我们有一个方法要返回传入的number类型的值： 123function getValue(arg: number): number &amp;#123;    return arg;&amp;#125;  而另一个方法要返回传入的string类型的值： 123function getValue(arg:">
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.7k
+                  2.9k
                 </span>
               
 
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  11
+                  12
                 </span>
               
             </div>
@@ -553,6 +553,14 @@
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> numArray&lt;T&gt; &#123;</span><br><span class="line">    length: <span class="built_in">number</span>;</span><br><span class="line">    [index: <span class="built_in">number</span>]: <span class="built_in">any</span>;</span><br><span class="line"></span><br><span class="line">    reverse(): <span class="built_in">Array</span>&lt;T&gt;;</span><br><span class="line">    shift(): T;</span><br><span class="line">    push(...items: <span class="built_in">Array</span>&lt;T&gt;): <span class="built_in">number</span>;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>之后我们创建数组类来实现这些接口中定义的方法和属性即可。</p>
+<h3 id="在泛型中使用new操作（类类型）"><a href="#在泛型中使用new操作（类类型）" class="headerlink" title="在泛型中使用new操作（类类型）"></a>在泛型中使用new操作（类类型）</h3><p>如果我们想要构造一个工厂函数，该工厂函数可以返回传入该函数的类的实例。因为，我们不知道这个类的具体类型，因此，我们使用泛型来进行。</p>
+<p>值得注意的是，如果我们直接这样写，编译是会出错的：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createObjec</span>&lt;<span class="title">T</span>&gt;(<span class="params">ctor: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ctor(); <span class="comment">// Error: 该类型不具有构造函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们知道只有一个函数具有[[constructor]]时，该构造函数才可以被实例化（进行new操作）。</p>
+<p>因此，我们做出如下修改：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明传入的参数ctor具有构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createObject</span>&lt;<span class="title">T</span>&gt;(<span class="params">ctor: &#123;<span class="keyword">new</span>(): T;&#125;</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ctor();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Test &#123;</span><br><span class="line">    data: <span class="built_in">string</span> = <span class="string">'hello world'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> test: Test = createObject&lt;Test&gt;(Test);</span><br><span class="line"><span class="built_in">console</span>.log(test);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">Test &#123; data: 'hello world' &#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -674,7 +682,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">141</span>
+                  <span class="site-state-item-count">142</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -736,7 +744,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是泛型"><span class="nav-number">1.</span> <span class="nav-text">什么是泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#了解泛型的初步概念"><span class="nav-number">2.</span> <span class="nav-text">了解泛型的初步概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多个类型参数"><span class="nav-number">2.1.</span> <span class="nav-text">多个类型参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型的约束"><span class="nav-number">2.2.</span> <span class="nav-text">泛型的约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#js是运行时检查类型"><span class="nav-number">2.2.1.</span> <span class="nav-text">js是运行时检查类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ts是编译时检查类型"><span class="nav-number">2.2.2.</span> <span class="nav-text">ts是编译时检查类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通用性约束"><span class="nav-number">2.2.3.</span> <span class="nav-text">通用性约束</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型接口"><span class="nav-number">2.3.</span> <span class="nav-text">泛型接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型类"><span class="nav-number">2.4.</span> <span class="nav-text">泛型类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型参数作为类型的一部分"><span class="nav-number">2.5.</span> <span class="nav-text">类型参数作为类型的一部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TS定义好的常用泛型"><span class="nav-number">2.6.</span> <span class="nav-text">TS定义好的常用泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Array-lt-T-gt"><span class="nav-number">2.6.1.</span> <span class="nav-text">Array&lt;T&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise-lt-T-gt"><span class="nav-number">2.6.2.</span> <span class="nav-text">Promise&lt;T&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set-lt-T-gt"><span class="nav-number">2.6.3.</span> <span class="nav-text">Set&lt;T&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Map-lt-K-V-gt"><span class="nav-number">2.6.4.</span> <span class="nav-text">Map&lt;K,V&gt;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型接口实现TS自带的一些泛型"><span class="nav-number">2.7.</span> <span class="nav-text">泛型接口实现TS自带的一些泛型</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是泛型"><span class="nav-number">1.</span> <span class="nav-text">什么是泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#了解泛型的初步概念"><span class="nav-number">2.</span> <span class="nav-text">了解泛型的初步概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多个类型参数"><span class="nav-number">2.1.</span> <span class="nav-text">多个类型参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型的约束"><span class="nav-number">2.2.</span> <span class="nav-text">泛型的约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#js是运行时检查类型"><span class="nav-number">2.2.1.</span> <span class="nav-text">js是运行时检查类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ts是编译时检查类型"><span class="nav-number">2.2.2.</span> <span class="nav-text">ts是编译时检查类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通用性约束"><span class="nav-number">2.2.3.</span> <span class="nav-text">通用性约束</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型接口"><span class="nav-number">2.3.</span> <span class="nav-text">泛型接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型类"><span class="nav-number">2.4.</span> <span class="nav-text">泛型类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型参数作为类型的一部分"><span class="nav-number">2.5.</span> <span class="nav-text">类型参数作为类型的一部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TS定义好的常用泛型"><span class="nav-number">2.6.</span> <span class="nav-text">TS定义好的常用泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Array-lt-T-gt"><span class="nav-number">2.6.1.</span> <span class="nav-text">Array&lt;T&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise-lt-T-gt"><span class="nav-number">2.6.2.</span> <span class="nav-text">Promise&lt;T&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set-lt-T-gt"><span class="nav-number">2.6.3.</span> <span class="nav-text">Set&lt;T&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Map-lt-K-V-gt"><span class="nav-number">2.6.4.</span> <span class="nav-text">Map&lt;K,V&gt;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型接口实现TS自带的一些泛型"><span class="nav-number">2.7.</span> <span class="nav-text">泛型接口实现TS自带的一些泛型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在泛型中使用new操作（类类型）"><span class="nav-number">2.8.</span> <span class="nav-text">在泛型中使用new操作（类类型）</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -771,7 +779,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">158.3k</span>
+    <span title="Site words total count">163k</span>
   
 </div>
 
@@ -801,7 +809,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共158.3k字</span>
+  <span class="post-count">博客全站共163k字</span>
 </div>
         
 

@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="元数据我们知道,TS仅在代码设计时使用类型，但一些特性，注入依赖注入，运行时类型断言、反射和测试，需要运行时的类型信息才可以实现。 因此，TS使用了反射元信息API来获取元数据。 什么是元数据元数据是用来定义数据的数据。例如，对于一个数据A，它会具有值，数据类型等等描述这个数据的数据。这样的数据，我们称之为元数据。 通过元数据反射API，我们可以为数据添加和获取元数据  Reflect Metad">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript元数据的理解与使用">
+<meta property="og:url" content="http://angellike_fairy.gitee.io/angellikefairy/2019/12/16/TypeScript元数据的理解与使用/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="元数据我们知道,TS仅在代码设计时使用类型，但一些特性，注入依赖注入，运行时类型断言、反射和测试，需要运行时的类型信息才可以实现。 因此，TS使用了反射元信息API来获取元数据。 什么是元数据元数据是用来定义数据的数据。例如，对于一个数据A，它会具有值，数据类型等等描述这个数据的数据。这样的数据，我们称之为元数据。 通过元数据反射API，我们可以为数据添加和获取元数据  Reflect Metad">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-18T08:34:04.585Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TypeScript元数据的理解与使用">
+<meta name="twitter:description" content="元数据我们知道,TS仅在代码设计时使用类型，但一些特性，注入依赖注入，运行时类型断言、反射和测试，需要运行时的类型信息才可以实现。 因此，TS使用了反射元信息API来获取元数据。 什么是元数据元数据是用来定义数据的数据。例如，对于一个数据A，它会具有值，数据类型等等描述这个数据的数据。这样的数据，我们称之为元数据。 通过元数据反射API，我们可以为数据添加和获取元数据  Reflect Metad">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://angellike_fairy.gitee.io/angellikefairy/2019/12/16/TypeScript元数据的理解与使用/">
+
+
+
+
+
+  <title>TypeScript元数据的理解与使用 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+  
+ 
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+         <a href="https://github.com/Angellikefairy"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149" alt="Fork me on GitHub"></a>
+    </div>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://angellike_fairy.gitee.io/angellikefairy/2019/12/16/TypeScript元数据的理解与使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TypeScript元数据的理解与使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-16T15:29:14+08:00">
+                2019-12-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h2><p>我们知道,TS仅在代码设计时使用类型，但一些特性，注入依赖注入，运行时类型断言、反射和测试，需要运行时的类型信息才可以实现。</p>
+<p>因此，TS使用了反射元信息API来获取元数据。</p>
+<h3 id="什么是元数据"><a href="#什么是元数据" class="headerlink" title="什么是元数据"></a>什么是元数据</h3><p>元数据是用来定义数据的数据。例如，对于一个数据A，它会具有值，数据类型等等描述这个数据的数据。这样的数据，我们称之为元数据。</p>
+<p>通过元数据反射API，我们可以为数据添加和获取元数据</p>
+<blockquote>
+<p>Reflect Metadata 的 API 可以用于类或者类的属性上</p>
+</blockquote>
+<p>当我们为类或类的属性添加了元数据之后，构造函数或者构造函数的原型将会具有一个新的[[Metadata]]内部属性,该属性将包含一个Map，其键是属性键（或undefined），其值是元数据键值</p>
+<p>元数据的定义具有以下特征：</p>
+<ol>
+<li>当在类C声明上或者类C的静态成员上定义元数据时，元数据会存储在C.[[Metadata]]中</li>
+<li>当在类C的实例成员上定义元数据时，元数据会存储在C.prototype.[[Metadata]]中</li>
+</ol>
+<p>TS定义了三种保留元数据键</p>
+<ol>
+<li>类型元数据使用元数据键”design:type”（用来获取属性类型）</li>
+<li>参数类型元数据使用元数据键”design:paramtypes”（用来获取参数类型）</li>
+<li>返回值类型元数据使用元数据键”design:returntype”（用来获取返回值类型）</li>
+</ol>
+<h3 id="元数据的定义和添加"><a href="#元数据的定义和添加" class="headerlink" title="元数据的定义和添加"></a>元数据的定义和添加</h3><p>我们有以下三种方式进行元数据的定义：</p>
+<ol>
+<li>通过为类或类中的成员定义一个装饰器</li>
+<li>通过Reflect.metadata声明式定义</li>
+<li>通过Reflect.defineMetadata命令式定义</li>
+</ol>
+<p>注意：</p>
+<blockquote>
+<p>如果没有进行这三种方式的定义，我们无法通过反射元数据API来获得元数据</p>
+</blockquote>
+<h4 id="通过为类或类中的成员定义一个装饰器"><a href="#通过为类或类中的成员定义一个装饰器" class="headerlink" title="通过为类或类中的成员定义一个装饰器"></a>通过为类或类中的成员定义一个装饰器</h4><p>事实上，这是我在元编程实战的时候发现的。当我将TS代码翻译成ES5代码的时候，我发现了这个特性。</p>
+<p>当我们为类或类中的成员使用装饰器时，ES会默认为其添加上元数据的信息。但是，这会有以下几种不同的情况</p>
+<ol>
+<li>当我们为类使用装饰器是，只会为类添加上”design:paramtypes”的元数据信息，含义为其构造函数的传入参数的类型数组</li>
+<li>当我们为类中的属性使用装饰器时，只会为该属性添加上”design:type”的元数据，含义为该属性的类型</li>
+<li>当我们为类中的方法使用装饰器时，会为该属性添加上所有三种保留元数据键，含义分别为方法的类型，传入该方法的形参类型数组，该方法的返回值的类型</li>
+</ol>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"Reflect-metadata"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="keyword">constructor</span>&lt;T = any&gt; = new(<span class="params">...args: <span class="built_in">Array</span>&lt;<span class="built_in">any</span>&gt;</span>) =&gt; T;</span><br><span class="line"></span><br><span class="line">@log</span><br><span class="line">class A &#123;</span><br><span class="line">    <span class="meta">@log</span></span><br><span class="line">    <span class="keyword">static</span> n: <span class="built_in">string</span> = <span class="string">'hello'</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> m: <span class="built_in">string</span></span>) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@log</span></span><br><span class="line">    getMes(mes:<span class="built_in">number</span>): <span class="built_in">number</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> mes;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>&lt;<span class="title">T</span>&gt;(<span class="params">constructor: constructor&lt;T&gt;|&#123;&#125;,propertyName?: <span class="built_in">string</span>,descriptor?: PropertyDescriptor</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">type</span>: <span class="built_in">Function</span>,paramtypes: <span class="built_in">Array</span>&lt;<span class="built_in">Function</span>&gt;,returntype: <span class="built_in">Function</span>;</span><br><span class="line">    <span class="keyword">type</span> = Reflect.getMetadata(<span class="string">"design:type"</span>,<span class="keyword">constructor</span>,propertyName);</span><br><span class="line">    if(<span class="params">descriptor</span>) &#123;</span><br><span class="line">        paramtypes = Reflect.getMetadata(<span class="string">"design:paramtypes"</span>,<span class="keyword">constructor</span>,propertyName);</span><br><span class="line">        returntype = Reflect.getMetadata(<span class="params">"design:returntype",constructor,propertyName</span>);</span><br><span class="line">        console.log(<span class="params">propertyName,<span class="keyword">type</span>,paramtypes,returntype</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        <span class="keyword">if</span>(propertyName) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(propertyName,<span class="keyword">type</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            paramtypes = Reflect.getMetadata(<span class="string">"design:paramtypes"</span>,<span class="keyword">constructor</span>);</span><br><span class="line">            console.log(<span class="params">constructor,paramtypes</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">getMes [Function: Function] [ [Function: Number] ] [Function: Number]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">n [Function: String]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">[Function: A] &#123; n: 'hello' &#125; [ [Function: String] ]</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们查看其编译成ES5的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"><span class="keyword">var</span> __decorate = (<span class="keyword">this</span> &amp;&amp; <span class="keyword">this</span>.__decorate) || <span class="function"><span class="keyword">function</span> (<span class="params">decorators, target, key, desc</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> c = <span class="built_in">arguments</span>.length, r = c &lt; <span class="number">3</span> ? target : desc === <span class="literal">null</span> ? desc = <span class="built_in">Object</span>.getOwnPropertyDescriptor(target, key) : desc, d;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Reflect</span> === <span class="string">"object"</span> &amp;&amp; <span class="keyword">typeof</span> <span class="built_in">Reflect</span>.decorate === <span class="string">"function"</span>) r = <span class="built_in">Reflect</span>.decorate(decorators, target, key, desc);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">for</span> (<span class="keyword">var</span> i = decorators.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) <span class="keyword">if</span> (d = decorators[i]) r = (c &lt; <span class="number">3</span> ? d(r) : c &gt; <span class="number">3</span> ? d(target, key, r) : d(target, key)) || r;</span><br><span class="line">    <span class="keyword">return</span> c &gt; <span class="number">3</span> &amp;&amp; r &amp;&amp; <span class="built_in">Object</span>.defineProperty(target, key, r), r;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> __metadata = (<span class="keyword">this</span> &amp;&amp; <span class="keyword">this</span>.__metadata) || <span class="function"><span class="keyword">function</span> (<span class="params">k, v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Reflect</span> === <span class="string">"object"</span> &amp;&amp; <span class="keyword">typeof</span> <span class="built_in">Reflect</span>.metadata === <span class="string">"function"</span>) <span class="keyword">return</span> <span class="built_in">Reflect</span>.metadata(k, v);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(exports, <span class="string">"__esModule"</span>, &#123; <span class="attr">value</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">"Reflect-metadata"</span>);</span><br><span class="line"><span class="keyword">var</span> A = <span class="comment">/** @class */</span> (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">m</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.m = m;</span><br><span class="line">    &#125;</span><br><span class="line">    A.prototype.getMes = <span class="function"><span class="keyword">function</span> (<span class="params">mes</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mes;</span><br><span class="line">    &#125;;</span><br><span class="line">    A.n = <span class="string">'hello'</span>;</span><br><span class="line">    __decorate([</span><br><span class="line">        log,</span><br><span class="line">        __metadata(<span class="string">"design:type"</span>, <span class="built_in">Function</span>),</span><br><span class="line">        __metadata(<span class="string">"design:paramtypes"</span>, [<span class="built_in">Number</span>]),</span><br><span class="line">        __metadata(<span class="string">"design:returntype"</span>, <span class="built_in">Number</span>)</span><br><span class="line">    ], A.prototype, <span class="string">"getMes"</span>, <span class="literal">null</span>);</span><br><span class="line">    __decorate([</span><br><span class="line">        log,</span><br><span class="line">        __metadata(<span class="string">"design:type"</span>, <span class="built_in">String</span>)</span><br><span class="line">    ], A, <span class="string">"n"</span>, <span class="keyword">void</span> <span class="number">0</span>);</span><br><span class="line">    A = __decorate([</span><br><span class="line">        log,</span><br><span class="line">        __metadata(<span class="string">"design:paramtypes"</span>, [<span class="built_in">String</span>])</span><br><span class="line">    ], A);</span><br><span class="line">    <span class="keyword">return</span> A;</span><br><span class="line">&#125;());</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">constructor, propertyName, descriptor</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> type, paramtypes, returntype;</span><br><span class="line">    type = <span class="built_in">Reflect</span>.getMetadata(<span class="string">"design:type"</span>, <span class="keyword">constructor</span>, propertyName);</span><br><span class="line">    if (descriptor) &#123;</span><br><span class="line">        paramtypes = <span class="built_in">Reflect</span>.getMetadata(<span class="string">"design:paramtypes"</span>, <span class="keyword">constructor</span>, propertyName);</span><br><span class="line">        returntype = Reflect.getMetadata("design:returntype", <span class="keyword">constructor</span>, propertyName);</span><br><span class="line">        console.log(propertyName, type, paramtypes, returntype);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        <span class="keyword">if</span> (propertyName) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(propertyName, type);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            paramtypes = <span class="built_in">Reflect</span>.getMetadata(<span class="string">"design:paramtypes"</span>, <span class="keyword">constructor</span>);</span><br><span class="line">            console.log(<span class="keyword">constructor</span>, paramtypes);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//# sourceMappingURL=hello.js.map</span><br></pre></td></tr></table></figure>
+
+<p>我们就很容易明白，为类及类中的成员使用装饰器会为它们定义元数据。</p>
+<h4 id="将Reflect-metadata当做装饰器使用进行声明式定义"><a href="#将Reflect-metadata当做装饰器使用进行声明式定义" class="headerlink" title="将Reflect.metadata当做装饰器使用进行声明式定义"></a>将Reflect.metadata当做装饰器使用进行声明式定义</h4><p>我们可以将Reflect.metadata当做装饰器来使用，直接装饰类或类的属性。</p>
+<blockquote>
+<p>@Reflect.metadata(metadataKey, metadataValue)</p>
+</blockquote>
+<p>使用这样的装饰器语法，就相当于在类或类的属性上添加了元数据的键名和键值。</p>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"reflect-metadata"</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Reflect</span>.metadata(<span class="string">"name"</span>,<span class="string">"classA"</span>)</span><br><span class="line"><span class="keyword">class</span> A &#123;</span><br><span class="line">    <span class="meta">@Reflect</span>.metadata(<span class="string">"name"</span>,<span class="string">"propertyN"</span>)</span><br><span class="line">    n: <span class="built_in">string</span> = <span class="string">'nice'</span>;</span><br><span class="line">    <span class="meta">@Reflect</span>.metadata(<span class="string">"name"</span>,<span class="string">"propertyK"</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> k: <span class="built_in">string</span> = <span class="string">"hello"</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"><span class="keyword">public</span> m: <span class="built_in">string</span></span>) &#123;&#125;</span><br><span class="line">    <span class="meta">@Reflect</span>.metadata(<span class="string">"name"</span>,<span class="string">"funcGet"</span>)</span><br><span class="line">    <span class="keyword">get</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Reflect.getMetadata(<span class="string">"name"</span>,A));</span><br><span class="line"><span class="built_in">console</span>.log(Reflect.getMetadata(<span class="string">"name"</span>,A,<span class="string">"k"</span>));</span><br><span class="line"><span class="built_in">console</span>.log(Reflect.getMetadata(<span class="string">"name"</span>,A.prototype,<span class="string">"get"</span>));</span><br><span class="line"><span class="built_in">console</span>.log(Reflect.getMetadata(<span class="string">"name"</span>,A.prototype,<span class="string">"n"</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">classA</span></span><br><span class="line"><span class="comment">propertyK</span></span><br><span class="line"><span class="comment">funcGet</span></span><br><span class="line"><span class="comment">propertyN</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="使用Reflect-defineMetadata进行命令式定义"><a href="#使用Reflect-defineMetadata进行命令式定义" class="headerlink" title="使用Reflect.defineMetadata进行命令式定义"></a>使用Reflect.defineMetadata进行命令式定义</h4><p>“Reflect-metadata”提供了Reflect.defineMetadata来对元数据进行命令式的定义。与之前定义元数据的目标一致，我们可以用命令式定义API来定义类或类的成员（属性和方法），其有以下两种语法：</p>
+<ol>
+<li><p>为类定义元数据</p>
+<blockquote>
+<p>Reflect.defineMetadata(metadataKey, metadataValue, target)</p>
+</blockquote>
+</li>
+<li><p>为类的成员（属性和方法）定义元数据</p>
+<blockquote>
+<p>Reflect.defineMetadata(metadataKey, metadataValue, target, propertyKey)</p>
+</blockquote>
+</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"Reflect-metadata"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> A &#123;</span><br><span class="line">    <span class="keyword">static</span> m: <span class="built_in">string</span> = <span class="string">"hello"</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"><span class="keyword">public</span> n: <span class="built_in">string</span></span>) &#123;&#125;</span><br><span class="line">    getMes(): <span class="built_in">string</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Reflect.defineMetadata(<span class="string">"name"</span>,<span class="string">"classA"</span>,A);</span><br><span class="line">Reflect.defineMetadata(<span class="string">"name"</span>,<span class="string">"propertyM"</span>,A,<span class="string">"m"</span>);</span><br><span class="line">Reflect.defineMetadata(<span class="string">"name"</span>,<span class="string">"propertyGetMes"</span>,A.prototype,<span class="string">"getMes"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Reflect.getMetadata(<span class="string">"name"</span>,A));</span><br><span class="line"><span class="built_in">console</span>.log(Reflect.getMetadata(<span class="string">"name"</span>,A,<span class="string">"m"</span>));</span><br><span class="line"><span class="built_in">console</span>.log(Reflect.getMetadata(<span class="string">"name"</span>,A.prototype,<span class="string">"getMes"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">classA</span></span><br><span class="line"><span class="comment">propertyM</span></span><br><span class="line"><span class="comment">propertyGetMes</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Reflect-getMetadata获取元数据信息"><a href="#Reflect-getMetadata获取元数据信息" class="headerlink" title="Reflect.getMetadata获取元数据信息"></a>Reflect.getMetadata获取元数据信息</h3><p>我们可以通过以下的反射元数据API来获取元数据的信息</p>
+<ol>
+<li>获取类（构造函数）上的元数据<blockquote>
+<p>Reflect.getMetadata(metadataKey, target);</p>
+</blockquote>
+</li>
+<li>获取静态成员或实例成员的元数据<blockquote>
+<p>Reflect.hasOwnMetadata(metadataKey, target, propertyKey);</p>
+</blockquote>
+</li>
+</ol>
+<p>其中,metadataKey表示元数据键,target表示构造函数或者是构造函数的原型，peropertyKey表示属性或者是方法</p>
+<p>除了自定义的元数据键(metadataKey)，还有三种常用的保留元数据键</p>
+<ol>
+<li>类型元数据使用元数据键”design:type”（用来获取属性类型）</li>
+<li>参数类型元数据使用元数据键”design:paramtypes”（用来获取参数类型）</li>
+<li>返回值类型元数据使用元数据键”design:returntype”（用来获取返回值类型）</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"Reflect-metadata"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用类型别名，将构造函数类型别名为使用泛型的Construct&lt;T = any&gt;</span></span><br><span class="line"><span class="keyword">type</span> Construct&lt;T = <span class="built_in">any</span>&gt; = <span class="keyword">new</span> (...args: <span class="built_in">Array</span>&lt;<span class="built_in">any</span>&gt;) =&gt; T</span><br><span class="line"></span><br><span class="line"><span class="comment">// 为类添加装饰器使得类具有保留元数据（只具有"design:paramtyps"元数据键，表示该构造函数的所有形参类型数组）</span></span><br><span class="line"><span class="meta">@Injectable</span></span><br><span class="line"><span class="keyword">class</span> A &#123;</span><br><span class="line">    <span class="comment">// 对类中的属性使用Reflect.metadata装饰器进行声明式定义，同样，该属性也会具有保留元数据（只具有"design:type"元数据键，表示该属性的类型）。另外，该属性还具有声明式定义的元数据键值对“name:propertyM”</span></span><br><span class="line">    <span class="meta">@Reflect</span>.metadata(<span class="string">"name"</span>,<span class="string">"propertyM"</span>)</span><br><span class="line">    <span class="keyword">static</span> m: <span class="built_in">string</span> = <span class="string">"hello"</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"><span class="keyword">public</span> n: <span class="built_in">string</span></span>) &#123;&#125;</span><br><span class="line">    getMes(): <span class="built_in">string</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Injectable</span>&lt;<span class="title">T</span>&gt;(<span class="params">constructor: Construct&lt;T&gt;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> paramtypes = Reflect.getMetadata(<span class="string">"design:paramtypes"</span>,<span class="keyword">constructor</span>);</span><br><span class="line">    console.log(<span class="params">"传递给类A的构造函数的参数类型数组",paramtypes</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(<span class="params">Reflect.getMetadata(<span class="string">"design:type"</span>,A,<span class="string">"m"</span>)</span>);</span><br><span class="line"></span><br><span class="line">// 使用Reflect.defineMetadata进行命令式定义时，则不会为其添加保留元数据键，而只是添加命令式定义的元数据键值对“name:propertyGetMes”</span><br><span class="line">Reflect.defineMetadata(<span class="params">"name","propertyGetMes",A.prototype,"getMes"</span>);</span><br><span class="line">console.log(<span class="params">Reflect.getMetadata(<span class="string">"name"</span>,A.prototype,<span class="string">"getMes"</span>)</span>);</span><br><span class="line">console.log(<span class="params">Reflect.getMetadata(<span class="string">"design:returntype"</span>,A.prototype,<span class="string">"getMes"</span>)</span>);</span><br><span class="line"></span><br><span class="line">/* 输出结果</span><br><span class="line">传递给类A的构造函数的参数类型数组 [ [Function: String] ]</span><br><span class="line">[Function: String]</span><br><span class="line">propertyGetMes</span><br><span class="line">undefined</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<h3 id="元数据相关总结"><a href="#元数据相关总结" class="headerlink" title="元数据相关总结"></a>元数据相关总结</h3><p>通过以上的所有例子，可以得到以下的元数据相关总结：</p>
+<ul>
+<li>我们只能为类或者是类中的成员（属性和方法）来进行元数据定义</li>
+<li>我们可以通过三种方式来进行元数据的定义：<ol>
+<li>为类或类的成员使用自定义装饰器</li>
+<li>为类或类的成员使用@Reflect.metadata装饰器进行声明式定义</li>
+<li>使用Reflect.defineMetadata进行命令式定义</li>
+</ol>
+</li>
+<li>只有使用以上三种方式进行元数据定义后，目标对象才会拥有[[Metadata]]属性（默认为不可枚举属性），也就是说才能获取和定义元数据</li>
+<li>为类或类的静态成员定义元数据时，元数据会存储在C.[[Metadata]]中</li>
+<li>为类的实例成员定义元数据时，元数据会存储在C.prototype[[Metadata]]中</li>
+<li>TS为我们定义了三种保留元数据键<ol>
+<li>“design:type” 类型元数据使用元数据键，用来获取元素的属性（只有类中的成员会具有，类本身不具有）</li>
+<li>“design:paramtypes” 参数类型元数据使用元数据键，用来获取参数的类型数组（只有类（构造函数的形参数组），类中的方法（该方法的形参数组）会具有，类的属性不具有）</li>
+<li>“desing:returntype” 返回值元数据使用元数据键，用来获取方法返回值的类型（只有类中的方法会具有，类声明和类中的属性都不具有）</li>
+</ol>
+</li>
+<li>使用Reflect.defineMetadata为类和类中的成员进行命令式定义时，并不会为指定的类或类的成员默认添加保留元数据键，而其他两种定义方法会默认添加</li>
+</ul>
+<h2 id="使用反射元数据和装饰器进行应用"><a href="#使用反射元数据和装饰器进行应用" class="headerlink" title="使用反射元数据和装饰器进行应用"></a>使用反射元数据和装饰器进行应用</h2><h3 id="控制翻转和依赖注入的简单实现"><a href="#控制翻转和依赖注入的简单实现" class="headerlink" title="控制翻转和依赖注入的简单实现"></a>控制翻转和依赖注入的简单实现</h3><p>依赖注入可以通过类构造函数进行注入，也可以通过书信进行注入。在这里，我们只进行类构造函数注入的简单实现。</p>
+<p>我们来模拟Nest.js的依赖注入的简单实现：</p>
+<p>首先，我们需要定义一些基础的装饰器以及IOC容器</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在common.ts中</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"Reflect-metadata"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Construct&lt;T = <span class="built_in">any</span>&gt; = <span class="keyword">new</span> (...args: <span class="built_in">Array</span>&lt;<span class="built_in">any</span>&gt;) =&gt; T;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明Injectable装饰器，当为类声明装饰该装饰器时则表示该类是可注入的类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Injectable</span>&lt;<span class="title">T</span>&gt;(<span class="params">constructor: Construct&lt;T&gt;</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明Controller装饰齐齐，当为类声明装饰器装饰器时则表示该类是控制器模块</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Controller</span>&lt;<span class="title">T</span>&gt;(<span class="params">constructor: Construct&lt;T&gt;</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明简单的IOC容器，用来将对象创建的控制器反转</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Factory</span>&lt;<span class="title">T</span>&gt;(<span class="params">constructor: Construct&lt;T&gt;</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> paramtypes = Reflect.getMetadata(<span class="string">"design:paramtypes"</span>,<span class="keyword">constructor</span>);</span><br><span class="line">    let providers = paramtypes.map(<span class="params">(provider: Construct&lt;T&gt;) =&gt; <span class="keyword">new</span> provider()</span>);</span><br><span class="line">    return new <span class="keyword">constructor</span>(<span class="params">...providers</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export &#123;Injectable,Controller,Factory&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，我们只是声明了一些装饰器函数，但我们并没有为装饰器函数添加任何函数体。那么这是为什么呢？我们之前提到过，为类或类的成员使用装饰器会默认为它们添加它们所允许拥有的保留元数据键。这些元数据键我们在之后的Factory函数中需要使用到。</p>
+<p>接下来，我们来定义Service模块和Controller模块</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在cats.service.ts中，该模块为cats的service模块，用来编写业务代码</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;Injectable&#125; <span class="keyword">from</span> <span class="string">"./common"</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> CatsService &#123;</span><br><span class="line">    catName: <span class="built_in">string</span> = <span class="string">"jack"</span>;</span><br><span class="line">    getCatName(): <span class="built_in">string</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.catName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在cats.controller.ts中，该模块为控制器模块</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;Controller&#125; <span class="keyword">from</span> <span class="string">"./common"</span></span><br><span class="line"><span class="keyword">import</span> &#123;CatsService&#125; <span class="keyword">from</span> <span class="string">"./cats.service"</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> CatsController &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"><span class="keyword">public</span> readonly catsService: CatsService</span>) &#123;&#125;</span><br><span class="line">    getCatsServiceMes(): <span class="built_in">string</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.catsService.getCatName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，在catsController类的构造函数中没有任何函数体，而构造函数的参数前添加了访问限定符public和readonly。这是一种叫做参数属性的特性：</p>
+<blockquote>
+<p>参数属性通过给构造函数参数前面添加一个访问限定符来声明。 使用 private限定一个参数属性会声明并初始化一个私有成员；对于 public，protected和readonly来说也是一样。</p>
+</blockquote>
+<p>使用参数属性，允许我们将声明和赋值合并至一处。</p>
+<p>最后是模拟依赖注入的过程：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在main.ts中</span></span><br><span class="line"><span class="keyword">import</span> &#123;Factory&#125; <span class="keyword">from</span> <span class="string">"./common"</span></span><br><span class="line"><span class="keyword">import</span> &#123;CatsController&#125; <span class="keyword">from</span> <span class="string">"./cats.controller"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Factory(CatsController));</span><br><span class="line"><span class="built_in">console</span>.log(Factory(CatsController).getCatsServiceMes());</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">catsController &#123; catsService: CatsService &#123; catName: 'jack' &#125; &#125;</span></span><br><span class="line"><span class="comment">jack</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>到这里，我们完成了依赖注入的最简单的实现。总之，实现依赖注入就得需要依靠装饰器和反射元数据API的使用，因为，我们需要在运行中获得参数的类型信息。</p>
+<h3 id="Controller和-Get的简单实现"><a href="#Controller和-Get的简单实现" class="headerlink" title="@Controller和@Get的简单实现"></a>@Controller和@Get的简单实现</h3><p>在Nest.js中，我们经常会使用到这些装饰器。@Controller负责路由控制，@Get表示请求的方法须为get请求</p>
+<p>首先，我们建立Controller和请求方法的装饰器函数</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在common.ts中</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"Reflect-metadata"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Construct&lt;T = <span class="built_in">any</span>&gt; = <span class="keyword">new</span> (...args: <span class="built_in">Array</span>&lt;<span class="built_in">any</span>&gt;) =&gt; T</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Route &#123;</span><br><span class="line">    route: <span class="built_in">string</span>;</span><br><span class="line">    method: <span class="built_in">string</span>;</span><br><span class="line">    fn: <span class="built_in">Function</span>;</span><br><span class="line">    methodName: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建立@Controller装饰器函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Controller</span>(<span class="params">path: <span class="built_in">string</span></span>): <span class="title">Function</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>&lt;<span class="title">T</span>&gt;(<span class="params">constructor: Construct&lt;T&gt;</span>) </span>&#123;</span><br><span class="line">        Reflect.defineMetadata(<span class="string">'path'</span>,<span class="string">'/'</span>+path,<span class="keyword">constructor</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">// 一个工厂函数，根据传入的请求方法类型来返回一个该类型的装饰器工厂函数</span><br><span class="line">function createMethodsDecorator(<span class="params">method: <span class="built_in">string</span></span>): Function &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">routeName: <span class="built_in">string</span></span>): <span class="title">Function</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target: <span class="built_in">any</span>,propertyName: <span class="built_in">string</span>,descriptor: PropertyDescriptor</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// @Get之类的装饰器会装饰实例方法。因此，为该实例方法设定元数据route路由路径和method请求方法</span></span><br><span class="line">            Reflect.defineMetadata(<span class="string">"route"</span>,<span class="string">'/'</span>+routeName,target,propertyName);</span><br><span class="line">            Reflect.defineMetadata(<span class="string">"method"</span>,method,target,propertyName);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 路径信息解析函数，传入的参数为控制器类，返回该控制器的所有路由信息</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mapRoute</span>&lt;<span class="title">T</span>&gt;(<span class="params">constructor: Construct&lt;T&gt;</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 得到控制器路径，即@Controller()中的参数值</span></span><br><span class="line">    <span class="keyword">let</span> pathName = Reflect.getMetadata(<span class="string">"path"</span>,<span class="keyword">constructor</span>);</span><br><span class="line">    let routes: Array&lt;Object&gt; = [];</span><br><span class="line">    let proto = <span class="keyword">constructor</span>.prototype;</span><br><span class="line">    // 过滤掉类的原型中不是函数的属性</span><br><span class="line">    let funcs = Object.keys(<span class="params">proto</span>).filter(<span class="params">item =&gt; (<span class="keyword">typeof</span> proto[item] === <span class="string">'function'</span>)</span>);</span><br><span class="line">    funcs.forEach(<span class="params">funcName=&gt;&#123;</span></span><br><span class="line"><span class="params">        <span class="comment">// 得到@Get()中的参数值</span></span></span><br><span class="line"><span class="params">        <span class="keyword">let</span> route = Reflect.getMetadata(<span class="string">"route"</span>,proto,funcName);</span></span><br><span class="line"><span class="params">        route = pathName + route;</span></span><br><span class="line"><span class="params">        <span class="comment">// 得到为该方法设定的允许请求方法</span></span></span><br><span class="line"><span class="params">        <span class="keyword">let</span> method = Reflect.getMetadata(<span class="string">"method"</span>,proto,funcName);</span></span><br><span class="line"><span class="params">        <span class="keyword">let</span> fn = proto[funcName];</span></span><br><span class="line"><span class="params">        <span class="keyword">let</span> routeMes: Route = &#123;</span></span><br><span class="line"><span class="params">            route,</span></span><br><span class="line"><span class="params">            method,</span></span><br><span class="line"><span class="params">            fn,</span></span><br><span class="line"><span class="params">            methodName: funcName</span></span><br><span class="line"><span class="params">        &#125;;</span></span><br><span class="line"><span class="params">        routes.push(routeMes)</span></span><br><span class="line"><span class="params">    &#125;</span>)</span><br><span class="line">    return &#123;</span><br><span class="line">        pathName,</span><br><span class="line">        routes</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 通过上述工厂函数得到装饰器工厂函数</span><br><span class="line">const Get = createMethodsDecorator(<span class="params">'GET'</span>);</span><br><span class="line">const Post = createMethodsDecorator(<span class="params">'POST'</span>);</span><br><span class="line"></span><br><span class="line">export &#123;Controller,Get,Post,mapRoute&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着，我们编写控制器模块</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在cats.controller.ts中</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;Controller,Get,Post&#125; <span class="keyword">from</span> <span class="string">"./common"</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span>(<span class="string">"cats"</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> CatsController &#123;</span><br><span class="line">    <span class="meta">@Get</span>(<span class="string">'findAll'</span>)</span><br><span class="line">    findAll(): <span class="built_in">string</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Find all"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Get</span>(<span class="string">'findOne'</span>)</span><br><span class="line">    findOne(): <span class="built_in">string</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Find one"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Post</span>(<span class="string">'create'</span>)</span><br><span class="line">    create(): <span class="built_in">string</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Create succeed"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着，我们需要解析这个控制器得到相应的路径信息，并且创建http服务器进行请求监听</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在main.ts中</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> http <span class="keyword">from</span> <span class="string">"http"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;mapRoute&#125; <span class="keyword">from</span> <span class="string">"./common"</span></span><br><span class="line"><span class="keyword">import</span> &#123;CatsController&#125; <span class="keyword">from</span> <span class="string">"./cats.controller"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> controller = mapRoute(CatsController);</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function">(<span class="params">req,res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> route of controller.routes) &#123;</span><br><span class="line">        <span class="keyword">let</span> routeName = (route <span class="keyword">as</span> <span class="built_in">any</span>).route;</span><br><span class="line">        <span class="keyword">if</span>(req.url === routeName) &#123;</span><br><span class="line">            res.setHeader(<span class="string">"Content-Type"</span>,<span class="string">"text/palin"</span>);</span><br><span class="line">            res.end((route <span class="keyword">as</span> <span class="built_in">any</span>).fn());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).listen(<span class="number">3000</span>,<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"Port 3000 is listening"</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样我们就完成了从控制器模块到服务器监听程序建立的全部过程了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+        
+      
+      </div>
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/14/在TS中使用混合/" rel="next" title="在TS中使用混合">
+                <i class="fa fa-chevron-left"></i> 在TS中使用混合
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar_1.png" alt="Angel">
+            
+              <p class="site-author-name" itemprop="name">Angel</p>
+              <p class="site-description motion-element" itemprop="description">这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">142</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#元数据"><span class="nav-number">1.</span> <span class="nav-text">元数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是元数据"><span class="nav-number">1.1.</span> <span class="nav-text">什么是元数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元数据的定义和添加"><span class="nav-number">1.2.</span> <span class="nav-text">元数据的定义和添加</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通过为类或类中的成员定义一个装饰器"><span class="nav-number">1.2.1.</span> <span class="nav-text">通过为类或类中的成员定义一个装饰器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将Reflect-metadata当做装饰器使用进行声明式定义"><span class="nav-number">1.2.2.</span> <span class="nav-text">将Reflect.metadata当做装饰器使用进行声明式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用Reflect-defineMetadata进行命令式定义"><span class="nav-number">1.2.3.</span> <span class="nav-text">使用Reflect.defineMetadata进行命令式定义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reflect-getMetadata获取元数据信息"><span class="nav-number">1.3.</span> <span class="nav-text">Reflect.getMetadata获取元数据信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元数据相关总结"><span class="nav-number">1.4.</span> <span class="nav-text">元数据相关总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用反射元数据和装饰器进行应用"><span class="nav-number">2.</span> <span class="nav-text">使用反射元数据和装饰器进行应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#控制翻转和依赖注入的简单实现"><span class="nav-number">2.1.</span> <span class="nav-text">控制翻转和依赖注入的简单实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller和-Get的简单实现"><span class="nav-number">2.2.</span> <span class="nav-text">@Controller和@Get的简单实现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angel</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">163k</span>
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共163k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script>
+</body>
+</html>
+<script type="text/javascript" src="/js/src/click.js"></script>
