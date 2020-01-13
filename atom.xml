@@ -3,11 +3,11 @@
   <title>Hexo</title>
   
   
-  <link href="/atom.xml" rel="self"/>
+  <link href="AngelLikeFairy/atom.xml" rel="self"/>
   
-  <link href="http://angellike_fairy.gitee.io/angellikefairy/"/>
-  <updated>2019-12-18T08:34:04.585Z</updated>
-  <id>http://angellike_fairy.gitee.io/angellikefairy/</id>
+  <link href="https://gitee.com/angellike_fairy/"/>
+  <updated>2020-01-13T08:51:52.206Z</updated>
+  <id>https://gitee.com/angellike_fairy/</id>
   
   <author>
     <name>Angel</name>
@@ -17,9 +17,23 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>scrollTop与无限上滑的简单实现</title>
+    <link href="https://gitee.com/angellike_fairy/2020/01/13/scrollTop%E4%B8%8E%E6%97%A0%E9%99%90%E4%B8%8A%E6%BB%91%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://gitee.com/angellike_fairy/2020/01/13/scrollTop与无限上滑的简单实现/</id>
+    <published>2020-01-13T08:51:52.000Z</published>
+    <updated>2020-01-13T08:51:52.206Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>TypeScript元数据的理解与使用</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/12/16/TypeScript%E5%85%83%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E4%BD%BF%E7%94%A8/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/12/16/TypeScript元数据的理解与使用/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/12/16/TypeScript%E5%85%83%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E4%BD%BF%E7%94%A8/"/>
+    <id>https://gitee.com/angellike_fairy/2019/12/16/TypeScript元数据的理解与使用/</id>
     <published>2019-12-16T07:29:14.000Z</published>
     <updated>2019-12-18T08:34:04.585Z</updated>
     
@@ -34,15 +48,15 @@
     
     </summary>
     
-      <category term="TypeScript" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/TypeScript/"/>
+      <category term="TypeScript" scheme="https://gitee.com/angellike_fairy/categories/TypeScript/"/>
     
     
   </entry>
   
   <entry>
     <title>在TS中使用混合</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/12/14/%E5%9C%A8TS%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%B7%B7%E5%90%88/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/12/14/在TS中使用混合/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/12/14/%E5%9C%A8TS%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%B7%B7%E5%90%88/"/>
+    <id>https://gitee.com/angellike_fairy/2019/12/14/在TS中使用混合/</id>
     <published>2019-12-14T05:33:17.000Z</published>
     <updated>2019-12-14T08:01:32.495Z</updated>
     
@@ -58,15 +72,15 @@
     
     </summary>
     
-      <category term="TypeScript" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/TypeScript/"/>
+      <category term="TypeScript" scheme="https://gitee.com/angellike_fairy/categories/TypeScript/"/>
     
     
   </entry>
   
   <entry>
     <title>代理proxy和反射Reflection的基本使用</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/12/09/%E4%BB%A3%E7%90%86proxy%E5%92%8C%E5%8F%8D%E5%B0%84Reflection%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/12/09/代理proxy和反射Reflection的基本使用/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/12/09/%E4%BB%A3%E7%90%86proxy%E5%92%8C%E5%8F%8D%E5%B0%84Reflection%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
+    <id>https://gitee.com/angellike_fairy/2019/12/09/代理proxy和反射Reflection的基本使用/</id>
     <published>2019-12-09T05:53:12.000Z</published>
     <updated>2019-12-17T08:28:33.626Z</updated>
     
@@ -81,15 +95,15 @@
     
     </summary>
     
-      <category term="ES6" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/ES6/"/>
+      <category term="ES6" scheme="https://gitee.com/angellike_fairy/categories/ES6/"/>
     
     
   </entry>
   
   <entry>
     <title>防抖与节流</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/28/%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/28/防抖与节流/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/28/%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/28/防抖与节流/</id>
     <published>2019-11-28T05:57:52.000Z</published>
     <updated>2019-11-30T08:51:31.128Z</updated>
     
@@ -104,15 +118,15 @@
     
     </summary>
     
-      <category term="javaScript基础" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/javaScript%E5%9F%BA%E7%A1%80/"/>
+      <category term="javaScript基础" scheme="https://gitee.com/angellike_fairy/categories/javaScript%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
   
   <entry>
     <title>二叉树的递归与非递归遍历</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%80%92%E5%BD%92%E4%B8%8E%E9%9D%9E%E9%80%92%E5%BD%92%E9%81%8D%E5%8E%86/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/25/二叉树的递归与非递归遍历/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%80%92%E5%BD%92%E4%B8%8E%E9%9D%9E%E9%80%92%E5%BD%92%E9%81%8D%E5%8E%86/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/25/二叉树的递归与非递归遍历/</id>
     <published>2019-11-25T11:13:54.000Z</published>
     <updated>2019-11-25T13:05:03.464Z</updated>
     
@@ -128,15 +142,15 @@
     
     </summary>
     
-      <category term="算法笔记" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
+      <category term="算法笔记" scheme="https://gitee.com/angellike_fairy/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
     
     
   </entry>
   
   <entry>
     <title>TypeScript装饰器理解</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/23/TypeScript%E8%A3%85%E9%A5%B0%E5%99%A8%E7%90%86%E8%A7%A3/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/23/TypeScript装饰器理解/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/23/TypeScript%E8%A3%85%E9%A5%B0%E5%99%A8%E7%90%86%E8%A7%A3/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/23/TypeScript装饰器理解/</id>
     <published>2019-11-23T11:50:21.000Z</published>
     <updated>2019-12-16T09:45:26.648Z</updated>
     
@@ -152,15 +166,15 @@
     
     </summary>
     
-      <category term="TypeScript" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/TypeScript/"/>
+      <category term="TypeScript" scheme="https://gitee.com/angellike_fairy/categories/TypeScript/"/>
     
     
   </entry>
   
   <entry>
     <title>TypeScript中的泛型理解</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/19/TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B%E7%90%86%E8%A7%A3/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/19/TypeScript中的泛型理解/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/19/TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B%E7%90%86%E8%A7%A3/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/19/TypeScript中的泛型理解/</id>
     <published>2019-11-19T06:25:42.000Z</published>
     <updated>2019-12-15T07:02:42.592Z</updated>
     
@@ -176,15 +190,15 @@
     
     </summary>
     
-      <category term="TypeScript" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/TypeScript/"/>
+      <category term="TypeScript" scheme="https://gitee.com/angellike_fairy/categories/TypeScript/"/>
     
     
   </entry>
   
   <entry>
     <title>TypeScript的类与接口</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/17/TypeScript%E7%9A%84%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/17/TypeScript的类与接口/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/17/TypeScript%E7%9A%84%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/17/TypeScript的类与接口/</id>
     <published>2019-11-17T10:40:57.000Z</published>
     <updated>2019-11-18T09:31:53.371Z</updated>
     
@@ -199,15 +213,15 @@
     
     </summary>
     
-      <category term="TypeScript" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/TypeScript/"/>
+      <category term="TypeScript" scheme="https://gitee.com/angellike_fairy/categories/TypeScript/"/>
     
     
   </entry>
   
   <entry>
     <title>flex布局一把梭</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/16/flex%E5%B8%83%E5%B1%80%E4%B8%80%E6%8A%8A%E6%A2%AD/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/16/flex布局一把梭/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/16/flex%E5%B8%83%E5%B1%80%E4%B8%80%E6%8A%8A%E6%A2%AD/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/16/flex布局一把梭/</id>
     <published>2019-11-16T12:09:06.000Z</published>
     <updated>2019-11-16T14:44:32.702Z</updated>
     
@@ -222,15 +236,15 @@
     
     </summary>
     
-      <category term="css" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/css/"/>
+      <category term="css" scheme="https://gitee.com/angellike_fairy/categories/css/"/>
     
     
   </entry>
   
   <entry>
     <title>相等==与全等===的区别</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/15/%E7%9B%B8%E7%AD%89-%E4%B8%8E%E5%85%A8%E7%AD%89-%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/15/相等-与全等-的区别/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/15/%E7%9B%B8%E7%AD%89-%E4%B8%8E%E5%85%A8%E7%AD%89-%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/15/相等-与全等-的区别/</id>
     <published>2019-11-15T06:44:33.000Z</published>
     <updated>2019-11-15T08:47:40.647Z</updated>
     
@@ -245,15 +259,15 @@
     
     </summary>
     
-      <category term="javaScript基础" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/javaScript%E5%9F%BA%E7%A1%80/"/>
+      <category term="javaScript基础" scheme="https://gitee.com/angellike_fairy/categories/javaScript%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
   
   <entry>
     <title>TypeScript零散知识点总结</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/15/TypeScript%E9%9B%B6%E6%95%A3%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/15/TypeScript零散知识点总结/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/15/TypeScript%E9%9B%B6%E6%95%A3%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/15/TypeScript零散知识点总结/</id>
     <published>2019-11-15T05:26:14.000Z</published>
     <updated>2019-11-15T06:10:05.964Z</updated>
     
@@ -270,15 +284,15 @@
     
     </summary>
     
-      <category term="TypeScript" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/TypeScript/"/>
+      <category term="TypeScript" scheme="https://gitee.com/angellike_fairy/categories/TypeScript/"/>
     
     
   </entry>
   
   <entry>
     <title>Vue的一些零散知识点总结</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/11/Vue%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9B%B6%E6%95%A3%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/11/Vue的一些零散知识点总结/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/11/Vue%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9B%B6%E6%95%A3%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/11/Vue的一些零散知识点总结/</id>
     <published>2019-11-11T05:47:44.000Z</published>
     <updated>2019-11-13T11:17:19.725Z</updated>
     
@@ -294,15 +308,15 @@
     
     </summary>
     
-      <category term="Vue" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/Vue/"/>
+      <category term="Vue" scheme="https://gitee.com/angellike_fairy/categories/Vue/"/>
     
     
   </entry>
   
   <entry>
     <title>Vue的生命周期理解</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/10/Vue%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%90%86%E8%A7%A3/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/10/Vue的生命周期理解/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/10/Vue%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%90%86%E8%A7%A3/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/10/Vue的生命周期理解/</id>
     <published>2019-11-10T04:50:15.000Z</published>
     <updated>2019-11-10T06:28:23.197Z</updated>
     
@@ -317,15 +331,15 @@
     
     </summary>
     
-      <category term="Vue" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/Vue/"/>
+      <category term="Vue" scheme="https://gitee.com/angellike_fairy/categories/Vue/"/>
     
     
   </entry>
   
   <entry>
     <title>MVVM模式的理解以及双向数据绑定</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/09/MVVM%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%90%86%E8%A7%A3%E4%BB%A5%E5%8F%8A%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/09/MVVM模式的理解以及双向数据绑定/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/09/MVVM%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%90%86%E8%A7%A3%E4%BB%A5%E5%8F%8A%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/09/MVVM模式的理解以及双向数据绑定/</id>
     <published>2019-11-09T06:38:05.000Z</published>
     <updated>2019-11-09T11:19:20.682Z</updated>
     
@@ -340,15 +354,15 @@
     
     </summary>
     
-      <category term="Vue" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/Vue/"/>
+      <category term="Vue" scheme="https://gitee.com/angellike_fairy/categories/Vue/"/>
     
     
   </entry>
   
   <entry>
     <title>Buffer的理解以及文件上传的应用</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/05/Buffer%E7%9A%84%E7%90%86%E8%A7%A3%E4%BB%A5%E5%8F%8A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%9A%84%E5%BA%94%E7%94%A8/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/05/Buffer的理解以及文件上传的应用/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/05/Buffer%E7%9A%84%E7%90%86%E8%A7%A3%E4%BB%A5%E5%8F%8A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%9A%84%E5%BA%94%E7%94%A8/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/05/Buffer的理解以及文件上传的应用/</id>
     <published>2019-11-05T07:16:53.000Z</published>
     <updated>2019-11-06T12:59:53.569Z</updated>
     
@@ -363,15 +377,15 @@
     
     </summary>
     
-      <category term="Node" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/Node/"/>
+      <category term="Node" scheme="https://gitee.com/angellike_fairy/categories/Node/"/>
     
     
   </entry>
   
   <entry>
     <title>V8的垃圾回收机制与内存管理</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/04/V8%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/04/V8的垃圾回收机制/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/04/V8%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/04/V8的垃圾回收机制/</id>
     <published>2019-11-04T12:11:14.000Z</published>
     <updated>2019-11-04T14:04:11.479Z</updated>
     
@@ -388,15 +402,15 @@
     
     </summary>
     
-      <category term="浏览器" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+      <category term="浏览器" scheme="https://gitee.com/angellike_fairy/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
     
     
   </entry>
   
   <entry>
     <title>node.js的事件循环机制</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/03/node-js%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/03/node-js的事件循环机制/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/03/node-js%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/03/node-js的事件循环机制/</id>
     <published>2019-11-03T07:20:19.000Z</published>
     <updated>2019-11-04T07:05:17.830Z</updated>
     
@@ -417,8 +431,8 @@
   
   <entry>
     <title>深入了解Node的异步I/O</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/11/01/%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Node%E7%9A%84%E5%BC%82%E6%AD%A5I-O/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/11/01/深入了解Node的异步I-O/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/11/01/%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Node%E7%9A%84%E5%BC%82%E6%AD%A5I-O/"/>
+    <id>https://gitee.com/angellike_fairy/2019/11/01/深入了解Node的异步I-O/</id>
     <published>2019-11-01T06:35:42.000Z</published>
     <updated>2019-11-04T07:05:17.830Z</updated>
     
@@ -433,15 +447,15 @@
     
     </summary>
     
-      <category term="Node" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/Node/"/>
+      <category term="Node" scheme="https://gitee.com/angellike_fairy/categories/Node/"/>
     
     
   </entry>
   
   <entry>
     <title>浏览器渲染机制</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/10/29/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/10/29/浏览器渲染机制/</id>
+    <link href="https://gitee.com/angellike_fairy/2019/10/29/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/"/>
+    <id>https://gitee.com/angellike_fairy/2019/10/29/浏览器渲染机制/</id>
     <published>2019-10-29T06:58:30.000Z</published>
     <updated>2019-10-29T12:58:26.581Z</updated>
     
@@ -459,32 +473,7 @@
     
     </summary>
     
-      <category term="浏览器" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>循环中的async与await处理</title>
-    <link href="http://angellike_fairy.gitee.io/angellikefairy/2019/10/28/%E5%BE%AA%E7%8E%AF%E4%B8%AD%E7%9A%84async%E4%B8%8Eawait%E5%A4%84%E7%90%86/"/>
-    <id>http://angellike_fairy.gitee.io/angellikefairy/2019/10/28/循环中的async与await处理/</id>
-    <published>2019-10-28T10:18:25.000Z</published>
-    <updated>2019-10-28T14:30:38.717Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>之前在做项目的时候，遇到一个场景：</p><p>给定了一个数组类似于这样：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>需求是这样的，我们需要遍历整个数组，获得每个对象中的hallId值，再通过该ID值请求某接口得到hallName，再将该hallName存入对象</p><p>结果类似于这样</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">1</span>,</span><br><span class="line">        hallName: <span class="string">'1号'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">2</span>,</span><br><span class="line">        hallName: <span class="string">'2号'</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>然后就遇到了循环中使用async和await遇到的一些问题，以下就是探究的过程</p><h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>我们首先准备要获取的数据</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ha = [</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">3</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hall = [</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">1</span>,</span><br><span class="line">        hallName: <span class="string">'1号'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        hallId: <span class="number">2</span>,</span><br><span class="line">        hallName: <span class="string">'2号'</span></span><br><span class="line">    &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">        hallId: <span class="number">3</span>,</span><br><span class="line">        hallName: <span class="string">'3号'</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>以及使用setTimeout来模拟异步请求</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getHallName</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> v of hall) &#123;</span><br><span class="line">                <span class="keyword">if</span>(v.hallId===id) &#123;</span><br><span class="line">                    resolve(v.hallName);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="number">1000</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="for循环中使用await"><a href="#for循环中使用await" class="headerlink" title="for循环中使用await"></a>for循环中使用await</h2><p>我们首先来看下在for循环中使用await</p><p>我们可以很自然地写出以下异步函数：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> v of ha) &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 执行结果</span></span><br><span class="line"><span class="comment">// 等待1000ms</span></span><br><span class="line"><span class="comment">1号</span></span><br><span class="line"><span class="comment">// 等待1000ms</span></span><br><span class="line"><span class="comment">2号</span></span><br><span class="line"><span class="comment">// 等待1000ms</span></span><br><span class="line"><span class="comment">3号</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure><h2 id="在forEach中使用await"><a href="#在forEach中使用await" class="headerlink" title="在forEach中使用await"></a>在forEach中使用await</h2><p>一开始的写的异步函数如下</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ha.forEach(<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure><p>但是当我们兴致冲冲去查看运行结果的时候却傻了眼，得到的输出结果却是如下</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SyntaxError: await is only valid in async function</span><br></pre></td></tr></table></figure><p>这时候，我们一拍脑袋，回想起来forEach() 方法是对数组的每个元素执行一次提供的函数。</p><p>现在，我又将函数修改为以下的形式</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ha.forEach(<span class="keyword">async</span> v =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure><p>现在结果总该是正确的吧，但是，令人失望的是，结果还是错的</p><p>输出结果如下：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">// 等待1000ms,然后直接输出下面的三项，而不是每一项之间间隔1000ms</span></span><br><span class="line"><span class="comment">1号</span></span><br><span class="line"><span class="comment">2号</span></span><br><span class="line"><span class="comment">3号</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure><p>查阅资料后，才得到了一个结论</p><blockquote><p>JavaScript 中的 forEach不支持 promise 感知，也不支持 async 和await，所以不能在 forEach 使用 await 。</p></blockquote><h2 id="在map中使用await"><a href="#在map中使用await" class="headerlink" title="在map中使用await"></a>在map中使用await</h2><p>既然在forEach中无法使用await，那么map()方法呢？</p><p>这次我们有了forEach()的教训，</p><blockquote><p>map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。</p></blockquote><p>我们就记住了要让提供给map()方法的函数为异步函数</p><p>我们写出来以下的方法来进行试验：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ha.map(<span class="keyword">async</span> v=&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure><p>输出结果如下：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">// 等待1000ms，然后直接一次性输出下列三个值</span></span><br><span class="line"><span class="comment">1号</span></span><br><span class="line"><span class="comment">2号</span></span><br><span class="line"><span class="comment">3号</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure><p>我们查看一下mdn文档对于map()方法的说明：</p><blockquote><p>map 方法会给原数组中的每个元素都按顺序调用一次  callback 函数。callback 每次执行后的返回值（包括 undefined）组合起来形成一个新数组。</p></blockquote><p>也就是说，在不考虑返回数组的情况下，map()方法就可以表示为以下的形式</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">map1</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">map2</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">map3</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">map1(ha[<span class="number">0</span>]);</span><br><span class="line">map2(ha[<span class="number">1</span>]);</span><br><span class="line">map3(ha[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure><p>我们首先注册了三个异步函数，然后并行调用了它们。因此，输出结果也就是如上述所述，等待一段时间后，然后按照任务队列中的顺序依次输出</p><p>那么，如果再考虑map()方法的特性，其可以将每次函数执行后的返回值组合起来形成一个新的数组。另外，我们又知道</p><blockquote><p>异步函数返回一个promise对象</p></blockquote><p>因此，使用map()方法就可以返回一个包含promise对象的数组</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="built_in">Promise</span> &#123; &lt;pending&gt; &#125;, <span class="built_in">Promise</span> &#123; &lt;pending&gt; &#125;, <span class="built_in">Promise</span> &#123; &lt;pending&gt; &#125; ]</span><br></pre></td></tr></table></figure><p>因此，我们可以利用Promise.all()方法来进行后续的处理</p><p>现在，我们来重写之前的方法</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> promiseArr = ha.map(<span class="keyword">async</span> v =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="keyword">await</span> getHallName(v.hallId);</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Promise</span>.all(promiseArr).then( <span class="function"><span class="params">v</span>=&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(v);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">// 等待1000ms</span></span><br><span class="line"><span class="comment">[ '1号', '2号', '3号' ]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>根据以上的分析，我们可以看到：<br>对于async和await来控制异步流程</p><ol><li>如果想要在循环中让异步任务串行（继发运行），那么使用for循环(包括for的一些列循环: for…of , for…in)</li><li>如果想要在循环中让异步任务并行，那么我们除了Promise.all()方法外，还可以使用map()方法来使异步任务并行</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;之前在做项目的时候，遇到一个场景：&lt;/p&gt;
-&lt;p&gt;给定了一个数组类似于这样：&lt;/p&gt;
-&lt;figure class=&quot;highlight ty
-      
-    
-    </summary>
-    
-      <category term="ES6" scheme="http://angellike_fairy.gitee.io/angellikefairy/categories/ES6/"/>
+      <category term="浏览器" scheme="https://gitee.com/angellike_fairy/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
     
     
   </entry>
