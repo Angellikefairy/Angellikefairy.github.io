@@ -88,16 +88,19 @@
 
 
 
-<meta name="description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://angellike_fairy.gitee.io/angellikefairy/archives/2019/page/12/index.html">
+<meta name="description" content="前言想来Vue三件套一个源码都没有细读过，于是就想从vuex开始读起，同时也能帮助自己更好地使用vuex。 这是vuex的整体项目结构  那么，我们就从源码的入口文件开始读起吧！ 源码分析vuex入口文件vuex的入口文件主要向外暴露了vuex的一些API 12345678910111213import &amp;#123; Store, install &amp;#125; from &apos;./store&apos;impo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vuex源码分析">
+<meta property="og:url" content="https://angellike_fairy.gitee.io/angellikefairy/2020/01/26/vuex源码分析/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta property="og:description" content="前言想来Vue三件套一个源码都没有细读过，于是就想从vuex开始读起，同时也能帮助自己更好地使用vuex。 这是vuex的整体项目结构  那么，我们就从源码的入口文件开始读起吧！ 源码分析vuex入口文件vuex的入口文件主要向外暴露了vuex的一些API 12345678910111213import &amp;#123; Store, install &amp;#125; from &apos;./store&apos;impo">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s2.ax1x.com/2020/01/26/1m4cIe.png">
+<meta property="og:updated_time" content="2020-01-26T11:21:06.901Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="这个世界里，虽然没有最美好的相遇，却应该有为了相遇或者重逢所做的最美好的努力">
+<meta name="twitter:title" content="vuex源码分析">
+<meta name="twitter:description" content="前言想来Vue三件套一个源码都没有细读过，于是就想从vuex开始读起，同时也能帮助自己更好地使用vuex。 这是vuex的整体项目结构  那么，我们就从源码的入口文件开始读起吧！ 源码分析vuex入口文件vuex的入口文件主要向外暴露了vuex的一些API 12345678910111213import &amp;#123; Store, install &amp;#125; from &apos;./store&apos;impo">
+<meta name="twitter:image" content="https://s2.ax1x.com/2020/01/26/1m4cIe.png">
 
 
 
@@ -127,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="https://angellike_fairy.gitee.io/angellikefairy/archives/2019/page/12/">
+  <link rel="canonical" href="https://angellike_fairy.gitee.io/angellikefairy/2020/01/26/vuex源码分析/">
 
 
 
 
 
-  <title>归档 | Hexo</title>
+  <title>vuex源码分析 | Hexo</title>
   
 
 
@@ -154,7 +157,7 @@
   
  
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband">
          <a href="https://github.com/Angellikefairy"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149" alt="Fork me on GitHub"></a>
     </div>
@@ -292,390 +295,228 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://angellike_fairy.gitee.io/angellikefairy/2020/01/26/vuex源码分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
-         
+          <h1 class="post-title" itemprop="name headline">vuex源码分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-26T17:50:26+08:00">
+                2020-01-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        非常好! 目前共计 144 篇日志。 继续努力。
-      </span>
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/02/leetcode-283/" itemprop="url">
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">leetcode-283 移动零</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-02T15:19:27+08:00" content="2019-08-02">
-          08-02
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/01/数据类型/" itemprop="url">
-              
-                <span itemprop="name">数据类型</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-01T15:04:58+08:00" content="2019-08-01">
-          08-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>想来Vue三件套一个源码都没有细读过，于是就想从vuex开始读起，同时也能帮助自己更好地使用vuex。</p>
+<p>这是vuex的整体项目结构</p>
+<p><img src="https://s2.ax1x.com/2020/01/26/1m4cIe.png" alt></p>
+<p>那么，我们就从源码的入口文件开始读起吧！</p>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="vuex入口文件"><a href="#vuex入口文件" class="headerlink" title="vuex入口文件"></a>vuex入口文件</h3><p>vuex的入口文件主要向外暴露了vuex的一些API</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Store, install &#125; <span class="keyword">from</span> <span class="string">'./store'</span></span><br><span class="line"><span class="keyword">import</span> &#123; mapState, mapMutations, mapGetters, mapActions, createNamespacedHelpers &#125; <span class="keyword">from</span> <span class="string">'./helpers'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  Store,</span><br><span class="line">  install,</span><br><span class="line">  version: <span class="string">'__VERSION__'</span>,</span><br><span class="line">  mapState,</span><br><span class="line">  mapMutations,</span><br><span class="line">  mapGetters,</span><br><span class="line">  mapActions,</span><br><span class="line">  createNamespacedHelpers</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        
-        
+<h4 id="Store构造函数"><a href="#Store构造函数" class="headerlink" title="Store构造函数"></a>Store构造函数</h4><p>Store构造函数用来创建一个vuex的store实例来存放应用的状态。这个store实例也就是vuex的核心。</p>
+<p>我们可以这样来创建一个vuex实例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;...options&#125;);</span><br></pre></td></tr></table></figure>
 
-        
+<p>options是一个构造器选项对象，通过对象展开运算符的方式将选项对象们注入到类Store中。</p>
+<p>因此，通常完整的写法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vux.Store(&#123;</span><br><span class="line">    state: &#123;&#125;,</span><br><span class="line">    mutations: &#123;&#125;,</span><br><span class="line">    actions: &#123;&#125;,</span><br><span class="line">    modules: &#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<h4 id="install方法"><a href="#install方法" class="headerlink" title="install方法"></a>install方法</h4><p>vue规定，vue的插件必须对外暴露一个install方法，从而才允许插件向Vue及Vue实例注入全局性的属性或方法。</p>
+<h4 id="组件绑定的辅助函数"><a href="#组件绑定的辅助函数" class="headerlink" title="组件绑定的辅助函数"></a>组件绑定的辅助函数</h4><p>为了方便组件可以直接获取store实例中的多个状态或者mutaions和actions等，vuex提供了以下的辅助函数来帮助开发：</p>
+<ol>
+<li>mapState</li>
+<li>mapMutations</li>
+<li>mapGetters</li>
+<li>mapActions</li>
+<li>createNamespacedHelpers</li>
+</ol>
+<p>我们首先从install方法开始着手</p>
+<h3 id="install方法-1"><a href="#install方法-1" class="headerlink" title="install方法"></a>install方法</h3><h4 id="install函数"><a href="#install函数" class="headerlink" title="install函数"></a>install函数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Vue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">install</span> (<span class="params">_Vue</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (Vue &amp;&amp; _Vue === Vue) &#123;</span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(</span><br><span class="line">        <span class="string">'[vuex] already installed. Vue.use(Vuex) should be called only once.'</span></span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  Vue = _Vue</span><br><span class="line">  applyMixin(Vue)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/31/leetcode-1021/" itemprop="url">
-              
-                <span itemprop="name">leetcode-1021 删除最外层的括号</span>
-              
-            </a>
-        
-      </h2>
+<p>其中，install方法的第一个参数_Vue是Vue的构造器。如果我们在开发环境中多次使用Vue.use()方法来使用Vuex插件的话，我们便会得到如上的提示。</p>
+<p>一方面，Vue.use()会自动阻止相同插件的多次注册，即使Vue.use(同一个插件)被多次调用也只会注册一次。这有点像node的模块机制，在node中，当一个模块被加载过之后，这个模块就会被存放在缓存中。之后即使多次导入该模块，模块也只会被加载一次。</p>
+<p>其次，我们可以看到，因为Vue.use()会默认调用install方法并传入Vue构造器。而一开始Vue变量是undefined的，当调用Vue.use()后，Vue变量就会被赋予Vue构造器，因此，之后的再次调用Vue.use()就会直接return;</p>
+<h4 id="applyMixin方法"><a href="#applyMixin方法" class="headerlink" title="applyMixin方法"></a>applyMixin方法</h4><p>如果是第一通过Vue.use()注册插件的话，那么这个方法就会被调用。这个方法的主要功能就是通过混入的方式使得每个Vue实例都可以通过vm.$store来访问到同一个store实例。</p>
+<p>如果vue为2.x版本及以上，vue就可以通过vue.mixin()方法来进行全局注册，从而影响之后所有创建的每一个实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (version &gt;= <span class="number">2</span>) &#123;</span><br><span class="line">    Vue.mixin(&#123; <span class="attr">beforeCreate</span>: vuexInit &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-31T16:11:10+08:00" content="2019-07-31">
-          07-31
-        </time>
-      </div>
+<p>我们知道类的继承只能是单继承，但如果我们想要一个对象继承多个对象的属性和方法。那么我们就得需要混入的方式来实现。在TypeScript中也有类似的概念被称之为混合。我们通常会手动实现一个混合函数，其思想简而言之就是对多个对象进行浅复制，后面对象的同名属性覆盖前面对象的。有点类似于Object.assign()方法。但是,vue对混入的处理又有点不同，对于数据对象也就是data中的数据会进行递归合并。但是，</p>
+<blockquote>
+<p>注意：Vue中的混入对于混入对象和组件自身的同名钩子函数将会被合并为一个数组。也就是说所有的同名钩子函数都会被调用，先混入的对象先执行，自身组件的方法会最后被调用。</p>
+</blockquote>
+<p>而Vue.mixin()方法是对混入进行全局注册，因此，之后创建的所有vue实例在beforeCreate钩子时都会调用vuexInit方法</p>
+<h4 id="vuexinit方法"><a href="#vuexinit方法" class="headerlink" title="vuexinit方法"></a>vuexinit方法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">vuexInit</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> options = <span class="keyword">this</span>.$options</span><br><span class="line">    <span class="comment">// store injection</span></span><br><span class="line">    <span class="keyword">if</span> (options.store) &#123;</span><br><span class="line">        <span class="keyword">this</span>.$store = <span class="keyword">typeof</span> options.store === <span class="string">'function'</span></span><br><span class="line">        ? options.store()</span><br><span class="line">        : options.store</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (options.parent &amp;&amp; options.parent.$store) &#123;</span><br><span class="line">        <span class="keyword">this</span>.$store = options.parent.$store</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+<p>vm.$options可以获得当前vue实例的初始化选项。例如，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    data: &#123;<span class="comment">/*...*/</span>&#125;,</span><br><span class="line">    methods: &#123;<span class="comment">/*...*/</span>&#125;,</span><br><span class="line">    custom: &#123;<span class="comment">/*...*/</span>&#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> &#123;data,methods,custom&#125; = vm.$options;</span><br><span class="line"><span class="built_in">console</span>.log(data,methods,custom);</span><br></pre></td></tr></table></figure>
 
+<p>除了组件自身的属性，我们还可以获得自定义的属性。</p>
+<p>通常，在Vue项目的入口文件main.ts中,</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure>
 
+<p>store实例会被包含在Vue构造器的初始化选项中。因此，在Vue的根实例中，就可以通过vm.$options.store来获取这个store实例并且将其赋值给当前实例的$store属性。</p>
+<p>另外，在根实例的子组件中，自然是没有在初始化选项中就包含store实例的。因此，我们需要通过vm.$options.parent来获取其父实例，如果其父实例具有$store属性， 那么当前组件的$store属性也指向这个store实例。按照树的形式，每当一个新的子组件被注册，这个子组件实例的$store属性都会指向同一个store实例。</p>
+<p>从而，也就实现了store实例的全局注册。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/30/leetcode-1122/" itemprop="url">
-              
-                <span itemprop="name">leetcode-1122 数组的相对排序</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-30T14:14:33+08:00" content="2019-07-30">
-          07-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/30/leetcode-344/" itemprop="url">
-              
-                <span itemprop="name">leetcode-344 反转字符串</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-30T13:42:24+08:00" content="2019-07-30">
-          07-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/29/leetcode-977/" itemprop="url">
-              
-                <span itemprop="name">leetcode-977 有序数组的平方</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-29T22:06:32+08:00" content="2019-07-29">
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/28/leetcode-350/" itemprop="url">
-              
-                <span itemprop="name">leetcode-350 两个数组的交集 II</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-28T17:11:39+08:00" content="2019-07-28">
-          07-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/27/二分查找/" itemprop="url">
-              
-                <span itemprop="name">二分查找</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-27T17:49:17+08:00" content="2019-07-27">
-          07-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/27/leetcode-852/" itemprop="url">
-              
-                <span itemprop="name">leetcode-852 山脉数组的峰顶索引</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-27T15:42:56+08:00" content="2019-07-27">
-          07-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/26/leetcode-944/" itemprop="url">
-              
-                <span itemprop="name">leetcode-944 删列造序</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-26T10:55:29+08:00" content="2019-07-26">
-          07-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+        
+      
+      </div>
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/16/TypeScript元数据的理解与使用/" rel="next" title="TypeScript元数据的理解与使用">
+                <i class="fa fa-chevron-left"></i> TypeScript元数据的理解与使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2019/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2019/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2019/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/archives/2019/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2019/page/15/">15</a><a class="extend next" rel="next" href="/archives/2019/page/13/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -683,6 +524,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -703,8 +548,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -773,6 +627,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码分析"><span class="nav-number">2.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vuex入口文件"><span class="nav-number">2.1.</span> <span class="nav-text">vuex入口文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Store构造函数"><span class="nav-number">2.1.1.</span> <span class="nav-text">Store构造函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#install方法"><span class="nav-number">2.1.2.</span> <span class="nav-text">install方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组件绑定的辅助函数"><span class="nav-number">2.1.3.</span> <span class="nav-text">组件绑定的辅助函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#install方法-1"><span class="nav-number">2.2.</span> <span class="nav-text">install方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#install函数"><span class="nav-number">2.2.1.</span> <span class="nav-text">install函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#applyMixin方法"><span class="nav-number">2.2.2.</span> <span class="nav-text">applyMixin方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vuexinit方法"><span class="nav-number">2.2.3.</span> <span class="nav-text">vuexinit方法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -944,6 +814,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

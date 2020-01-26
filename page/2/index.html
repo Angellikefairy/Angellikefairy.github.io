@@ -307,6 +307,302 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://angellike_fairy.gitee.io/angellikefairy/2019/11/15/相等-与全等-的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/15/相等-与全等-的区别/" itemprop="url">相等==与全等===的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-15T14:44:33+08:00">
+                2019-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript基础/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>JavaScript 有两种比较方式：严格比较运算符和转换类型比较运算符。对于严格比较运算符（===）来说，仅当两个操作数的类型相同且值相等为 true，而对于被广泛使用的比较运算符（==）来说，会在进行比较之前，将两个操作数转换成相同的类型。</p>
+<h2 id="全等运算符（-）"><a href="#全等运算符（-）" class="headerlink" title="全等运算符（===）"></a>全等运算符（===）</h2><p>全等运算符（===）的规则相对简单，我们先来看全等运算符的运算规则</p>
+<ol>
+<li>如果两个操作数有不同的类型，它们不是严格相等的</li>
+<li>如果两个操作数都为 null，则它们是严格相等的</li>
+<li>如果两个操作数都为 undefined，它们是严格相等的</li>
+<li>如果一个或两个操作数都是 NaN，它们就不是严格相等的</li>
+<li>如果两个操作数都为 true 或都为 false，它们是严格相等的</li>
+<li>如果两个操作数都是 number 类型并且具有相同的值，则它们是严格相等的</li>
+<li>如果两个操作数都是 string 类型并且具有相同的值，则它们是严格相等的</li>
+<li>如果两个操作数都引用相同的对象或函数，则它们是严格相等的</li>
+<li>以上所有其他情况下操作数都不是严格相等的。</li>
+</ol>
+<p>简单概括来说，对于全等运算符来说，操作数双方必须是同一类型并且具有相同的值（引用的指向必须指向同一个引用）（除了NaN）以外。因为，NaN与任何值都不相等包括其本身。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="literal">undefined</span>===<span class="literal">undefined</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>===<span class="string">'1'</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span>===<span class="literal">null</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;===&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数值转换"><a href="#数值转换" class="headerlink" title="数值转换"></a>数值转换</h2><p>我们使用Number()转型函数来将其他类型转化为数值型</p>
+<p>具体规则如下：</p>
+<ol>
+<li>如果是布尔值，那么true转化为1，false转化为0<br>2，如果是null值，那么转化为0</li>
+<li>如果是undefined，返回NaN</li>
+<li>如果是字符串，又会分以下几种情况<ul>
+<li>如果字符串只包含数字（包括带正负号，整数或者是浮点数），那么就会返回该数值</li>
+<li>如果字符串是空的，那么返回数字0</li>
+</ul>
+<ol start="3">
+<li>其余情况返回NaN</li>
+</ol>
+</li>
+<li>如果是对象，那么调用对象的valueOf()方法，然后再依照前面的规则转换返回的值</li>
+</ol>
+<h2 id="对象转化为基本类型值"><a href="#对象转化为基本类型值" class="headerlink" title="对象转化为基本类型值"></a>对象转化为基本类型值</h2><p>在将相等运算符的规则之前，我们需要弄清楚对象转化为基本类型值会变成怎么样？因为，这会出现在相等运算符的比较规则中</p>
+<blockquote>
+<p>对象在转换基本类型时，首先会调用 valueOf 然后调用 toString</p>
+</blockquote>
+<h3 id="valueOf-NaN"><a href="#valueOf-NaN" class="headerlink" title="valueOf"></a>valueOf</h3><blockquote>
+<p>valueOf() 方法返回指定对象的原始值。</p>
+</blockquote>
+<p>具体规则如下：<br>对象|返回值<br>–|–<br>Array|返回数组本身对象<br>Boolean|布尔值<br>Date|存储的时间是从 1970 年 1 月 1 日午夜开始计的毫秒数 UTC<br>Function|函数本身<br>Number|数字值<br>Object|对象本身<br>String|字符串值</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].valueOf()); <span class="comment">// [1,2,3]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>).valueOf()); <span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>().valueOf()); <span class="comment">// 1573803246103</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;.valueOf()); <span class="comment">// function a()&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">1</span>).valueOf()); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;.valueOf()); <span class="comment">// &#123;a:1&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'nice'</span>).valueOf()); <span class="comment">// 'nice'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString"></a>toString</h3><blockquote>
+<p>toString() 方法返回一个表示该对象的字符串。</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].toString()); <span class="comment">// '1,2,3'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>).toString()); <span class="comment">//'false'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>().toString()); <span class="comment">// 'Fri Nov 15 2019 15:41:22 GMT+0800 (GMT+08:00)'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;.toString()); <span class="comment">// 'function a()&#123;&#125;'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">1</span>).toString()); <span class="comment">// '1'</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;.toString()); <span class="comment">// [object Object]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'nice'</span>).toString()); <span class="comment">// 'nice'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="相等运算符（-）"><a href="#相等运算符（-）" class="headerlink" title="相等运算符（==）"></a>相等运算符（==）</h2><p>使用相等运算符时，都会先转换操作数（通常称为强制转型）为相同的类型，然后再比较他们的相等性</p>
+<p>相等运算符遵循以下规则：</p>
+<ol>
+<li>如果操作数具有相同的类型，请使用上面的 IEA 测试它们是否严格相等。 如果它们不严格相等，则它们不相等，否则相等。</li>
+<li>如果操作数有不同的类型：<ul>
+<li>如果一个操作数为 null 而另一个 undefined，则它们相等</li>
+<li>如果一个值是数字，另一个是字符串，先将字符串转换为数字，然后使用转换后的值比较</li>
+<li>如果一个操作数是布尔值，则将 true 转换为 1，将 false 转换为 0，然后使用转换后的值比较</li>
+<li>如果一个操作数是一个对象，而另一个操作数是一个数字或字符串，则调用valueOf()将该对象转换为基本类型值，再使用转换后的值进行比较</li>
+</ul>
+</li>
+<li>在以上的其他情况下，操作数都不相等</li>
+</ol>
+<p>注意：</p>
+<blockquote>
+<p>在进行相等比较操作中,undefined和null是不能进行类型转化的。因此,undefined和null只能互相相等或者它们自身相等</p>
+</blockquote>
+<p>例如：</p>
+<h3 id="其中一个操作数为布尔值"><a href="#其中一个操作数为布尔值" class="headerlink" title="其中一个操作数为布尔值"></a>其中一个操作数为布尔值</h3><blockquote>
+<p>如果一个操作数为布尔值，那么将true转化为1，将false转化为0。然后，再利用其余规则进行比较</p>
+</blockquote>
+<h4 id="布尔值与数值比较"><a href="#布尔值与数值比较" class="headerlink" title="布尔值与数值比较"></a>布尔值与数值比较</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>==<span class="literal">true</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">3</span>==<span class="literal">false</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="布尔值与字符串比较"><a href="#布尔值与字符串比较" class="headerlink" title="布尔值与字符串比较"></a>布尔值与字符串比较</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'1'</span>==<span class="literal">true</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'123'</span>==<span class="literal">false</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="布尔值与其余基本类型值比较"><a href="#布尔值与其余基本类型值比较" class="headerlink" title="布尔值与其余基本类型值比较"></a>布尔值与其余基本类型值比较</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="literal">undefined</span>==<span class="literal">true</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span>==<span class="literal">false</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>因为，在进行相等比较操作中，undefined和null是不能进行转化的，而布尔值需要转化为数值型，因此，两者不可能相等</p>
+<h4 id="布尔值与数组比较"><a href="#布尔值与数组比较" class="headerlink" title="布尔值与数组比较"></a>布尔值与数组比较</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log([]==<span class="literal">false</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]==<span class="literal">false</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log([<span class="number">1</span>]==<span class="literal">true</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>是不是感觉很奇怪？</p>
+<p>我们在前面提过，如果其中一个操作数为对象，那么就要该对象先通过valueOf()再通过toString()转化为基本类型值（确切来说是字符串型）然后再利用其余规则进行比较</p>
+<p>又因为另一个操作数为布尔值，那么，布尔值就会被转化为数值型，true转化为1，false转化为0</p>
+<p>因此，已经转化为字符串的对象还需要将字符串转化为数值型</p>
+<p>具体过程如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">比较[]与false</span><br><span class="line">1. [].valueOf() --&gt; &apos;&apos;</span><br><span class="line">2. &apos;&apos;.toString() --&gt; &apos;&apos;</span><br><span class="line">3. Number(&apos;&apos;) --&gt; 0</span><br><span class="line"></span><br><span class="line">4. Number(false) --&gt; 0</span><br><span class="line"></span><br><span class="line">5. 0===0 --&gt;true</span><br><span class="line"></span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<p>其余几个过程类似，因此不再赘述</p>
+<h4 id="布尔值与其余对象"><a href="#布尔值与其余对象" class="headerlink" title="布尔值与其余对象"></a>布尔值与其余对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125; == <span class="literal">false</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>()=== <span class="literal">true</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;&#125; == <span class="literal">false</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="其中一个操作数为字符串"><a href="#其中一个操作数为字符串" class="headerlink" title="其中一个操作数为字符串"></a>其中一个操作数为字符串</h3><p>在进行操作数比较前，我们需要明确，只有另一个操作数为数值型的情况下（可能发生了转换变为了数值型），我们才需要将该字符串转化为数值；否则，该字符串不会进行转化</p>
+<p>例如：</p>
+<h4 id="另一个操作数为数值"><a href="#另一个操作数为数值" class="headerlink" title="另一个操作数为数值"></a>另一个操作数为数值</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'123'</span>==<span class="number">123</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="另一个操作数为布尔值"><a href="#另一个操作数为布尔值" class="headerlink" title="另一个操作数为布尔值"></a>另一个操作数为布尔值</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'1'</span>==<span class="literal">true</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'0'</span>==<span class="literal">false</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>因为布尔值在进行相等比较的前一定会转换为数值型，因此，字符串也会被通过Number转型函数变为数值型。</p>
+<h4 id="另一个操作数为其他基本类型值"><a href="#另一个操作数为其他基本类型值" class="headerlink" title="另一个操作数为其他基本类型值"></a>另一个操作数为其他基本类型值</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'0'</span>==<span class="literal">null</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'0'</span>==<span class="literal">undefined</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>在相等比较前，null和undefined不能被转换为其他类型值</p>
+<h4 id="另一个操作数为数组"><a href="#另一个操作数为数组" class="headerlink" title="另一个操作数为数组"></a>另一个操作数为数组</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'0'</span>==[]); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'1'</span>==[<span class="number">1</span>]); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'123'</span>==[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'1,2,3'</span>==[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>首先，必须明确地是，如果其中一个操作数为字符串类型，那么我们先去看另一个操作数为什么类型。</p>
+<p>在这里，另一个操作数为引用类型值，那么引用类型值会通过valueOf和toString转换为字符串型。那么，另一个字符型操作数就不需要进行转换，两个字符串类型进行比较即可。（因为，相等操作符在比较比较之前的目的就是将两个操作数的类型转换为一致，然后再进行比较）</p>
+<h4 id="另一个操作数为对象"><a href="#另一个操作数为对象" class="headerlink" title="另一个操作数为对象"></a>另一个操作数为对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;==<span class="string">'a:1'</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;&#125;==<span class="string">''</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>在这里，我们千万不要忘记自定义对象通过toString()方法转换得到的都是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;.valueOf().toString()); <span class="comment">// '[object Object]'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="其中一个操作数为数组"><a href="#其中一个操作数为数组" class="headerlink" title="其中一个操作数为数组"></a>其中一个操作数为数组</h3><p>大致的比较方法差不多在前面都提及了，这里看一个奇葩的题目：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log([]=![]); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>是不是很奇怪，但是，如果仔细进行分析就不会觉得奇怪了。</p>
+<p>具体过程：</p>
+<ol>
+<li>第一个操作数为[]，那么将其通过valueOf和toString转换为字符串得到空字符串’’</li>
+<li>第二个操作数![]，因为有逻辑非布尔操作符，因此第二个操作数实际上是布尔值false</li>
+<li>布尔值需要转换为数值型,false转换为0</li>
+<li>因为第二个操作数转换为数值型了，因此，第一个操作数也要将得到的字符串转换为数值型，空字符串’’通过Number转型函数得到的是0</li>
+<li>0===0 返回true</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      <div>
+      
+      </div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://angellike_fairy.gitee.io/angellikefairy/2019/11/15/TypeScript零散知识点总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2880,313 +3176,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://angellike_fairy.gitee.io/angellikefairy/2019/10/29/浏览器渲染机制/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Angel">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/29/浏览器渲染机制/" itemprop="url">浏览器渲染机制</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-29T14:58:30+08:00">
-                2019-10-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/浏览器/" itemprop="url" rel="index">
-                    <span itemprop="name">浏览器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  7
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="浏览器渲染步骤"><a href="#浏览器渲染步骤" class="headerlink" title="浏览器渲染步骤"></a>浏览器渲染步骤</h2><p>浏览器的渲染机制一般分为以下几步：</p>
-<ol>
-<li>处理HTML并构建DOM树</li>
-<li>处理CSS构建CSSOM树</li>
-<li>将DOM和CSSOM合并生成Render Tree（渲染树）</li>
-<li>根据渲染树计算节点的位置进行布局</li>
-<li>通过显卡将画面绘制到屏幕上</li>
-</ol>
-<p>一个整体的流程图<br><img src="https://s2.ax1x.com/2019/10/29/KfV1eS.jpg" alt></p>
-<h2 id="DOM树与CSSOM树的生成过程"><a href="#DOM树与CSSOM树的生成过程" class="headerlink" title="DOM树与CSSOM树的生成过程"></a>DOM树与CSSOM树的生成过程</h2><p>DOM树的生成过程（CSSOM树与之类似）：</p>
-<ol>
-<li>转换：浏览器从磁盘或网络上读取HTML的原始字节，并根据文件的指定编码（例如UTF-8）将它们转换为单个字符。</li>
-<li>标记化：浏览器将字符串转换为W3C HTML5标准指定的不同标记；例如“ <html>”，“ <body>”以及尖括号内的其他字符串。每个令牌都有特殊的含义和自己的规则集。</body></html></li>
-<li>节点生成：发出的令牌被转换为“对象”，以定义其属性和规则。</li>
-<li>DOM构造：最后，由于HTML标记定义了不同标记之间的关系（某些标记包含在其他标记中），因此创建的对象以树形数据结构链接，该树数据结构还捕获了原始标记中定义的父子关系：HTML 对象是body对象的父对象，body是段落对象的父 对象，依此类推。</li>
-</ol>
-<p>DOM树示例</p>
-<p><img src="https://s2.ax1x.com/2019/10/29/KRQVC4.png" alt></p>
-<p>CSSOM树示例</p>
-<p><img src="https://s2.ax1x.com/2019/10/29/KRQZ8J.png" alt></p>
-<h2 id="Render-Tree（渲染树）"><a href="#Render-Tree（渲染树）" class="headerlink" title="Render Tree（渲染树）"></a>Render Tree（渲染树）</h2><p>在上面，我们得到了描述页面内容的DOM树和描述页面样式的CSSOM。接下来，我们就得需要将两者进行结合生成Render Tree</p>
-<h3 id="渲染树的生成和渲染步骤"><a href="#渲染树的生成和渲染步骤" class="headerlink" title="渲染树的生成和渲染步骤"></a>渲染树的生成和渲染步骤</h3><ol>
-<li><p>将DOM和CSSOM树合并以形成渲染树</p>
-<pre><code>渲染树的生成步骤：
-1. 从DOM树的根节点开始，采取深度优先遍历的方式（也就是说当前节点的所有子节点都构建好后才会去构建当前节点的下一个兄弟节点）来遍历每一个可见节点
-&gt; 什么是不可见节点： 
-    1. 一些节点不可见（例如，脚本标记，元标记等），由于它们未反映在渲染的输出中，因此将其省略。
-    2. 一些节点通过CSS隐藏，并且在渲染树中也被省略；例如，将一个节点设置了“ display：none”属性。（但是设置visibility: hidden就会将该CSSOM节点和属性添加到渲染树中）
-2. 对于每个可见节点，找到匹配CSSOM规则并应用它们。
-3. 生成具有内容及其计算样式的可见节点。</code></pre></li>
-<li><p>布局：在生成的渲染树中，我们已经可以得知了那些节点是可见的，并且该节点的样式也是已知的。接下来我们需要计算它们在设备视口中的确切位置和大小，这就是“布局”阶段，也称为“重排”。 </p>
-</li>
-<li><p>将各个节点绘制到屏幕上</p>
-</li>
-</ol>
-<p><img src="https://s2.ax1x.com/2019/10/29/KRwEmF.png" alt></p>
-<p>需要注意的是：</p>
-<blockquote>
-<p>Render Tree与DOM树不一定是相同的。虽然，Renter Tree是按照DOM树的节点进行遍历生成的。但是，我们要记住，Render Tree中的所有节点都是可见节点（我们在前面已经提到过什么是不可见节点）。</p>
-</blockquote>
-<h2 id="阻塞渲染"><a href="#阻塞渲染" class="headerlink" title="阻塞渲染"></a>阻塞渲染</h2><p>我们知道HTML会阻塞渲染树的渲染，因为要是没有DOM，渲染树就无法渲染任何内容。那么对于css和JS呢？它们阻塞渲染吗？</p>
-<p>掘金站点的html文档耗时情况<br><img src="https://s2.ax1x.com/2019/10/29/KfZ5j0.png" alt></p>
-<p>我们可以看到阻塞了150ms</p>
-<h3 id="css阻塞渲染"><a href="#css阻塞渲染" class="headerlink" title="css阻塞渲染"></a>css阻塞渲染</h3><p>在默认的情况下，css是阻塞渲染的。</p>
-<p>我们在html文档里引入一个css文件，然后查看一下渲染过程，我们可以看到该css文件是阻塞的</p>
-<p>在构建 CSSOM 树时，会阻塞渲染，直至 CSSOM 树构建完成。并且构建 CSSOM 树是一个十分消耗性能的过程，所以应该尽量保证层级扁平，减少过度层叠，越是具体的 CSS 选择器，执行速度越慢。</p>
-<p><img src="https://s2.ax1x.com/2019/10/29/KRwkOU.png" alt></p>
-<h3 id="js文件阻塞渲染"><a href="#js文件阻塞渲染" class="headerlink" title="js文件阻塞渲染"></a>js文件阻塞渲染</h3><blockquote>
-<p>除非明确声明为异步，否则JavaScript会阻止DOM构建</p>
-</blockquote>
-<h4 id="非异步脚本"><a href="#非异步脚本" class="headerlink" title="非异步脚本"></a>非异步脚本</h4><p>无论我们使用的是&lt;script&gt;内联形式的代码块还是引入外部文件，浏览器都会暂停并执行js脚本，然后才能处理文档的其余部分。</p>
-<p>另外，在使用外部JavaScript文件的情况下，浏览器必须暂停以等待从磁盘，缓存或远程服务器中获取脚本，这可能会增加关键渲染路径的数十到数千毫秒的延迟。</p>
-<p>我们来试验一下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./a.js"</span>&gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>结果</p>
-<p><img src="https://s2.ax1x.com/2019/10/29/KRwVw4.png" alt></p>
-<h4 id="异步脚本"><a href="#异步脚本" class="headerlink" title="异步脚本"></a>异步脚本</h4><p>HTML5为script元素定义了async属性。该属性可以让js文件异步加载。</p>
-<blockquote>
-<p>async只适用于外部脚本文件</p>
-</blockquote>
-<p>指定async属性的目的是不让页面等待脚本下载和执行，从而异步加载页面其他内容。因此，异步脚本不要在加载期间修改DOM</p>
-<p>另外，异步脚本一定会在页面的load事件前执行。</p>
-<p>来看一下加上async属性，该js脚本是否回阻塞后面的执行：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./a.js"</span>&gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>结果</p>
-<p><img src="https://s2.ax1x.com/2019/10/29/KRwZTJ.png" alt></p>
-<h2 id="重绘与回流"><a href="#重绘与回流" class="headerlink" title="重绘与回流"></a>重绘与回流</h2><p>重绘与回流的基本概念</p>
-<ol>
-<li><p>当Render Tree中部分或全部元素的尺寸、结构、或某些属性发生改变时，浏览器重新渲染部分或全部文档的过程称为回流。</p>
-</li>
-<li><p>当页面中元素样式的改变并不影响它在文档流中的位置时（例如：color、background-color、visibility等），浏览器会将新样式赋予给元素并重新绘制它，这个过程称为重绘。</p>
-</li>
-</ol>
-<p>由此我们可以得出一个结论：</p>
-<blockquote>
-<p>回流必定会发生重绘，重绘不一定会引发回流。</p>
-</blockquote>
-<p>我们来看一下回流具体发生的场景：</p>
-<ol>
-<li><p>添加或者删除可见的DOM元素；</p>
-</li>
-<li><p>元素位置改变；</p>
-</li>
-<li><p>元素尺寸改变——边距、填充、边框、宽度和高度</p>
-</li>
-<li><p>内容改变——比如文本改变或者图片大小改变而引起的计算值宽度和高度改变；</p>
-</li>
-<li><p>页面渲染初始化；</p>
-</li>
-<li><p>浏览器窗口尺寸改变——resize事件发生时；</p>
-</li>
-<li><p>查询或调用一些会引起回流的属性</p>
-<pre><code>clientWidth、clientHeight、clientTop、clientLeft
-offsetWidth、offsetHeight、offsetTop、offsetLeft
-scrollWidth、scrollHeight、scrollTop、scrollLeft
-scrollIntoView()、scrollIntoViewIfNeeded()
-getComputedStyle()
-getBoundingClientRect()
-scrollTo()</code></pre></li>
-</ol>
-<h3 id="重绘与回流的开销"><a href="#重绘与回流的开销" class="headerlink" title="重绘与回流的开销"></a>重绘与回流的开销</h3><blockquote>
-<p>回流比重绘的开销要更大。</p>
-</blockquote>
-<p>另外，回流的开销也会因为操作的不同而有可能相差很大</p>
-<p>假如，我们直接操纵body，并且在body前插入一个元素，那么整个Render Tree都会被重新构建</p>
-<p>而如果只是在Render Tree的叶子节点后插入一个节点，那么前面的所有节点都不会影响。因此，开销会比上一个回流的开销小得多。</p>
-<h3 id="减少重绘与回流（性能提高）"><a href="#减少重绘与回流（性能提高）" class="headerlink" title="减少重绘与回流（性能提高）"></a>减少重绘与回流（性能提高）</h3><h4 id="对于css"><a href="#对于css" class="headerlink" title="对于css"></a>对于css</h4><ol>
-<li><p>避免使用table布局。 由于浏览器使用流式布局，对Render Tree的计算通常只需要遍历一次就可以完成，但table及其内部元素除外，他们可能需要多次计算，通常要花3倍于同等元素的时间。</p>
-</li>
-<li><p>使用 visibility：0 替换 display: none ，因为前者只会引起重绘，后者会引发回流（改变了布局–渲染树不会生成该节点）</p>
-</li>
-<li><p>CSS 选择符从右往左匹配查找，避免 DOM 深度过深</p>
-</li>
-<li><p>避免使用CSS表达式（例如：calc()）</p>
-</li>
-</ol>
-<h4 id="对于js"><a href="#对于js" class="headerlink" title="对于js"></a>对于js</h4><ol>
-<li><p>避免频繁操作样式，最好一次性重写style属性，或者将样式列表定义为class并一次性更改class属性。</p>
-</li>
-<li><p>避免频繁操作DOM，创建一个documentFragment，在它上面应用所有DOM操作，最后再把它添加到文档中。</p>
-</li>
-<li><p>避免频繁读取会引发回流/重绘的属性，如果确实需要多次使用，就用一个变量缓存起来。</p>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">    <span class="comment">// 获取 offsetTop 会导致回流，因为需要去获取正确的值</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">document</span>.querySelector(<span class="string">'.test'</span>).style.offsetTop)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>也可以先为元素设置display: none，操作结束后再把它显示出来。因为在display属性为none的元素上进行的DOM操作不会引发回流和重绘（因为将display属性设置为none的节点为不可见节点，不可见节点不会被添加到渲染树中）。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      <div>
-      
-      </div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3239,7 +3228,7 @@ scrollTo()</code></pre></li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">143</span>
+                  <span class="site-state-item-count">144</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3320,7 +3309,7 @@ scrollTo()</code></pre></li>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">164.5k</span>
+    <span title="Site words total count">165.9k</span>
   
 </div>
 
@@ -3350,7 +3339,7 @@ scrollTo()</code></pre></li>
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共164.5k字</span>
+  <span class="post-count">博客全站共165.9k字</span>
 </div>
         
 
